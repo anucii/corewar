@@ -6,7 +6,7 @@
 #    By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/04 15:31:09 by jgonthie          #+#    #+#              #
-#    Updated: 2017/11/18 11:12:20 by jgonthie         ###   ########.fr        #
+#    Updated: 2017/11/18 13:14:30 by jgonthie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,10 @@ INC_PATH = ./include/
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 SRC_PATH = ./src/
-SRC_FILE =	main_2.c \
+SRC_FILE =	main.c \
 			ft_count_line.c \
 			ft_is_label_char.c \
-			ft_multi_split_2.c \
+			ft_multi_split.c \
 			ft_info_label.c \
 			ft_info_line.c \
 

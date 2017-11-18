@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 18:21:49 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/11/14 14:24:40 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/18 13:24:33 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct			s_file
 	int					ret;
 }						t_file;
 
+int			ft_multi_split(char ***token, char *s);
 int			ft_multi_split_2(t_token *token, t_file file);
 int			ft_count_line(char *s);
 int			ft_is_label_char(char c, char *label_char);
