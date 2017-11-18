@@ -1,6 +1,0 @@
-test
-entry:
-		sti		   r1,%:beegees_gen,%1
-		sti		   r2, %:i_love_youuuu, %3
-entry:		sti		   r1,%:beegees_gen,%1
-			sti		   r2, %:i_love_youuuu, %3
