@@ -14,7 +14,7 @@
 # define ASM_H
 
 # include "op.h"
-# include "libft.h"
+# include "libft/libft.h"
 # include <fcntl.h>
 
 # define HASH			'#'
@@ -54,5 +54,8 @@ typedef struct			s_file
 	int					fd;
 	int					ret;
 }						t_file;
+
+int		ft_count_line(char *argv);
+int		ft_is_label_char(char c, char *label_char);
 
 #endif

@@ -1,0 +1,12 @@
+.name 		"golem"
+.comment	"clay champion for testing purposes"
+
+fail_val:	ld %48,r16	#value to display if replacement failed
+			sti r2,%0,%96
+store1:		aff r16
+			sti r7,%0,%90
+live:		live %2
+			st	r2,42
+store2:		aff r16
+			st	r3,43
+replaced:	aff r16
