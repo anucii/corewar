@@ -60,7 +60,7 @@ typedef struct			s_file
 
 void	ft_error(char *s);
 void	ft_realloc_order(t_order **order, int *size);
-void	ft_pars_order(t_order *order, t_file file);
+int		ft_pars_order(t_order *order, t_file file);
 int		ft_pars_info(t_info *info, char *line);
 int		ft_is_label_char(char c, char *label_char);
 int		ft_multi_split(char ***tokens, char *s);
