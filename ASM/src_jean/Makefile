@@ -11,11 +11,15 @@ INC_PATH = ../../include/
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 SRC_PATH = ./
 SRC_FILE =	main.c \
-			ft_count_line.c \
+			ft_error.c \
+			ft_realloc_order.c \
+			ft_pars_info.c \
+			ft_pars_order.c \
 			ft_is_label_char.c \
+			ft_multi_split.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
-OBJ_PATH = ../obj/
+OBJ_PATH = ./obj/
 OBJ_FILE = $(SRC_FILE:.c=.o)
 
 .PHONY: all clean fclean re

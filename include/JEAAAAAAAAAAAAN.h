@@ -17,6 +17,8 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 
+# define SIZE_STRUCT	2
+
 # define HASH			'#'
 # define SPACE			' ' 
 # define TAB			'\t'
@@ -51,11 +53,16 @@ typedef struct			s_order
 typedef struct			s_file
 {
 	char				*line;
+	int					nb_line;
 	int					fd;
 	int					ret;
 }						t_file;
 
-int		ft_count_line(char *argv);
+void	ft_error(char *s);
+void	ft_realloc_order(t_order **order, int *size);
+void	ft_pars_order(t_order *order, t_file file);
+int		ft_pars_info(t_info *info, char *line);
 int		ft_is_label_char(char c, char *label_char);
+int		ft_multi_split(char ***tokens, char *s);
 
 #endif
