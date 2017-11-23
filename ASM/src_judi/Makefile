@@ -6,7 +6,7 @@ DIR_S = ./
 DIR_O = ./
 DIR_H = ../../include/
 
-RDX = maintest parse_instr parse_params
+RDX = maintest parse_instr parse_params op_matches add_label op
 
 SRC = $(addprefix $(DIR_S), $(addsuffix .c, $(RDX)))
 OBJ = $(addprefix $(DIR_O), $(addsuffix .o, $(RDX)))

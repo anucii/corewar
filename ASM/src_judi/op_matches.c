@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_params.c                                     :+:      :+:    :+:   */
+/*   op_matches.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 19:29:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/23 22:36:51 by jdaufin          ###   ########.fr       */
+/*   Created: 2017/11/23 22:03:33 by jdaufin           #+#    #+#             */
+/*   Updated: 2017/11/23 22:46:41 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "judi.h"
 
-_Bool	parse_params(char **tokens, int max, t_order **slot, ssize_t op_idx)
+_Bool	op_matches(char *s)
 {
-	t_order *buf;
+	ssize_t	i;
 
-	if (!(tokens && *tokens && (max > 0) && slot && *slot))
-	{
-		ft_putendl_fd("[ERR] parse_params: bad params", 2);
-		exit(EXIT_FAILURE);
-	}
-	if (op_idx > 1)
+	if (!s)
 		return (0);
-	buf = *slot;
-	(buf->ty_param)[0] = T_DIR;
-	(buf->ty_param)[1] = T_IND;
-	(buf->ty_param)[2] = T_REG;
-	return (1);
+	i = -1;
+	while (g_op_tab[++i].name)
+	{
+		if (ft_strequ(s, g_op_tab[i].name))
+			return (1);
+	}
+	return (0);
 }
