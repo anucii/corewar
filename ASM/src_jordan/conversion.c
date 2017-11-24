@@ -6,25 +6,16 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:27:23 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/24 13:32:30 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/11/24 18:25:08 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/jordan.h"
 #include "../include/op.h"
-/*
-char	*convertint(int opcode, char *binaire)
-{
-	const char *str;
-	static int i = 0;
 
-	str = "\0\1";
-	i = 0;
-	if (opcode >= 2)
-		convertint(opcode/2, binaire);
-		binaire[i++] = str[opcode % 2];
-	return (binaire);
-}*/
+/*
+** convert little endian in big endian
+*/
 
 void	bigendian(unsigned int *i, short *s)
 {
@@ -39,33 +30,91 @@ void	bigendian(unsigned int *i, short *s)
 	*s = (*s >> 8) | (*s << 8);
 }
 
+/*
+** write magic number, name program and comment in that order
+*/
+
 int		startup(t_header *file)
 {
 	int		fd;
 
 	fd = open("test.cor", O_CREAT | O_WRONLY, 777);
 	if (fd == -1)
-		return ;
+		return (-1);
 	bigendian(&file->magic, 0);
 	write(fd, &file->magic, 4);
 	write(fd, file->prog_name, 129);
 	write(fd, file->comment, 2049);
-	return(fd)
+	return(fd);
 }
 
-void	writeop&opc(fd, t_order **champ)
+/*
+**create an octet from the type of params, in test
+*/
+
+unsigned char	opcbit(int *params, int nb)
 {
-	write(fd, 
+	unsigned char	a;
+	unsigned char	b;
+	unsigned char	c;
+	unsigned char	d;
+	int				i;
+
+	a = 128;
+	b = 192;
+	c = 64;
+	d = 0;
+	i = 0;
+	while (i < nb)
+	{
+		if (params[i] == 1)
+		d = d | c;
+		else if (params[i] == 2)
+		d = d | a;
+		else if (params[i] == 4)
+		d = d | b;
+		i++;
+		a = a >> 2;
+		b = b >> 2;
+		c = c >> 2;
+	}
+	return (d);
+}
+
+/*
+**write each instruction in prod
+*/
+
+void	writeinst(int fd, t_order **champ)
+{
+	int		i;
+	char c;
+
+	i = 0;
+	while (i < nb_struct) //need to create in one of the struct
+	{
+		write (fd, &champ[i]->op_code, 1);
+		if (champ[i]->op_code != 1 && champ[i]->op_code != 9
+				&& champ[i]->op_code != 12 && champ[i]->op_code != 15)
+		{
+			c = opcbit(champ[i]->ty_param, champ[i]->nb_param);
+			write(fd, &c, 1);
+		}
+	}
+}
+
+/*
+** central fonction
+*/
 
 void	reception(t_header *file, t_order **champ)
 {
 	int		fd;
-	int
+	int		nb;
 
+	nb = 
 	fd = startup(file);
-	writeop(fd, champ);
-
-
+	writeinst(fd, champ);
 }
 
 int main()

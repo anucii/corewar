@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/18 19:20:22 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/24 13:32:35 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ASM_H
 
 # include "op.h"
-# include "libft.h"
+# include "../../mygit/libft/libft.h"
 # include <fcntl.h>
 
 # define HASH			'#'
@@ -43,7 +43,8 @@ typedef struct			s_order
 	char				**label;
 	char				**param;
 	int					ty_param[3];
-	int					op_code;
+	char				op_code; //changed to char
+	int					ocp;
 	int					nb_param;
 	int					pos; 
 }						t_order;
