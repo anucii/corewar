@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/18 19:20:22 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/24 18:55:45 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 
-# define SIZE_STRUCT	2
+# define SIZE_STRUCT	20
 
 # define HASH			'#'
 # define SPACE			' ' 
@@ -60,9 +60,11 @@ typedef struct			s_file
 
 void	ft_error(char *s);
 void	ft_realloc_order(t_order **order, int *size);
-int		ft_pars_order(t_order *order, t_file file);
-int		ft_pars_info(t_info *info, char *line);
-int		ft_is_label_char(char c, char *label_char);
+_Bool	ft_pars_order(t_order *order, t_file file);
+_Bool	ft_pars_info(t_info *info, char *line);
+_Bool	ft_is_label_char(char c, char *label_char);
 int		ft_multi_split(char ***tokens, char *s);
+_Bool	parse_params(char **tokens, int max, t_order *slot, ssize_t op_idx);
+
 
 #endif

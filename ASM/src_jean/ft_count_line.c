@@ -3,8 +3,8 @@
 static int	ft_check_if_instruction(char *s)
 {
 	static char	label[16][6] = {"live", "ld", "st", "add", "sub", "and",\
-				"or", "xor", "zjmp", "ldi", "sti", "fork", "lld", \
-				"lldi", "lfork", "aff"};
+		"or", "xor", "zjmp", "ldi", "sti", "fork", "lld", \
+			"lldi", "lfork", "aff"};
 	static int	label_len[16] = {4, 2, 2, 3, 3, 3, 2, 3, 4, 3, 3, 4, 3, 4, 5, 3};
 	int			index;
 	int			len;
@@ -35,7 +35,7 @@ static int	ft_check_if_instruction(char *s)
 		while (++index < 16)
 		{
 			if (ft_strncmp(s, label[index], label_len[index]) == 0)
-			return (1);
+				return (1);
 		}
 	}
 	return (0);

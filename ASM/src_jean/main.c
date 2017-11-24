@@ -10,7 +10,7 @@ int		main(int argc, char **argv)
 	size = 1;
 	if (argc != 2)
 		ft_error("Bad usage\n");
-	order = ft_memalloc(sizeof(t_order*) * 20 * SIZE_STRUCT);
+	order = ft_memalloc(sizeof(t_order*) * SIZE_STRUCT * size);
 	file.fd = open(argv[1], O_RDONLY);
 	if (file.fd == -1)
 		ft_error("Ft. Open() Failed\n");

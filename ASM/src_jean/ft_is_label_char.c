@@ -1,6 +1,6 @@
 #include "JEAAAAAAAAAAAAN.h"
 
-int			ft_is_label_char(char c, char *label_char)
+_Bool			ft_is_label_char(char c, char *label_char)
 {
 	while (*label_char)
 	{
