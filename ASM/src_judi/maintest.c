@@ -22,14 +22,15 @@ static void		disp(t_order *order)
 
 static _Bool	t_parse(char **tokens, int max)
 {
-	t_order	*order = (t_order [1]){{NULL, NULL,{0, 0, 0}, -1, 0, 0, 0}};
+	//t_order	*order = (t_order [1]){{NULL, NULL,{0, 0, 0}, -1, 0, 0, 0}};
+	t_order	order = {NULL, NULL,{0, 0, 0}, -1, 0, 0, 0};
 	_Bool	ret;
 
 	if (!(tokens && *tokens))
 		return (0);
 	ret = parse_instr(tokens, max, &order);
 	if (ret)
-		disp(order);
+		disp(&order);
 	return (ret);
 }
 

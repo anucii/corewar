@@ -6,13 +6,13 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:24:23 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/23 22:35:35 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/24 19:24:07 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "judi.h"
 
-static _Bool	check_label(char **tokens, t_order **slot)
+static _Bool	check_label(char **tokens, t_order *slot)
 {
 	size_t	len;
 	size_t	i;
@@ -31,42 +31,58 @@ static _Bool	check_label(char **tokens, t_order **slot)
 	return (1);
 }
 
-static _Bool	check_master(char **tokens, t_order **slot, ssize_t op_idx)
+static char		get_code(char *s)
 {
+	char	i;
+
+	if (!(s && ((i = op_matches(s)) >= 0)))
+		return (0);
+	return (g_op_tab[(int)i].op_code);
+}
+
+static _Bool	check_master(char **tokens, t_order *slot, ssize_t op_idx)
+{
+	char	code;
+	_Bool	ret;
+
 	if ((op_idx > 0) && !check_label(tokens, slot))
 		return (0);
-	return (1);
+	if ((ret = (op_matches(tokens[op_idx])) >= 0))
+	{
+		code = get_code(tokens[op_idx]);
+		slot->op_code = code;
+	}
+	return (ret);
 }
 
 static ssize_t	parse_master(char **tokens, int argnum)
 {
-	int	ret;
 	int i;
 
 	i = -1;
 	while (++i < argnum)
 	{
-		if (op_matches(tokens[i]))
+		if (op_matches(tokens[i]) >= 0)
 			return (i);
 	}
-	return (ret = -1);
+	return (-1);
 }
 
-_Bool			parse_instr(char **tokens, int argnum, t_order **slot)
+_Bool			parse_instr(char **tokens, int argnum, t_order *slot)
 {
 	int op_idx;
 
 	if (!(tokens && *tokens && (argnum > 0) && (argnum <= I_MAXLEN)\
-				&& slot && *slot))
+				&& slot))
 	{
 		ft_putendl_fd("[ERR] parse_instr : bad params", 2);
 		exit(EXIT_FAILURE);
 	}
 	op_idx = parse_master(tokens, argnum);
+	/*dbg*/ft_printf("op_idx = %d\n", op_idx);
 	if ((op_idx == -1) && (argnum == 1))
 		return (check_label(tokens, slot));
-	else if (op_idx != -1)
-		if (!check_master(tokens, slot, op_idx))
-			return (0);
+	else if ((op_idx == -1) || !check_master(tokens, slot, op_idx))
+		return (0);
 	return (parse_params(tokens, argnum, slot, op_idx));
 }
