@@ -1,7 +1,7 @@
 NAME = a.out
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 LIB_PATH = ../../include/libft
 
@@ -17,6 +17,12 @@ SRC_FILE =	main.c \
 			ft_pars_order.c \
 			ft_is_label_char.c \
 			ft_multi_split.c \
+			parse_params.c \
+			op.c \
+			reg_param.c \
+			dir_param.c \
+			ind_param.c \
+			param_utility.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
