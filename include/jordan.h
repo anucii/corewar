@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/24 13:32:35 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:35:33 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct			s_order
 	char				op_code; //changed to char
 	int					ocp;
 	int					nb_param;
-	int					pos; 
+	int					pos; // 
 }						t_order;
 
 typedef struct			s_file
@@ -56,4 +56,8 @@ typedef struct			s_file
 	int					ret;
 }						t_file;
 
+void		labelcall(t_order **champ, int fd, char *label, int pos);
+int			deref_label(t_order **champ, char *label);
+void		bigendian(unsigned int *i, unsigned short *s);
+void		timetoatoi(unsigned int j, unsigned char c, char *param, int fd);
 #endif
