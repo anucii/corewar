@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:01:22 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/22 17:15:48 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/27 17:18:26 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	search_label(t_order **prog, char *label)
 
 	if (!(prog && *prog && label))
 		return (-1);
-	src == (*prog)->label;
+	src = (*prog)->label;
 	while (src)
 	{
 		if (ft_strequ(label, *src))

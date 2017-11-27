@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/24 19:07:38 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/27 17:10:31 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # define COTE			'\"'
 # define COLON			':'
 # define I_MAXLEN		5
+
+# define T_REG_SIZE		1
+# define T_IND_SIZE		2
+# define T_DIR_SIZE		4
 
 /*
 typedef struct			s_info
@@ -50,8 +54,8 @@ typedef struct			s_order
 	int					ty_param[3];
 	char				op_code;
 	int					nb_param;
-	int					pos; 
-	int					size;
+	short				pos; 
+	short				size;
 }						t_order;
 
 typedef struct			s_file
@@ -69,7 +73,7 @@ typedef struct			s_op
 	char				op_code;
 	int					cycles;
 	char				*description;
-	_Bool				bool_1;
+	_Bool				has_ocp;
 	_Bool				bool_2;
 }						t_op;
 
@@ -78,6 +82,9 @@ _Bool					parse_params(char **tokens, int argnum, t_order *slot,\
 	   ssize_t op_idx);
 char					op_matches(char *s);
 void					add_label(t_order *slot, char *s);
+void					write_order_size(t_order *slot);
+void					write_order_pos(t_order *tab, int max);
+_Bool					has_ocp(char op_code);
 
 extern t_op				g_op_tab[17];
 
