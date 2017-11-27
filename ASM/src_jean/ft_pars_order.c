@@ -19,10 +19,9 @@ _Bool    ft_pars_order(t_order *order, t_file file)
 				ft_printf("[%s] ", tokens[index]);
 		}
 	}
-	order->op_code = 1;
+	order->op_code = 2;
 	if (!parse_params(tokens, count_words, order, 1))
-		exit(0);
-//		return (0);
+		return (0);
 	exit(0);
 	return (1);
 }
