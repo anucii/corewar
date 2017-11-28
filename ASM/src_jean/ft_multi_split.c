@@ -11,6 +11,8 @@ static int  ft_count_words(char *s)
 		index++;
 	while (s[index])
 	{
+		if (s[index] && s[index] == HASH)
+			return (count);
 		if (s[index] && s[index] != SPACE && s[index] != TAB && s[index] != COMMA)
 		{
 			while (s[index + 1] && s[index] != SPACE && s[index] != TAB && s[index] != COMMA)
