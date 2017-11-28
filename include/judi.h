@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/27 17:10:31 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/28 22:08:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define T_REG_SIZE		1
 # define T_IND_SIZE		2
 # define T_DIR_SIZE		4
+
+# define SIZE_STRUCT	10
 
 /*
 typedef struct			s_info
@@ -76,6 +78,10 @@ typedef struct			s_op
 	_Bool				has_ocp;
 	_Bool				bool_2;
 }						t_op;
+
+void					launch_parsing(char *filepath, t_order **tab,\
+		t_header *hdr);
+void					write_order_pos(t_order *tab, int max);
 
 _Bool					parse_instr(char **tokens, int argnum, t_order *slot);
 _Bool					parse_params(char **tokens, int argnum, t_order *slot,\
