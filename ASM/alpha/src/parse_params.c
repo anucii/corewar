@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:29:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/27 19:00:50 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:58:56 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ _Bool			parse_params(char **tokens, int max, t_order *slot, ssize_t op_idx)
 	int			index;
 
 	index = -1;
-	while (++index < REG_NUMBER)
+	while (++index < 16)
 	{
 		if (g_op_tab[index].op_code == slot->op_code)
 		{
@@ -50,10 +50,12 @@ _Bool			parse_params(char **tokens, int max, t_order *slot, ssize_t op_idx)
 			if (!ini_ty_param(&g_op_tab[index], slot, tokens, op_idx))
 			{
 				index = -1;
+				/*
 				while (++index < slot->nb_param)
 					if (slot->param[index])
 						ft_strdel(&slot->param[index]);
 				ft_memdel((void**)slot->param);
+				*/
 				return (0);
 			}
 			return (1);

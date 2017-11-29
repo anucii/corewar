@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:27:23 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/29 13:57:25 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/29 17:21:06 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int				startup(t_header *file)
 {
 	int		fd;
 
-	fd = open("test.cor", O_CREAT | O_WRONLY, 777);
+	fd = open("test.cor", O_CREAT | O_RDWR, 00770);
 	if (fd == -1)
 		return (-1);
 	bigendian(&file->magic, 0);
@@ -121,13 +121,14 @@ static void				writeparams(t_order **champ, int fd, t_order *inst)
 
 void					writeinst(t_order **champ, t_header *file)
 {
-	int		i;
-	int		fd;
-	char	c;
+	unsigned int	i;
+	int				fd;
+	char			c;
 
 	i = 0;
-	fd = startup(file);
-	while (i < 2) //need to create nb_struct in one of the struct
+	if ((fd = startup(file)) == -1)
+		error("[ERR] : bad filedescriptor");
+	while (i < file->nb_struct) //need to create nb_struct in one of the struct
 	{
 		write(fd, &champ[i]->op_code, 1);
 		if (champ[i]->op_code != 1 && champ[i]->op_code != 9
@@ -139,6 +140,8 @@ void					writeinst(t_order **champ, t_header *file)
 		writeparams(champ, fd, champ[i]);
 		i++;
 	}
+	if (close(fd) != 0)
+		error("[ERR] : Fildes closing failed");
 }
 
 	/* use to test

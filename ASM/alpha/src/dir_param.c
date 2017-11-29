@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 15:11:40 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/11/27 17:51:09 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:54:58 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ _Bool			dir_param(char **param, int *ty_param, char *s)
 {
 	if (s[0] != '%' || !s[1])
 		return (0);
-	if (s[1])
+	if (s[1] == LABEL_CHAR)
 	{
 		if (!label_param(s))
 			return (0);

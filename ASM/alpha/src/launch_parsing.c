@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 15:36:07 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:07:52 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ _Bool	launch_parsing(char *filepath, t_order **tab, t_header *hdr)
 				ft_putstr("ERROR\n");
 				exit(0);
 			}
+			tab[file.nb_line]->nb_param = 0;//dbg
 			if (!pars_order(tab[file.nb_line], file))//exit if returns 0?
 				return (0);
 			index = -1;
@@ -67,7 +68,9 @@ _Bool	launch_parsing(char *filepath, t_order **tab, t_header *hdr)
 			ft_printf("param[i]: %s, ty_param[i]: %d\n", tab[file.nb_line]->param[index], tab[file.nb_line]->ty_param[index]);
 			file.nb_line += tab[file.nb_line]->op_code ? 1 : 0;
 		}
-		hdr->nb_struct = file.nb_line;
 	}
+	hdr->nb_struct = file.nb_line;
+	if (close(file.fd) != 0)
+		error("[ERR] : parsing file closing failed");
 	return (1);
 }

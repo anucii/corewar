@@ -6,24 +6,30 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:01:22 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 15:05:58 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/29 17:49:28 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+/*
+**	Search label returns -1 if label doesn't fit, or the instruction's pos
+**	otherwise
+*/
+
 static int	search_label(t_order *prog, char *label)
 {
 	char	**src;
+	ssize_t	i;
 
 	if (!(prog && label))
-		return (-1);
+		error("[ERR] : search label bad params");
 	src = prog->label;
-	while (src)
+	i = -1;
+	while (src[++i])
 	{
-		if (ft_strequ(label, *src))
+		if (ft_strequ(label, src[i]))
 			return (prog->pos);
-		src++;
 	}
 	return (-1);
 }
@@ -34,13 +40,11 @@ int			deref_label(t_order **prog, char *label)
 	int	i;
 
 	if (!(prog && *prog && label))
-	{
-		//ft_error(1, "[ERR] dereferencing failure : no label or no program");
-		exit(EXIT_FAILURE);
-	}
+		error("[ERR] dereferencing failure : no label or no program");
 	ret = -1;
-	i = -1;
-	while (prog && prog[++i]->label && ((ret = search_label(prog[i], label)) < 0))
-		;
+	i = 0;
+	while (prog && prog[i]->label \
+			&& ((ret = search_label(prog[i], label)) < 0))
+		i++;
 	return (ret);
 }
