@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 18:07:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/29 18:13:48 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ _Bool	launch_parsing(char *filepath, t_order **tab, t_header *hdr)
 
 	if (!tab || *tab)
 		error("[ERR] : corrupted slot to record instructions");
-	if (!filepath || ((file.fd = open(filepath, O_RDONLY /*| O_SYMLINK*/)) < 0))
+	if (!filepath || ((file.fd = open(filepath, O_RDONLY | O_SYMLINK)) < 0))
 		error("[ERR] : opening failed on filepath");
 	size = 1;
 	file.nb_line = 0;
