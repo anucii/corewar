@@ -1,0 +1,9 @@
+.name 		"golem"  #test
+.comment	"clay champion for testing purposes"
+
+fail_val:	ld 48,r16	#value to display if replacement failed
+live:		live %-111222333444
+live:		live %:test
+sauter:		zjmp	%:test
+sauter_2:	zjmp	%123
+test:		st	r2,42
