@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:27:23 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/27 17:44:47 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/11/29 12:25:24 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ static int				startup(t_header *file)
 		return (-1);
 	bigendian(&file->magic, 0);
 	write(fd, &file->magic, 4);
-	write(fd, file->prog_name, 129);
-	write(fd, file->comment, 2049);
+	write(fd, file->prog_name, PROG_NAME_LENGTH);
+	bigendian(&file->prog_size, 0);
+	write(fd, &file->prog_size, 4);
+	write(fd, file->comment, COMMENT_LENGTH);
 	return (fd);
 }
 
