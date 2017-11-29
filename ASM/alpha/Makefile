@@ -26,6 +26,9 @@ SRC_FILE =	asm.c \
 			multi_split.c \
 			error.c \
 			op.c \
+			conversion.c\
+			labelcall.c\
+			deref_label.c\
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
