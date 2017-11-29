@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 14:45:24 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/29 14:53:07 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/11/29 14:55:18 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void		calc_prog_size(t_order **champ, t_header *hdr)
 {
-	int				i;
+	unsigned int	i;
 	unsigned int	size;
 
 	i = 0;
