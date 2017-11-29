@@ -9,6 +9,7 @@ int     main(int argc, char **argv)
     if (argc < 2)
         error("Usage : ./parser <line content space-separated>");
     launch_parsing(argv[argc - 1], tab, &hdr);
+	calc_prog_size(tab);
 	writeinst(tab, &hdr);
     return (0);
 }
