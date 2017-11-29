@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 14:37:21 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/29 14:40:06 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ _Bool	launch_parsing(char *filepath, t_order **tab, t_header *hdr)
 	t_file		file;
 	int			size;
 	int			index;
-//	if (!tab || *tab)
-//		error("[ERR] : corrupted slot to record instructions");
+	if (!tab || *tab)
+		error("[ERR] : corrupted slot to record instructions");
 	if (!filepath || ((file.fd = open(filepath, O_RDONLY /*| O_SYMLINK*/)) < 0))
 		error("[ERR] : opening failed on filepath");
 	size = 1;
 	file.nb_line = 0;
-	tab = ft_memalloc(sizeof(t_order*) * SIZE_STRUCT * size);
-//	*tab = (t_order *)ft_memalloc(sizeof(t_order) * (SIZE_STRUCT * size));
+//	tab = ft_memalloc(sizeof(t_order*) * SIZE_STRUCT * size);
+	*tab = (t_order *)ft_memalloc(sizeof(t_order) * (SIZE_STRUCT * size));
 	while ((file.ret = get_next_line(file.fd, &file.line)) == 1)
 	{
 		if ((skip_blanks(&file.line) == -1) || ((*file.line == COMMENT_CHAR)\
