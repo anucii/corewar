@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 14:14:27 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/29 14:38:23 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int						deref_label(t_order **champ, char *label);
 void					bigendian(unsigned int *i, unsigned short *s);
 void					timetoatoi(unsigned int j, unsigned char c, char *param, int fd);
 void					writeinst(t_order **champ, t_header *file);
-void					calc_prog_size(t_order **champ);
+void					calc_prog_size(t_order **champ, t_header *hdr);
 
 #endif

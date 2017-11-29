@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/28 22:05:13 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/29 14:37:21 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ _Bool	launch_parsing(char *filepath, t_order **tab, t_header *hdr)
 			ft_printf("param[i]: %s, ty_param[i]: %d\n", tab[file.nb_line]->param[index], tab[file.nb_line]->ty_param[index]);
 			file.nb_line += tab[file.nb_line]->op_code ? 1 : 0;
 		}
+		hdr->nb_struct = file.nb_line;
 	}
 	return (1);
 }
