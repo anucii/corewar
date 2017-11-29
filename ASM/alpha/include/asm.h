@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 14:38:23 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/29 20:18:05 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct			s_op
 	char				op_code;
 	int					cycles;
 	char				*description;
-	_Bool				bool_1;
+	_Bool				has_ocp;
 	_Bool				bool_2;
 }						t_op;
 
@@ -57,9 +57,10 @@ typedef struct			s_order
 	char				**label;
 	char				**param;
 	int					ty_param[3];
-	int					op_code;
+	char				op_code;
 	int					nb_param;
-	int					pos;
+	short				pos;
+	short				size;
 }						t_order;
 
 typedef struct			s_file
@@ -70,7 +71,7 @@ typedef struct			s_file
 	int					ret;
 }						t_file;
 
-_Bool					launch_parsing(char *filepath, t_order **tab, t_header *hdr);
+_Bool					launch_parsing(char *filepath, t_order ***tab, t_header *hdr);
 _Bool					pars_info(t_header *info, char *line);
 _Bool					pars_order(t_order *order, t_file file);
 _Bool					parse_instr(char **tokens, int argnum, t_order *slot);
