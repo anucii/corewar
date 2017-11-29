@@ -6,23 +6,23 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:01:22 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 13:58:22 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/29 15:05:58 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	search_label(t_order **prog, char *label)
+static int	search_label(t_order *prog, char *label)
 {
 	char	**src;
 
-	if (!(prog && *prog && label))
+	if (!(prog && label))
 		return (-1);
-	src = (*prog)->label;
+	src = prog->label;
 	while (src)
 	{
 		if (ft_strequ(label, *src))
-			return ((*prog)->pos);
+			return (prog->pos);
 		src++;
 	}
 	return (-1);
@@ -31,6 +31,7 @@ static int	search_label(t_order **prog, char *label)
 int			deref_label(t_order **prog, char *label)
 {
 	int	ret;
+	int	i;
 
 	if (!(prog && *prog && label))
 	{
@@ -38,7 +39,8 @@ int			deref_label(t_order **prog, char *label)
 		exit(EXIT_FAILURE);
 	}
 	ret = -1;
-	while (prog && *prog && ((ret = search_label(prog, label)) < 0))
-		prog = &(prog[1]);
+	i = -1;
+	while (prog && prog[++i]->label && ((ret = search_label(prog[i], label)) < 0))
+		;
 	return (ret);
 }
