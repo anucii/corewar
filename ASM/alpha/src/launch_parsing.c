@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 13:51:09 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 15:22:21 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ static void	realloc_order(t_order ***order, int *size)
 
 static char	skip_blanks(char **s)
 {
+	ssize_t	i;
+
 	if (!(s && *s && **s))
 		return (-1);
+	i = -1;
 	while ((**s) == SPACE || (**s) == TAB)
 		(*s)++;
 	return (0);
@@ -32,6 +35,7 @@ static char	skip_blanks(char **s)
 _Bool	launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 {
 	t_file		file;
+	char		*to_free;
 	int			size;
 	int			index;
 
@@ -43,18 +47,19 @@ _Bool	launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 	file.nb_line = 0;
 	while ((file.ret = get_next_line(file.fd, &file.line)) == 1)
 	{
+		to_free = file.line;
 		if ((skip_blanks(&file.line) == -1) || ((*file.line == COMMENT_CHAR)\
 					|| !(*file.line)))
 		{
 			if (file.line)
-				ft_strdel(&file.line);
+				ft_strdel(&to_free);
 			continue ;
 		}
 		if (*file.line == DOT)
 		{
 			if (!pars_info(hdr, file.line))
 			{
-				ft_strdel(&file.line);
+				ft_strdel(&to_free);
 				return (0);
 			}
 			ft_printf(".name = [%s], .comment = [%s]\n", hdr->prog_name, hdr->comment);
@@ -67,17 +72,20 @@ _Bool	launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 				exit(0);
 			if (!pars_order((*tab)[file.nb_line], file))//exit if returns 0?
 			{
-				ft_strdel(&file.line);
+				ft_strdel(&to_free);
 				return (0);
 			}
 			index = -1;
 			while (++index < (*tab)[file.nb_line]->nb_param)
-				ft_printf("param[i]: %s, ty_param[i]: %d\n", (*tab)[file.nb_line]->param[index], (*tab)[file.nb_line]->ty_param[index]);
+				ft_printf("param[%d]: %s, ty_param[%d]: %d\n", index, \
+						(*tab)[file.nb_line]->param[index], index,\
+						(*tab)[file.nb_line]->ty_param[index]);
 			file.nb_line += (*tab)[file.nb_line]->op_code ? 1 : 0;
 		}
-		ft_strdel(&file.line);
+		ft_strdel(&to_free);
 	}
 	hdr->nb_struct = file.nb_line;
+	write_order_pos(*tab, hdr->nb_struct);
 	if (close(file.fd) != 0)
 		error("[ERR] : parsing file closing failed");
 	return (1);

@@ -25,6 +25,6 @@ int     main(int argc, char **argv)
 	writeinst(tab, &hdr);
 	ft_strdel(&hdr.filename);
 	free_order(tab, hdr.nb_struct);
-	while (1);
+//	while (1);
 	return (0);
 }

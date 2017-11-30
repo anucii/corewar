@@ -5,6 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/30 14:49:20 by jdaufin           #+#    #+#             */
+/*   Updated: 2017/11/30 15:04:00 by jdaufin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asm.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
 /*   Updated: 2017/11/30 11:33:32 by jgonthie         ###   ########.fr       */
 /*                                                                            */
@@ -26,6 +38,10 @@
 # define COTE			'\"'
 # define COLON			':'
 # define I_MAXLEN		5
+
+# define T_REG_SIZE		1
+# define T_IND_SIZE		2
+# define T_DIR_SIZE		4
 
 /*
 **	Global variable from op.c and its struct
@@ -95,5 +111,10 @@ void					writeinst(t_order **champ, t_header *file);
 void					calc_prog_size(t_order **champ, t_header *hdr);
 void					free_order(t_order **tab, int size);
 void					free_doublechar(char **tab, int size);
+
+void					write_order_size(t_order *slot);
+void					write_order_pos(t_order **tab, int last);
+_Bool					has_ocp(char op_code);
+_Bool					dir_as_addr(char op_code);
 
 #endif
