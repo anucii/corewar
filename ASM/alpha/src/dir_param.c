@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 15:11:40 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/11/29 17:54:58 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 15:14:07 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ _Bool			dir_param(char **param, int *ty_param, char *s)
 			return (0);
 	}
 	*ty_param = T_DIR;
-	*param = ft_strsub(s, 1, ft_strlen(s) - 1);
+	*param = ft_strsub(s, 1, ft_strlen(s));
 	return (1);
 }
