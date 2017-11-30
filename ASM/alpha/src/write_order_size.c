@@ -6,11 +6,8 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:33:41 by jdaufin           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/11/30 16:43:21 by jdaufin          ###   ########.fr       */
-=======
+/*   Updated: 2017/11/30 17:04:26 by jdaufin          ###   ########.fr       */
 /*   Updated: 2017/11/30 16:03:36 by jdaufin          ###   ########.fr       */
->>>>>>> 52ada85406319d5225f1b9ddc6a5d29902da0748
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +43,7 @@ static short	get_param_size(char op_code, int ty_param)
 	else if (ty_param == T_DIR)
 		return (dir_as_addr(op_code) ? T_IND_SIZE : T_DIR_SIZE);
 	error("[ERR] : unvalid parameter type");
-<<<<<<< HEAD
 	return (0);
-=======
->>>>>>> 52ada85406319d5225f1b9ddc6a5d29902da0748
 }	
 
 void		write_order_size(t_order *slot)
