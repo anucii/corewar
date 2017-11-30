@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:33:41 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 15:02:24 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 16:03:36 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ _Bool	dir_as_addr(char op_code)
 	ssize_t				i;
 
 	if ((op_code < 0) || (op_code > 16))
-		exit(EXIT_FAILURE);
-		//ft_error(1, "[ERR] : unvalid opcode");
+		error("[ERR] : unvalid opcode");
 	else if (!op_code)
 		return (0);
 	i = -1;
@@ -42,8 +41,7 @@ static short	get_param_size(char op_code, int ty_param)
 		return (T_IND_SIZE);
 	else if (ty_param == T_DIR)
 		return (dir_as_addr(op_code) ? T_IND_SIZE : T_DIR_SIZE);
-	exit(EXIT_FAILURE);
-	//ft_error(1, "[ERR] : unvalid parameter type");
+	error("[ERR] : unvalid parameter type");
 }	
 
 void		write_order_size(t_order *slot)
