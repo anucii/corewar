@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 12:17:49 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:51:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ _Bool	launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 		if ((skip_blanks(&file.line) == -1) || ((*file.line == COMMENT_CHAR)\
 					|| !(*file.line)))
 		{
-			ft_strdel(&file.line);
+			if (file.line)
+				ft_strdel(&file.line);
 			continue ;
 		}
 		if (*file.line == DOT)
