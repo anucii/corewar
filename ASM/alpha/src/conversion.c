@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:27:23 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/29 17:21:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 14:43:23 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int				startup(t_header *file)
 	bigendian(&file->magic, 0);
 	write(fd, &file->magic, 4);
 	write(fd, file->prog_name, PROG_NAME_LENGTH);
+	ft_printf("prog size = %d\n", file->prog_size);
 	bigendian(&file->prog_size, 0);
 	write(fd, &file->prog_size, 4);
 	write(fd, file->comment, COMMENT_LENGTH);
@@ -102,7 +103,7 @@ static void				writeparams(t_order **champ, int fd, t_order *inst)
 			if (inst->param[i][j] == LABEL_CHAR)
 				labelcall(champ, fd, inst->param[i], inst->pos);
 			else
-				timetoatoi(1, 0, inst->param[i], fd);
+				timetoatoi(inst->op_code, 0, inst->param[i], fd);
 		}
 		else if (inst->ty_param[i] == 4)
 		{

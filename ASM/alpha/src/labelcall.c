@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 11:44:04 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/29 13:58:55 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 15:22:18 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,29 @@ void	timetoatoi(unsigned int j, unsigned char c, char *param, int fd)
 
 	if (c > 0)
 	{
-		c = ft_atoi(param);
+		c = (char)(ft_atoi(param));
+		ft_printf("param = %s c = %d\n", param, c);
 		write(fd, &c, 1);
 	}
 	else if (j > 0)
 	{
-		j = ft_atoi(param);
-		bigendian(&j, 0);
-		write(fd, &j, 4);
+		if (dir_as_addr(j) == 1)
+		{
+			ft_printf("OK\n");
+			s = (short)(ft_atoi(param));
+			bigendian(0, &s);
+			write(fd, &s, 2);
+		}
+		else
+		{
+			j = (unsigned int)(ft_atoi(param));
+			bigendian(&j, 0);
+			write(fd, &j, 4);
+		}
 	}
 	else
 	{
-		s = ft_atoi(param);
+		s = (short)(ft_atoi(param));
 		bigendian(0, &s);
 		write(fd, &s, 2);
 	}
