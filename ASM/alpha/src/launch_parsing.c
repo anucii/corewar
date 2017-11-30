@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 15:22:21 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 15:50:27 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ static void	realloc_order(t_order ***order, int *size)
 
 static char	skip_blanks(char **s)
 {
-	ssize_t	i;
-
 	if (!(s && *s && **s))
 		return (-1);
-	i = -1;
 	while ((**s) == SPACE || (**s) == TAB)
 		(*s)++;
 	return (0);
@@ -51,7 +48,7 @@ _Bool	launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 		if ((skip_blanks(&file.line) == -1) || ((*file.line == COMMENT_CHAR)\
 					|| !(*file.line)))
 		{
-			if (file.line)
+			if (to_free)
 				ft_strdel(&to_free);
 			continue ;
 		}
