@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:24:23 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 15:34:00 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/30 12:12:26 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ _Bool			parse_instr(char **tokens, int argnum, t_order *slot)
 {
 	int op_idx;
 
+	slot->nb_label = 0;
 	if (!(tokens && *tokens && (argnum > 0) && (argnum <= I_MAXLEN)\
 				&& slot))
 	{

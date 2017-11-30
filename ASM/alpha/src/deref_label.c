@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:01:22 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 17:49:28 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 12:14:53 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static int	search_label(t_order *prog, char *label)
 	while (src[++i])
 	{
 		if (ft_strequ(label, src[i]))
+		{
+		//	prog->nb_label = 1;
 			return (prog->pos);
+		}
 	}
 	return (-1);
 }
@@ -39,12 +42,11 @@ int			deref_label(t_order **prog, char *label)
 	int	ret;
 	int	i;
 
-	if (!(prog && *prog && label))
-		error("[ERR] dereferencing failure : no label or no program");
 	ret = -1;
 	i = 0;
-	while (prog && prog[i]->label \
-			&& ((ret = search_label(prog[i], label)) < 0))
+	if (!(prog && *prog && label))
+		error("[ERR] dereferencing failure : no label or no program");
+	while (prog && prog[i] && prog[i]->label && ((ret = search_label(prog[i], label)) < 0))
 		i++;
 	return (ret);
 }

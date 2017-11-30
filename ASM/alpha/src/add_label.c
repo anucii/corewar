@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 22:31:58 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/24 17:29:14 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 12:20:24 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	add_label(t_order *slot, char *s)
 		buf = slot->label;
 	}
 	buf[i] = ft_strdup(s);
+	slot->nb_label++;
 }

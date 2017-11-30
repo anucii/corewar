@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 20:18:05 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 11:33:32 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ typedef struct			s_order
 	char				**label;
 	char				**param;
 	int					ty_param[3];
-	char				op_code;
 	int					nb_param;
+	int					nb_label;
+	char				op_code;
 	short				pos;
 	short				size;
 }						t_order;
@@ -92,5 +93,7 @@ void					bigendian(unsigned int *i, unsigned short *s);
 void					timetoatoi(unsigned int j, unsigned char c, char *param, int fd);
 void					writeinst(t_order **champ, t_header *file);
 void					calc_prog_size(t_order **champ, t_header *hdr);
+void					free_order(t_order **tab, int size);
+void					free_doublechar(char **tab, int size);
 
 #endif

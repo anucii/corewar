@@ -24,6 +24,7 @@ int     main(int argc, char **argv)
 	calc_prog_size(tab, &hdr);
 	writeinst(tab, &hdr);
 	ft_strdel(&hdr.filename);
-	//free_tab(&tab);
+	free_order(tab, hdr.nb_struct);
+	while (1);
 	return (0);
 }

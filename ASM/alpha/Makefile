@@ -30,6 +30,7 @@ SRC_FILE =	asm.c \
 			labelcall.c \
 			deref_label.c \
 			calc_prog_size.c \
+			free.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/

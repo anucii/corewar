@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/29 20:20:14 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/11/30 12:17:49 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,17 @@ _Bool	launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 	{
 		if ((skip_blanks(&file.line) == -1) || ((*file.line == COMMENT_CHAR)\
 					|| !(*file.line)))
+		{
+			ft_strdel(&file.line);
 			continue ;
+		}
 		if (*file.line == DOT)
 		{
 			if (!pars_info(hdr, file.line))
+			{
+				ft_strdel(&file.line);
 				return (0);
+			}
 			ft_printf(".name = [%s], .comment = [%s]\n", hdr->prog_name, hdr->comment);
 		}
 		else
@@ -57,17 +63,18 @@ _Bool	launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 			if (file.nb_line == (SIZE_STRUCT * size))
 				realloc_order(tab, &size);
 			if (((*tab)[file.nb_line] = ft_memalloc(sizeof(t_order))) == NULL)
-			{
-				ft_putstr("ERROR\n");
 				exit(0);
-			}
 			if (!pars_order((*tab)[file.nb_line], file))//exit if returns 0?
+			{
+				ft_strdel(&file.line);
 				return (0);
+			}
 			index = -1;
 			while (++index < (*tab)[file.nb_line]->nb_param)
-			ft_printf("param[i]: %s, ty_param[i]: %d\n", (*tab)[file.nb_line]->param[index], (*tab)[file.nb_line]->ty_param[index]);
+				ft_printf("param[i]: %s, ty_param[i]: %d\n", (*tab)[file.nb_line]->param[index], (*tab)[file.nb_line]->ty_param[index]);
 			file.nb_line += (*tab)[file.nb_line]->op_code ? 1 : 0;
 		}
+		ft_strdel(&file.line);
 	}
 	hdr->nb_struct = file.nb_line;
 	if (close(file.fd) != 0)
