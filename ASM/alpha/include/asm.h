@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 11:33:32 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/30 19:49:25 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # define COTE			'\"'
 # define COLON			':'
 # define I_MAXLEN		5
+# define T_REG_SIZE		1
+# define T_IND_SIZE		2
+# define T_DIR_SIZE		4
 
 /*
 **	Global variable from op.c and its struct
@@ -74,11 +77,11 @@ typedef struct			s_file
 
 _Bool					launch_parsing(char *filepath, t_order ***tab, t_header *hdr);
 _Bool					pars_info(t_header *info, char *line);
-_Bool					pars_order(t_order *order, t_file file);
+_Bool					pars_order(t_order *order, char *s);
 _Bool					parse_instr(char **tokens, int argnum, t_order *slot);
 _Bool					parse_params(char **tokens, int argnum, t_order *slot, ssize_t op_idx);
 char					op_matches(char *s);
-void					add_label(t_order *slot, char *s);
+void					add_label(t_order **slot, char *s);
 _Bool					is_label_char(char c, char *label_char);
 _Bool					dir_param(char **param, int *ty_param, char *s);
 _Bool					reg_param(char **param, int *ty_param, char *s);
@@ -95,5 +98,11 @@ void					writeinst(t_order **champ, t_header *file);
 void					calc_prog_size(t_order **champ, t_header *hdr);
 void					free_order(t_order **tab, int size);
 void					free_doublechar(char **tab, int size);
+ _Bool					dir_as_addr(char op_code);
+
+ _Bool	has_ocp(char op_code);
+ void	write_order_pos(t_order **tab, int last);
+ _Bool	dir_as_addr(char op_code);
+ void	write_order_size(t_order *slot);
 
 #endif

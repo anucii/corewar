@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:27:23 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/30 14:43:23 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/11/30 19:41:29 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int				startup(t_header *file)
 	bigendian(&file->magic, 0);
 	write(fd, &file->magic, 4);
 	write(fd, file->prog_name, PROG_NAME_LENGTH);
-	ft_printf("prog size = %d\n", file->prog_size);
 	bigendian(&file->prog_size, 0);
 	write(fd, &file->prog_size, 4);
 	write(fd, file->comment, COMMENT_LENGTH);
@@ -144,45 +143,3 @@ void					writeinst(t_order **champ, t_header *file)
 	if (close(fd) != 0)
 		error("[ERR] : Fildes closing failed");
 }
-
-	/* use to test
-int main()
-{
-	t_order **champ;
-	t_header *file;
-
-	file = (t_header*)malloc(sizeof(t_header));
-	file->magic = COREWAR_EXEC_MAGIC;
-	ft_strcpy(file->prog_name, "zork");
-	ft_strcpy(file->comment, "I M ALIVE");
-	champ = (t_order**)malloc(sizeof(t_order) * 2);
-	champ[0] = (t_order*)malloc(sizeof(t_order));
-	champ[0]->param = (char**)malloc(sizeof(char*) * 3);
-	champ[0]->op_code = 11;
-	champ[0]->ocp = 1;
-	champ[0]->ty_param[0] = 1;
-	champ[0]->ty_param[1] = 4;
-	champ[0]->ty_param[2] = 2;
-	champ[0]->nb_param = 3;
-	champ[0]->param[0] = "12";
-	champ[0]->param[1] = "20";
-	champ[0]->param[2] = "33";
-	champ[0]->pos = 10;
-	champ[0]->label = (char**)malloc(sizeof(char*) * 1);
-	champ[0]->label[0] =":theworld";
-	champ[1] = (t_order*)malloc(sizeof(t_order));
-	champ[1]->param = (char**)malloc(sizeof(char*) * 3);
-	champ[1]->op_code = 11;
-	champ[1]->ocp = 1;
-	champ[1]->ty_param[0] = 1;
-	champ[1]->ty_param[1] = 4;
-	champ[1]->ty_param[2] = 2;
-	champ[1]->nb_param = 3;
-	champ[1]->param[0] = "12";
-	champ[1]->param[1] = ":theworld";
-	champ[1]->param[2] = "33";
-	champ[1]->pos = 15;
-	writeinst(champ, file);
-	return (0);
-}
-*/

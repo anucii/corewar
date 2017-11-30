@@ -6,13 +6,13 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:24:23 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 12:12:26 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/30 19:49:55 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static _Bool	check_label(char **tokens, t_order *slot)
+static _Bool	check_label(char **tokens, t_order **slot)
 {
 	size_t	len;
 	size_t	i;
@@ -45,7 +45,7 @@ static _Bool	check_master(char **tokens, t_order *slot, ssize_t op_idx)
 	char	code;
 	_Bool	ret;
 
-	if ((op_idx > 0) && !check_label(tokens, slot))
+	if ((op_idx > 0) && !check_label(tokens, &slot))
 		return (0);
 	if ((ret = (op_matches(tokens[op_idx])) >= 0))
 	{
@@ -72,7 +72,6 @@ _Bool			parse_instr(char **tokens, int argnum, t_order *slot)
 {
 	int op_idx;
 
-	slot->nb_label = 0;
 	if (!(tokens && *tokens && (argnum > 0) && (argnum <= I_MAXLEN)\
 				&& slot))
 	{
@@ -82,7 +81,7 @@ _Bool			parse_instr(char **tokens, int argnum, t_order *slot)
 	op_idx = parse_master(tokens, argnum);
 	/*dbg*/ //ft_printf("op_idx = %d\n", op_idx);
 	if ((op_idx == -1) && (argnum == 1))
-		return (check_label(tokens, slot));
+		return (check_label(tokens, &slot));
 	else if ((op_idx == -1) || !check_master(tokens, slot, op_idx))
 		return (0);
 	return (parse_params(tokens, argnum, slot, op_idx));

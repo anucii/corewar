@@ -1,5 +1,16 @@
-#include "asm.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars_order.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/30 14:52:12 by jgonthie          #+#    #+#             */
+/*   Updated: 2017/11/30 18:44:33 by jgonthie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "asm.h"
 /*
 static void put_tab(char *s)
 {
@@ -8,36 +19,35 @@ static void put_tab(char *s)
 	int     index;
 
 	if ((count_words = multi_split(&tab, s)) != 0)
+	{
+		ft_printf("count_words = %d: ", count_words);
+		index = -1;
+		while (++index < count_words)
 		{
-			ft_printf("count_words = %d: ", count_words);
-			index = -1;
-			while (++index < count_words)
-			{
-				if (index + 1 == count_words)
-					ft_printf("[%s]\n", tab[index]);
-				else
-					ft_printf("[%s] ", tab[index]);
-			}
+			if (index + 1 == count_words)
+				ft_printf("[%s]\n", tab[index]);
+			else
+				ft_printf("[%s] ", tab[index]);
 		}
+	}
 }
 */
-
-_Bool    pars_order(t_order *order, t_file file)
+_Bool    pars_order(t_order *order, char *s)
 {
 	char    **tokens;
 	int     count_words;
 
 	tokens = NULL;
-	if ((count_words = multi_split(&tokens, file.line)) == 0)
+//	put_tab(s);
+	if ((count_words = multi_split(&tokens, s)) == 0)
 		return (0);
 	if (!(parse_instr(tokens, count_words, order)))
 	{
 		free_doublechar(tokens, count_words);
 		return (0);
 	}
+	if (order->op_code)
+		write_order_size(order);
 	free_doublechar(tokens, count_words);
-//	ft_printf("count_words : %d\n", count_words);
-//	if (!(parse_params(tokens, count_words, order, ret)))
-	//	return (0);
 	return (1);
 }
