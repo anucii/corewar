@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 15:11:13 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/11/27 15:39:33 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:15:54 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ _Bool			reg_param(char **param, int *ty_param, char *s)
 	if (ft_cmpsting(value, REG_NUMBER) > 0)
 		return (0);
 	*ty_param = T_REG;
-	*param = ft_strdup(s);
+	*param = ft_strsub(s, 1, ft_strlen(s) - 1);
 	return (1);
 }
