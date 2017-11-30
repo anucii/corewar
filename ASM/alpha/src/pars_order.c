@@ -35,6 +35,7 @@ _Bool    pars_order(t_order *order, t_file file)
 		free_doublechar(tokens, count_words);
 		return (0);
 	}
+	write_order_size(order);
 	free_doublechar(tokens, count_words);
 //	ft_printf("count_words : %d\n", count_words);
 //	if (!(parse_params(tokens, count_words, order, ret)))
