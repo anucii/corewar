@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 13:59:14 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/11/30 17:15:08 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 13:52:21 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	comment_line(t_header *info, char *line, int index)
 	int		len;
 
 	len = 0;
+	if (info->comment[0] != '\0')
+		return (0);
 	inc_line(line, &index, &len, COMMENT_LENGTH);
 	ft_bzero(info->comment, COMMENT_LENGTH + 1);
 	ft_strncpy(info->comment, ((const char*)line + index - len), len);
@@ -51,6 +53,8 @@ static int	name_line(t_header *info, char *line, int index)
 	int		len;
 
 	len = 0;
+	if (info->prog_name[0] != '\0')
+		return (0);
 	inc_line(line, &index, &len, PROG_NAME_LENGTH);
 	ft_bzero(info->prog_name, PROG_NAME_LENGTH + 1);
 	ft_strncpy(info->prog_name, ((const char*)line + index - len), len);
