@@ -37,8 +37,13 @@ void		free_order(t_order **tab, int size)
 		if (tab[index]->nb_param > 0)
 		{
 			size_param = -1;
+			ft_putstr("Param : ");
 			while (++size_param < tab[index]->nb_param)
+			{
+				ft_printf("%s ", tab[index]->param[size_param]);
 				ft_strdel(&tab[index]->param[size_param]);
+			}
+			ft_putchar('\n');
 			ft_memdel((void**)tab[index]->param);
 		}
 		if (tab[index]->nb_label > 0)

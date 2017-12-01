@@ -30,7 +30,8 @@ int		main(int argc, char **argv)
 		if (++file.nb_line == SIZE_STRUCT * size)
 			ft_realloc_order(order, &size);
 		order[file.nb_line] = ft_memalloc(sizeof(t_order));
-		ft_pars_order(order[file.nb_line], file);
+		if (!ft_pars_order(order[file.nb_line], file))
+			return (0);
 	}
 	return (0);
 }

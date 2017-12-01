@@ -49,5 +49,6 @@ _Bool    pars_order(t_order *order, char *s)
 	if (order->op_code)
 		write_order_size(order);
 	free_doublechar(tokens, count_words);
+//	ft_printf("C'est de la merde = %s\n", order->label[0]);
 	return (1);
 }

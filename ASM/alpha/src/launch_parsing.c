@@ -51,7 +51,6 @@ _Bool			instr_line(t_order ****tab, t_file *file, char *s)
 //	if (check != file->nb_line)
 	if (!(**tab)[file->nb_line])
 	{
-		ft_putstr("test\n");
 		(**tab)[file->nb_line] = ft_memalloc(sizeof(t_order));
 		(**tab)[file->nb_line]->nb_label = 0;
 		check++;
@@ -60,6 +59,7 @@ _Bool			instr_line(t_order ****tab, t_file *file, char *s)
 //		ft_printf("=== %s ===\n", (**tab)[file->nb_line]->label[0]);
 	if (!pars_order((**tab)[file->nb_line], s))
 		return (0);
+//	ft_printf("C'est de la merde = %s\n", (**tab)[file->nb_line]->label[0]);
 	file->nb_line += (**tab)[file->nb_line]->op_code ? 1 : 0;
 	return (1);
 }
@@ -71,7 +71,7 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 
 	if (!(tab && *tab) || **tab)
 		error("[ERR] : corrupted slot to record instructions");
-	if (!filepath || ((file.fd = open(filepath, O_RDONLY | O_SYMLINK)) < 0))
+	if (!filepath || ((file.fd = open(filepath, O_RDONLY /*| O_SYMLINK*/)) < 0))
 		error("[ERR] : opening failed on filepath");
 	file.nb_line = 0;
 	while ((file.ret = get_next_line(file.fd, &file.line)) == 1)

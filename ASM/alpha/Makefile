@@ -34,6 +34,7 @@ SRC_FILE =	asm.c \
 			write_order_size.c \
 			write_order_pos.c \
 			has_ocp.c \
+			new_name.c \
 			
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))

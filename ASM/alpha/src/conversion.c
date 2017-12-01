@@ -37,7 +37,8 @@ static int				startup(t_header *file)
 {
 	int		fd;
 
-	fd = open("test.cor", O_CREAT | O_RDWR, 00770);
+	file->filename = new_name(file);
+	fd = open(file->filename, O_CREAT | O_RDWR, 00770);
 	if (fd == -1)
 		return (-1);
 	bigendian(&file->magic, 0);
