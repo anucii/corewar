@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 13:42:48 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 14:26:25 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static _Bool	breaking_line(char *s)
 
 _Bool			instr_line(t_order ****tab, t_file *file, char *s)
 {
-	static int	check = 1;
 	static int	size = 1;
 
 	if (file->nb_line == (SIZE_STRUCT * size))
@@ -53,7 +52,6 @@ _Bool			instr_line(t_order ****tab, t_file *file, char *s)
 	{
 		(**tab)[file->nb_line] = ft_memalloc(sizeof(t_order));
 		(**tab)[file->nb_line]->nb_label = 0;
-		check++;
 	}
 	if (!pars_order((**tab)[file->nb_line], s))
 		return (0);
