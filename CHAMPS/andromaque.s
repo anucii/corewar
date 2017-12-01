@@ -36,6 +36,26 @@
 		ld		:display,r3
 		aff		r2
 		aff		r3
+ca:
+dag:
+adf:
+2df:
+3df:
+rrr:
+rdf:
+adf:
+adf:
+adf:
+adf:
+adf:
+adf:
+adf:
+adf:
+adf:
+adf:
+adf:
+adf:
+adf:
 auto:	ld		:auto,r4
 		aff		r4
 

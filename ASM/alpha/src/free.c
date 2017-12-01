@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 10:59:46 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/01 11:55:20 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 16:40:34 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,7 @@ void		free_order(t_order **tab, int size)
 		{
 			size_label = -1;
 			while (++size_label < tab[index]->nb_label)
-			{
-				if (size_label == 0)
-					ft_printf("Label : %s\n", tab[index]->label[size_label]);
-				else
-					ft_printf("%s\n", tab[index]->label[size_label]);
-				ft_strdel(&tab[index]->param[size_label]);
-			}
+				ft_strdel(&tab[index]->label[size_label]);
 			ft_memdel((void**)tab[index]->param);
 		}
 		ft_memdel((void**)&tab[index]);
