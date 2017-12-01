@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/11/29 16:36:21 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/01 16:38:52 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ typedef struct		s_header
 	char			comment[COMMENT_LENGTH + 1];
 	unsigned int	nb_struct;
 	char			*filename;
+	_Bool			if_prog;
+	_Bool			if_comment;
 }					t_header;
 #endif
