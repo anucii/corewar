@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 13:59:14 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/01 13:52:21 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 16:41:32 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ static int	comment_line(t_header *info, char *line, int index)
 	int		len;
 
 	len = 0;
-	if (info->comment[0] != '\0')
+	if (info->if_comment == 1)
 		return (0);
 	inc_line(line, &index, &len, COMMENT_LENGTH);
 	ft_bzero(info->comment, COMMENT_LENGTH + 1);
 	ft_strncpy(info->comment, ((const char*)line + index - len), len);
+	info->if_comment = 1;
 	while (line[++index])
 	{
 		if (line[index] != SPACE && line[index] != TAB)
@@ -53,11 +54,12 @@ static int	name_line(t_header *info, char *line, int index)
 	int		len;
 
 	len = 0;
-	if (info->prog_name[0] != '\0')
+	if (info->if_prog == 1)
 		return (0);
 	inc_line(line, &index, &len, PROG_NAME_LENGTH);
 	ft_bzero(info->prog_name, PROG_NAME_LENGTH + 1);
 	ft_strncpy(info->prog_name, ((const char*)line + index - len), len);
+	info->if_prog = 1;
 	while (line[++index])
 	{
 		if (line[index] != SPACE && line[index] != TAB)
