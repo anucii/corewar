@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 16:40:34 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 18:03:33 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static _Bool	instr_line(t_order ***tab, t_file *file, char *s)
 {
 	static int	size = 1;
 
-	ft_putendl(file->line);
 	if (file->nb_line == (SIZE_STRUCT * size))
 		realloc_order(tab, &size);
 	if (!(*tab)[file->nb_line] || (file->nb_line >= SIZE_STRUCT))

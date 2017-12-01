@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:22:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/01 11:22:55 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 18:08:01 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int     main(int argc, char **argv)
 	writeinst(tab, &hdr);
 	ft_strdel(&hdr.filename);
 	free_order(tab, hdr.nb_struct);
+	ft_printf("Writing output program to %s\n", argv[argc - 1]);
 	return (0);
 }
