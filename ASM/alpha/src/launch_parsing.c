@@ -6,19 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 19:44:44 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 11:25:07 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-static void		realloc_order(t_order ****order, int *size)
-{
-	*size += 1;
-	if ((*order = realloc(*order, sizeof(t_order *) \
-					* (*size * SIZE_STRUCT))) == NULL)
-		error("[ERR] : Ft. Realloc Failed\n");
-}
 
 static char		skip_blanks(char **s)
 {
