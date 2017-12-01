@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 11:25:07 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 11:55:21 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ static _Bool	empty_line(t_file *file, char *s)
 		ft_strdel(&file->line);
 		return (1);
 	}
+	return (0);
+}
+
+static _Bool	breaking_line(char *s)
+{
+	while (*s && ft_isdigit(*s))
+		(s)++;
+	skip_blanks(&s);
+	if (!(*s))
+		return (1);
 	return (0);
 }
 
@@ -74,6 +84,8 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 			ft_strdel(&file.line);
 			continue ;
 		}
+		if (breaking_line(tmp))
+			break ;
 		if (*tmp == DOT)
 		{
 			if (!pars_info(hdr, tmp))
