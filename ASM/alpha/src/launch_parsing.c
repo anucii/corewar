@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 16:26:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/01 16:32:48 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 		}
 		else
 		{
-			if (hdr->prog_name[0] == '\0' || hdr->comment[0] == '\0')
+			if (hdr->prog_name[0] == '\0')
 				error("[ERR] : Header");
 			if (!instr_line(tab, &file, tmp))
 			{
