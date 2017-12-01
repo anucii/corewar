@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 15:08:17 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 16:26:06 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char		skip_blanks(char **s)
 		return (-1);
 	while ((**s) && ((**s) == SPACE || (**s) == TAB))
 		(*s)++;
-	return (0);
+	return (**s ? 0 : -1);
 }
 
 static _Bool	empty_line(t_file *file, char *s)
@@ -48,11 +48,8 @@ static _Bool	instr_line(t_order ***tab, t_file *file, char *s)
 
 	ft_putendl(file->line);
 	if (file->nb_line == (SIZE_STRUCT * size))
-	{
 		realloc_order(tab, &size);
-		ft_putstr("test\n");
-	}
-	if (!(*tab)[file->nb_line])
+	if (!(*tab)[file->nb_line] || (file->nb_line >= SIZE_STRUCT))
 	{
 		(*tab)[file->nb_line] = ft_memalloc(sizeof(t_order));
 		(*tab)[file->nb_line]->nb_label = 0;
