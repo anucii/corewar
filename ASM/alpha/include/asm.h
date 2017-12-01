@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 11:24:56 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 15:08:10 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,6 @@ void					write_order_pos(t_order **tab, int last);
 _Bool					dir_as_addr(char op_code);
 void					write_order_size(t_order *slot);
 char    				*new_name(t_header *file);
-void					realloc_order(t_order ****order, int *size);
+void					realloc_order(t_order ***order, int *size);
 
 #endif

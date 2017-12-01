@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 14:26:25 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 15:08:17 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,24 @@ static _Bool	breaking_line(char *s)
 	return (0);
 }
 
-_Bool			instr_line(t_order ****tab, t_file *file, char *s)
+static _Bool	instr_line(t_order ***tab, t_file *file, char *s)
 {
 	static int	size = 1;
 
+	ft_putendl(file->line);
 	if (file->nb_line == (SIZE_STRUCT * size))
-		realloc_order(tab, &size);
-	if (!(**tab)[file->nb_line])
 	{
-		(**tab)[file->nb_line] = ft_memalloc(sizeof(t_order));
-		(**tab)[file->nb_line]->nb_label = 0;
+		realloc_order(tab, &size);
+		ft_putstr("test\n");
 	}
-	if (!pars_order((**tab)[file->nb_line], s))
+	if (!(*tab)[file->nb_line])
+	{
+		(*tab)[file->nb_line] = ft_memalloc(sizeof(t_order));
+		(*tab)[file->nb_line]->nb_label = 0;
+	}
+	if (!pars_order((*tab)[file->nb_line], s))
 		return (0);
-	file->nb_line += (**tab)[file->nb_line]->op_code ? 1 : 0;
+	file->nb_line += (*tab)[file->nb_line]->op_code ? 1 : 0;
 	return (1);
 }
 
@@ -91,7 +95,7 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 		{
 			if (hdr->prog_name[0] == '\0' || hdr->comment[0] == '\0')
 				error("[ERR] : Header");
-			if (!instr_line(&tab, &file, tmp))
+			if (!instr_line(tab, &file, tmp))
 			{
 				ft_strdel(&file.line);
 				return (0);
