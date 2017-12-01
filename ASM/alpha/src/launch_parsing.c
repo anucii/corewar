@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 11:55:21 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/01 13:42:48 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,14 @@ _Bool			instr_line(t_order ****tab, t_file *file, char *s)
 
 	if (file->nb_line == (SIZE_STRUCT * size))
 		realloc_order(tab, &size);
-//	ft_printf("check : %d -- nb_line : %d\n", check, file->nb_line);
-//	if (check != file->nb_line)
 	if (!(**tab)[file->nb_line])
 	{
 		(**tab)[file->nb_line] = ft_memalloc(sizeof(t_order));
 		(**tab)[file->nb_line]->nb_label = 0;
 		check++;
 	}
-//	if ((**tab)[file->nb_line]->nb_label > 0)
-//		ft_printf("=== %s ===\n", (**tab)[file->nb_line]->label[0]);
 	if (!pars_order((**tab)[file->nb_line], s))
 		return (0);
-//	ft_printf("C'est de la merde = %s\n", (**tab)[file->nb_line]->label[0]);
 	file->nb_line += (**tab)[file->nb_line]->op_code ? 1 : 0;
 	return (1);
 }
@@ -73,7 +68,7 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 
 	if (!(tab && *tab) || **tab)
 		error("[ERR] : corrupted slot to record instructions");
-	if (!filepath || ((file.fd = open(filepath, O_RDONLY /*| O_SYMLINK*/)) < 0))
+	if (!filepath || ((file.fd = open(filepath, O_RDONLY | O_SYMLINK)) < 0))
 		error("[ERR] : opening failed on filepath");
 	file.nb_line = 0;
 	while ((file.ret = get_next_line(file.fd, &file.line)) == 1)
@@ -96,6 +91,8 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 		}
 		else
 		{
+			if (hdr->prog_name[0] == '\0' || hdr->comment[0] == '\0')
+				error("[ERR] : Header");
 			if (!instr_line(&tab, &file, tmp))
 			{
 				ft_strdel(&file.line);
