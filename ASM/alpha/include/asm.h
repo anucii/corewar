@@ -76,7 +76,7 @@ typedef struct			s_file
 }						t_file;
 
 void					init_hdr(t_header *hdr, char *s);
-_Bool					launch_parsing(char *filepath, t_order ***tab, t_header *hdr);
+_Bool					launch_parsing(char *filepath, t_order ***tab, t_header *hdr, t_file *file);
 _Bool					breaking_line(char *s);
 _Bool					empty_line(t_file *file, char *s);
 char					skip_blanks(char **s);

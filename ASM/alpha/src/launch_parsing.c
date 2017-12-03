@@ -12,6 +12,16 @@
 
 #include "asm.h"
 
+static _Bool	parse_header(t_file *file, t_header *hdr, char *s)
+{
+	if (!pars_info(hdr, s))
+	{
+		ft_strdel(&file->line);
+		return (0);
+	}
+	return (1);
+}
+
 static _Bool	instr_line(t_order ***tab, t_file *file, char *s)
 {
 	static int	size = 1;
@@ -29,45 +39,43 @@ static _Bool	instr_line(t_order ***tab, t_file *file, char *s)
 	return (1);
 }
 
-_Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
+static _Bool	check_inst(t_order ***tab, t_file *file, t_header *hdr, char *s)
 {
-	t_file		file;
+	if (!(hdr->if_prog || hdr->if_comment))
+		error("[ERR] : Header");
+	if (!instr_line(tab, file, s))
+	{
+		ft_strdel(&file->line);
+		return (0);
+	}
+	return (1);
+}
+
+_Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr, \
+						t_file *fle)
+{
 	char		*tmp;
 
-	file.nb_line = 0;
-	if (!filepath || ((file.fd = open(filepath, O_RDONLY /*| O_SYMLINK*/)) < 0))
+	if (!filepath || ((fle->fd = open(filepath, O_RDONLY /*| O_SYMLINK*/)) < 0))
 		error("[ERR] : opening failed on filepath");
-	while ((file.ret = get_next_line(file.fd, &file.line)) == 1)
+	while ((fle->ret = get_next_line(fle->fd, &fle->line)) == 1)
 	{
-		tmp = file.line;
-		if (empty_line(&file, tmp))
+		tmp = fle->line;
+		if (empty_line(fle, tmp))
 			continue ;
 		if (breaking_line(tmp))
 			break ;
 		if (*tmp == DOT)
 		{
-			if (!pars_info(hdr, tmp))
-			{			ft_printf("%c\n", *tmp);
-
-				ft_strdel(&file.line);
+			if (!parse_header(fle, hdr, tmp))
 				return (0);
-			}
 		}
-		else
-		{
-			if (!(hdr->if_prog || hdr->if_comment))
-				error("[ERR] : Header");
-			if (!instr_line(tab, &file, tmp))
-			{
-				ft_strdel(&file.line);
-				return (0);
-			}
-		}
-		ft_strdel(&file.line);
+		else if (!check_inst(tab, fle, hdr, tmp))
+			return (0);
+		ft_strdel(&fle->line);
 	}
-	hdr->nb_struct = file.nb_line;
-	write_order_pos(*tab, hdr->nb_struct);
-	if (close(file.fd) != 0)
+	hdr->nb_struct = fle->nb_line;
+	if (close(fle->fd) != 0)
 		error("[ERR] : parsing file closing failed");
 	return (1);
 }
