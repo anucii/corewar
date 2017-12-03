@@ -12,36 +12,6 @@
 
 #include "asm.h"
 
-static char		skip_blanks(char **s)
-{
-	if (!(s && *s && **s))
-		return (-1);
-	while ((**s) && ((**s) == SPACE || (**s) == TAB))
-		(*s)++;
-	return (**s ? 0 : -1);
-}
-
-static _Bool	empty_line(t_file *file, char *s)
-{
-	if ((skip_blanks(&s) == -1) || ((*s == COMMENT_CHAR)\
-				|| !(s)))
-	{
-		ft_strdel(&file->line);
-		return (1);
-	}
-	return (0);
-}
-
-static _Bool	breaking_line(char *s)
-{
-	while (*s && ft_isdigit(*s))
-		(s)++;
-	skip_blanks(&s);
-	if (!(*s))
-		return (1);
-	return (0);
-}
-
 static _Bool	instr_line(t_order ***tab, t_file *file, char *s)
 {
 	static int	size = 1;
@@ -64,32 +34,28 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr)
 	t_file		file;
 	char		*tmp;
 
-	if (!(tab && *tab) || **tab)
-		error("[ERR] : corrupted slot to record instructions");
-	if (!filepath || ((file.fd = open(filepath, O_RDONLY | O_SYMLINK)) < 0))
-		error("[ERR] : opening failed on filepath");
 	file.nb_line = 0;
+	if (!filepath || ((file.fd = open(filepath, O_RDONLY /*| O_SYMLINK*/)) < 0))
+		error("[ERR] : opening failed on filepath");
 	while ((file.ret = get_next_line(file.fd, &file.line)) == 1)
 	{
 		tmp = file.line;
 		if (empty_line(&file, tmp))
-		{
-			ft_strdel(&file.line);
 			continue ;
-		}
 		if (breaking_line(tmp))
 			break ;
 		if (*tmp == DOT)
 		{
 			if (!pars_info(hdr, tmp))
-			{
+			{			ft_printf("%c\n", *tmp);
+
 				ft_strdel(&file.line);
 				return (0);
 			}
 		}
 		else
 		{
-			if (hdr->if_prog == 0 || hdr->if_comment == 0)
+			if (!(hdr->if_prog || hdr->if_comment))
 				error("[ERR] : Header");
 			if (!instr_line(tab, &file, tmp))
 			{

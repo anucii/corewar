@@ -11,7 +11,9 @@ LIB_PATH = $(INC_PATH)libft/
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 SRC_PATH = ./src/
 SRC_FILE =	asm.c \
+			init_hdr.c \
 			launch_parsing.c \
+			skip_line.c \
 			pars_info.c \
 			pars_order.c \
 			parse_instr.c \

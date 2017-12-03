@@ -25,6 +25,5 @@ void	write_order_pos(t_order **tab, int last)
 	{
 		step = i ? tab[i - 1]->pos + tab[i - 1]->size : 0;
 		tab[i]->pos = step;
-	//	ft_printf("tab[%d]->pos = %d\n", i, tab[i]->pos);
 	}
 }

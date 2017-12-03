@@ -16,7 +16,6 @@ void	add_label(t_order *slot, char *s)
 {
 	_Bool	resize;
 
-
 	if (!(slot && s))
 		return ;
 	resize = slot->label ? 1 : 0;
@@ -25,7 +24,8 @@ void	add_label(t_order *slot, char *s)
 	if (resize)
 	{
 		slot->nb_label++;
-		if ((slot->label = realloc(slot->label, sizeof(char**) * (slot->nb_label))) == NULL)
+		if ((slot->label = realloc(slot->label, sizeof(char**) * \
+			(slot->nb_label))) == NULL)
 			error("[ERR] : ft.Realloc() Failed");
 		slot->label[slot->nb_label - 1] = ft_strdup(s);
 		return ;

@@ -21,20 +21,23 @@ static _Bool	ini_ty_param(t_op *tab, t_order *slot, char **param, int op_idx)
 	{
 		op_idx++;
 		if (tab->tp_param[index] & T_REG)
-			if (reg_param(&slot->param[index], &slot->ty_param[index], param[op_idx]))
+			if (reg_param(&slot->param[index], &slot->ty_param[index], \
+				param[op_idx]))
 				continue ;
 		if (tab->tp_param[index] & T_DIR)
-			if (dir_param(&slot->param[index], &slot->ty_param[index], param[op_idx]))
+			if (dir_param(&slot->param[index], &slot->ty_param[index], \
+				param[op_idx]))
 				continue ;
 		if (tab->tp_param[index] & T_IND)
-			if (ind_param(&slot->param[index], &slot->ty_param[index], param[op_idx]))
+			if (ind_param(&slot->param[index], &slot->ty_param[index], \
+				param[op_idx]))
 				continue ;
 		return (0);
 	}
 	return (1);
 }
 
-_Bool			parse_params(char **tokens, int max, t_order *slot, ssize_t op_idx)
+_Bool			pars_param(char **param, int max, t_order *slot, ssize_t op_idx)
 {
 	int			index;
 
@@ -47,15 +50,13 @@ _Bool			parse_params(char **tokens, int max, t_order *slot, ssize_t op_idx)
 			slot->param = ft_memalloc(sizeof(char**) * slot->nb_param);
 			if ((max - op_idx) != (g_op_tab[index].nb_param + 1))
 				return (0);
-			if (!ini_ty_param(&g_op_tab[index], slot, tokens, op_idx))
+			if (!ini_ty_param(&g_op_tab[index], slot, param, op_idx))
 			{
 				index = -1;
-				/*
 				while (++index < slot->nb_param)
 					if (slot->param[index])
 						ft_strdel(&slot->param[index]);
-				ft_memdel((void**)slot->param);
-				*/
+				ft_memdel((void**)&slot->param);
 				return (0);
 			}
 			return (1);

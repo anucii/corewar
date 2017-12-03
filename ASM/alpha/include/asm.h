@@ -75,11 +75,15 @@ typedef struct			s_file
 	int					ret;
 }						t_file;
 
+void					init_hdr(t_header *hdr, char *s);
 _Bool					launch_parsing(char *filepath, t_order ***tab, t_header *hdr);
+_Bool					breaking_line(char *s);
+_Bool					empty_line(t_file *file, char *s);
+char					skip_blanks(char **s);
 _Bool					pars_info(t_header *info, char *line);
 _Bool					pars_order(t_order *order, char *s);
 _Bool					parse_instr(char **tokens, int argnum, t_order *slot);
-_Bool					parse_params(char **tokens, int argnum, t_order *slot, ssize_t op_idx);
+_Bool					pars_param(char **param, int argnum, t_order *slot, ssize_t op_idx);
 char					op_matches(char *s);
 void					add_label(t_order *slot, char *s);
 _Bool					is_label_char(char c, char *label_char);

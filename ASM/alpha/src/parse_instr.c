@@ -79,10 +79,9 @@ _Bool			parse_instr(char **tokens, int argnum, t_order *slot)
 		exit(EXIT_FAILURE);
 	}
 	op_idx = parse_master(tokens, argnum);
-	/*dbg*/ //ft_printf("op_idx = %d\n", op_idx);
 	if ((op_idx == -1) && (argnum == 1))
 		return (check_label(tokens, slot));
 	else if ((op_idx == -1) || !check_master(tokens, slot, op_idx))
 		return (0);
-	return (parse_params(tokens, argnum, slot, op_idx));
+	return (pars_param(tokens, argnum, slot, op_idx));
 }

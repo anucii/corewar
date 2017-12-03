@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static t_search	*ft_new(int fd, t_search *file)
+static		t_search	*ft_new(int fd, t_search *file)
 {
 	file = ft_memalloc(sizeof(t_search));
 	file->fd = fd;
@@ -22,7 +22,7 @@ static t_search	*ft_new(int fd, t_search *file)
 	return (file);
 }
 
-static t_search	*ft_check_fd(int fd, t_search *file)
+static 		t_search	*ft_check_fd(int fd, t_search *file)
 {
 	t_search		*tmp;
 
@@ -50,7 +50,7 @@ static t_search	*ft_check_fd(int fd, t_search *file)
 	return (file);
 }
 
-int				ft_check_save(t_search *file, char **line)
+static int	ft_check_save(t_search *file, char **line)
 {
 	char		*tmp;
 
@@ -67,11 +67,12 @@ int				ft_check_save(t_search *file, char **line)
 	return (0);
 }
 
-int				ft_get_line(char *buf, char **line, t_search *file)
+static int	ft_get_line(char *buf, char **line, t_search *file, int ret)
 {
 	char		*tmp;
 
 	tmp = NULL;
+	buf[ret] = '\0';
 	if ((tmp = ft_strchr(buf, '\n')))
 	{
 		tmp = ft_strdup(tmp);
@@ -90,7 +91,7 @@ int				ft_get_line(char *buf, char **line, t_search *file)
 	return (0);
 }
 
-int				get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line)
 {
 	static t_search	*file;
 	char			*buf;
@@ -105,8 +106,7 @@ int				get_next_line(const int fd, char **line)
 	{
 		if (ret == -1)
 			return (-1);
-		buf[ret] = '\0';
-		if (ft_get_line(buf, &*line, file))
+		if (ft_get_line(buf, &*line, file, ret))
 			return (1);
 	}
 	ft_strdel(&buf);

@@ -24,5 +24,6 @@ char    *new_name(t_header *file)
     ft_strdel(&file_name);
     file_name = ft_strdup(tmp);
     ft_strdel(&tmp);
+    ft_strdel(&file->filename);
     return (file_name);
 }

@@ -12,21 +12,21 @@
 
 #include "asm.h"
 
-void	timetoatoi(unsigned int j, unsigned char c, char *param, int fd)
+static	void write_max(char *param, unsigned char c, int fd)
+{
+	c = (char)(ft_atoi(param));
+	write(fd, &c, 1);
+}
+void		timetoatoi(unsigned int j, unsigned char c, char *param, int fd)
 {
 	unsigned short s;
 
 	if (c > 0)
-	{
-		c = (char)(ft_atoi(param));
-	//	ft_printf("param = %s c = %d\n", param, c);
-		write(fd, &c, 1);
-	}
+		write_max(param, c, fd);
 	else if (j > 0)
 	{
 		if (dir_as_addr(j) == 1)
 		{
-	//		ft_printf("OK\n");
 			s = (short)(ft_atoi(param));
 			bigendian(0, &s);
 			write(fd, &s, 2);
@@ -46,7 +46,7 @@ void	timetoatoi(unsigned int j, unsigned char c, char *param, int fd)
 	}
 }
 
-void	labelcall(t_order **champ, int fd, char *label, int fpos)
+void		labelcall(t_order **champ, int fd, char *label, int fpos)
 {
 	unsigned short	pos;
 	short			res;

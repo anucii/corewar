@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/op.h"
-#include "../include/asm.h"
+#include "asm.h"
 
 void		calc_prog_size(t_order **champ, t_header *hdr)
 {

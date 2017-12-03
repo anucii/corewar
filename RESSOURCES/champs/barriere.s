@@ -16,6 +16,13 @@ arriere_live:	live %42
 		add	r3, r5, r3
 		sti	r4, %:arriere, r3
 		add	r3, r5, r3
+
+
+
+
+
+
+
 		sti	r4, %:arriere, r3
 		add	r3, r5, r3
 		sti	r4, %:arriere, r3

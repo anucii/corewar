@@ -129,7 +129,7 @@ void					writeinst(t_order **champ, t_header *file)
 	i = 0;
 	if ((fd = startup(file)) == -1)
 		error("[ERR] : bad filedescriptor");
-	while (i < file->nb_struct) //need to create nb_struct in one of the struct
+	while (i < file->nb_struct)
 	{
 		write(fd, &champ[i]->op_code, 1);
 		if (champ[i]->op_code != 1 && champ[i]->op_code != 9

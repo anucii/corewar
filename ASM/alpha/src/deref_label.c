@@ -23,6 +23,7 @@ static _Bool	label_match(char *def, char *param)
 {
 	char	*tmp1;
 	char	*tmp2;
+	int		ret;
 
 	if (!(def && param))
 		return (0);
@@ -32,7 +33,10 @@ static _Bool	label_match(char *def, char *param)
 	if (!(tmp2 = ft_strrchr(param, LABEL_CHAR)))
 		return (0);
 	tmp2 = ft_strsub(param, 1, ft_strlen(param) - 1);
-	return (ft_strequ(tmp1, tmp2));
+	ret = ft_strequ(tmp1, tmp2);
+	ft_strdel(&tmp1);
+	ft_strdel(&tmp2);
+	return (ret);
 }
 
 static int	search_label(t_order *prog, char *label)
