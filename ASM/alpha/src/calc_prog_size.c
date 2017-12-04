@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 14:45:24 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/29 14:55:18 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/04 16:32:39 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		calc_prog_size(t_order **champ, t_header *hdr)
 	size = 0;
 	while (i < hdr->nb_struct)
 	{
-		size = size + champ[i]->pos;
+		size = size + champ[i]->size;
 		i++;
 	}
 	hdr->prog_size = size;

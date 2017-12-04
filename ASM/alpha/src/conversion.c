@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:27:23 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/30 19:41:29 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:31:45 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static int				startup(t_header *file)
 		return (-1);
 	bigendian(&file->magic, 0);
 	write(fd, &file->magic, 4);
-	write(fd, file->prog_name, PROG_NAME_LENGTH);
+	write(fd, file->prog_name, PROG_NAME_LENGTH + 4);
 	bigendian(&file->prog_size, 0);
 	write(fd, &file->prog_size, 4);
-	write(fd, file->comment, COMMENT_LENGTH);
+	write(fd, file->comment, COMMENT_LENGTH + 4);
 	return (fd);
 }
 
@@ -101,14 +101,14 @@ static void				writeparams(t_order **champ, int fd, t_order *inst)
 		else if (inst->ty_param[i] == 2)
 		{
 			if (inst->param[i][j] == LABEL_CHAR)
-				labelcall(champ, fd, inst->param[i], inst->pos);
+				labelcall(champ, fd, inst->param[i], inst);
 			else
 				timetoatoi(inst->op_code, 0, inst->param[i], fd);
 		}
 		else if (inst->ty_param[i] == 4)
 		{
 			if (inst->param[i][j] == LABEL_CHAR)
-				labelcall(champ, fd, inst->param[i], inst->pos);
+				labelcall(champ, fd, inst->param[i], inst);
 			else
 				timetoatoi(0, 0, inst->param[i], fd);
 		}

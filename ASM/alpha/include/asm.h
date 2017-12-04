@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 15:08:10 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:04:57 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ _Bool					label_param(char *s);
 _Bool					digit_param(char *s);
 int						multi_split(char ***tokens, char *s);
 void					error(char *s);
-void					labelcall(t_order **champ, int fd, char *label, int pos);
+void					labelcall(t_order **champ, int fd, char *label, t_order *inst);
 int						deref_label(t_order **champ, char *label);
 void					bigendian(unsigned int *i, unsigned short *s);
 void					timetoatoi(unsigned int j, unsigned char c, char *param, int fd);

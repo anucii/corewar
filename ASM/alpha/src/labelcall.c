@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 11:44:04 by jpallard          #+#    #+#             */
-/*   Updated: 2017/11/30 19:45:24 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:27:16 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,49 @@ void		timetoatoi(unsigned int j, unsigned char c, char *param, int fd)
 	}
 }
 
-void		labelcall(t_order **champ, int fd, char *label, int fpos)
+static	void		label4(int fd, int res, unsigned int pos)
+{
+	unsigned int max;
+
+	max = 0xFFFF;
+	if (res < 0)
+	{
+		max = max + res + 1;
+		bigendian(&max, 0);
+		write(fd, &max, 4);
+	}
+	else
+	{
+		pos = res;
+		bigendian(&pos, 0);
+		write(fd, &pos, 4);
+	}
+}
+
+void		labelcall(t_order **champ, int fd, char *label, t_order *inst)
 {
 	unsigned short	pos;
 	short			res;
 	unsigned short	max;
 
 	pos = deref_label(champ, label);
-	res = pos - fpos;
+	res = pos - inst->pos;
 	max = 0xFFFF;
-	if (res < 0)
+	if (dir_as_addr(inst->op_code) == 1)
 	{
-		max = max + res + 1;
-		bigendian(0, &max);
-		write(fd, &max, 2);
+		if (res < 0)
+		{
+			max = max + res + 1;
+			bigendian(0, &max);
+			write(fd, &max, 2);
+		}
+		else
+		{
+			pos = res;
+			bigendian(0, &pos);
+			write(fd, &pos, 2);
+		}
 	}
 	else
-	{
-		pos = res;
-		bigendian(0, &pos);
-		write(fd, &pos, 2);
-	}
+		label4(fd, (int)res, (unsigned int)pos);
 }
