@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 16:09:09 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 19:17:24 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:56:09 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	write_order_pos(t_order **tab, int last)
 {
-	int 	i;
+	int		i;
 	short	step;
 
 	if (!(tab && *tab))
