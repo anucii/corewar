@@ -6,16 +6,16 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:22:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/01 18:08:01 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:46:07 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int     main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_order     **tab;
-	t_header    hdr;
+	t_order		**tab;
+	t_header	hdr;
 	t_file		file;
 
 	tab = ft_memalloc(sizeof(t_order**) * (SIZE_STRUCT));

@@ -6,8 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:33:41 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/11/30 18:18:14 by jgonthie         ###   ########.fr       */
-/*   Updated: 2017/11/30 16:03:36 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/04 16:50:57 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +17,7 @@
 **	(see write_order_pos for setting positions)
 */
 
-_Bool	dir_as_addr(char op_code)
+_Bool			dir_as_addr(char op_code)
 {
 	static const char	op_addr[] = {9, 10, 11, 12, 14, 15, -1};
 	ssize_t				i;
@@ -44,9 +43,9 @@ static short	get_param_size(char op_code, int ty_param)
 		return (dir_as_addr(op_code) ? T_IND_SIZE : T_DIR_SIZE);
 	error("[ERR] : unvalid parameter type");
 	return (0);
-}	
+}
 
-void		write_order_size(t_order *slot)
+void			write_order_size(t_order *slot)
 {
 	short	buf;
 	int		count[2];
