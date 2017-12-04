@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_hdr.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/04 16:40:00 by jpallard          #+#    #+#             */
+/*   Updated: 2017/12/04 16:43:42 by jpallard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 void	init_hdr(t_header *hdr, char *s)
 {
-	char 	*tmp;
+	char	*tmp;
 	int		fd;
 
 	if (!(hdr && s))
 		error("[ERR] : bad params to init header");
 	hdr->magic = COREWAR_EXEC_MAGIC;
-	if ((fd = open(s, O_RDONLY /*| O_SYMLINK*/)) < 0)
+	if ((fd = open(s, O_RDONLY | O_SYMLINK)) < 0)
 		error("[ERR] : opening failed on filepath");
 	if (ft_strlen(s) > 250)
 		error("[ERR] : FIle name to long (250 octet max)");
-	tmp = ft_strsub(s, ft_strlen(s) - ft_strlen(ft_strrchr(s, DOT)), ft_strlen(s));
+	tmp = ft_strsub(s, ft_strlen(s)
+			- ft_strlen(ft_strrchr(s, DOT)), ft_strlen(s));
 	if (ft_strcmp(tmp, ".s") != 0)
 		error("Bad file name, so fuck you!");
 	ft_strdel(&tmp);

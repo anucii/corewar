@@ -6,18 +6,19 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 11:44:04 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/04 16:27:16 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:45:39 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static	void write_max(char *param, unsigned char c, int fd)
+static	void	write_max(char *param, unsigned char c, int fd)
 {
 	c = (char)(ft_atoi(param));
 	write(fd, &c, 1);
 }
-void		timetoatoi(unsigned int j, unsigned char c, char *param, int fd)
+
+void			timetoatoi(unsigned int j, unsigned char c, char *param, int fd)
 {
 	unsigned short s;
 
@@ -46,7 +47,7 @@ void		timetoatoi(unsigned int j, unsigned char c, char *param, int fd)
 	}
 }
 
-static	void		label4(int fd, int res, unsigned int pos)
+static	void	label4(int fd, int res, unsigned int pos)
 {
 	unsigned int max;
 
@@ -65,7 +66,7 @@ static	void		label4(int fd, int res, unsigned int pos)
 	}
 }
 
-void		labelcall(t_order **champ, int fd, char *label, t_order *inst)
+void			labelcall(t_order **champ, int fd, char *label, t_order *inst)
 {
 	unsigned short	pos;
 	short			res;

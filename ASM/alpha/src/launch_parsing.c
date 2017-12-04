@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 18:03:33 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:47:50 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr, \
 {
 	char		*tmp;
 
-	if (!filepath || ((fle->fd = open(filepath, O_RDONLY /*| O_SYMLINK*/)) < 0))
+	if (!filepath || ((fle->fd = open(filepath, O_RDONLY | O_SYMLINK)) < 0))
 		error("[ERR] : opening failed on filepath");
 	while ((fle->ret = get_next_line(fle->fd, &fle->line)) == 1)
 	{

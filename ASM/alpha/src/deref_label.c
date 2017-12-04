@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:01:22 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/01 18:05:52 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:37:34 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static _Bool	label_match(char *def, char *param)
 	return (ret);
 }
 
-static int	search_label(t_order *prog, char *label)
+static int		search_label(t_order *prog, char *label)
 {
 	int		index;
 
@@ -54,7 +54,7 @@ static int	search_label(t_order *prog, char *label)
 	return (-1);
 }
 
-int			deref_label(t_order **prog, char *label)
+int				deref_label(t_order **prog, char *label)
 {
 	int	ret;
 	int	i;
