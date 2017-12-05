@@ -6,13 +6,13 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 13:37:56 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/09/25 17:51:32 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:45:39 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static		t_search	*ft_new(int fd, t_search *file)
+static t_search		*ft_new(int fd, t_search *file)
 {
 	file = ft_memalloc(sizeof(t_search));
 	file->fd = fd;
@@ -22,7 +22,7 @@ static		t_search	*ft_new(int fd, t_search *file)
 	return (file);
 }
 
-static 		t_search	*ft_check_fd(int fd, t_search *file)
+static t_search		*ft_check_fd(int fd, t_search *file)
 {
 	t_search		*tmp;
 
@@ -50,7 +50,7 @@ static 		t_search	*ft_check_fd(int fd, t_search *file)
 	return (file);
 }
 
-static int	ft_check_save(t_search *file, char **line)
+static int			ft_check_save(t_search *file, char **line)
 {
 	char		*tmp;
 
@@ -67,7 +67,7 @@ static int	ft_check_save(t_search *file, char **line)
 	return (0);
 }
 
-static int	ft_get_line(char *buf, char **line, t_search *file, int ret)
+static int			ft_get_line(char *buf, char **line, t_search *file, int ret)
 {
 	char		*tmp;
 
@@ -91,7 +91,7 @@ static int	ft_get_line(char *buf, char **line, t_search *file, int ret)
 	return (0);
 }
 
-int			get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
 	static t_search	*file;
 	char			*buf;
