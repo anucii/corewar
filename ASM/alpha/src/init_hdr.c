@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 16:40:00 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/04 16:43:42 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:40:14 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	init_hdr(t_header *hdr, char *s)
 	hdr->magic = COREWAR_EXEC_MAGIC;
 	if ((fd = open(s, O_RDONLY | O_SYMLINK)) < 0)
 		error("[ERR] : opening failed on filepath");
-	if (ft_strlen(s) > 250)
-		error("[ERR] : FIle name to long (250 octet max)");
+	if (ft_strlen(s) > 252)
+		error("[ERR] : FIle name to long (252 octet max)");
 	tmp = ft_strsub(s, ft_strlen(s)
 			- ft_strlen(ft_strrchr(s, DOT)), ft_strlen(s));
 	if (ft_strcmp(tmp, ".s") != 0)
-		error("Bad file name, so fuck you!");
+		error("[ERR] : Name file need to end by [.s]");
 	ft_strdel(&tmp);
 	hdr->filename = ft_strdup(s);
 	hdr->nb_struct = 0;

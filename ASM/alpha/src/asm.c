@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:22:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/04 16:46:07 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/05 14:37:21 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int		main(int argc, char **argv)
 	init_hdr(&hdr, argv[argc - 1]);
 	file.nb_line = 0;
 	if (!launch_parsing(argv[argc - 1], &tab, &hdr, &file))
-		error("[ERR] : parsing failure");
+	{
+		ft_printf("[ERR] : parsing failure line %d", file.nb_line);
+		error("\n");
+	}
 	write_order_pos(tab, hdr.nb_struct);
 	calc_prog_size(tab, &hdr);
 	writeinst(tab, &hdr);
