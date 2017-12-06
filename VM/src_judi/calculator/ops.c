@@ -15,7 +15,6 @@ t_op	g_op_tab[] = {\
 
 void	store(t_proc *proc, unsigned char *mem, short pos)
 {
-	ssize_t	i = -1;
 	short	tgt;
 
 	if (!(proc && mem) || (pos < 0))
@@ -25,7 +24,6 @@ void	store(t_proc *proc, unsigned char *mem, short pos)
 	printf("reg[%d] = %d\n", mem[tgt] % REG_MAX, (proc->reg)[mem[tgt] % REG_MAX]);
 	(proc->reg)[mem[tgt] % REG_MAX]= mem[pos % MEMSIZE];
 	proc->carry = 1;
-	i = -1;
 	printf("Store operation : ");
 	printf("reg[%d] = %d\n", mem[tgt] % REG_MAX,\
 			(proc->reg)[mem[tgt] % REG_MAX]);
