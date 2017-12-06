@@ -57,7 +57,7 @@ void	write(t_proc *proc, unsigned char *mem, short pos)
 	printf("[pid : %hd] @ %hd (pc)\n", proc->pid, proc->pc);
 	tgt = (proc->pc + mem[(pos + 1) % MEMSIZE]) % MEMSIZE;
 	printf("mem[%d] = %d & reg[%d] = %d\n", tgt, mem[tgt],\
-			(pos % MEMSIZE) % REG_MAX,\
+			mem[(pos % MEMSIZE)] % REG_MAX,\
 			(proc->reg)[mem[pos % MEMSIZE] % REG_MAX]);
 	mem[tgt] = (proc->reg)[mem[pos % MEMSIZE] % REG_MAX];
 	printf("Write operation : ");
