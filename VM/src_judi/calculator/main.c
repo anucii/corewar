@@ -7,7 +7,7 @@ static void			init_proc(t_proc *ptr, ssize_t id)
 	if (!ptr)
 		return ;
 	ptr->pid = (short)id;
-	ptr->pc = 0;
+	ptr->pc = ptr->pid * (MEMSIZE / MAX_PROC);
 	while (++i < REG_NUM)
 		ptr->reg[i] = 0;
 	ptr->carry = 0;

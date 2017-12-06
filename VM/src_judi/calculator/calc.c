@@ -3,6 +3,7 @@
 static _Bool	load_program(unsigned char **pmem)
 {
 	ssize_t			i = -1;
+	/*
 	unsigned char	prog[] = {\
 		1, 1, 1,\
 			1, 2, 2,\
@@ -12,7 +13,26 @@ static _Bool	load_program(unsigned char **pmem)
 			3, 3, 3,\
 			3, 1, 3,\
 			0\
+	};*/
+	unsigned char	prog[] = {\
+		1, 3, 1,\
+			1, 1, 2,\
+			1, 3, 3,\
+			3, 1, 9,\
+			3, 2, 7,\
+			3, 3, 5,\
+			0\
 	};
+
+	/*
+	 * Program's content : 
+	 * store(3, reg_1)
+	 * store(1, reg_2)
+	 * store(3, reg_3)
+	 * write(reg_1, @ pc + 9)
+	 * write(reg_2, @ pc + 7)
+	 * write(reg_3, @ pc + 5)
+	 */
 
 	if (!(pmem && *pmem))
 		return (0);

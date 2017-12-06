@@ -6,7 +6,8 @@
 
 # define MEMSIZE 64
 # define REG_NUM 16
-# define MAX_PROC 4
+# define REG_MAX ((REG_NUM) - 1) 
+# define MAX_PROC 3
 
 typedef struct		s_proc
 {
