@@ -19,7 +19,7 @@ $(DIR)%.o : $(DIR)%.c $(HDR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	for file in $(OBJ); do [ -f $file && rm $file ]; done
+	for file in $(OBJ); do [ -f $$file ] && rm $$file; done
 
 fclean : clean
 	[ -f $(NAME) ] && rm $(NAME)
