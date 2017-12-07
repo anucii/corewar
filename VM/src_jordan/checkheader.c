@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/06 17:07:57 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/07 17:33:25 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void		littleendian(unsigned int *i)
 		| ((*i << 24) & 0xff000000);
 	}
 }
+
+/*
+**check if each champ have the correct header attached to them and if the size 
+**is correct
+*/
 
 void	checkheader(int fd)
 {
@@ -41,6 +46,6 @@ void	checkheader(int fd)
 		error_vm("champ size is 0 or negative ?");
 	j = lseek(fd, 0, SEEK_END);
 	if (*i + PROG_NAME_LENGTH + COMMENT_LENGTH + (sizeof(int) * 4) != j)
-		error_vm ("diff between file_size and header prog_size");
+		error_vm ("diff between file size and header prog_size");
 }
 
