@@ -6,29 +6,29 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 13:57:33 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/07 18:02:13 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/08 17:38:37 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/jordan.h"
 
 /*
-**function wich load each champ with MEM_SIZE/nb octet between them
-**on MEM_SIZE octet
+**function wich load each champ with MEM_SIZE/number of champ octet between them
+**on MEM_SIZE (unsigned char) octet.
 */
 
-char	*load_champ(int *tab, short nb)
+unsigned char	*load_champ(int *tab, short nb)
 {
 	int				i;
-	char			*mem;
+	unsigned char	*mem;
 	unsigned int	size[1];
 	int				fd;
 	int				space;
 
 	i = 0;
 	space = 0;
-	mem = ft_strnew(MEM_SIZE + 1);
-	while (i < nb)
+	mem = ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
+		while (i < nb)
 	{
 		lseek(tab[i], PROG_NAME_LENGTH + 8, SEEK_SET);
 		read(tab[i], size, 4);
@@ -40,10 +40,9 @@ char	*load_champ(int *tab, short nb)
 		i++;
 		space = MEM_SIZE/nb + space;
 	}
-	// part used for debugging acual bug = abort when nb = 4 will investiget later
+	/* part used for debugging 
 	fd = open("test.MEM", O_CREAT | O_RDWR, 00770);
 	write(fd, mem, MEM_SIZE);
-	close(fd);
-	ft_printf("succes !\n");
+	close(fd);*/
 	return(mem);
 }
