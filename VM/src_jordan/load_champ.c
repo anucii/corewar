@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 13:57:33 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/08 17:38:37 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/11 18:10:05 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,25 @@
 **on MEM_SIZE (unsigned char) octet.
 */
 
-unsigned char	*load_champ(int *tab, short nb)
+unsigned char	*load_champ(int *tab, short nb, t_proc **p)
 {
 	int				i;
 	unsigned char	*mem;
 	unsigned int	size[1];
-	int				fd;
-	int				space;
+//	int				fd;
+	unsigned int	space;
 
 	i = 0;
 	space = 0;
 	mem = ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
-		while (i < nb)
+	while (i < nb)
 	{
 		lseek(tab[i], PROG_NAME_LENGTH + 8, SEEK_SET);
 		read(tab[i], size, 4);
 		littleendian(&size[0]);
 		lseek(tab[i], COMMENT_LENGTH + 4, SEEK_CUR);
 		read(tab[i], mem + space, size[0]);
+		p[i]->pc = space;
 		if (close(tab[i]) == -1)
 			error_vm("err : close");
 		i++;

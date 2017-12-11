@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/07 17:33:25 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/11 17:44:06 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,23 @@ void		littleendian(unsigned int *i)
 	}
 }
 
+
+void	init_proc(t_proc ***p, int fd)
+{
+	(**p) = ft_memalloc(sizeof(t_proc));
+	(**p)->children = NULL;
+	(**p)->carry = 0;
+	(**p)->pc = 0;
+	(**p)->name = NULL;
+	get_next_line(fd, &(**p)->name);
+}
+
 /*
 **check if each champ have the correct header attached to them and if the size 
 **is correct
 */
 
-void	checkheader(int fd)
+void	checkheader(int fd, t_proc **p)
 {
 	unsigned int	i[1];
 	unsigned int	j;
@@ -37,7 +48,8 @@ void	checkheader(int fd)
 	littleendian(&i[0]);
 	if (*i != COREWAR_EXEC_MAGIC)
 		error_vm("invalid header");
-	lseek(fd, PROG_NAME_LENGTH + 4, SEEK_CUR);
+	init_proc(&p, fd);
+	lseek(fd, PROG_NAME_LENGTH + 8, SEEK_SET);
 	read(fd, i, 4);
 	littleendian(&i[0]);
 	if (*i > CHAMP_MAX_SIZE)
