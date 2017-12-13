@@ -6,14 +6,13 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 12:20:49 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/13 14:53:45 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_H
 # define VM_H
 # include "op.h"
-typedef				s_proc	t_proc;
 
 /*
 **	Structure specific fields
@@ -41,9 +40,10 @@ typedef	struct		s_proc
 	unsigned int	pid;
 	unsigned int	pc;
 	unsigned int	cc;
-	t_champ			
-	t_proc			*children;
-};
+//	t_champ			champ;
+	struct s_proc	*children;
+}					t_proc;
+
 
 /*
 **	REQUESTS enumeration for chronos function :
@@ -65,11 +65,26 @@ typedef enum		e_req
 void				foreach_proc(t_proc **tab, unsigned int max, void (*func)(t_proc **));
 
 unsigned int		timer(t_req request);
+unsigned int		new_pid(void);
 _Bool				chronos(t_proc *proc, t_req request, unsigned int player);
 void				atropos(t_proc **proc_tab, unsigned int max);
 void				kill_proc(t_proc *proc);
 
 typedef				void (*t_f_op)(t_proc **, unsigned char *);
+
+typedef struct		s_op
+{
+	char			*name;
+	int				nb_param;
+	int				tp_param[3];
+	char			op_code;
+	int				cycles;
+	_Bool			has_ocp;
+	_Bool			bool_2;
+	t_f_op			func;
+}					t_op;
+
+extern t_op			g_op_tab[17];
 
 void				f_live(t_proc **proc, unsigned char *mem);
 void				f_ld(t_proc **proc, unsigned char *mem);

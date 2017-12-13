@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/12/11 16:40:20 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/13 14:53:41 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,5 @@ typedef struct		s_header
 	_Bool			if_prog;
 	_Bool			if_comment;
 }					t_header;
-
-typedef struct		s_order
-{
-	char			**label;
-	char			**param;
-	int				ty_param[3];
-	int				nb_param;
-	int				nb_label;
-	char			op_code;
-	short			pos;
-	short			size;
-	t_f_op			func;
-}					t_order;
 
 #endif
