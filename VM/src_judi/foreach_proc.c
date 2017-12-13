@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:40:47 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 12:25:08 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/13 15:30:46 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	apply(t_proc **ptr_proc, void (*func)(t_proc **))
 	if (!((*ptr_proc)->children))
 		func(ptr_proc);
 	else
-		apply(&((*ptr->proc)->children), func);
+		apply(&((*ptr_proc)->children), func);
 }
 
 void		foreach_proc(t_proc **tab, unsigned int max, void (*func)(t_proc **))

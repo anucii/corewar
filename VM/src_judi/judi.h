@@ -6,13 +6,14 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 14:53:45 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/13 15:32:14 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_H
 # define VM_H
 # include "op.h"
+# include <stdlib.h>
 
 /*
 **	Structure specific fields
@@ -68,7 +69,7 @@ unsigned int		timer(t_req request);
 unsigned int		new_pid(void);
 _Bool				chronos(t_proc *proc, t_req request, unsigned int player);
 void				atropos(t_proc **proc_tab, unsigned int max);
-void				kill_proc(t_proc *proc);
+void				kill_proc(t_proc **ptr_proc);
 
 typedef				void (*t_f_op)(t_proc **, unsigned char *);
 
@@ -79,6 +80,7 @@ typedef struct		s_op
 	int				tp_param[3];
 	char			op_code;
 	int				cycles;
+	char			*description;
 	_Bool			has_ocp;
 	_Bool			bool_2;
 	t_f_op			func;

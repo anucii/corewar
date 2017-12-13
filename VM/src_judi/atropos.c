@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 14:56:23 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/13 15:52:54 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,25 @@ void	kill_proc(t_proc **ptr_proc)
 	if (!(ptr_proc && *ptr_proc))
 		return ;
 	record = (*ptr_proc)->children;
-	if ((*ptr->proc)->life.status)
+	if ((*ptr_proc)->life.status)
 		return ;
 	free(*ptr_proc);
 	*ptr_proc = record;
 }
 
-void	atropos(t_proc **tab)
+void	atropos(t_proc **tab, unsigned int max)
 {
 	if (!tab)
 		return ;
-	foreach_proc(tab, &kill_proc);
+	foreach_proc(tab, max, &kill_proc);
 }
 
 /*
 ** Maintest
 */
-#include <stdlib.h>
 #include <stdio.h>
 
-static void		init_proc(t_proc **ptr, unsigned int depth)
+static void		init_proc(t_proc **ptr, unsigned int player, unsigned int depth)
 {
 	ssize_t	i = -1;
 
@@ -55,7 +54,7 @@ static void		init_proc(t_proc **ptr, unsigned int depth)
 	(*ptr)->carry = 0;
 	(*ptr)->life.status = 0;
 	(*ptr)->life.last = depth;
-	(*ptr)->life.player = 0;
+	(*ptr)->life.player = player;
 	while (++i < REG_NUMBER)
 		(*ptr)->reg[i] = (unsigned char)i;
 	(*ptr)->pid = new_pid();
@@ -63,14 +62,14 @@ static void		init_proc(t_proc **ptr, unsigned int depth)
 	(*ptr)->cc = 0;
 	(*ptr)->children = NULL;
 	if (depth < 5)
-		init_proc(&((*ptr)->children), depth + 1);
+		init_proc(&((*ptr)->children), player, depth + 1);
 }
 
-static void		make_list(t_proc **ptr)
+static void		make_list(t_proc **ptr, unsigned int player)
 {
 	if (!ptr)
 		return ;
-	init_proc(ptr, 0);
+	init_proc(ptr, player, 0);
 	return ;
 }
 
@@ -79,13 +78,15 @@ static void		gen_procs(t_proc **tab)
 	ssize_t i = -1;
 	
 	while (++i < 4)
-		make_list(&tab[i]);
+		make_list(&tab[i], (unsigned int)i);
 }
 
 int				main(void)
 {
-	ssize_t	i = -1;
-	t_proc **tab = (t_proc **)malloc(sizeof(t_proc *) * 4);
+	ssize_t	i;
+	_Bool	alive;
+	t_proc	*buf;
+	t_proc	**tab = (t_proc **)malloc(sizeof(t_proc *) * 4);
 
 	if (tab)
 		gen_procs(tab);
@@ -94,6 +95,21 @@ int				main(void)
 		puts("Malloc failure on processes array initialization");
 		exit(EXIT_FAILURE);
 	}
-	while (++i < 4)
+	while (timer(CHECK) < 10)
+	{
+		i = -1;
+		while (++i < 4)
+		{
+			buf = tab[i];
+			while (buf)
+			{
+				alive = chronos(buf, i % 2 ? LIVE : CHECK, i); //sets alive only odd index processes
+				printf("Player %zd (PID = %u) is %s.\n", i, buf->pid, alive ? "alive" : "dead");
+				buf = buf->children;
+			}
+		}
+		atropos(tab, 4);
+		printf("Clock : %u\n", timer(INCR));
+	}
 	return (0);
 }

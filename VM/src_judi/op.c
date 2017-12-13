@@ -6,16 +6,16 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 23:07:49 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/11 16:50:18 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/13 15:30:20 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "judi.h"
 
 t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR, 0, 0}, 1, 10, "alive", 0, 0, &f_live},
-	{"ld", 2, {T_DIR | T_IND, T_REG, 0}, 2, 5, "load", 1, 0, %f_ld},
+	{"ld", 2, {T_DIR | T_IND, T_REG, 0}, 2, 5, "load", 1, 0, &f_ld},
 	{"st", 2, {T_REG, T_IND | T_REG, 0}, 3, 5, "store", 1, 0, &f_st},
 	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0, &f_add},
 	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0, &f_sub},
