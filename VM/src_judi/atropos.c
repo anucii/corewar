@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/12 16:51:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/13 12:25:00 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	kill_proc(t_proc **ptr_proc)
 
 void	atropos(t_proc **tab)
 {
+	if (!tab)
+		return ;
+	foreach_proc(tab, &kill_proc);
 }
 
 /*

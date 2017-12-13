@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/12 16:51:01 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/13 12:20:49 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_life
 {
 	_Bool			status;
 	unsigned int	last;
+	unsigned int	player;
 }					t_life;
 
 typedef	struct		s_proc
@@ -40,6 +41,7 @@ typedef	struct		s_proc
 	unsigned int	pid;
 	unsigned int	pc;
 	unsigned int	cc;
+	t_champ			
 	t_proc			*children;
 };
 
@@ -60,11 +62,11 @@ typedef enum		e_req
 **	when to put an end to each of the processes life
 */
 
-void				foreach_proc(t_proc **tab, void (*func)(t_proc **));
+void				foreach_proc(t_proc **tab, unsigned int max, void (*func)(t_proc **));
 
-void				timer(void);
-_Bool				chronos(t_proc *proc, t_req request);
-void				atropos(t_proc **proc_tab);
+unsigned int		timer(t_req request);
+_Bool				chronos(t_proc *proc, t_req request, unsigned int player);
+void				atropos(t_proc **proc_tab, unsigned int max);
 void				kill_proc(t_proc *proc);
 
 typedef				void (*t_f_op)(t_proc **, unsigned char *);
