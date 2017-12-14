@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/13 19:56:32 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/14 12:31:18 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_proc(t_proc **p, int fd, unsigned int player)
 	(*p)->life.last = 0;
 	(*p)->player = 0;
 	i = 0;
-	(*p)->reg[i] = (unsigned char)player;
+	(*p)->reg[i] = player;
 	while (++i < REG_NUMBER)
 		(*p)->reg[i] = 0;
 	(*p)->pid = new_pid();

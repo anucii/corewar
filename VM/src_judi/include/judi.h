@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 20:22:37 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/14 12:29:53 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef	struct		s_proc
 {
 	_Bool			carry;
 	t_life			life;
-	unsigned char	reg[REG_NUMBER];
+	unsigned int	reg[REG_NUMBER];
 	unsigned int	pid;
 	unsigned int	pc;
 	unsigned int	cc;

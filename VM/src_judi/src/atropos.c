@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 15:52:54 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/14 12:32:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	atropos(t_proc **tab, unsigned int max)
 
 /*
 ** Maintest
-*/
 #include <stdio.h>
 
 static void		init_proc(t_proc **ptr, unsigned int player, unsigned int depth)
@@ -56,7 +55,7 @@ static void		init_proc(t_proc **ptr, unsigned int player, unsigned int depth)
 	(*ptr)->life.last = depth;
 	(*ptr)->life.player = player;
 	while (++i < REG_NUMBER)
-		(*ptr)->reg[i] = (unsigned char)i;
+		(*ptr)->reg[i] = (unsigned int)i;
 	(*ptr)->pid = new_pid();
 	(*ptr)->pc = 0;
 	(*ptr)->cc = 0;
@@ -113,3 +112,4 @@ int				main(void)
 	}
 	return (0);
 }
+*/
