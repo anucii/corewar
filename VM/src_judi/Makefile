@@ -19,7 +19,7 @@ FILES = atropos.c checkheader.c chronos.c error_vm.c f_add.c f_aff.c\
 		f_and.c f_fork.c f_ld.c f_ldi.c f_lfork.c f_live.c f_lld.c\
 		f_lldi.c f_or.c f_st.c f_sti.c f_sub.c f_xor.c f_zjmp.c\
 		foreach_proc.c load_champ.c new_pid.c op.c run.c start.c\
-		timer.c error_vm.c
+		timer.c error_vm.c new_player.c chars_to_int.c
 HDR_FILES = judi.h op.h
 
 HDR = $(addprefix $(HDR_DIR), $(HDR_FILES))
