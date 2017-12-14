@@ -6,14 +6,18 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/14 12:29:53 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/14 14:16:01 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_H
 # define VM_H
 # include "op.h"
+# include "libft.h"
+# include "libftprintf.h"
 # include <stdlib.h>
+# include <fcntl.h>
+# include <limits.h>
 
 /*
 **	Structure specific fields
@@ -80,6 +84,9 @@ void				checkheader(int fd, t_proc **p, unsigned int player);
 void				init_proc(t_proc **p, int fd, unsigned int player);
 void				littleendian(unsigned int *i);
 unsigned char		*load_champ(int *tab, short nb, t_proc **p);
+void				run(unsigned char *mem, t_proc **p);
+void				execute_order(unsigned char *mem, t_proc *p);
+void				error_vm(char *s);
 
 typedef				void (*t_f_op)(t_proc **, unsigned char *);
 

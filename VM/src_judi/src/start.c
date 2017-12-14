@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 14:17:18 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/13 20:06:46 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/14 14:16:53 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int				main(int argc, char **argv)
 	}
 	arene = load_champ(tab, argc - 1, p);
 	ft_printf("p[0] = %s, %u\n p[1] = %s, %u\n", p[0]->name, p[0]->pc, p[1]->name, p[1]->pc);
+	run(arene, p);
 
 	//free(arene);
 	//free(tab);

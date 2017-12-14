@@ -6,21 +6,22 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/13 20:31:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/14 14:20:15 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "judi.h"
 
 void	execute_order(unsigned char *mem, t_proc *p)
 {
 	int		i;
 
 	i = 0;
-	mem = mem + p->pc;
+	//mem = mem + p->pc;
 	while (i < 17)
 	{
-		if (*mem ==  g_op_tab[i][3])
+		//if (*mem ==  g_op_tab[i][3])
+		if (mem[p->pc] == g_op_tab[i].op_code)
 		{
 			g_op_tab[i].func(&p, mem);
 			return ;
@@ -28,6 +29,7 @@ void	execute_order(unsigned char *mem, t_proc *p)
 		i++;
 	}
 	p->pc++;
+	p->pc %= MEM_SIZE;
 }
 
 /*
@@ -37,22 +39,26 @@ void	execute_order(unsigned char *mem, t_proc *p)
 
 void	run(unsigned char *mem, t_proc **p)
 {
-	_Bool			c;
-	unsigned int	i;
+	_Bool	c;
+	ssize_t	i;
 
 	if (!(mem && p))
 		return ;
-	i = 0;
 	c = 1;
 	while (c)
 	{
 		while (timer(CHECK) < deadline(CHECK))
 		{
+			i = (ssize_t)g_n_players;
+			while (--i >= 0)
+				execute_order(mem, p[i]);
 			timer(INCR);
 		}
+		timer(RESET);
 		c = 0;
-		while ()
-		{}
+		atropos(p, g_n_players);
+		while (++i < (ssize_t)g_n_players)
+			c |= p[i] ? 1 : 0;
 		deadline(DECR);
 	}
 	/*

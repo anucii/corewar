@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/14 12:31:18 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/14 14:15:41 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_proc(t_proc **p, int fd, unsigned int player)
 	(*p)->carry = 0;
 	(*p)->life.status = 0;
 	(*p)->life.last = 0;
-	(*p)->player = 0;
+	(*p)->life.player = 0;
 	i = 0;
 	(*p)->reg[i] = player;
 	while (++i < REG_NUMBER)
