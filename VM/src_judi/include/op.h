@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/12/13 14:53:41 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/14 21:22:21 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,30 @@
 #ifndef OP_H
 # define OP_H
 
+/*
+**	The following sizes are the sizes of each type on the memory as values
+*/
+
 # define IND_SIZE				2
 # define REG_SIZE				4
 # define DIR_SIZE				REG_SIZE
+
+/*
+**	But notice that registers references/indexes are not as large as the actual
+**	registers storage ranges in the processes : references occupy only
+**	one byte, compared to 4-bytes values stored in the processes 
+*/
+
+# define REG_REF_SIZE			1
+
+/*
+**	The code defines are used for the OCP encoding and decoding (see checkocp)
+**	Default values :
+**	- REG_CODE : 0b01
+**	- DIR_CODE : 0b10
+**	- IND_CODE : 0b11
+**	NB : the OCP ends systematically with the 0b00 value
+*/
 
 # define REG_CODE				1
 # define DIR_CODE				2
