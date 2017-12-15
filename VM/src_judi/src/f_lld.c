@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:42:56 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 15:43:13 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/15 18:53:39 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	f_lld(t_proc **proc, unsigned char *mem)
 {
+	(void)proc;
+	(void)mem;
 	return ;
 }

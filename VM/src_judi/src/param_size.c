@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 20:29:32 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/15 14:43:26 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/15 18:42:39 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 */
 
 unsigned int	param_size(unsigned int p_first, int *param, _Bool dir_as_addr,\
-		int (*p_idx)[3])
+		unsigned int (*p_idx)[3])
 {
 	ssize_t			i;
 	unsigned int	ret;

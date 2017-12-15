@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 15:43:31 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/15 18:53:49 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	f_lldi(t_proc **proc, unsigned char *mem)
 {
+	(void)proc;
+	(void)mem;
 	return ;
 }

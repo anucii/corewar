@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/14 17:35:34 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/15 18:56:06 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	execute_order(unsigned char *mem, t_proc *p)
 	{
 		if (mem[p->pc] == g_op_tab[i].op_code)
 		{
-			if (++(p->cc) == g_op_tab[i].cycles)
+			if (++(p->cc) == (unsigned int)g_op_tab[i].cycles)
 			{
 				g_op_tab[i].func(&p, mem);
 				p->cc = 0;

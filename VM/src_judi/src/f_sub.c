@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:43 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 15:38:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/15 18:51:41 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	f_sub(t_proc **proc, unsigned char *mem)
 {
+	(void)proc;
+	(void)mem;
 	return ;
 }

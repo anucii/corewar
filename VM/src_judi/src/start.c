@@ -6,11 +6,11 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 14:17:18 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/14 14:16:53 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/15 19:10:57 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "judi.h"
 
 /*
 **	MAIN,  MODIFY WITH CAUTION
@@ -20,7 +20,7 @@
 */
 
 unsigned int	g_n_players = 0;
-
+/*	MAIN COMMENTED FOR TESTING PURPOSES
 int				main(int argc, char **argv)
 {
 	int				i;
@@ -54,3 +54,4 @@ int				main(int argc, char **argv)
 	//free(tab);
 	return (0);
 }
+*/
