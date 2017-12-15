@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 20:29:32 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/14 21:24:21 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/15 14:43:26 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 **	param_size() returns the size of the set of parameters types passed by the
 **	int pointer; if dir_as_addr is TRUE, then DIR_SIZE (4 by default) is reset 
 **	to IND_SIZE (2 by default)
+**	NEW FUNCTIONALITY : sets the index of each parameter on the memory space
 */
 
-unsigned int	param_size(int *param, _Bool dir_as_addr)
+unsigned int	param_size(unsigned int p_first, int *param, _Bool dir_as_addr,\
+		int (*p_idx)[3])
 {
 	ssize_t			i;
 	unsigned int	ret;
@@ -29,6 +31,7 @@ unsigned int	param_size(int *param, _Bool dir_as_addr)
 	ret = 0;
 	while (++i < 3)
 	{
+		(*p_idx)[i] = (p_first + ret) % MEM_SIZE;
 		if (param[i] == T_REG)
 			ret += REG_REF_SIZE;
 		else if (param[i] == T_IND)
@@ -45,6 +48,7 @@ unsigned int	param_size(int *param, _Bool dir_as_addr)
  * - checkocp.c
  * - libft.a (ft_memalloc in checkocp())
  * - error_vm.c
+ * TODO for new tests : an index_array pointer to fit with the new function prototype
 
 int	main(void)
 {
