@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/15 18:43:11 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/15 19:40:20 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ void				f_aff(t_proc **proc, unsigned char *mem);
 
 unsigned int		chars_to_int(unsigned char *mem, unsigned int index);
 unsigned short		chars_to_short(unsigned char *mem, unsigned int index);
+void				int_on_mem(unsigned char *mem, unsigned int i);
 
 #endif

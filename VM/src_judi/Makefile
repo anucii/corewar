@@ -21,7 +21,7 @@ FILES = atropos.c checkheader.c chronos.c error_vm.c f_add.c f_aff.c\
 		foreach_proc.c load_champ.c new_pid.c op.c run.c start.c\
 		timer.c error_vm.c new_player.c chars_to_int.c execute_error.c\
 		checkocp.c reinit_life_status.c chars_to_short.c param_size.c\
-		deadline.c
+		deadline.c int_on_mem.c
 HDR_FILES = judi.h op.h
 
 HDR = $(addprefix $(HDR_DIR), $(HDR_FILES))
