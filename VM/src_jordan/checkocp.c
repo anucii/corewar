@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:09:44 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/14 11:29:27 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/15 15:54:33 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@
 **to free the array param later, *mem should be pointing on the ocp !
 */
 
-static unsigned char		bitwise(unsigned char o, int i)
+static unsigned char		bitwise(unsigned char *o1, int i, unsigned char mem)
 {
 	if (i == 0)
 	{
-		o = o << 2;
-		o = o >> 6;
+		*o1 = mem << 2;
+		*o1 = *o1 >> 6;
 	}
 	else
 	{
-		o = o << 4;
-		o = o >> 6;
+		*o1 = mem << 4;
+		*o1 = *o1 >> 6;
 	}
-	return (o);
+	return (*o1);
 }
 
 int		*checkocp(unsigned char *mem)
@@ -41,8 +41,8 @@ int		*checkocp(unsigned char *mem)
 	i = 0;
 	param = ft_memalloc(sizeof(int) * 3);
 	o[0] = *mem >> 6;
-	o[1] = bitwise(*mem, 0);
-	o[2] = bitwise(*mem, 1);
+	o[1] = bitwise(&o[1], 0, *mem);
+	o[2] = bitwise(&o[2] , 1, *mem);
 	while (i < 3)
 	{
 		if (o[i] == 2)
