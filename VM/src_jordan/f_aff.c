@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:44:25 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/14 16:33:39 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/16 12:46:26 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 
 void	f_aff(t_proc **proc, unsigned char *mem)
 {/* need to create execute_error
-	if(mem[(*proc)->pc + 1] != 1)
+	if(mem[((*proc)->pc + 1) % MEM_SIZE] != 1)
 		execute_error();
-	else if(mem[(*proc)->pc + 2] > REG_NUMBER)
+	else if(mem[((*proc)->pc + 2) % MEM_SIZE] > REG_NUMBER)
 		execute_error();
 	else*/
-		ft_printf("%c\n", (*proc)->reg[mem[(*proc)->pc + 2]] % 256);
+		ft_printf("%c\n",
+				(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE ] - 1] % 256);
 	(*proc)->pc = ((*proc)->pc + 3) % MEM_SIZE;
 	return ;
 }
@@ -39,4 +40,4 @@ int		main(void)
 	p->reg[5] = 80;
 	f_aff(&p, mem);
 	return(0);
-}
+}*/

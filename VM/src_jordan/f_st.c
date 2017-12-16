@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/15 17:59:46 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/16 17:10:18 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	f_st(t_proc **proc, unsigned char *mem)
 {
-	int				*i = NULL;
+	int				*i;
 	unsigned short	s;
 
 	i = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
@@ -32,13 +32,16 @@ void	f_st(t_proc **proc, unsigned char *mem)
 		}*/
 		(*proc)->reg[mem[((*proc)->pc + 3) % MEM_SIZE] - 1] =
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1];
+		(*proc)->pc = ((*proc)->pc + 4) % MEM_SIZE;
 	}
 	else
 	{
 		s = (short)mem[((*proc)->pc + 3) % MEM_SIZE] << 8
 			| mem[((*proc)->pc + 4) % MEM_SIZE];
-			int_on_mem(&mem[((*proc)->pc + (s % IDX_MOD)) % MEM_SIZE],
-					(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1]);
+			int_on_mem(mem,
+					(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
+					(*proc)->pc + (s % IDX_MOD));
+		(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
 	}
 	return ;
 }

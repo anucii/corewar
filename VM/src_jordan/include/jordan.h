@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:41 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/15 17:15:08 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/16 17:55:31 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int				*checkocp(unsigned char *mem);
 void			error_vm(char *s);
 unsigned char	*load_champ(int *tab, short nb, t_proc **p);
 void			littleendian(unsigned int *i);
-void			int_on_mem(unsigned char *mem, unsigned int i);
+void			int_on_mem(unsigned char *mem, unsigned int i, unsigned short s);
+unsigned int	param_size(unsigned int p_first, int *params, _Bool dir_as_add,
+							unsigned int (*p_idx)[3]);
 
 #endif
