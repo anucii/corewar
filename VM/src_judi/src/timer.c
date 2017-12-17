@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:48:48 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/12 15:57:55 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/16 16:38:44 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 **	Global timer function, 
 **	- increments the clock only if called with request INCR,
-**	- reinitializes the clock if called with RESET
+**	- reinitializes the clock if called with REINIT
 **	- returns the current clock value otherwise
 */
 
@@ -25,7 +25,7 @@ unsigned int	timer(t_req request)
 
 	if (request == INCR)
 		clock++;
-	else if (request == RESET)
+	else if (request == REINIT)
 		clock = 0;
 	return (clock);
 }

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 20:29:32 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/15 18:42:39 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/16 18:05:49 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 **	int pointer; if dir_as_addr is TRUE, then DIR_SIZE (4 by default) is reset 
 **	to IND_SIZE (2 by default)
 **	NEW FUNCTIONALITY : sets the index of each parameter on the memory space
+**	provided that the p_first parameter is correctly modulo'd by MEM_SIZE in
+**	the calling function.
 */
 
 unsigned int	param_size(unsigned int p_first, int *param, _Bool dir_as_addr,\
@@ -31,7 +33,8 @@ unsigned int	param_size(unsigned int p_first, int *param, _Bool dir_as_addr,\
 	ret = 0;
 	while (++i < 3)
 	{
-		(*p_idx)[i] = (p_first + ret) % MEM_SIZE;
+		if (p_idx)
+			(*p_idx)[i] = (p_first + ret) % MEM_SIZE;
 		if (param[i] == T_REG)
 			ret += REG_REF_SIZE;
 		else if (param[i] == T_IND)

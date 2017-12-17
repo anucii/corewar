@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:15:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/13 20:26:20 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/16 16:37:18 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ unsigned int	nbr_live(t_req request)
 
 	if (request == INCR)
 		ret++;
-	if (request == RESET)
+	if (request == REINIT)
 		ret = 0;
 	return (ret);
 }

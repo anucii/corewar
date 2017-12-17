@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/15 19:40:20 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/17 21:52:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef	struct		s_proc
 
 typedef enum		e_req
 {
-					NONE = -1, LIVE, CHECK,	INCR, DECR, RESET
+					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT
 }					t_req;
 
 /*
@@ -100,7 +100,7 @@ typedef struct		s_op
 	char			*name;
 	int				nb_param;
 	int				tp_param[3];
-	char			op_code;
+	unsigned char	op_code;
 	int				cycles;
 	char			*description;
 	_Bool			has_ocp;
@@ -131,5 +131,16 @@ void				f_aff(t_proc **proc, unsigned char *mem);
 unsigned int		chars_to_int(unsigned char *mem, unsigned int index);
 unsigned short		chars_to_short(unsigned char *mem, unsigned int index);
 void				int_on_mem(unsigned char *mem, unsigned int i);
+_Bool				parse_params(int *param, unsigned int (*p_idx)[3],\
+		unsigned char op_code, unsigned char *mem);
+
+/*
+**	TESTING auxiliary functions : remember to erase before final push
+*/
+
+void			print_mem(unsigned char *mem, ssize_t max); //to remove after test-phase
+void			print_proc(t_proc *proc); //to remove after test-phase
+void			write_on_mem(unsigned char *mem, unsigned short begin,\
+		unsigned char *txt, unsigned short len);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/15 18:56:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/16 16:37:50 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	run(unsigned char *mem, t_proc **p)
 				execute_order(mem, p[i]);
 			timer(INCR);
 		}
-		timer(RESET);
+		timer(REINIT);
 		c = 0;
 		atropos(p, g_n_players);
 		while (++i < (ssize_t)g_n_players)
