@@ -1,6 +1,10 @@
 .name		"test_lldi"
 .comment	"champion for comparison purposes w/ the test written in f_lldi.c"
 
-		lldi 7,%0,r2
-		st r2,50
-		and %16,%17,r18
+		and %3,%6,r11
+		lldi 37,%0,r3
+		st r3,61
+		and %16,%17,r16
+		and %10,%5,r15
+		or %24,%3,r14
+		or %6,%52,r13
