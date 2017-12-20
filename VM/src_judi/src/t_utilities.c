@@ -7,7 +7,7 @@ void	print_mem(unsigned char *mem, ssize_t max)
 	if (!mem)
 		return ;
 	while (++i < max)
-		ft_printf("%02hx%c", mem[i], (i + 1) % 8 ? ' ' : '\n');
+		ft_printf("%02hx%c", mem[i], (i + 1) % 16 ? ' ' : '\n');
 	ft_printf("\n");
 }
 

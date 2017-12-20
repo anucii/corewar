@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 15:00:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/20 15:48:06 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	f_and(t_proc **proc, unsigned char *mem)
 	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 0, &idx);
 	if (!parse_params(param, &idx, 6, mem))
 	{
-		execute_error();
+		execute_error(*proc);
 		return ;
 	}
 	while (j < 2)
