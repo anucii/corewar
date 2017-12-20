@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 15:09:19 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/20 16:23:55 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void				destroy_win(t_win *window);
 void				init_coor(t_win *window);
 void				draw_corewar(t_win *window, t_proc **proc);
 void				draw_arena(t_win *window, unsigned char *arena, int color);
+void				init_arena(t_win *window, unsigned char *arena);
 void				refresh_arena(t_win *window, unsigned char *arena, int color);
 void				put_menu(t_win *window);
 int					*checkocp(unsigned char *mem);

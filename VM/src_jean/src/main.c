@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/20 15:24:45 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/20 15:49:28 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ int		main(int argc, char **argv)
 	{
 		while (1)
 		{
-			w->start = 0;
-			w->end = 0;
-			run(arena, p);
 			if ((ch = wgetch(w->win)) == 'Q')
 			{
 				destroy_win(w);

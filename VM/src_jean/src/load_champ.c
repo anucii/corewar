@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 13:57:33 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/20 11:19:32 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/20 18:17:18 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ unsigned char	*load_champ(int *tab, short nb, t_proc **p, t_win **w)
 	{
 		*w = ft_memalloc(sizeof(t_win));
 		start_ncurses(*w, p);
+		init_arena(*w, mem);
 	}
 	while (i < nb)
 	{
@@ -47,10 +48,8 @@ unsigned char	*load_champ(int *tab, short nb, t_proc **p, t_win **w)
 		{
 			(*w)->start = MEM_SIZE/nb - space;
 			(*w)->start *= -1;
-			if ((*w)->start != 0)
-				(*w)->start -= 64;
-			(*w)->end = space;
-			draw_arena(*w, mem, p[i]->color);
+			(*w)->end = (*w)->start + *size;
+			refresh_arena(*w, mem, p[i]->color);
 		}
 		i++;
 	}

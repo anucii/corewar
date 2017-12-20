@@ -20,13 +20,13 @@ SRC_FILE = 	main.c \
 			destroy_win.c \
 			init_coor.c \
 			draw_corewar.c \
+			init_arena.c \
 			draw_arena.c \
 			refresh_arena.c \
 			put_menu.c \
 			checkocp.c \
 			int_on_mem.c \
 			f_st.c \
-			run.c \
 
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
