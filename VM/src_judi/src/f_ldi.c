@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:16 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 18:02:18 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/20 20:10:50 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,51 +58,45 @@ void	f_ldi(t_proc **proc, unsigned char *mem)
 /*
 **	MAINTEST
 **	see the four first instructions test_ldi.s to get an explanation
+*/
 
 int		main(void)
 {
 	unsigned char	*mem = ft_memalloc(MEM_SIZE);
+	unsigned short	var = 17;
+	unsigned short	dir = 1;
 	unsigned char	txt[] = {\
-		2, 144, 0, 0, 15, 235, 2,\
-			10, 164, 255, 251, 0, 0, 3,\
-			10, 228, 255, 251, 0, 0,  16,\
-			10, 84, 2, 3, 4\
+		6, 0xa4, 0, 0, 0, 3, 0, 0, 0, 6,\
+			0x0b, 0x0a, 0xe4, var >> 8, var, dir >> 8, dir, 3, 3, 0x70,\
+			3, 0, 0x3d, 6, 0xa4, 0, 0, 0, 0x10, 0,\
+			0, 0, 0x11, 0x10, 6, 0xa4, 0, 0, 0, 0x0a,\
+			0, 0, 0, 5, 0x0f, 7, 0xa4, 0, 0, 0,\
+			0x18, 0, 0, 0, 0x34, 0x0e, 7, 0xa4, 0, 0,\
+			0, 6, 0, 0, 0, 0x2b, 0x0d\
 	};
-	unsigned char	*test = ft_memalloc(32);
 	t_proc			*proc = ft_memalloc(sizeof(t_proc));
+	unsigned char	golem[] = {\
+		3, 0x50, 1, 7, 2, 0x90, 0, 0, 0, 0x30\
+	};
 		
-	write_on_mem(mem, 0, txt, 26);
-	ft_memset(test, 42, 31);
-	write_on_mem(mem, 511, test, 31);
+	write_on_mem(mem, 0, txt, 68);
+	write_on_mem(mem, 2047, golem, 10);
 	ft_printf("Initial conditions:\n");
 	print_proc(proc);
-	print_mem(mem, 32);
+	print_mem(mem, 128);
+	ft_printf("golem @ mem[2047]\n");
+	print_mem(&mem[2047], 16);
 	ft_printf("-------------------\n\n");
 
-	ft_printf("ld DIR.4075, r2\n");
-	f_ld(&proc, mem);
+	f_and(&proc, mem);
 	print_proc(proc);
-	print_mem(mem, 32);
-	ft_printf("-------------------\n\n");
-
-	ft_printf("ldi  DIR.-4, DIR.0, r3\n");
+	ft_printf("\nldi %u, %%%u, r3\n", var, dir);
 	f_ldi(&proc, mem);
 	print_proc(proc);
-	print_mem(mem, 32);
-	ft_printf("-------------------\n\n");
-
-	ft_printf("ldi IND.-4, DIR.0, r16\n");
-	f_ldi(&proc, mem);
-	print_proc(proc);
-	print_mem(mem, 32);
-	ft_printf("-------------------\n\n");
-
-	ft_printf("ldi r2, r3, r4\n");
-	f_ldi(&proc, mem);
-	print_proc(proc);
-	print_mem(mem, 32);
+	print_mem(mem, 128);
+	ft_printf("golem @ mem[2047]\n");
+	print_mem(&mem[2047], 16);
 	ft_printf("-------------------\n\n");
 
 	return (0);
 }
-*/
