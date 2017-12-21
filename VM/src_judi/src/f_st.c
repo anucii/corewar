@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/15 19:39:31 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/18 11:55:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	f_st(t_proc **proc, unsigned char *mem)
 {
-	int				*i = NULL;
+	int				*i;
 	unsigned short	s;
 
 	i = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
@@ -29,18 +29,19 @@ void	f_st(t_proc **proc, unsigned char *mem)
 		{
 			execute_error();
 			return ;
-		}
-TODO : CHECK THAT THE CANDIDATE REGISTER INDEX REMAINS BETWEEN 1 AND REG_NUMBER
-		*/
+		}*/
 		(*proc)->reg[mem[((*proc)->pc + 3) % MEM_SIZE] - 1] =
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1];
+		(*proc)->pc = ((*proc)->pc + 4) % MEM_SIZE;
 	}
 	else
 	{
 		s = (short)mem[((*proc)->pc + 3) % MEM_SIZE] << 8
 			| mem[((*proc)->pc + 4) % MEM_SIZE];
-			int_on_mem(&mem[((*proc)->pc + (s % IDX_MOD)) % MEM_SIZE],
-					(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1]);
+			int_on_mem(mem,
+					(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
+					(*proc)->pc + (s % IDX_MOD));
+		(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
 	}
 	return ;
 }

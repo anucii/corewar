@@ -7,7 +7,7 @@ void	print_mem(unsigned char *mem, ssize_t max)
 	if (!mem)
 		return ;
 	while (++i < max)
-		ft_printf("%02hx%c", mem[i], (i + 1) % 8 ? ' ' : '\n');
+		ft_printf("%02hx%c", mem[i], (i + 1) % 16 ? ' ' : '\n');
 	ft_printf("\n");
 }
 
@@ -19,7 +19,7 @@ void	print_proc(t_proc *proc)
 	ft_printf("%s[pid:%3u] @ pc:%u)\n", proc->name, proc->pid, proc->pc);
 	ft_printf("Registers:\n");
 	while (++i < REG_NUMBER)
-		ft_printf("[(%03zu) = %u]%c", i, proc->reg[i], (i + 1) % 4 ? ' ' : '\n');
+		ft_printf("[(%03zu) = %x]%c", i, proc->reg[i], (i + 1) % 4 ? ' ' : '\n');
 	ft_printf("\n");
 	ft_printf("Life status : %s - last live : %04u - player declared : %4u\n",\
 			proc->life.status ? "alive" : "dead", proc->life.last, proc->life.player);
