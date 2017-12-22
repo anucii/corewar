@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 13:57:33 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/20 18:17:18 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/21 14:30:23 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ unsigned char	*load_champ(int *tab, short nb, t_proc **p, t_win **w)
 
 	i = 0;
 	space = 0;
+	g_n_players = nb;
 	mem = ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
-	if (g_print == 1 && nb != -1)
+	if (g_print && nb != -1)
 	{
 		*w = ft_memalloc(sizeof(t_win));
 		start_ncurses(*w, p);
@@ -44,7 +45,7 @@ unsigned char	*load_champ(int *tab, short nb, t_proc **p, t_win **w)
 		if (close(tab[i]) == -1)
 			error_vm("Error : close");
 		space = MEM_SIZE/nb + space;
-		if (g_print == 1 && nb != -1)
+		if (g_print && nb != -1)
 		{
 			(*w)->start = MEM_SIZE/nb - space;
 			(*w)->start *= -1;

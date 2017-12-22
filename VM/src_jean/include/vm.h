@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 16:23:55 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/21 14:26:44 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define BORDER_ARENA_Y 67
 # define MENU 1
 # define COREWAR 2
+# define REG_REF_SIZE 1
 
 /*
 **	Structure specific fields
@@ -47,18 +48,33 @@ typedef struct		s_life
 
 typedef	struct		s_proc
 {
-	struct s_proc	*children;
-	char			*name;
+	int				color;
+	_Bool			carry;
 	t_life			life;
 	unsigned int	reg[REG_NUMBER];
 	unsigned int	pid;
 	unsigned int	pc;
 	unsigned int	cc;
-	int				color;
-	_Bool			carry;
+	char			*name;
 //	t_champ			champ;
+	struct s_proc	*children;
 }					t_proc;
 
+/*
+**	Struct and global for visu
+**	WINDOW: 		- pointer to the curent window
+**	START and END:	- index for print the new segment
+**	Global:			- check if the verbose mode is on
+*/
+
+typedef struct	s_win
+{
+	WINDOW		*win;
+	int			start;
+	int			end;
+}				t_win;
+
+extern _Bool	g_print;
 
 /*
 **	REQUESTS enumeration for chronos function :
@@ -68,7 +84,7 @@ typedef	struct		s_proc
 
 typedef enum		e_req
 {
-					NONE = -1, LIVE, CHECK,	INCR, DECR, RINIT
+					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT
 }					t_req;
 
 /*
@@ -89,7 +105,10 @@ void				atropos(t_proc **proc_tab, unsigned int max);
 void				kill_proc(t_proc **ptr_proc);
 
 unsigned int		new_player(void);
+void				checkheader(int fd, t_proc **p, unsigned int player);
+//void				init_proc(t_proc **p, int fd, unsigned int player);
 void				littleendian(unsigned int *i);
+unsigned char		*load_champ(int *tab, short nb, t_proc **p, t_win **w);
 void				run(unsigned char *mem, t_proc **p);
 void				execute_order(unsigned char *mem, t_proc *p);
 void				error_vm(char *s);
@@ -106,7 +125,7 @@ typedef struct		s_op
 	char			*name;
 	int				nb_param;
 	int				tp_param[3];
-	char			op_code;
+	unsigned char	op_code;
 	int				cycles;
 	char			*description;
 	_Bool			has_ocp;
@@ -136,34 +155,31 @@ void				f_aff(t_proc **proc, unsigned char *mem);
 
 unsigned int		chars_to_int(unsigned char *mem, unsigned int index);
 unsigned short		chars_to_short(unsigned char *mem, unsigned int index);
-
-
-typedef struct		s_win
-{
-	WINDOW			*win;
-	int				start;
-	int				end;
-}					t_win;
-
-extern _Bool		g_print;
-
-void				error_vm(char *s);
-t_win				*check_arg(t_proc ***prec, unsigned char **arena, char **argv, int argc);
-void				parse_header(int fd, t_proc **p, char *name_file);
-unsigned char		*load_champ(int *tab, short nb, t_proc **p, t_win **w);
-void				littleendian(unsigned int *i);
-void				start_ncurses(t_win *win, t_proc **proc);
-void				new_win(t_win *window, int put);
-void				destroy_win(t_win *window);
-void				init_coor(t_win *window);
-void				draw_corewar(t_win *window, t_proc **proc);
-void				draw_arena(t_win *window, unsigned char *arena, int color);
-void				init_arena(t_win *window, unsigned char *arena);
-void				refresh_arena(t_win *window, unsigned char *arena, int color);
-void				put_menu(t_win *window);
-int					*checkocp(unsigned char *mem);
+unsigned int		convert(unsigned char *mem, unsigned int idx[3], int *param, int j);
 void				int_on_mem(unsigned char *mem, unsigned int i, unsigned short s);
-void				f_st(t_proc **proc, unsigned char *mem);
+_Bool				parse_params(int *param, unsigned int (*p_idx)[3],\
+		unsigned char op_code, unsigned char *mem);
 
+/*
+**	TESTING auxiliary functions : remember to erase before final push
+*/
+
+void			print_mem(unsigned char *mem, ssize_t max); //to remove after test-phase
+void			print_proc(t_proc *proc); //to remove after test-phase
+void			write_on_mem(unsigned char *mem, unsigned short begin,\
+		unsigned char *txt, unsigned short len);
+
+void			error_vm(char *s);
+t_win			*check_arg(t_proc ***prec, unsigned char **arena, char **argv, int argc);
+void			parse_header(int fd, t_proc **p, char *name_file);
+void			start_ncurses(t_win *win, t_proc **proc);
+void			new_win(t_win *window, int put);
+void			destroy_win(t_win *window);
+void			init_coor(t_win *window);
+void			draw_corewar(t_win *window, t_proc **proc);
+void			draw_arena(t_win *window, unsigned char *arena, int color);
+void			init_arena(t_win *window, unsigned char *arena);
+void			refresh_arena(t_win *window, unsigned char *arena, int color);
+void			put_menu(t_win *window);
 
 #endif

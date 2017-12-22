@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/18 17:36:50 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/21 17:17:57 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ static char	*get_name(int fd)
 	return (ft_strdup(name));
 }
 
-
-static void	init_proc(t_proc ***p, int fd)
+static void		init_proc(t_proc ***p, int fd)
 {
 	static int	color = 1;
 
 	(**p) = ft_memalloc(sizeof(t_proc));
-	(**p)->children = NULL;
+	(**p)->color = color;
 	(**p)->carry = 0;
 	(**p)->pc = 0;
-	(**p)->color = color;
+	(**p)->cc = 0;
+	(**p)->children = NULL;
 	(**p)->name = get_name(fd);
 	color++;
 }

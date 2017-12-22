@@ -1,4 +1,4 @@
-NAME = ncurses
+NAME = corewar
 
 CC = gcc
 FLAGS = -g -Wall -Wextra -Werror
@@ -27,7 +27,35 @@ SRC_FILE = 	main.c \
 			checkocp.c \
 			int_on_mem.c \
 			f_st.c \
-
+			run.c \
+			atropos.c \
+			deadline.c \
+			op.c \
+			timer.c \
+			f_add.c\
+			f_aff.c \
+			f_and.c \
+			f_fork.c \
+			f_ld.c \
+			f_ldi.c \
+			f_lfork.c \
+			f_live.c \
+			f_lld.c \
+			f_lldi.c \
+			f_or.c \
+			f_sti.c \
+			f_sub.c \
+			f_xor.c \
+			f_zjmp.c \
+			foreach_proc.c \
+			chars_to_int.c \
+			chars_to_short.c \
+			chronos.c \
+			execute_error.c \
+			param_size.c \
+			parse_params.c \
+			reinit_life_status.c \
+			convert.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
