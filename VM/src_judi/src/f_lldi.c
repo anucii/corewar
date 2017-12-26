@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 18:45:43 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/26 16:40:54 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,15 @@ static unsigned int lldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 		//	deref[i] = chars_to_short(mem, (proc->pc + chars_to_short(mem,\
 		//					(*p_idx)[i])));
 		else if (param[i] == T_IND)
+		{
+			unsigned int dbg;
+
 			deref[i] = chars_to_short(mem, ((*p_idx)[i] \
-					+ (chars_to_short(mem, (*p_idx)[i]) % MEM_SIZE))) % MEM_SIZE;
+					+ (dbg = chars_to_short(mem, (*p_idx)[i], 1))), 1);
+			ft_printf("Intermediate index read on mem[%u] = %u\n", (*p_idx)[i], dbg);
+		}
 		else
-			deref[i] = chars_to_short(mem, (*p_idx)[i]);//\
+			deref[i] = chars_to_short(mem, (*p_idx)[i], 1);//\
 					  // + (param[i] == T_DIR ? 0 : proc->pc);
 		ft_printf("deref[%zu(param @ mem[%u])] = %hu\n", i, (*p_idx)[i], deref[i]);//dbg
 		ft_printf("proc->pc = %u\n", proc->pc);
@@ -39,7 +44,7 @@ static unsigned int lldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 	deref[0] = (proc->pc + deref[0] + deref[1]) % MEM_SIZE;
 	//deref[0] = deref[0] + deref[1];
 	ft_printf("deref sum = %hu\n", deref[0]);//dbg
-	return (ret = chars_to_int(mem, deref[0]));
+	return (ret = chars_to_int(mem, deref[0], 1));
 }
 
 void	f_lldi(t_proc **proc, unsigned char *mem)
@@ -65,11 +70,12 @@ void	f_lldi(t_proc **proc, unsigned char *mem)
 /*
 **	MAINTEST
 **	see the four first instructions test_ldi.s to get an explanation
+*/
 
 int		main(void)
 {
 	unsigned char	*mem = ft_memalloc(MEM_SIZE);
-	unsigned char	var[2] = {0x0f, 0xfb};
+	unsigned char	var[2] = {0x07, 0xfa};
 	unsigned short	var_val = var[0];
 	var_val = (var_val << 8) | var[1];
 	unsigned char	txt[] = {\
@@ -110,4 +116,3 @@ int		main(void)
 
 	return (0);
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/18 16:07:33 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/26 15:46:06 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef enum		e_req
 
 /*
 **	chronos manages a table of the current livestate of each process
-**	atropos, which is one of the three Parcae in greek mythology, decides
-**	when to put an end to each of the processes life
+**	atropos (which is one of the three Parcae in greek mythology) and decides
+**	when to put an end to each of the processes' lives
 */
 
 void				foreach_proc(t_proc **tab, unsigned int max, void (*func)(t_proc **));
@@ -128,8 +128,8 @@ void				f_lldi(t_proc **proc, unsigned char *mem);
 void				f_lfork(t_proc **proc, unsigned char *mem);
 void				f_aff(t_proc **proc, unsigned char *mem);
 
-unsigned int		chars_to_int(unsigned char *mem, unsigned int index);
-unsigned short		chars_to_short(unsigned char *mem, unsigned int index);
+unsigned int		chars_to_int(unsigned char *mem, unsigned int index, _Bool lg);
+unsigned short		chars_to_short(unsigned char *mem, unsigned int index, _Bool lg);
 unsigned int		convert(unsigned char *mem, unsigned int idx[3], int *param, int j);
 void				int_on_mem(unsigned char *mem, unsigned int i, unsigned short s);
 _Bool				parse_params(int *param, unsigned int (*p_idx)[3],\

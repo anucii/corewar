@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:16 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 20:10:50 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/26 15:45:38 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static unsigned int ldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 			deref[i] = proc->reg[mem[(*p_idx)[i]] - 1];
 		else if (param[i] == T_IND)
 			deref[i] = chars_to_short(mem, ((*p_idx)[i] \
-						+ (chars_to_short(mem, (*p_idx[i])) % IDX_MOD)))\
+						+ (chars_to_short(mem, (*p_idx[i]), 0) % IDX_MOD)), 0)\
 					% IDX_MOD;
 		else
-			deref[i] = chars_to_short(mem, (*p_idx)[i]);
+			deref[i] = chars_to_short(mem, (*p_idx)[i], 0);
 	}
 	deref[0] = (proc->pc + ((deref[0] + deref[1]) % IDX_MOD)) % MEM_SIZE;
-	return (ret = chars_to_int(mem, deref[0]));
+	return (ret = chars_to_int(mem, deref[0], 1));
 }
 
 void	f_ldi(t_proc **proc, unsigned char *mem)
@@ -58,7 +58,6 @@ void	f_ldi(t_proc **proc, unsigned char *mem)
 /*
 **	MAINTEST
 **	see the four first instructions test_ldi.s to get an explanation
-*/
 
 int		main(void)
 {
@@ -100,3 +99,4 @@ int		main(void)
 
 	return (0);
 }
+*/
