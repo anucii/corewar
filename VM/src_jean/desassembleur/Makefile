@@ -36,6 +36,7 @@ SRC_FILE = 	main.c \
 			f_aff.c \
 			f_and.c \
 			f_sub.c \
+			ft_to_deci.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/

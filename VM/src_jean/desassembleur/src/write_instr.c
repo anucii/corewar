@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 19:46:39 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/22 19:55:28 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/27 14:41:30 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void			write_instr(int new_fd, int old_fd)
 	read(old_fd, instr, size[0]);
 	len = lseek(old_fd, 0, SEEK_END);
 	len = len - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
-	ft_printf("len before ft: %d\n", len);
+//	ft_printf("len before ft: %d\n", len);
 	while (len-- > 0)
 	{
 		len -= write_instr_in_file(instr, new_fd);
-		ft_printf("len after ft: %d\n", len);
+//		ft_printf("len after ft: %d\n", len);
 		/*
 		index++;
 		ft_printf("%s ", conv);

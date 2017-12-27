@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 15:56:13 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/22 19:56:03 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/27 15:00:50 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 void		f_live(unsigned char *instr, int *index, int fd)
 {
 	char	*conv;
+	char	*tmp;
 	char	*o1;
 	char	*o2;
 
 	*index += 1;
-	o1 = ft_strbase(instr[++(*index)], "0123456789");
-	o2 = ft_strbase(instr[++(*index)], "0123456789");
-	conv = ft_strjoin(o1, o2);
+	o1 = ft_strbase(instr[++(*index)], "0123456789abcdef");
+	o2 = ft_strbase(instr[++(*index)], "0123456789abcdef");
+	tmp = ft_strjoin(o1, o2);
+	conv = ft_to_deci(tmp, "0123456789abcdef");
 	write(fd, "%", 1);
 	write(fd, conv, ft_strlen(conv));
 	write(fd, "\n", 1);
 	ft_strdel(&o1);
 	ft_strdel(&o2);
+	ft_strdel(&tmp);
 	ft_strdel(&conv);
 }

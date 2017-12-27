@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/22 17:16:21 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/27 13:45:15 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "op.h"
 # include "./libft/include/libft.h"
 # include <fcntl.h>
+# include <math.h>
 
 # define COREWAR_EXEC_MAGIC	0xea83f3
 # define PROG_NAME_LENGTH	(128)
@@ -51,5 +52,6 @@ void				f_lld(unsigned char *instr, int *index, int fd);
 void				f_lldi(unsigned char *instr, int *index, int fd);
 void				f_lfork(unsigned char *instr, int *index, int fd);
 void				f_aff(unsigned char *instr, int *index, int fd);
+char				*ft_to_deci(char *s, char *base);
 
 #endif
