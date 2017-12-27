@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/26 20:50:36 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/27 12:55:47 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	f_lldi(t_proc **proc, unsigned char *mem)
 /*
 **	MAINTEST
 **	see the four first instructions test_ldi.s to get an explanation
-*/
 
 int		main(void)
 {
@@ -123,3 +122,4 @@ int		main(void)
 
 	return (0);
 }
+*/
