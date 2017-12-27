@@ -6,11 +6,26 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 19:46:39 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/27 14:41:30 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/27 20:02:07 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "crack.h"
+
+static int		check_op(unsigned char c)
+{
+	char			*conv_hexa;
+	char			*conv_deci;
+	int				op;
+
+	conv_hexa = ft_strbase(c, "0123456789abdef");
+	conv_deci = ft_to_deci(conv_hexa, "0123456789abcdef");
+	if ((op = op_matches(conv_deci)) == -1)
+		error("Bad instr!\n");
+	ft_strdel(&conv_hexa);
+	ft_strdel(&conv_deci);
+	return (op);
+}
 
 static int		write_instr_in_file(unsigned char *s, int fd)
 {
@@ -18,18 +33,12 @@ static int		write_instr_in_file(unsigned char *s, int fd)
 		&f_or, &f_xor, &f_zjmp, &f_ldi, &f_sti, &f_fork, &f_lld, &f_lldi,
 		&f_fork, &f_aff};
 	static int		index = -1;
-	char			*conv;
 	int				instr;
 	int				i;
 
-//	ft_printf("index: %d\n", index);
-	conv = ft_strbase(s[++index], "0123456789");
-	if ((instr = op_matches(conv)) == -1)
-		error("Bad instr!\n");
+	instr = check_op(s[++index]);
 	write(fd, g_op_tab[instr].name, ft_strlen(g_op_tab[instr].name));
 	write(fd, " ", 1);
-	index++;
-	ft_strdel(&conv);
 	i = g_op_tab[instr].op_code - 1;
 	ft[i](s, &index, fd);
 	return (g_op_tab[instr].nb_param + 3);
@@ -48,22 +57,7 @@ void			write_instr(int new_fd, int old_fd)
 	read(old_fd, instr, size[0]);
 	len = lseek(old_fd, 0, SEEK_END);
 	len = len - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
-//	ft_printf("len before ft: %d\n", len);
 	while (len-- > 0)
-	{
 		len -= write_instr_in_file(instr, new_fd);
-//		ft_printf("len after ft: %d\n", len);
-		/*
-		index++;
-		ft_printf("%s ", conv);
-		ft_strdel(&conv);
-		conv = ft_strbase(instr[++index], "0123456789abcdef");
-		write_opc_in_file(conv, new_fd, i);
-		write(new_fd, ",", 1);
-		ft_strdel(&conv);
-		conv = ft_strbase(instr[++index], "0123456789abcdef");
-		ft_strdel(&conv);
-		*/
-	}
 	return ;
 }

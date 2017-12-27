@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_live.c                                           :+:      :+:    :+:   */
+/*   to_hexa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/22 15:56:13 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/27 18:18:52 by jgonthie         ###   ########.fr       */
+/*   Created: 2017/12/27 18:18:11 by jgonthie          #+#    #+#             */
+/*   Updated: 2017/12/27 18:18:28 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "crack.h"
 
-void		f_live(unsigned char *instr, int *index, int fd)
+char	*to_hexa(unsigned char c1, unsigned char c2)
 {
-	char	*tmp_2;
-	char	*tmp_1;
-	char	*conv;
 	char	*join;
+	char	*o1;
+	char	*o2;
 
-	tmp_2 = to_hexa(instr[++(*index)], instr[++(*index)]);
-	tmp_1 = to_hexa(instr[++(*index)], instr[++(*index)]);
-	join = ft_strjoin(tmp_2, tmp_1);
-	conv = ft_to_deci(join, "0123456789abcdef");
-	write(fd, "%", 1);
-	write(fd, conv, ft_strlen(conv));
-	write(fd, "\n", 1);
-	ft_strdel(&tmp_2);
-	ft_strdel(&tmp_1);
-	ft_strdel(&conv);
-	ft_strdel(&join);
+	o1 = ft_strbase(c1, "0123456789abcdef");
+	o2 = ft_strbase(c2, "0123456789abcdef");
+	join = ft_strjoin(o1, o2);
+	ft_strdel(&o1);
+	ft_strdel(&o2);
+	return (join);
 }

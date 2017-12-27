@@ -37,6 +37,8 @@ SRC_FILE = 	main.c \
 			f_and.c \
 			f_sub.c \
 			ft_to_deci.c \
+			to_hexa.c \
+			check_opc.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
