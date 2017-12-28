@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/28 11:40:25 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 12:42:26 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void	run(unsigned char *mem, t_proc **p)
 		while (++i < (ssize_t)g_n_players)
 			c |= p[i] ? 1 : 0;
 		deadline(DECR);
+		foreach_proc(p, g_n_players, &reinit_life_status);
 	}
 }

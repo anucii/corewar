@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/14 12:32:43 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 14:37:48 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	atropos(t_proc **tab, unsigned int max)
 	if (!tab)
 		return ;
 	foreach_proc(tab, max, &kill_proc);
+	foreach_proc(tab, max, &reinit_life_status);
 }
 
 /*

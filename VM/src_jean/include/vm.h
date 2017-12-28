@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/21 14:26:44 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 14:55:46 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void				run(unsigned char *mem, t_proc **p);
 void				execute_order(unsigned char *mem, t_proc *p);
 void				error_vm(char *s);
 void				execute_error(t_proc *proc);
-void				reinit_life_status(t_proc *proc);
+void				reinit_life_status(t_proc **proc);
 int					*checkocp(unsigned char *mem);
 unsigned int		param_size(unsigned int p_first, int *params,\
 		_Bool dir_as_addr, unsigned int (*p_idx)[3]);

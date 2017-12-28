@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/27 12:55:47 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 16:20:00 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	f_lldi(t_proc **proc, unsigned char *mem)
 	int				*param;
 	unsigned int	p_idx[3];
 	unsigned int	size;
+	unsigned int	val;
 
 	if (!(proc && *proc && mem))
 		error_vm("f_lldi() called with undue null parameter(s)");
@@ -62,7 +63,9 @@ void	f_lldi(t_proc **proc, unsigned char *mem)
 		execute_error(*proc);
 		return ;
 	}
-	(*proc)->reg[mem[p_idx[2]] - 1] = lldi_calc(*proc, mem, param, &p_idx);
+	val = lldi_calc(*proc, mem, param, &p_idx);
+	(*proc)->reg[mem[p_idx[2]] - 1] = val;
+	(*proc)->carry = val ? 0 : 1;
 	(*proc)->pc = ((*proc)->pc + size) % MEM_SIZE;
 	free(param);
 }

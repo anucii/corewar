@@ -16,7 +16,7 @@ void	print_proc(t_proc *proc)
 	ssize_t	i = -1;
 	if (!proc)
 		return ;
-	ft_printf("%s[pid:%3u] @ pc:%u)\n", proc->name, proc->pid, proc->pc);
+	ft_printf("%s[pid:%3u] @ pc:%u)\n", proc->champ.name, proc->pid, proc->pc);
 	ft_printf("Registers:\n");
 	while (++i < REG_NUMBER)
 		ft_printf("[(%03zu) = %x]%c", i, proc->reg[i], (i + 1) % 4 ? ' ' : '\n');

@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/14 14:15:41 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 16:25:42 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_proc(t_proc **p, int fd, unsigned int player)
 	(*p)->pid = new_pid();
 	(*p)->pc = (UINT_MAX - player) * (MEM_SIZE / g_n_players);
 	(*p)->cc = 0;
-	(*p)->name = NULL;
-	get_next_line(fd, &(*p)->name);
+	(*p)->champ.name = NULL;
+	get_next_line(fd, &(*p)->champ.name);
 	(*p)->children = NULL;
 }
 

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:05 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/27 19:59:57 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 16:14:54 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void				f_ld(t_proc **proc, unsigned char *mem)
 		return ;
 	}
 	(*proc)->reg[mem[p_idx[1]] - 1] = val;
+	(*proc)->carry = val ? 0 : 1;
 	(*proc)->pc += size;
 	free(param);
 }

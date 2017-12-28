@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/26 15:46:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 16:24:30 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct		s_life
 	unsigned int	player;
 }					t_life;
 
+typedef struct		s_champ
+{
+	char			*name;
+	unsigned int	id;
+}					t_champ;
+
 typedef	struct		s_proc
 {
 	_Bool			carry;
@@ -45,8 +51,7 @@ typedef	struct		s_proc
 	unsigned int	pid;
 	unsigned int	pc;
 	unsigned int	cc;
-	char			*name;
-//	t_champ			champ;
+	t_champ			champ;
 	struct s_proc	*children;
 }					t_proc;
 
@@ -88,7 +93,7 @@ void				run(unsigned char *mem, t_proc **p);
 void				execute_order(unsigned char *mem, t_proc *p);
 void				error_vm(char *s);
 void				execute_error(t_proc *proc);
-void				reinit_life_status(t_proc *proc);
+void				reinit_life_status(t_proc **proc);
 int					*checkocp(unsigned char *mem);
 unsigned int		param_size(unsigned int p_first, int *params,\
 		_Bool dir_as_addr, unsigned int (*p_idx)[3]);

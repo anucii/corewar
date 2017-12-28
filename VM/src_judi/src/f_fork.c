@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/14 18:44:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 15:03:13 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		f_fork(t_proc **proc, unsigned char *mem)
 	tmp->children = ft_memalloc(sizeof(t_proc));
 	tmp->children = ft_memcpy(tmp->children, *proc, sizeof(t_proc));
 	tmp->children->pc = (((*proc)->pc + s) % IDX_MOD) % MEM_SIZE;
-	reinit_life_status(tmp->children);
 	(*proc)->pc = ((*proc)->pc + 3) % MEM_SIZE ;
 	return ;
 }
