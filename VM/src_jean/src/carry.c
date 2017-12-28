@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   int_on_mem.c                                       :+:      :+:    :+:   */
+/*   carry.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 16:48:15 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/21 14:25:04 by jpallard         ###   ########.fr       */
+/*   Created: 2017/12/28 16:32:14 by jpallard          #+#    #+#             */
+/*   Updated: 2017/12/28 16:34:26 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "jordan.h"
 
-void	int_on_mem(unsigned char *mem, unsigned int i, unsigned short s)
+void	carry(t_proc ***p, unsigned int val)
 {
-	unsigned char	i1;
-	unsigned char	i2;
-	unsigned char	i3;
-
-	i1 = i >> 24;
-	i2 = i >> 16;
-	i3 = i >> 8;
-	mem[s % MEM_SIZE] = i1;
-	mem[(s + 1) % MEM_SIZE] = i2;
-	mem[(s + 2) % MEM_SIZE] = i3;
-	mem[(s + 3) % MEM_SIZE] = i;
-	return ;
+	if (val != 0)
+		(**p)->carry = 0;
+	else
+		(**p)->carry = 1;
 }

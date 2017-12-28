@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 16:38:22 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 16:45:55 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "./include/jordan.h"
 
 /*
 **create a new processus at the adress given
@@ -22,15 +22,15 @@ void	f_lfork(t_proc **proc, unsigned char *mem)
 {
 	unsigned short s;
 	t_proc		*tmp;
-	s = ((short)mem[((*proc)->pc + 1) % MEM_SIZE] << 8) \
-		| mem[((*proc)->pc + 2) % MEM_SIZE];
+	s = ((short)mem[((*proc)->pc + 1) % MEM_SIZE] << 8) |
+		mem[((*proc)->pc + 2) % MEM_SIZE];
 	tmp = (*proc);
 	while(tmp->children != NULL)
 		tmp = tmp->children;
 	tmp->children = ft_memalloc(sizeof(t_proc));
 	tmp->children = ft_memcpy(tmp->children, *proc, sizeof(t_proc));
 	tmp->children->pc = (((*proc)->pc + s)) % MEM_SIZE;
-	reinit_life_status(&tmp->children);
+	tmp->children->children = NULL;
 	(*proc)->pc = ((*proc)->pc + 3) % MEM_SIZE;
 	return ;
 }

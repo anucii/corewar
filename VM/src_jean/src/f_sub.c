@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:37:24 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 18:48:44 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 16:37:25 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "./include/jordan.h"
 
 //WARNING operation modify carry
 
@@ -26,6 +26,7 @@ void	f_sub(t_proc **proc, unsigned char *mem)
 	//	execute_error
 	(*proc)->reg[mem[idx[2] - 1]] = (*proc)->reg[mem[idx[0]] - 1] -
 		(*proc)->reg[mem[idx[1]] - 1];
+	carry(&proc, (*proc)->reg[mem[idx[2] - 1]]);
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
 	return ;
 }

@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:40:44 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 18:49:10 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/16 17:12:11 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "./include/jordan.h"
 
 /*
 **2 unsigned char transferred over 1 short to have the real number in case you 
@@ -22,10 +22,12 @@ void	f_zjmp(t_proc **proc, unsigned char *mem)
 {
 	unsigned short i;
 
-	i = ((short)mem[((*proc)->pc + 1) % MEM_SIZE] << 8) \
+	i = ((short)mem[((*proc)->pc + 1) % MEM_SIZE] << 8) 
 		| mem[((*proc)->pc + 2) % MEM_SIZE];
 	if ((*proc)->carry == 1)
 		(*proc)->pc = (((*proc)->pc + (i % IDX_MOD)) % MEM_SIZE);
+	else
+		(*proc)->pc = (((*proc)->pc + 3) % MEM_SIZE);
 	return ;
 }
 
