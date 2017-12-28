@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:15:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 18:43:34 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 18:33:15 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,16 @@ unsigned int	nbr_live(t_req request)
 unsigned int	deadline(t_req request)
 {
 	static unsigned int	ret = CYCLE_TO_DIE;
+	static unsigned int checks = 0;
 
-	if ((request == DECR) && (nbr_live(CHECK) >= NBR_LIVE))
-		ret -= CYCLE_DELTA;
+	if (request == DECR)
+	{
+		checks++;
+		if ((nbr_live(CHECK) >= NBR_LIVE) || (checks == MAX_CHECKS))
+		{
+			ret -= CYCLE_DELTA;
+			checks = 0;
+		}
+	}
 	return (ret);
 }

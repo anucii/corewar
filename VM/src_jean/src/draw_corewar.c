@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 09:31:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/18 17:52:30 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 18:39:33 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	draw_player(t_win *w, t_proc **proc, int color)
 		wprintw(w->win, ft_itoa(nb_player));
 		wprintw(w->win, " : ");
 		wattron(w->win, COLOR_PAIR(color));
-		wprintw(w->win, (*proc)->name);
+		wprintw(w->win, (*proc)->champ.name);
 		wattroff(w->win, COLOR_PAIR(color));
 		nb_player--;
 		pos += 2;
