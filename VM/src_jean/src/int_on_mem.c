@@ -6,11 +6,11 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:48:15 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/21 14:25:04 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:13:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "vm.h"
 
 void	int_on_mem(unsigned char *mem, unsigned int i, unsigned short s)
 {
