@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 17:04:53 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/27 20:00:22 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 11:24:22 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ void		f_ld(unsigned char *instr, int *index, int fd)
 	index = -1;
 	opc = ft_strbase(instr[++(*index)], "01");
 	ft_bzero(size, 3);
-	check_opc(&size, opc);
-	if (size[0] == T_DIR)
+	check_opc(&size, opc, 1, 2);
+	while (++index < 2)
 	{
-
-	}
-	else if (size[0] == T_REG)
-	{
+		if (size[0] == T_REG)
+		{
 	tmp_2 = to_hexa(instr[++(*index)], instr[++(*index)]);
 	tmp_1 = ft_to_deci(tmp_2, "0123456789abcdef");
 	write(fd, tmp_1, ft_strlen(tmp_1));
@@ -44,5 +42,15 @@ void		f_ld(unsigned char *instr, int *index, int fd)
 	ft_strdel(&tmp_1);
 	ft_strdel(&conv);
 	ft_strdel(&o);
+
+		}
+		else if (size[0] == T_DIR)
+		{
+
+		}
+		else if (size[0] == T_IND)
+		{
+
+		}
 	}
 }

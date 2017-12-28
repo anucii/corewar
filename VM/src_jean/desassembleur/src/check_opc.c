@@ -6,38 +6,34 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 18:45:20 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/27 20:02:06 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 11:14:00 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "crack.h"
 
-static _Bool	op_match(int (*size)[3], int instr)
+static _Bool	op_match(int (*size)[3], int instr, int nb_params)
 {
 	int		index;
 
 	index = -1;
-	while (++index < slot->nb_param)
+	while (++index < nb_params)
 	{
-		op_idx++;
-		if (tab->tp_param[index] & T_REG)
-			if (reg_param(&slot->param[index], &slot->ty_param[index], \
-						param[op_idx]))
+		if (g_op_tab[instr].tp_param[index] & T_REG)
+			if ((*size)[index] == REG_CODE)
 				continue ;
-		if (tab->tp_param[index] & T_DIR)
-			if (dir_param(&slot->param[index], &slot->ty_param[index], \
-						param[op_idx]))
+		if (g_op_tab[instr].tp_param[index] & T_DIR)
+			if ((*size)[index] == DIR_CODE)
 				continue ;
-		if (tab->tp_param[index] & T_IND)
-			if (ind_param(&slot->param[index], &slot->ty_param[index], \
-						param[op_idx]))
+		if (g_op_tab[instr].tp_param[index] & T_IND)
+			if ((*size)[index] == IND_CODE)
 				continue ;
 		return (0);
 	}
 	return (1);
 }
 
-void		check_opc(int (*size)[3], char *opc, int instr)
+void		check_opc(int (*size)[3], char *opc, int instr, int nb_params)
 {
 	int		index;
 	int		index_2;
@@ -46,7 +42,6 @@ void		check_opc(int (*size)[3], char *opc, int instr)
 	index_2 = 0;
 	while (++index < 3)
 	{
-		ft_printf("opc[index] : %c%c\n", opc[index_2], opc[index_2 + 1]);
 		if (opc[index_2] == '0' && opc[index_2 + 1] == '1')
 			(*size)[index] = REG_CODE;
 		else if (opc[index_2] == '1' && opc[index_2 + 1] == '0')
@@ -57,9 +52,9 @@ void		check_opc(int (*size)[3], char *opc, int instr)
 			(*size)[index] = 0;
 		index_2 += 2;
 	}
-	if (!op_match(size, instr))
+	if (!op_match(size, instr, nb_params))
 	{
-		ft_printf("Bad params for %s instr\n", g_op_tab);
-		error("");
+		ft_printf("Error : Bad params for %s instr.", g_op_tab[instr].name);
+		error(" Take only {DIR | IND, REG} params");
 	}
 }

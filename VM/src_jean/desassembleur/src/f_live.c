@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 15:56:13 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/27 18:18:52 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 11:23:34 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void		f_live(unsigned char *instr, int *index, int fd)
 {
+	//int		size[3];
 	char	*tmp_2;
 	char	*tmp_1;
 	char	*conv;
@@ -23,6 +24,7 @@ void		f_live(unsigned char *instr, int *index, int fd)
 	tmp_1 = to_hexa(instr[++(*index)], instr[++(*index)]);
 	join = ft_strjoin(tmp_2, tmp_1);
 	conv = ft_to_deci(join, "0123456789abcdef");
+	if (ft_strlen(join) == 8)
 	write(fd, "%", 1);
 	write(fd, conv, ft_strlen(conv));
 	write(fd, "\n", 1);

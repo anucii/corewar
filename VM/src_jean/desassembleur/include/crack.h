@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/27 19:34:10 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 11:09:22 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void				f_lfork(unsigned char *instr, int *index, int fd);
 void				f_aff(unsigned char *instr, int *index, int fd);
 char				*ft_to_deci(char *s, char *base);
 char				*to_hexa(unsigned char c1, unsigned char c2);
-void				check_opc(int (*size)[3], char *opc);
+void				check_opc(int (*size)[3], char *opc, int instr, int nb_params);
 
 #endif
