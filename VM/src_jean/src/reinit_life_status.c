@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 18:42:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 14:39:04 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 16:38:46 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "judi.h"
+#include "vm.h"
 
 void	reinit_life_status(t_proc **ptr_proc)
 {
