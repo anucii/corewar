@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:44:25 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/16 12:46:26 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:02:50 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "vm.h"
 
 /*
 **print a character stocked in the reg passed in parameter apply %256 on it

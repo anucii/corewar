@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/16 17:10:18 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:11:31 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "vm.h"
 
 void	f_st(t_proc **proc, unsigned char *mem)
 {

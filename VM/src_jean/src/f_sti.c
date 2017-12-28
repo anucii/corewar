@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 16:50:44 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:12:02 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "vm.h"
 
 /*
 ** stock the content of the reg passed on first param at the adress given

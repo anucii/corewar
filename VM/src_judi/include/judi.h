@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 16:24:30 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/28 17:26:21 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ typedef enum		e_req
 **	when to put an end to each of the processes' lives
 */
 
-void				foreach_proc(t_proc **tab, unsigned int max, void (*func)(t_proc **));
+void				foreach_proc(t_proc **tab, unsigned int max,\
+		void (*func)(t_proc **));
 
 unsigned int		timer(t_req request);
 unsigned int		deadline(t_req request);

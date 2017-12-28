@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 16:40:02 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:12:29 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "vm.h"
 
 void	f_xor(t_proc **proc, unsigned char *mem)
 {

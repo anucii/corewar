@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:37:24 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 16:37:25 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:12:14 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "vm.h"
 
 //WARNING operation modify carry
 

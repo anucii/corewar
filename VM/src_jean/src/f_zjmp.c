@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:40:44 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/16 17:12:11 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:12:53 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "vm.h"
 
 /*
 **2 unsigned char transferred over 1 short to have the real number in case you 

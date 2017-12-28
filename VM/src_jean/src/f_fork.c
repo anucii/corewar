@@ -6,11 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 16:49:23 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:03:14 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/jordan.h"
+#include "vm.h"
 
 /*
 **create a new processus at the adress given with % IDX_MOD
