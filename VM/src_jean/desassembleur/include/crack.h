@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 11:09:22 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:21:06 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define REG_NUMBER			16
 
 extern t_op			g_op_tab[17];
-typedef void		(*t_pft)(unsigned char *instr, int *index, int nb_param);
 
 void				error(char *s);
 _Bool				parse_file(char **new_file, char *old_file);
@@ -37,23 +36,12 @@ void				write_header(int fd_new, int fd_old);
 void				write_instr(int fd_new, int fd_old);
 char				op_matches(char *s);
 void				f_live(unsigned char *instr, int *index, int fd);
-void				f_ld(unsigned char *instr, int *index, int fd);
-void				f_st(unsigned char *instr, int *index, int fd);
-void				f_add(unsigned char *instr, int *index, int fd);
-void				f_sub(unsigned char *instr, int *index, int fd);
-void				f_and(unsigned char *instr, int *index, int fd);
-void				f_or(unsigned char *instr, int *index, int fd);
-void				f_xor(unsigned char *instr, int *index, int fd);
-void				f_zjmp(unsigned char *instr, int *index, int fd);
-void				f_ldi(unsigned char *instr, int *index, int fd);
-void				f_sti(unsigned char *instr, int *index, int fd);
-void				f_fork(unsigned char *instr, int *index, int fd);
-void				f_lld(unsigned char *instr, int *index, int fd);
-void				f_lldi(unsigned char *instr, int *index, int fd);
-void				f_lfork(unsigned char *instr, int *index, int fd);
-void				f_aff(unsigned char *instr, int *index, int fd);
+void				f_all(unsigned char *instr, int info[2], int *index, int fd);
 char				*ft_to_deci(char *s, char *base);
 char				*to_hexa(unsigned char c1, unsigned char c2);
 void				check_opc(int (*size)[3], char *opc, int instr, int nb_params);
+void				write_reg(unsigned char *instr, int *index, int fd);
+void				write_ind(unsigned char *instr, int *index, int fd, _Bool print);
+void				write_dir(unsigned char *instr, int *index, int fd);
 
 #endif

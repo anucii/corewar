@@ -21,24 +21,13 @@ SRC_FILE = 	main.c \
 			op.c \
 			op_matches.c \
 			f_live.c \
-			f_ld.c \
-			f_st.c \
-			f_add.c \
-			f_or.c \
-			f_xor.c \
-			f_zjmp.c \
-			f_ldi.c \
-			f_lldi.c \
-			f_sti.c \
-			f_fork.c \
-			f_lld.c \
-			f_lfork.c \
-			f_aff.c \
-			f_and.c \
-			f_sub.c \
+			f_all.c \
 			ft_to_deci.c \
 			to_hexa.c \
 			check_opc.c \
+			write_reg.c \
+			write_dir.c \
+			write_ind.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
