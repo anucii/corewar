@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/26 17:02:14 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 16:40:26 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	f_or(t_proc **proc, unsigned char *mem)
 		j++;
 	}
 	(*proc)->reg[mem[idx[2]] - 1] = s[0] | s[1];
+	carry(&proc, (*proc)->reg[mem[idx[2]] - 1]);
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
 	return ;
 }

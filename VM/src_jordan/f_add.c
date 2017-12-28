@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:37:24 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/18 13:23:31 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 16:35:33 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	f_add(t_proc **proc, unsigned char *mem)
 	//	execute_error
 	(*proc)->reg[mem[idx[2] - 1]] = (*proc)->reg[mem[idx[0]] - 1] +
 		(*proc)->reg[mem[idx[1]] - 1];
+	carry(&proc, (*proc)->reg[mem[idx[2] - 1]]);
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
 	return ;
 }

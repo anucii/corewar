@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:41 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/26 16:33:06 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/28 16:36:14 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void			int_on_mem(unsigned char *mem, unsigned int i, unsigned short s);
 unsigned int	param_size(unsigned int p_first, int *params, _Bool dir_as_add,
 							unsigned int (*p_idx)[3]);
 unsigned int	convert(unsigned char *mem, unsigned int idx, unsigned short pc, int j);
+void			carry(t_proc ***p, unsigned int val);
 
 #endif
