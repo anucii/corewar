@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:19:21 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:57:04 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ int				main(int argc, char **argv)
 	arena = NULL;
 	p = ft_memalloc(sizeof(t_proc));
 	info = check_arg(&p, &arena, argv, argc);
+	get_info(&info);
+	if (!info->opt[0])
+		intr_msg(p);
 	run(arena, p);
+	if (!info->opt[0])
+		lives_reg(CHECK, 0, info);
 	if (info->opt[0])
 	{
 		while (1)

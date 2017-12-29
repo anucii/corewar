@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:12:02 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/29 20:41:22 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	int_on_mem(mem,
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
 			(*proc)->pc + ((s + t) % IDX_MOD));
+	(*proc)->pc += 2 + i;
 	return ;
 }
 

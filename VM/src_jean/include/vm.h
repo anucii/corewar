@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 19:37:00 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:57:47 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct	s_info
 {
 	char		name[4][255];
 	int			opt[5];
-	int			nb_of_player[4];
+	int			id_player[4];
 	int			nb_player;
 	WINDOW		*win;
 	int			start;
@@ -138,7 +138,10 @@ void				reinit_life_status(t_proc **proc);
 int					*checkocp(unsigned char *mem);
 unsigned int		param_size(unsigned int p_first, int *params,\
 		_Bool dir_as_addr, unsigned int (*p_idx)[3]);
+void				intr_msg(t_proc **p);
 void				dump_mem(unsigned char *mem);
+void				lives_reg(t_req request, int num, t_info *info);
+t_info				*get_info(t_info **p_info);
 
 typedef				void (*t_f_op)(t_proc **, unsigned char *);
 

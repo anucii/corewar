@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:53:47 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 20:00:32 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static t_info	*ini_info(void)
 	while (++index)
 		ft_memset(info->name[index], 0, 255);
 	ft_memset(info->opt, 0, 5);
-	info->nb_of_player[0] = -1;
-	info->nb_of_player[1] = -2;
-	info->nb_of_player[2] = -3;
-	info->nb_of_player[3] = -4;
+	info->id_player[0] = -1;
+	info->id_player[1] = -2;
+	info->id_player[2] = -3;
+	info->id_player[3] = -4;
 	info->nb_player = 0;
 	info->win = NULL;
 	info->start = 0;
@@ -95,7 +95,6 @@ t_info			*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
 		print_usage();
 	while (++index[0] < argc)
 	{
-		info->opt[0] =1;
 		if (ft_strequ(argv[index[0]], "-c"))
 			inc_opt_print(info);
 		else
