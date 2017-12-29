@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:33:54 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/29 15:46:35 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void				foreach_proc(t_proc **tab, unsigned int max,\
 		void (*func)(t_proc **));
 
 unsigned int		timer(t_req request);
+unsigned int		global_timer(t_req request);
 unsigned int		deadline(t_req request);
 unsigned int		nbr_live(t_req request);
 
