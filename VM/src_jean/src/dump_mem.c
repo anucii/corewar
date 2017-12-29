@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 15:50:56 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 16:17:51 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/29 16:32:49 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	dump_mem(unsigned char *mem)
 			ft_printf("%c", (i + 1) % 32 ? ' ' : '\n');
 	}
 	if (MEM_SIZE & 1)
-		ft_printf('\n');
+		ft_printf("\n");
 }
