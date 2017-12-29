@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:20:06 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:53:47 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static t_info	*ini_info(void)
 	info->nb_of_player[2] = -3;
 	info->nb_of_player[3] = -4;
 	info->nb_player = 0;
+	info->win = NULL;
+	info->start = 0;
+	info->end = 0;
 	return (info);
 }
 
@@ -62,7 +65,7 @@ static void		prepare_pars(t_proc ****p, int *tab, t_info *info, int index)
 		ft_printf("Error : Open failed on file [%s]", info->name);
 		error_vm("");
 	}
-	else
+	else if (index > 0)
 	{
 		(**p) = (t_proc**)realloc((**p), sizeof(t_proc) * index + 1);
 		if ((**p) == NULL)
@@ -92,6 +95,7 @@ t_info			*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
 		print_usage();
 	while (++index[0] < argc)
 	{
+		info->opt[0] =1;
 		if (ft_strequ(argv[index[0]], "-c"))
 			inc_opt_print(info);
 		else
