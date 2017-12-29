@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/28 18:51:10 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/29 16:59:46 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	run(unsigned char *mem, t_proc **p)
 		{
 			i = (ssize_t)g_n_players;
 			while (--i >= 0)
-				execute_order(mem, p[i]);
+				if (p[i])
+					execute_order(mem, p[i]);
 			timer(INCR);
 		}
 		timer(REINIT);
@@ -66,7 +67,6 @@ void	run(unsigned char *mem, t_proc **p)
 		atropos(p, g_n_players);
 		while (++i < (ssize_t)g_n_players)
 			c |= p[i] ? 1 : 0;
-		//ft_printf("c : %s\n", c ? "true" : "false");//dbg
 		deadline(DECR);
 		foreach_proc(p, g_n_players, &reinit_life_status);
 	}
