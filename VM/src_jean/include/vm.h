@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 16:17:47 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/29 18:15:49 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,28 @@ typedef struct	s_win
 }				t_win;
 
 extern _Bool	g_print;
+
+/*
+**	Struct for parsing and opt
+**	name:			- name of champ
+**	opt:			- opt used 
+**	----------------> opt[0]: -c
+**	----------------> opt[1]: -dump - opt[2]: N for dump opt
+**	----------------> opt[3]: -v 	- opt[4]: N for v opt
+**	nb_of_players:	- same as name
+**	WINDOW: 		- pointer to the curent window (-c opt)
+**	start and end:	- index for print the new segment (-c opt)
+*/
+
+typedef struct	s_info
+{
+	char		name[255];
+	int			opt[5];
+	int			nb_of_player[4];
+	WINDOW		*win;
+	int			start;
+	int			end;
+}				t_info;
 
 /*
 **	REQUESTS enumeration for chronos function :

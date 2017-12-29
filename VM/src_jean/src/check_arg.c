@@ -6,11 +6,26 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 15:31:14 by jpallard         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:16:59 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+//	-c curses
+//	-n players [1param]
+//	-dump [1param]
+//	-v verbos [1param]
+
+static void	ini_info(t_info *info)
+{
+	ft_memset(info->name, 0, 255);
+	ft_memset(info->opt, 0, 5);
+	info->nb_of_player[0] = -1;
+	info->nb_of_player[1] = -2;
+	info->nb_of_player[2] = -3;
+	info->nb_of_player[3] = -4;
+}
 
 static void	inc_opt_print(void)
 {
@@ -21,9 +36,14 @@ static void	inc_opt_print(void)
 
 static void	print_usage(void)
 {
-	ft_printf("Usage: ./corewar [-c] <[-n number] champ.cor> <...> [%d players max]\n", MAX_PLAYERS);
-	ft_printf("### NCURSES OUTPUT MODE ###\n");
-	ft_printf("-c        : Ncurses output mode");
+	ft_printf(""RED"Usage:"RESET"\n\
+./corewar ["BLACK"-c"RESET"] ["GREEN"-n"RESET" number] ["PURPLE"-dump"RESET" \
+number] ["CYAN"-v"RESET" number] <champ.cor> <...> \
+[%d players max]\n"YELLOW"### OPTION ###"RESET"\n\
+"BLACK"-c"RESET"	: nCurses output mode\n\
+"GREEN"-n"RESET"	: number of player\n\
+"PURPLE"-dump"RESET"	: dumps memory after N cycles then exits\n\
+"CYAN"-v"RESET"	: verbos output mode", MAX_PLAYERS);
 	error_vm("");
 }
 
@@ -34,47 +54,58 @@ static void	prepare_pars(t_proc ****p, int *tab, char *name_file, int index)
 		ft_printf("Error : Open failed on file [%s]", name_file);
 		error_vm("");
 	}
-	if (index > 0)
+	else
+	{
 		(**p) = (t_proc**)realloc((**p), sizeof(t_proc) * index + 1);
+		if ((**p) == NULL)
+			error_vm("Ft. Realloc() failed");
+	}
 	parse_header(tab[index], &(**p)[index], name_file);
 }
 
+/*
+**	Deux index :	- index[0] incremente pour chaque ARG
+**					- index[1] incremente que l'ARG n'est pas une option et
+**						sert aussi d'index pour le tableau (int *tab) de FD
+*/
+
 t_win		*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
 {
-	t_win	*w;
-	int		*tab;
-	int		size;
-	int		i;
-	int		y;
+	t_win		*w;
+	t_info		info;
+	int			*tab;
+	int			index[2];
+	int			size;
 
 	size = 0;
 	w = NULL;
-	y = -1;
-	i = 0;
+	index[0] = 0;
+	index[1] = -1;
+	ini_info(&info);
 	if (argc == 1)
 		print_usage();
-	while (++i < argc)
+	while (++index[0] < argc)
 	{
-		if (ft_strequ(argv[i], "-c"))
+		if (ft_strequ(argv[index[0]], "-c"))
 			inc_opt_print();
 		else
 		{
-			if (++y == 0)
+			if (++index[1] == 0)
 				tab = ft_memalloc(sizeof(int));
-			else if (y >= MAX_PLAYERS)
+			else if (index[1] >= MAX_PLAYERS)
 			{
 				ft_printf("Too many players\n");
 				print_usage();
 			}
-			else if ((tab = (int*)realloc(tab, sizeof(int) * y + 1)) == NULL)
+			else if ((tab = (int*)realloc(tab, sizeof(int) * index[1] + 1)) == NULL)
 				error_vm("Error : Ft. realloc failed");
-			tab[y] = open(argv[i], O_RDONLY);
-			prepare_pars(&p, tab, argv[i], y);
+			tab[index[1]] = open(argv[index[0]], O_RDONLY);
+			prepare_pars(&p, tab, argv[index[0]], index[1]);
 		}
 	}
-	if (y == -1)
+	if (index[1] == -1)
 		print_usage();
-	*arena = load_champ(tab, y + 1, *p, &w);
+	*arena = load_champ(tab, index[1] + 1, *p, &w);
    	ft_memdel((void**)&tab);
 	return (w);
 }
