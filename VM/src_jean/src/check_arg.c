@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/20 19:41:12 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 15:31:14 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 static void	inc_opt_print(void)
 {
 	if (g_print == 1)
-		error_vm("Error : Option -n already given");
+		error_vm("Error : Option -c already given");
 	g_print = 1;
 }
 
 static void	print_usage(void)
 {
-	ft_printf("Usage: ./corewar [-n] <champ.cor> <...> [%d players max]\n", MAX_PLAYERS);
+	ft_printf("Usage: ./corewar [-c] <[-n number] champ.cor> <...> [%d players max]\n", MAX_PLAYERS);
 	ft_printf("### NCURSES OUTPUT MODE ###\n");
-	ft_printf("-n        : Ncurses output mode");
+	ft_printf("-c        : Ncurses output mode");
 	error_vm("");
 }
 
@@ -55,7 +55,7 @@ t_win		*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
 		print_usage();
 	while (++i < argc)
 	{
-		if (ft_strequ(argv[i], "-n"))
+		if (ft_strequ(argv[i], "-c"))
 			inc_opt_print();
 		else
 		{
