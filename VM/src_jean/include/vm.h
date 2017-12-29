@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 19:07:38 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:37:00 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,6 @@ typedef	struct		s_proc
 **	START and END:	- index for print the new segment
 **	Global:			- check if the verbose mode is on
 */
-
-typedef struct	s_win
-{
-	WINDOW		*win;
-	int			start;
-	int			end;
-}				t_win;
-
-extern _Bool	g_print;
 
 /*
 **	Struct for parsing and opt
