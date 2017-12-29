@@ -1,42 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   strcpystatic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:19:21 by jgonthie         ###   ########.fr       */
+/*   Created: 2017/12/29 19:04:54 by jgonthie          #+#    #+#             */
+/*   Updated: 2017/12/29 19:14:33 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-unsigned int	g_n_players = 0;
-
-int				main(int argc, char **argv)
+void		strcpystatic(char (*dest)[255], char *copy)
 {
-	t_proc			**p;
-	t_info			*info;
-	unsigned char	*arena;
-	int				ch;
+	int		index;
 
-	ch = 0;
-	arena = NULL;
-	p = ft_memalloc(sizeof(t_proc));
-	info = check_arg(&p, &arena, argv, argc);
-	run(arena, p);
-	if (info->opt[0])
-	{
-		while (1)
-		{
-			if ((ch = wgetch(info->win)) == 'Q')
-			{
-				destroy_win(info);
-				endwin();
-				break ;
-			}
-		}
-	}
-	return (0);
+	index = -1;
+	while (copy[++index])
+		(*dest)[index] = copy[index];
 }

@@ -6,15 +6,15 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 09:20:51 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/18 19:44:43 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:11:29 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		init_coor(t_win *window)
+void		init_coor(t_info *info)
 {
-	window->win = NULL;
-	window->start = 0;
-	window->end = 0;
+	info->win = NULL;
+	info->start = 0;
+	info->end = 0;
 }

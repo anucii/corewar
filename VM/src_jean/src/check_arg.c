@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 18:16:59 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:20:06 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,32 @@
 //	-dump [1param]
 //	-v verbos [1param]
 
-static void	ini_info(t_info *info)
+static t_info	*ini_info(void)
 {
-	ft_memset(info->name, 0, 255);
+	t_info		*info;
+	int 		index;
+
+	index = -1;
+	info = ft_memalloc(sizeof(t_info));
+	while (++index)
+		ft_memset(info->name[index], 0, 255);
 	ft_memset(info->opt, 0, 5);
 	info->nb_of_player[0] = -1;
 	info->nb_of_player[1] = -2;
 	info->nb_of_player[2] = -3;
 	info->nb_of_player[3] = -4;
+	info->nb_player = 0;
+	return (info);
 }
 
-static void	inc_opt_print(void)
+static void		inc_opt_print(t_info *info)
 {
-	if (g_print == 1)
+	if (info->opt[0] == 1)
 		error_vm("Error : Option -c already given");
-	g_print = 1;
+	info->opt[0] = 1;
 }
 
-static void	print_usage(void)
+static void		print_usage(void)
 {
 	ft_printf(""RED"Usage:"RESET"\n\
 ./corewar ["BLACK"-c"RESET"] ["GREEN"-n"RESET" number] ["PURPLE"-dump"RESET" \
@@ -47,11 +55,11 @@ number] ["CYAN"-v"RESET" number] <champ.cor> <...> \
 	error_vm("");
 }
 
-static void	prepare_pars(t_proc ****p, int *tab, char *name_file, int index)
+static void		prepare_pars(t_proc ****p, int *tab, t_info *info, int index)
 {
 	if (tab[index] == -1)
 	{
-		ft_printf("Error : Open failed on file [%s]", name_file);
+		ft_printf("Error : Open failed on file [%s]", info->name);
 		error_vm("");
 	}
 	else
@@ -60,7 +68,7 @@ static void	prepare_pars(t_proc ****p, int *tab, char *name_file, int index)
 		if ((**p) == NULL)
 			error_vm("Ft. Realloc() failed");
 	}
-	parse_header(tab[index], &(**p)[index], name_file);
+	parse_header(tab[index], &(**p)[index], info);
 }
 
 /*
@@ -69,25 +77,23 @@ static void	prepare_pars(t_proc ****p, int *tab, char *name_file, int index)
 **						sert aussi d'index pour le tableau (int *tab) de FD
 */
 
-t_win		*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
+t_info			*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
 {
-	t_win		*w;
-	t_info		info;
+	t_info		*info;
 	int			*tab;
 	int			index[2];
 	int			size;
 
 	size = 0;
-	w = NULL;
 	index[0] = 0;
 	index[1] = -1;
-	ini_info(&info);
+	info = ini_info();
 	if (argc == 1)
 		print_usage();
 	while (++index[0] < argc)
 	{
 		if (ft_strequ(argv[index[0]], "-c"))
-			inc_opt_print();
+			inc_opt_print(info);
 		else
 		{
 			if (++index[1] == 0)
@@ -100,12 +106,14 @@ t_win		*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
 			else if ((tab = (int*)realloc(tab, sizeof(int) * index[1] + 1)) == NULL)
 				error_vm("Error : Ft. realloc failed");
 			tab[index[1]] = open(argv[index[0]], O_RDONLY);
-			prepare_pars(&p, tab, argv[index[0]], index[1]);
+			strcpystatic(&info->name[index[1]], argv[index[0]]);
+			prepare_pars(&p, tab, info, index[1]);
 		}
 	}
 	if (index[1] == -1)
 		print_usage();
-	*arena = load_champ(tab, index[1] + 1, *p, &w);
+	info->nb_player = index[1] + 1;
+	*arena = load_champ(tab, *p, info);
    	ft_memdel((void**)&tab);
-	return (w);
+	return (info);
 }

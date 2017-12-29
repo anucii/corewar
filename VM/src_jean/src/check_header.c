@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/29 18:17:58 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:35:35 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,17 @@ static char	*get_name(int fd)
 	return (ft_strdup(name));
 }
 
-static void		init_proc(t_proc ***p, int fd)
+static void		init_proc(t_proc ***p, t_info *info, int fd)
 {
 	static int	color = 1;
+	static int	index = -1;
 
 	(**p) = ft_memalloc(sizeof(t_proc));
 	(**p)->color = color;
 	(**p)->carry = 0;
 	(**p)->pc = 0;
 	(**p)->cc = 0;
-	(**p)->champ.id = 0;
+	(**p)->champ.id = info->nb_of_player[++index];
 	(**p)->children = NULL;
 	(**p)->champ.name = get_name(fd);
 	color++;
@@ -53,7 +54,7 @@ static void		init_proc(t_proc ***p, int fd)
  **is correct
  */
 
-void	parse_header(int fd, t_proc **p, char *name_file)
+void	parse_header(int fd, t_proc **p, t_info *info)
 {
 	unsigned int	i[1];
 	unsigned int	j;
@@ -62,10 +63,10 @@ void	parse_header(int fd, t_proc **p, char *name_file)
 	littleendian(&i[0]);
 	if (*i != COREWAR_EXEC_MAGIC)
 	{
-		ft_printf("Error : %s has an invalid header", name_file);
+		ft_printf("Error : %s has an invalid header", info->name);
 		error_vm("");
 	}
-	init_proc(&p, fd);
+	init_proc(&p, info, fd);
 	lseek(fd, PROG_NAME_LENGTH + 8, SEEK_SET);
 	read(fd, i, 4);
 	littleendian(&i[0]);

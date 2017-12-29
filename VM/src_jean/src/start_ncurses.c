@@ -6,13 +6,13 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 14:10:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/20 16:25:12 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:46:46 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		start_ncurses(t_win *win, t_proc **proc)
+void		start_ncurses(t_info *info, t_proc **proc)
 {
 	if (initscr() == NULL)
 		error_vm("Ft.initsrc() in curses.h failed");
@@ -30,8 +30,8 @@ void		start_ncurses(t_win *win, t_proc **proc)
 	cbreak();
 	noecho();
 	refresh();
-	put_menu(win);
+	put_menu(info);
 	init_color(COLOR_BLUE, 400, 400, 400);
-	new_win(win, COREWAR);
-	draw_corewar(win, proc);
+	new_win(info, COREWAR);
+	draw_corewar(info, proc);
 }

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 18:48:11 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:07:38 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ unsigned int		new_player(void);
 void				checkheader(int fd, t_proc **p, unsigned int player);
 //void				init_proc(t_proc **p, int fd, unsigned int player);
 void				littleendian(unsigned int *i);
-unsigned char		*load_champ(int *tab, short nb, t_proc **p, t_win **w);
+unsigned char		*load_champ(int *tab, t_proc **p, t_info *info);
 void				run(unsigned char *mem, t_proc **p);
 void				execute_order(unsigned char *mem, t_proc *p);
 void				error_vm(char *s);
@@ -210,14 +210,15 @@ void			write_on_mem(unsigned char *mem, unsigned short begin,\
 void			error_vm(char *s);
 t_info			*check_arg(t_proc ***prec, unsigned char **arena, char **argv, int argc);
 void			parse_header(int fd, t_proc **p, t_info *info);
-void			start_ncurses(t_win *win, t_proc **proc);
-void			new_win(t_win *window, int put);
-void			destroy_win(t_win *window);
-void			init_coor(t_win *window);
-void			draw_corewar(t_win *window, t_proc **proc);
-void			draw_arena(t_win *window, unsigned char *arena, int color);
-void			init_arena(t_win *window, unsigned char *arena);
-void			refresh_arena(t_win *window, unsigned char *arena, int color);
-void			put_menu(t_win *window);
+void			start_ncurses(t_info *info, t_proc **proc);
+void			new_win(t_info *info, int put);
+void			destroy_win(t_info *info);
+void			init_coor(t_info *info);
+void			draw_corewar(t_info *info, t_proc **proc);
+void			draw_arena(t_info *info, unsigned char *arena, int color);
+void			init_arena(t_info *info, unsigned char *arena);
+void			refresh_arena(t_info *info, unsigned char *arena, int color);
+void			put_menu(t_info *info);
+void			strcpystatic(char (*dest)[255], char *copy);
 
 #endif

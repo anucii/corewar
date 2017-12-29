@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 13:57:33 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/29 17:36:55 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:10:20 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **on MEM_SIZE (unsigned char) octet.
 */
 
-unsigned char	*load_champ(int *tab, short nb, t_proc **p, t_win **w)
+unsigned char	*load_champ(int *tab, t_proc **p, t_info *info)
 {
 	int				i;
 	unsigned char	*mem;
@@ -26,15 +26,13 @@ unsigned char	*load_champ(int *tab, short nb, t_proc **p, t_win **w)
 
 	i = 0;
 	space = 0;
-	g_n_players = nb;
 	mem = ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
-	if (g_print)
+	if (info->opt[0])
 	{
-		*w = ft_memalloc(sizeof(t_win));
-		start_ncurses(*w, p);
-		init_arena(*w, mem);
+		start_ncurses(info, p);
+		init_arena(info, mem);
 	}
-	while (i < nb)
+	while (i < info->nb_player)
 	{
 		lseek(tab[i], PROG_NAME_LENGTH + 8, SEEK_SET);
 		read(tab[i], size, 4);
@@ -44,13 +42,13 @@ unsigned char	*load_champ(int *tab, short nb, t_proc **p, t_win **w)
 		p[i]->pc = space;
 		if (close(tab[i]) == -1)
 			error_vm("Error : close");
-		space = MEM_SIZE/nb + space;
-		if (g_print && nb != -1)
+		space = MEM_SIZE/info->nb_player + space;
+		if (info->opt[0])
 		{
-			(*w)->start = MEM_SIZE/nb - space;
-			(*w)->start *= -1;
-			(*w)->end = (*w)->start + *size;
-			refresh_arena(*w, mem, p[i]->color);
+			info->start = MEM_SIZE/info->nb_player - space;
+			info->start *= -1;
+			info->end = info->start + *size;
+			refresh_arena(info, mem, p[i]->color);
 		}
 		i++;
 	}

@@ -58,6 +58,7 @@ SRC_FILE = 	main.c \
 			convert.c \
 			carry.c \
 			dump_mem.c \
+			strcpystatic.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
