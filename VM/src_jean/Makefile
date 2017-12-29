@@ -57,6 +57,7 @@ SRC_FILE = 	main.c \
 			reinit_life_status.c \
 			convert.c \
 			carry.c \
+			dump_mem.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/

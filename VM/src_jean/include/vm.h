@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 15:46:35 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/29 16:17:47 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void				reinit_life_status(t_proc **proc);
 int					*checkocp(unsigned char *mem);
 unsigned int		param_size(unsigned int p_first, int *params,\
 		_Bool dir_as_addr, unsigned int (*p_idx)[3]);
+void				dump_mem(unsigned char *mem);
 
 typedef				void (*t_f_op)(t_proc **, unsigned char *);
 
