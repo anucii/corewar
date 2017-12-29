@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 18:15:49 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:48:11 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,10 @@ extern _Bool	g_print;
 
 typedef struct	s_info
 {
-	char		name[255];
+	char		name[4][255];
 	int			opt[5];
 	int			nb_of_player[4];
+	int			nb_player;
 	WINDOW		*win;
 	int			start;
 	int			end;
@@ -207,8 +208,8 @@ void			write_on_mem(unsigned char *mem, unsigned short begin,\
  */
 
 void			error_vm(char *s);
-t_win			*check_arg(t_proc ***prec, unsigned char **arena, char **argv, int argc);
-void			parse_header(int fd, t_proc **p, char *name_file);
+t_info			*check_arg(t_proc ***prec, unsigned char **arena, char **argv, int argc);
+void			parse_header(int fd, t_proc **p, t_info *info);
 void			start_ncurses(t_win *win, t_proc **proc);
 void			new_win(t_win *window, int put);
 void			destroy_win(t_win *window);
