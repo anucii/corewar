@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/30 12:33:39 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:16:21 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <FMOD/api/lowlevel/inc/fmod.h>
 
 # define HEIGHT_WIN 78
 # define WIDTH_WIN 235
