@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 13:47:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/28 18:40:07 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:39:31 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void			f_all(unsigned char *instr, int info[2], int *index, int fd)
 
 	i = -1;
 	opc = ft_strbase(instr[++(*index)], "01");
+	ft_printf("opc_binary : %s\n", opc);
 	ft_bzero(size, 3);
 	check_opc(&size, opc, info[0], info[1]);
 	print = conv_for_bitwise(&size, info); 

@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 11:50:40 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/28 16:50:20 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 15:28:22 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void		write_dir(unsigned char *instr, int *index, int fd)
 
 	o1 = to_hexa(instr[++(*index)], instr[++(*index)]);
 	o2 = to_hexa(instr[++(*index)], instr[++(*index)]);
+	ft_printf("o1 : %s o2 : %s\n", o1, o2);
 	hexa = ft_strjoin(o1, o2);
 	write(fd, "%", 1);
 	deci = ft_to_deci(hexa, "0123456789abcdef");
+	ft_printf("hexa : %s\ndeci : %s\n", hexa, deci);
 	write(fd, deci, ft_strlen(deci));
 	ft_strdel(&deci);
 	ft_strdel(&hexa);

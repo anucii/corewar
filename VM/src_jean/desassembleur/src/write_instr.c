@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 19:46:39 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/28 18:40:18 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:40:01 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void		write_instr_in_file(unsigned char *s, int *index, int fd)
 	instr = check_op(s[++(*index)]);
 	write(fd, g_op_tab[instr].name, ft_strlen(g_op_tab[instr].name));
 	write(fd, " ", 1);
+	ft_printf("Instr %s (opc %d)\n", g_op_tab[instr].name, instr + 1);
 	i = g_op_tab[instr].op_code - 1;
 	info[0] = g_op_tab[instr].op_code - 1;
 	info[1] = g_op_tab[instr].nb_param;
@@ -63,6 +64,11 @@ void			write_instr(int new_fd, int old_fd)
 	read(old_fd, instr, size[0]);
 	len = lseek(old_fd, 0, SEEK_END);
 	len = len - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
+	int	dbg;
+	dbg = 3;
 	while (index < (int)len - 1)
+	{
+		ft_printf("Line [%d] - ", ++dbg);
 		write_instr_in_file(instr, &index, new_fd);
+	}
 }
