@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/30 12:46:57 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:31:23 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ static void		prepare_pars(t_proc ****p, int *tab, t_info *info, int index)
 			error_vm("Ft. Realloc() failed");
 	}
 	parse_header(tab[index], &(**p)[index], info);
+}
+
+static void		check_file(int **tab, int *index)
+{
+	if (++index[1] == 0)
+		*tab = ft_memalloc(sizeof(int));
+	else if (index[1] >= MAX_PLAYERS)
+		print_usage("Too many players");
+	else if ((*tab = (int*)realloc(*tab, sizeof(int) * index[1] + 1))
+			== NULL)
+		error_vm("Error : Ft. realloc failed");
 }
 
 static _Bool	check_opt(t_info *info, char **arg, int *index, int id)
@@ -66,9 +77,7 @@ t_info			*check_arg(t_proc ***p, unsigned char **arena,\
 	int			*tab;
 	int			index[2];
 
-	index[0] = 0;
-	index[1] = -1;
-	info = ini_info();
+	info = ini_info(&index);
 	if (argc == 1)
 		print_usage("");
 	while (++index[0] < argc)
@@ -77,13 +86,7 @@ t_info			*check_arg(t_proc ***p, unsigned char **arena,\
 			continue ;
 		else
 		{
-			if (++index[1] == 0)
-				tab = ft_memalloc(sizeof(int));
-			else if (index[1] >= MAX_PLAYERS)
-				print_usage("Too many players");
-			else if ((tab = (int*)realloc(tab, sizeof(int) * index[1] + 1))
-					== NULL)
-				error_vm("Error : Ft. realloc failed");
+			check_file(&tab, index);
 			tab[index[1]] = open(argv[index[0]], O_RDONLY);
 			strcpystatic(&info->name[index[1]], argv[index[0]]);
 			prepare_pars(&p, tab, info, index[1]);

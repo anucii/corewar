@@ -6,13 +6,13 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 11:06:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/30 11:07:30 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:30:27 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-t_info		*ini_info(void)
+t_info		*ini_info(int (*tab)[2])
 {
 	t_info		*info;
 	int 		index;
@@ -30,5 +30,7 @@ t_info		*ini_info(void)
 	info->win = NULL;
 	info->start = 0;
 	info->end = 0;
+	(*tab)[0] = 0;
+	(*tab)[1] = -1;
 	return (info);
 }
