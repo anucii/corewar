@@ -6,16 +6,11 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/30 11:32:59 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 12:11:50 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-//	-c curses
-//	-n players [1param]
-//	-dump [1param]
-//	-v verbos [1param]
 
 static void		prepare_pars(t_proc ****p, int *tab, t_info *info, int index)
 {
@@ -33,28 +28,7 @@ static void		prepare_pars(t_proc ****p, int *tab, t_info *info, int index)
 	parse_header(tab[index], &(**p)[index], info);
 }
 
-static void		check_int(char *nb)
-{
-	int		index;
-	int		len;
-
-	index = 0;
-	len = 0;
-	while (nb[index] == '-' || nb[index] == '+')
-		index++;
-	if (index > 1)
-		print_usage("Error : format of -dump error");
-	if ((len = ft_strlen(nb) - index) < 0)
-		len *= -1;
-	if (len > 11 || ft_atoi(nb) < -2147483647 || ft_atoi(nb) > 2147483647)
-		print_usage("Error : Int Needed for opt -dump and -v");
-	while (ft_isdigit(nb[index]))
-		index++;
-	if (nb[index] != '\0')
-		print_usage("Error : Int Needed for opt -dump and -v");
-}
-
-static _Bool	check_opt(t_info *info, char **arg, int *index)
+static _Bool	check_opt(t_info *info, char **arg, int *index, int id)
 {
 	if (ft_strequ(arg[*index], "-c"))
 	{
@@ -76,10 +50,32 @@ static _Bool	check_opt(t_info *info, char **arg, int *index)
 		*index += 1;
 		return (1);
 	}
-	if (ft_strequ(arg[*index], "-dump"))
+	if (ft_strequ(arg[*index], "-v"))
 	{
 		if (info->opt[3])
 			error_vm(""RED"Error : Option -v already given"RESET"");
+		if (!arg[(*index) + 1])
+			print_usage("Error : format of -v error");
+		check_int(arg[(*index) + 1]);
+		info->opt[3] = 1;
+		if ((info->opt[4] = ft_atoi(arg[(*index) + 1])) < 0)
+			print_usage("Error : Positive int Needed for opt -dump and -v");
+		*index += 1;
+		return (1);
+	}
+	if (ft_strequ(arg[*index], "-n"))
+	{
+		ft_printf("id : %d\n", id);
+		if (id == -1)
+			id = 0;
+		else
+			id++;
+		if (!arg[(*index) + 1] || !arg[(*index) + 2])
+			print_usage("Error : format of -n error");
+		check_int(arg[(*index) + 1]);
+		info->id_player[id] = ft_atoi(arg[(*index) + 1]);
+		*index += 1;
+		return (1);
 	}
 	return (0);
 }
@@ -95,9 +91,7 @@ t_info			*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
 	t_info		*info;
 	int			*tab;
 	int			index[2];
-	int			size;
 
-	size = 0;
 	index[0] = 0;
 	index[1] = -1;
 	info = ini_info();
@@ -105,7 +99,7 @@ t_info			*check_arg(t_proc ***p, unsigned char **arena, char **argv, int argc)
 		print_usage("");
 	while (++index[0] < argc)
 	{
-		if (check_opt(info, argv, &index[0]))
+		if (check_opt(info, argv, &index[0], index[1]))
 			continue ;
 		else
 		{
