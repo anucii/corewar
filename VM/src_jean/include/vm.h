@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/30 11:54:41 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 12:33:39 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,5 +217,9 @@ void			strcpystatic(char (*dest)[255], char *copy);
 t_info			*ini_info(void);
 void			print_usage(char *s);
 void			check_int(char *nb);
+void			check_curse(t_info *info);
+void			check_verbos(t_info *info, char **arg, int *index);
+void			check_dump(t_info *info, char **arg, int *index);
+void			check_id_player(t_info *info, char **arg, int *index, int id);
 
 #endif
