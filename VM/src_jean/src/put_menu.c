@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:00:06 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:43:30 by jgonthie         ###   ########.fr       */
+/*   Updated: 2017/12/30 16:29:27 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,20 @@ static void	draw_menu(t_info *info)
 
 void		put_menu(t_info *info)
 {
+	FMOD_SYSTEM *system;
+	FMOD_SOUND *bgm;
+	FMOD_RESULT res;
+
+	FMOD_System_Create(&system);
+	FMOD_System_Init(system, 1, FMOD_INIT_NORMAL, NULL);
+	res = FMOD_System_CreateSound(system, "./include/AR.mp3", FMOD_LOOP_NORMAL, 0, &bgm);
+	if (res != FMOD_OK)
+	{
+		ft_printf("FUCCCCCCCCCCCCCCCCCCK\n");
+		exit(EXIT_FAILURE);
+	}
+	FMOD_Sound_SetLoopCount(bgm, -1);
+	FMOD_System_PlaySound(system, bgm, 0, false, NULL);
 	new_win(info, MENU);
 	draw_menu(info);
 	destroy_win(info);
