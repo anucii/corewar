@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 19:57:47 by jdaufin          ###   ########.fr       */
+/*   Updated: 2017/12/30 11:12:20 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,5 +214,7 @@ void			init_arena(t_info *info, unsigned char *arena);
 void			refresh_arena(t_info *info, unsigned char *arena, int color);
 void			put_menu(t_info *info);
 void			strcpystatic(char (*dest)[255], char *copy);
+t_info			*ini_info(void);
+void			print_usage(char *s);
 
 #endif
