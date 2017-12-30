@@ -76,7 +76,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_PATH)
-	@$(CC) $(OBJ) -L $(LIB_PATH) -lft -lcurses -o $(NAME)
+	@$(CC) $(OBJ) -L $(LIB_PATH) -lft  -lcurses -L ./include/ -lfmod  -o $(NAME)
 	@echo "\033[32mMake success.\033[0m"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
