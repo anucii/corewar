@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/30 14:28:14 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/03 12:57:05 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct		s_life
 typedef struct		s_champ
 {
 	char			*name;
-	unsigned int	id;
+	int				id;
 }					t_champ;
 
 typedef	struct		s_proc

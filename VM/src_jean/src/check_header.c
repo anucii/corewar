@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/29 19:59:31 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 12:57:08 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void		init_proc(t_proc ***p, t_info *info, int fd)
 	(**p)->pc = 0;
 	(**p)->cc = 0;
 	(**p)->champ.id = info->id_player[++index];
+	(**p)->reg[0] = (**p)->champ.id;
 	(**p)->children = NULL;
 	(**p)->champ.name = get_name(fd);
 	color++;

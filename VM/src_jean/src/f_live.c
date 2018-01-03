@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:35:02 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 20:31:20 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 13:03:21 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	f_live(t_proc **proc, unsigned char *mem)
 	if (!(proc && *proc))
 		error_vm("Error : null process sent to f_live");
 	val = chars_to_int(mem, (*proc)->pc + 1, 1);
-	ft_printf("About to call chronos\n"); //dbg
 	chronos(*proc, LIVE, val);
 	(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
 	return ;

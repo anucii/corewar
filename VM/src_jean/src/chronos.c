@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:30:38 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 20:31:50 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 13:01:48 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ _Bool	chronos(t_proc *proc, t_req request, unsigned int player)
 		proc->life.player = player;
 		nbr_live(INCR);
 		if (info && !info->opt[0])
-		{
-			ft_printf("chronos calls lives_reg\n");//dbg
 			lives_reg(LIVE, player, info);
-		}
+		/*
 		else //dbg else
 		{
 			ft_printf("info @ %p, ", info);
 			if (info)
 				ft_printf("-c option = %s\n", info->opt[0] ? "TRUE" : "FALSE");
 		}
+		*/
 		return (1);
 	}
 	else if (request == CHECK)
