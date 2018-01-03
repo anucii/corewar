@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:26:19 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:08:49 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/03 17:34:23 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void		refresh_arena(t_info *info, unsigned char *arena, int color)
 	tmp = info->start;
 	line = info->start / 64;
 	if (info->start > 64)
-	{
 		info->start = info->start - (64 * line);
-		info->start = info->start * 3;
-	}
+	info->start = info->start * 3;
 	while (len-- > 0)
 	{
 		mvwprintw(info->win, line + 2, info->start + 2, conv_to_print(arena[index]));

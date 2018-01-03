@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/29 20:42:58 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 17:17:31 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	run(unsigned char *mem, t_proc **p)
 			while (--i >= 0)
 				if (p[i])
 					execute_order(mem, p[i]);
+			if (info->opt[0])
+				usleep(50000);
 			timer(INCR);
 		}
 		timer(REINIT);

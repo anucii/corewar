@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/03 15:39:33 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 17:30:38 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 
 	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
 	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &idx);
-	info = get_info(NULL);
+	if(!(info = get_info(NULL)))
+		error_vm("DBG : info called in sti but unset");
 	if (param[1] == T_REG)
 		s = (unsigned short)(*proc)->reg[mem[idx[1]] - 1];
 	else
@@ -50,7 +51,12 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 			(*proc)->pc + ((s + t) % IDX_MOD));
 	info->start = (*proc)->pc + ((s + t) % IDX_MOD);
 	info->end = info->start + 4;
-	refresh_arena(info, mem, (*proc)->color);
+	if (info->opt[0])
+	{
+		//ft_printf("info->start = %d", info->start);
+		//ft_printf("info->end = %d", info->end);
+		refresh_arena(info, mem, (*proc)->color);
+	}
 	(*proc)->pc += 2 + i;
 	return ;
 }
