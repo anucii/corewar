@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 14:36:35 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 19:41:38 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@
 void	kill_proc(t_proc **ptr_proc)
 {
 	t_proc	*record;
+	t_info	*info;
 
 	if (!(ptr_proc && *ptr_proc))
 		return ;
 	record = (*ptr_proc)->children;
 	if ((*ptr_proc)->life.status)
 		return ;
+	info = get_info(NULL);
+	if (info->opt[3] && !info->opt[0])
+		ft_printf("Process %u (player %d) killed.\n",\
+				(*ptr_proc)->pid, (*ptr_proc)->champ.id);
 	free(*ptr_proc);
 	*ptr_proc = record;
 }

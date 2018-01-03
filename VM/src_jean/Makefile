@@ -65,6 +65,7 @@ SRC_FILE = 	main.c \
 			ini_info.c \
 			check_int.c \
 			check_opt.c \
+			new_pid.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/

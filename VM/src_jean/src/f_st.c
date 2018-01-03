@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/03 16:13:40 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 19:35:23 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	f_st(t_proc **proc, unsigned char *mem)
 	}
 	else
 	{
-		if (!(info = get_info(NULL)))
-			error_vm("DBG : info called but unset");
+		info = get_info(NULL);
 		s = (short)mem[((*proc)->pc + 3) % MEM_SIZE] << 8
 			| mem[((*proc)->pc + 4) % MEM_SIZE];
 		int_on_mem(mem,
@@ -36,9 +35,9 @@ void	f_st(t_proc **proc, unsigned char *mem)
 					(*proc)->pc + (s % IDX_MOD));
 		info->start = (*proc)->pc + (s % IDX_MOD);
 		info->end = info->start + 4;
-		(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
-		if (info->opt[0])
+		if (info && info->opt[0])
 			refresh_arena(info, mem, (*proc)->color);
+		(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
 	}
 }
 
