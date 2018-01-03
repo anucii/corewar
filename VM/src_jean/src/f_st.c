@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:11:31 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 15:39:46 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,28 @@ void	f_st(t_proc **proc, unsigned char *mem)
 {
 	int				*i;
 	unsigned short	s;
+	t_info			*info;
 
 	i = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
-	//if (mem[((*proc)->pc + 2) % MEM_SIZE] > REG_NUMBER )
-	//{
-		//execute_error();
-		//return ;
-	//	}
 	if (i[1] == T_REG)
-	{/*
-		if (mem[((*proc)->pc + 3) % MEM_SIZE] > REG_NUMBER)
-		{
-			execute_error();
-			return ;
-		}*/
+	{
 		(*proc)->reg[mem[((*proc)->pc + 3) % MEM_SIZE] - 1] =
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1];
 		(*proc)->pc = ((*proc)->pc + 4) % MEM_SIZE;
 	}
 	else
 	{
+		info = get_info(NULL);
 		s = (short)mem[((*proc)->pc + 3) % MEM_SIZE] << 8
 			| mem[((*proc)->pc + 4) % MEM_SIZE];
-			int_on_mem(mem,
+		int_on_mem(mem,
 					(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
 					(*proc)->pc + (s % IDX_MOD));
+		info->start = (*proc)->pc + (s % IDX_MOD);
+		info->end = info->start + 4;
 		(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
+		refresh_arena(info, mem, (*proc)->color);
 	}
-	return ;
 }
 
 /*for quick test

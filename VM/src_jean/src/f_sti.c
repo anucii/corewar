@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 20:41:22 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/03 15:39:33 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,14 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	unsigned int		i;
 	int					*param;
 	unsigned int		idx[3];
+	t_info				*info;
 
 
 	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
 	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &idx);
-	//if (mem[((*proc)->pc + 2) % MEM_SIZE] > 16)
-	//	execute_error();
+	info = get_info(NULL);
 	if (param[1] == T_REG)
-	{
-		//if (mem[((*proc)->pc + 3) % MEM_SIZE] > 16)
-		//	execute_error();
 		s = (unsigned short)(*proc)->reg[mem[idx[1]] - 1];
-	}
 	else
 	{
 		s = ((short)mem[idx[1]] << 8) |
@@ -45,8 +41,6 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 				(mem[(*proc)->pc + s + 3]) % IDX_MOD;
 	}
 	if (param[2] == T_REG)
-		//if (mem[((*proc)->pc + 5) % MEM_SIZE] > 16)
-		//	execute_error();
 		t = (unsigned short)(*proc)->reg[mem[idx[2]] - 1];
 	else
 		t = (short)mem[idx[2]] << 8 |
@@ -54,6 +48,9 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	int_on_mem(mem,
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
 			(*proc)->pc + ((s + t) % IDX_MOD));
+	info->start = (*proc)->pc + ((s + t) % IDX_MOD);
+	info->end = info->start + 4;
+	refresh_arena(info, mem, (*proc)->color);
 	(*proc)->pc += 2 + i;
 	return ;
 }
