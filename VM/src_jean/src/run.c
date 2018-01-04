@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/04 18:48:34 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/04 19:59:19 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,31 @@
 **	execute_order() checks that the process has been called on enough cycles
 **	and then calls the operation execution function associated with the opcode
 */
+/*
+static _Bool	ctrl_speed(t_info *info, int *speed)
+{
+	char	ch;
+	static int		clock = 50000;
 
+	while (clock -= 1000 > 0)
+	{
+		ch = wgetch(info->win);
+		ft_printf("%c", ch);
+		if (ch == 'w' && clock > 5000)
+			clock -= 1000;
+		if (ch == 'e' && clock < 70000)
+			clock += 1000;
+		if (ch == 'Q')
+		{
+			destroy_win(info);
+			endwin();
+			return (0);
+		}
+	}
+	return (1);
+	speed = 0;
+}
+*/
 void	execute_order(unsigned char *mem, t_proc *p)
 {
 	int		i;
@@ -53,6 +77,7 @@ p->champ.id);
 
 void	run(unsigned char *mem, t_proc **p)
 {
+	int		speed;
 	_Bool	c;
 	ssize_t	i;
 	t_info	*info;
@@ -61,6 +86,7 @@ void	run(unsigned char *mem, t_proc **p)
 		return ;
 	c = 1;
 	info = get_info(NULL);
+	speed = 50000;
 	while (c)
 	{
 		while (timer(CHECK) < deadline(CHECK))
@@ -70,7 +96,10 @@ void	run(unsigned char *mem, t_proc **p)
 				if (p[i])
 					execute_order(mem, p[i]);
 			if (info->opt[0])
-				usleep(500000);
+				usleep(speed);
+		//	if (info->opt[0])
+		//		if (!ctrl_speed(info, &speed))
+		//			return ;
 			timer(INCR);
 		}
 		timer(REINIT);
