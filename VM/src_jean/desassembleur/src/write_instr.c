@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 19:46:39 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/03 18:00:18 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/04 15:31:43 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ static int		check_op(unsigned char c)
 
 	conv_hexa = ft_strbase(c, "0123456789abcdef");
 	conv_deci = ft_to_deci(conv_hexa, "0123456789abcdef");
-	if ((op = op_matches(conv_deci)) == -1)
+	op = op_matches(conv_deci);
+	ft_strdel(&conv_hexa);
+	ft_strdel(&conv_deci);
+	if (op == -1)
 	{
 		ft_printf("Bad instr!\n");
 		return (-1);
 	}
-	ft_strdel(&conv_hexa);
-	ft_strdel(&conv_deci);
 	return (op);
 }
 

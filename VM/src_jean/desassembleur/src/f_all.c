@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 13:47:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/03 18:18:11 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/04 16:15:14 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ static _Bool	conv_for_bitwise(int (*size)[3], int info[2])
 
 _Bool			f_all(unsigned char *instr, int info[2], int *index, int fd)
 {
-	int		size[3];
-	char	*opc;
-	int		i;
-	_Bool	print;
+	static int	size[3] = {0, 0, 0};
+	char		*opc;
+	int			i;
+	_Bool		print;
 
 	i = -1;
 	opc = ft_strbase(instr[++(*index)], "01");
-	ft_bzero(size, 3);
+	if (ft_strlen(opc) != 8)
+		opc = new_join(opc, "0");
 	if (!check_opc(&size, opc, info[0], info[1]))
 		return (0);
 	print = conv_for_bitwise(&size, info);

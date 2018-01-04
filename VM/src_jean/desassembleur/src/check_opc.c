@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 18:45:20 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/04 14:38:35 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/04 16:15:05 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ _Bool			check_opc(int (*size)[3], char *opc, int instr, int nb_params)
 
 	index = -1;
 	index_2 = 0;
-	if (ft_strlen(opc) != 8)
-		opc = new_join(opc, "0");
 	while (++index < 3)
 	{
 		if (opc[index_2] == '0' && opc[index_2 + 1] == '1')
@@ -54,6 +52,7 @@ _Bool			check_opc(int (*size)[3], char *opc, int instr, int nb_params)
 			(*size)[index] = 0;
 		index_2 += 2;
 	}
+	ft_strdel(&opc);
 	if (!op_match(size, instr, nb_params))
 	{
 		ft_printf("Error : Bad params for %s\n", g_op_tab[instr].name);
