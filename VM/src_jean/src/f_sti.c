@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/03 19:35:08 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 18:38:37 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	unsigned short		s;
 	unsigned short		t;
 	unsigned int		i;
+	unsigned int		target;
 	int					*param;
 	unsigned int		idx[3];
 	t_info				*info;
@@ -47,13 +48,15 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 			mem[(idx[2] + 1)];
 	int_on_mem(mem,
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
-			(*proc)->pc + ((s + t) % IDX_MOD));
+			(target = (*proc)->pc + ((s + t) % IDX_MOD)));
+	if (info->opt[3] && !info->opt[0])
+		ft_printf("store %d (%#05x) @ %04u\n", convert(mem, target, 0, 1),\
+				convert(mem, target, 0, 1), target);
 	info->start = (*proc)->pc + ((s + t) % IDX_MOD);
 	info->end = info->start + 4;
 	if (info->opt[0])
 		refresh_arena(info, mem, (*proc)->color);
 	(*proc)->pc += 2 + i;
-	return ;
 }
 
 /*

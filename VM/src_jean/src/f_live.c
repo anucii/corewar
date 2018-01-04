@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:35:02 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/03 13:03:21 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 18:27:29 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 void	f_live(t_proc **proc, unsigned char *mem)
 {
 	unsigned int	val;
+	t_info			*info;
 
 	if (!mem)
 		error_vm("Error : null memory address.");
@@ -28,6 +29,9 @@ void	f_live(t_proc **proc, unsigned char *mem)
 		error_vm("Error : null process sent to f_live");
 	val = chars_to_int(mem, (*proc)->pc + 1, 1);
 	chronos(*proc, LIVE, val);
+	info = get_info(NULL);
+	if (info->opt[3] && !info->opt[0])
+		ft_printf("live %d(%#05x)\n", val, val);
 	(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
 	return ;
 }
