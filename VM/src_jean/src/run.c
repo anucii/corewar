@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/04 19:59:19 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/04 20:12:33 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,27 @@ p->champ.id);
 }
 
 /*
+**	exec_wrapper() enables the handling of the execution of children
+**	processes when needed.
+*/
+
+void	exec_wrapper(unsigned char *mem, t_proc *p)
+{
+	t_proc	*tmp;
+
+//	if (!p)
+//		return ;
+	tmp = p;
+	while (tmp)
+	{
+		if (tmp != p) //dbg
+			ft_printf("EXEC on child(pid : %04u)\n", tmp->pid);
+		execute_order(mem, tmp);
+		tmp = tmp->children;
+	}
+}
+
+/*
 **	The run function manages the cycles, it stops only when there is no
 **	more processus alive.
 */
@@ -94,7 +115,7 @@ void	run(unsigned char *mem, t_proc **p)
 			i = (ssize_t)info->nb_player;
 			while (--i >= 0)
 				if (p[i])
-					execute_order(mem, p[i]);
+					exec_wrapper(mem, p[i]);
 			if (info->opt[0])
 				usleep(speed);
 		//	if (info->opt[0])

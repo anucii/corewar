@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 19:09:32 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/04 20:07:52 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void				checkheader(int fd, t_proc **p, unsigned int player);
 void				littleendian(unsigned int *i);
 unsigned char		*load_champ(int *tab, t_proc **p, t_info *info);
 void				run(unsigned char *mem, t_proc **p);
+void				exec_wrapper(unsigned char *mem, t_proc *p);
 void				execute_order(unsigned char *mem, t_proc *p);
 void				error_vm(char *s);
 void				execute_error(t_proc *proc);
