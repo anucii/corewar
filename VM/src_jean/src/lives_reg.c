@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 18:50:21 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 14:38:59 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 14:54:56 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ proc->champ.id, info->id_player[i], info->name[i]);
 				ft_printf("[WIN(cy:%04u)]: le joueur %d(%s) a gagne\n",\
 						global_timer(CHECK), info->id_player[i],\
 						info->name[i]);
+		//to add : stalemate message
 	}
 }
