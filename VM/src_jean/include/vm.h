@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 17:56:06 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/04 19:09:32 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef	struct		s_proc
 	unsigned int	reg[REG_NUMBER];
 	unsigned int	pid;
 	unsigned int	pc;
+	unsigned int	old_pc;
 	unsigned int	cc;
 	t_champ			champ;
 	struct s_proc	*children;

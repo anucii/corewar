@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:22:25 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/04 18:10:21 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/04 19:13:37 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static char	*conv_to_print(unsigned char c)
 	return (s);
 }
 
-static void	uncolor_pc(t_proc *proc, t_info *info, unsigned char *mem, int old_pc)
+static void	uncolor_pc(t_proc *proc, t_info *info, unsigned char *mem,\
+		unsigned int old_pc)
 {
 	int				line;
 	int				x;
@@ -39,32 +40,26 @@ static void	uncolor_pc(t_proc *proc, t_info *info, unsigned char *mem, int old_p
 	if (x > 64)
 		x = x - (64 * line);
 	x = x * 3;
+	mvwprintw(info->win, line + 2, x + 2, "  ");
 	wattron(info->win, COLOR_PAIR(proc->color));
-	mvwprintw(info->win, line + 2, x, conv_to_print(mem[old_pc]));
-	wrefresh(info->win);
-	wattroff(info->win, COLOR_PAIR(proc->color));
+	mvwprintw(info->win, line + 2, x + 2, conv_to_print(mem[old_pc]));
 }
 
 void		color_pc(t_proc *proc, t_info *info, unsigned char *mem)
 {
-	static int		old_pc = 0;
-	int				line;
-	int				x;
+	int					line;
+	int					x;
 
-	if (old_pc != -1)
-	{
-		uncolor_pc(proc, info, mem, old_pc);
-		old_pc = proc->pc;;
-	}
+	uncolor_pc(proc, info, mem, proc->old_pc);
 	line = proc->pc / 64;
 	x = proc->pc;
 	if (x > 64)
 		x = x - (64 * line);
 	x = x * 3;
 	wattron(info->win, A_STANDOUT);
-	wattron(info->win, COLOR_PAIR(proc->color));
 	mvwprintw(info->win, line + 2, x + 2, conv_to_print(mem[proc->pc]));
-	wrefresh(info->win);
 	wattroff(info->win, COLOR_PAIR(proc->color));
 	wattroff(info->win, A_STANDOUT);
+	wrefresh(info->win);
+	proc->old_pc = proc->pc;
 }

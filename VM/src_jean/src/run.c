@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/04 14:46:14 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 18:48:34 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ p->champ.id);
 				g_op_tab[i].func(&p, mem);
 				p->cc = 0;
 			}
+			color_pc(p, info, mem);
 			return ;
 		}
 		i++;
@@ -68,8 +69,8 @@ void	run(unsigned char *mem, t_proc **p)
 			while (--i >= 0)
 				if (p[i])
 					execute_order(mem, p[i]);
-			//if (info->opt[0])
-			//	usleep(5000);
+			if (info->opt[0])
+				usleep(500000);
 			timer(INCR);
 		}
 		timer(REINIT);
