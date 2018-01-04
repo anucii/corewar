@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:57:04 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 14:35:31 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				main(int argc, char **argv)
 		intr_msg(p);
 	run(arena, p);
 	if (!info->opt[0])
-		lives_reg(CHECK, 0, info);
+		lives_reg(CHECK, 0, info, NULL);
 	if (info->opt[0])
 	{
 		while (1)

@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/03 17:50:59 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 14:38:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,22 @@
 void	execute_order(unsigned char *mem, t_proc *p)
 {
 	int		i;
+	t_info	*info;
 
 	i = 0;
+	info = get_info(NULL);
 	while (mem[p->pc] && (i < 17))
 	{
 		if (mem[p->pc] == g_op_tab[i].op_code)
 		{
 			if (++(p->cc) == (unsigned int)g_op_tab[i].cycles)
 			{
-				//dbg messages
-//				ft_printf("Proc no %u, pc = %u\n, instruction : %s\n",\
-//				 	  p->pid, p->pc, g_op_tab[i].description);
 				g_op_tab[i].func(&p, mem);
 				p->cc = 0;
+				if (info->opt[3] && !info->opt[0])
+					ft_printf("[EXEC (cy:%04u)]: %s (proc:%04u, player:%d)\n",\
+							global_timer(CHECK), g_op_tab[i].description,\
+							p->pid, p->champ.id);
 			}
 			return ;
 		}

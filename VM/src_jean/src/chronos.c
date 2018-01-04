@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:30:38 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/03 13:01:48 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 14:32:46 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ _Bool	chronos(t_proc *proc, t_req request, unsigned int player)
 		proc->life.player = player;
 		nbr_live(INCR);
 		if (info && !info->opt[0])
-			lives_reg(LIVE, player, info);
+			lives_reg(LIVE, player, info, proc);
 		/*
 		else //dbg else
 		{
