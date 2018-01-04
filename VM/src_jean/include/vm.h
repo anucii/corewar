@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 16:24:20 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 17:56:06 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,5 +228,6 @@ void			check_curse(t_info *info);
 void			check_verbos(t_info *info, char **arg, int *index);
 void			check_dump(t_info *info, char **arg, int *index);
 void			check_id_player(t_info *info, char **arg, int *index, int id);
+void			color_pc(t_proc *proc, t_info *info, unsigned char *mem);
 
 #endif
