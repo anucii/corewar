@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 13:47:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/30 14:39:31 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/03 18:18:11 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static _Bool	conv_for_bitwise(int (*size)[3], int info[2])
 	return (0);
 }
 
-void			f_all(unsigned char *instr, int info[2], int *index, int fd)
+_Bool			f_all(unsigned char *instr, int info[2], int *index, int fd)
 {
 	int		size[3];
 	char	*opc;
@@ -38,10 +38,10 @@ void			f_all(unsigned char *instr, int info[2], int *index, int fd)
 
 	i = -1;
 	opc = ft_strbase(instr[++(*index)], "01");
-	ft_printf("opc_binary : %s\n", opc);
 	ft_bzero(size, 3);
-	check_opc(&size, opc, info[0], info[1]);
-	print = conv_for_bitwise(&size, info); 
+	if (!check_opc(&size, opc, info[0], info[1]))
+		return (0);
+	print = conv_for_bitwise(&size, info);
 	while (++i < info[1])
 	{
 		if (size[i] == REG_CODE)
@@ -53,4 +53,5 @@ void			f_all(unsigned char *instr, int info[2], int *index, int fd)
 		if (i + 1 < info[1])
 			write(fd, ",", 1);
 	}
+	return (1);
 }

@@ -12,15 +12,13 @@ SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 SRC_PATH = ./src/
 SRC_FILE = 	main.c \
 			parse_file.c \
-			error.c \
-			print_output.c \
 			littleendian.c \
 			parse_header.c \
 			write_header.c \
 			write_instr.c \
 			op.c \
+			join.c \
 			op_matches.c \
-			f_live.c \
 			f_all.c \
 			ft_to_deci.c \
 			to_hexa.c \
@@ -28,6 +26,7 @@ SRC_FILE = 	main.c \
 			write_reg.c \
 			write_dir.c \
 			write_ind.c \
+			close_file.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/

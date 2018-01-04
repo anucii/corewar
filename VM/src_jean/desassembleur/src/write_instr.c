@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 19:46:39 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/30 14:40:01 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/03 18:00:18 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,25 @@ static int		check_op(unsigned char c)
 	conv_hexa = ft_strbase(c, "0123456789abcdef");
 	conv_deci = ft_to_deci(conv_hexa, "0123456789abcdef");
 	if ((op = op_matches(conv_deci)) == -1)
-		error("Bad instr!");
+	{
+		ft_printf("Bad instr!\n");
+		return (-1);
+	}
 	ft_strdel(&conv_hexa);
 	ft_strdel(&conv_deci);
 	return (op);
 }
 
-static void		write_instr_in_file(unsigned char *s, int *index, int fd)
+static _Bool	write_instr_in_file(unsigned char *s, int *index, int fd)
 {
 	int				info[2];
 	int				instr;
 	int				i;
 
-	instr = check_op(s[++(*index)]);
+	if ((instr = check_op(s[++(*index)])) == -1)
+		return (0);
 	write(fd, g_op_tab[instr].name, ft_strlen(g_op_tab[instr].name));
 	write(fd, " ", 1);
-	ft_printf("Instr %s (opc %d)\n", g_op_tab[instr].name, instr + 1);
 	i = g_op_tab[instr].op_code - 1;
 	info[0] = g_op_tab[instr].op_code - 1;
 	info[1] = g_op_tab[instr].nb_param;
@@ -47,28 +50,31 @@ static void		write_instr_in_file(unsigned char *s, int *index, int fd)
 	else
 		f_all(s, info, index, fd);
 	write(fd, "\n", 1);
+	return (1);
 }
 
-void			write_instr(int new_fd, int old_fd)
+_Bool			write_instr(int new_fd, int old_fd)
 {
-	unsigned char	instr[CHAMP_MAX_SIZE];
+	unsigned char	instr[CHAMP_MAX_SIZE + 1];
 	unsigned int	size[1];
 	unsigned int	len;
 	int				index;
-   
+
 	index = -1;
-	ft_bzero(instr, CHAMP_MAX_SIZE);
+	ft_bzero(instr, CHAMP_MAX_SIZE + 1);
 	lseek(old_fd, PROG_NAME_LENGTH + 8, SEEK_SET);
 	read(old_fd, size, 4);
 	lseek(old_fd, COMMENT_LENGTH + 4, SEEK_CUR);
 	read(old_fd, instr, size[0]);
 	len = lseek(old_fd, 0, SEEK_END);
 	len = len - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
-	int	dbg;
-	dbg = 3;
-	while (index < (int)len - 1)
+	if (len > CHAMP_MAX_SIZE + 1)
 	{
-		ft_printf("Line [%d] - ", ++dbg);
-		write_instr_in_file(instr, &index, new_fd);
+		ft_printf("Champ to big\n");
+		return (0);
 	}
+	while (index < (int)len - 1)
+		if (!write_instr_in_file(instr, &index, new_fd))
+			return (0);
+	return (1);
 }

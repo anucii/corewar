@@ -6,13 +6,13 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 18:11:19 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/21 21:06:07 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/03 12:30:16 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "crack.h"
 
-void			write_header(int new_fd, int old_fd)
+_Bool			write_header(int new_fd, int old_fd)
 {
 	char	name[PROG_NAME_LENGTH + 1];
 	char	comment[COMMENT_LENGTH + 1];
@@ -29,4 +29,5 @@ void			write_header(int new_fd, int old_fd)
 	write(new_fd, ".comment \"", 10);
 	write(new_fd, comment, ft_strlen(comment));
 	write(new_fd, "\"\n", 2);
+	return (1);
 }

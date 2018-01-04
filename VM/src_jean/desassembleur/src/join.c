@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   join.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/21 16:33:38 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/21 16:34:27 by jgonthie         ###   ########.fr       */
+/*   Created: 2018/01/04 14:31:28 by jgonthie          #+#    #+#             */
+/*   Updated: 2018/01/04 14:37:44 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "crack.h"
 
-void	error(char *s)
+char	*new_join(char *s, char *to_join)
 {
-	ft_printf("%s\n", s);
-	exit(EXIT_FAILURE);
+	char	*tmp;
+	char	*new;
+
+	tmp = ft_strdup(s);
+	ft_strdel(&s);
+	new = ft_strjoin(to_join, tmp);
+	ft_strdel(&tmp);
+	return (new);
 }

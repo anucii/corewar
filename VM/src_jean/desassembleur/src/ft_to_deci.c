@@ -6,13 +6,13 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 13:13:31 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/27 17:31:04 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/03 18:17:34 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "crack.h"
 
-static char ft_check_letter(char letter)
+static char	ft_check_letter(char letter)
 {
 	if (letter == 'a' || letter == 'A')
 		return ('0');
