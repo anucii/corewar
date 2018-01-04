@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 14:33:05 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 16:24:20 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,23 @@ typedef	struct		s_proc
 **	----------------> opt[0]: -c
 **	----------------> opt[1]: -dump - opt[2]: N for dump opt
 **	----------------> opt[3]: -v 	- opt[4]: N for v opt
-**	nb_of_players:	- same as name
+**	nb_player:		- number of players
+**	ll_player:		- players' last lives
 **	WINDOW: 		- pointer to the curent window (-c opt)
 **	start and end:	- index for print the new segment (-c opt)
 */
 
-typedef struct	s_info
+typedef struct		s_info
 {
-	char		name[4][255];
-	int			opt[5];
-	int			id_player[4];
-	int			nb_player;
-	WINDOW		*win;
-	int			start;
-	int			end;
-}				t_info;
+	char			name[4][255];
+	int				opt[5];
+	int				id_player[4];
+	int				nb_player;
+	unsigned int	ll_player[MAX_PLAYERS];
+	WINDOW			*win;
+	int				start;
+	int				end;
+}					t_info;
 
 /*
 **	REQUESTS enumeration for chronos function :
@@ -207,6 +209,8 @@ void			write_on_mem(unsigned char *mem, unsigned short begin,\
 void			error_vm(char *s);
 t_info			*check_arg(t_proc ***prec, unsigned char **arena, char **argv, int argc);
 void			parse_header(int fd, t_proc **p, t_info *info);
+void			info_player(t_info *info, int nb_player);
+void			init_ll(t_info *info);
 void			start_ncurses(t_info *info, t_proc **proc);
 void			new_win(t_info *info, int put);
 void			destroy_win(t_info *info);

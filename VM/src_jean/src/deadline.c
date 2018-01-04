@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:15:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 18:33:15 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/04 15:13:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ unsigned int	deadline(t_req request)
 		{
 			ret -= CYCLE_DELTA;
 			checks = 0;
+			nbr_live(REINIT);
 		}
 	}
 	return (ret);
