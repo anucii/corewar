@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/04 19:58:47 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/05 15:51:52 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,11 @@ int				main(int argc, char **argv)
 	if (!info->opt[0])
 		intr_msg(p);
 	run(arena, p);
-	if (!info->opt[0])
-		lives_reg(CHECK, 0, info, NULL);
 	if (info->opt[0])
 	{
-		while (1)
-		{
-			if ((ch = wgetch(info->win)) == 'Q')
-			{
-				destroy_win(info);
-				endwin();
-				break ;
-			}
-		}
+		destroy_win(info);
+		endwin();
 	}
+	lives_reg(CHECK, 0, info, NULL);
 	return (0);
 }

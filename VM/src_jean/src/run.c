@@ -6,41 +6,38 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/05 12:48:58 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 15:50:51 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
+static _Bool	ctrl_speed(t_info *info)
+{
+	static int	speed = 50000;
+	char		ch;
+
+	timeout(5);
+	usleep(speed);
+	ch = getch();
+	if (ch == 'w' && speed > 0)
+		speed -= 10000;
+	if (ch == 'e' && speed < 70000)
+		speed += 10000;
+	if (ch == 'Q')
+	{
+		destroy_win(info);
+		endwin();
+		return (0);
+	}
+	return (1);
+}
+
 /*
 **	execute_order() checks that the process has been called on enough cycles
 **	and then calls the operation execution function associated with the opcode
 */
-/*
-static _Bool	ctrl_speed(t_info *info, int *speed)
-{
-	char	ch;
-	static int		clock = 50000;
 
-	while (clock -= 1000 > 0)
-	{
-		ch = wgetch(info->win);
-		ft_printf("%c", ch);
-		if (ch == 'w' && clock > 5000)
-			clock -= 1000;
-		if (ch == 'e' && clock < 70000)
-			clock += 1000;
-		if (ch == 'Q')
-		{
-			destroy_win(info);
-			endwin();
-			return (0);
-		}
-	}
-	return (1);
-	speed = 0;
-}
-*/
 void	execute_order(unsigned char *mem, t_proc *p)
 {
 	int		i;
@@ -100,7 +97,6 @@ void	exec_wrapper(unsigned char *mem, t_proc *p)
 
 void	run(unsigned char *mem, t_proc **p)
 {
-	int		speed;
 	_Bool	c;
 	ssize_t	i;
 	t_info	*info;
@@ -109,7 +105,6 @@ void	run(unsigned char *mem, t_proc **p)
 		return ;
 	c = 1;
 	info = get_info(NULL);
-	speed = 50000;
 	while (c)
 	{
 		while (timer(CHECK) < deadline(CHECK))
@@ -118,12 +113,10 @@ void	run(unsigned char *mem, t_proc **p)
 			while (--i >= 0)
 				if (p[i])
 					exec_wrapper(mem, p[i]);
-			if (info->opt[0])
-				usleep(speed);
-		//	if (info->opt[0])
-		//		if (!ctrl_speed(info, &speed))
-		//			return ;
 			timer(INCR);
+		if (info->opt[0])
+			if (!ctrl_speed(info))
+				return ;
 		}
 		timer(REINIT);
 		c = 0;
