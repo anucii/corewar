@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/04 20:12:33 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:06:13 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	execute_order(unsigned char *mem, t_proc *p)
 					ft_printf("[EXEC (cy:%04u)]: %s (proc:%04u, pc:%04u,  \
 player:%d)\n", global_timer(CHECK), g_op_tab[i].description, p->pid, p->pc,\
 p->champ.id);
-				g_op_tab[i].func(&p, mem);
 				p->cc = 0;
+				g_op_tab[i].func(&p, mem);
 			}
 			color_pc(p, info, mem);
 			return ;
@@ -84,8 +84,8 @@ void	exec_wrapper(unsigned char *mem, t_proc *p)
 	tmp = p;
 	while (tmp)
 	{
-		if (tmp != p) //dbg
-			ft_printf("EXEC on child(pid : %04u)\n", tmp->pid);
+		//if (tmp != p) //dbg
+		//	ft_printf("EXEC on child(pid : %04u)\n", tmp->pid);
 		execute_order(mem, tmp);
 		tmp = tmp->children;
 	}
