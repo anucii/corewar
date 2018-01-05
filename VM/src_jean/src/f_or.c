@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:07:27 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:10:35 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	f_or(t_proc **proc, unsigned char *mem)
 	unsigned int	i;
 	unsigned int	idx[3];
 	int				j;
-	unsigned int	s[2];
+	int				s[2];
 
 	j = 0;
 	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);

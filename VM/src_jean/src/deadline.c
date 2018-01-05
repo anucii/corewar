@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:15:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 18:07:13 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:58:19 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,19 @@ unsigned int	deadline(t_req request)
 {
 	static unsigned int	ret = CYCLE_TO_DIE;
 	static unsigned int checks = 0;
+	t_info				*info;
 
 	if (request == DECR)
 	{
+		info = get_info(NULL);
 		checks++;
+		if (info->opt[3] && !info->opt[0])
+			ft_printf("[DEADLINE (cy:%u)]: %u lives recorded (check no %u)\n",\
+					global_timer(CHECK), nbr_live(CHECK), checks);
 		if ((nbr_live(CHECK) >= NBR_LIVE) || (checks == MAX_CHECKS))
 		{
-			ret -= CYCLE_DELTA;
+			if (ret > CYCLE_DELTA)
+				ret -= CYCLE_DELTA;
 			checks = 0;
 			nbr_live(REINIT);
 			init_ll(get_info(NULL));

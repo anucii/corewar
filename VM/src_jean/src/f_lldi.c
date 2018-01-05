@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:31:18 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:16:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static unsigned int lldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 		unsigned int (*p_idx)[3])
 {
-	unsigned int	ret;
-	unsigned short	deref[2];
+	int	ret;
+	short	deref[2];
 	ssize_t			i;
 
 	i = -1;
@@ -52,7 +52,7 @@ void	f_lldi(t_proc **proc, unsigned char *mem)
 	int				*param;
 	unsigned int	p_idx[3];
 	unsigned int	size;
-	unsigned int	val;
+	int				val;
 
 	if (!(proc && *proc && mem))
 		error_vm("f_lldi() called with undue null parameter(s)");

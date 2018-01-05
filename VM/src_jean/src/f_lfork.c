@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/03 19:54:28 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:06:39 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 void	f_lfork(t_proc **proc, unsigned char *mem)
 {
-	unsigned short s;
-	t_proc		*tmp;
+	short 	s;
+	t_proc	*tmp;
 	s = ((short)mem[((*proc)->pc + 1) % MEM_SIZE] << 8) |
 		mem[((*proc)->pc + 2) % MEM_SIZE];
 	tmp = (*proc);

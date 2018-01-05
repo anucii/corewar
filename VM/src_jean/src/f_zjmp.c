@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:40:44 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:12:53 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:11:53 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 void	f_zjmp(t_proc **proc, unsigned char *mem)
 {
-	unsigned short i;
+	short i;
 
 	i = ((short)mem[((*proc)->pc + 1) % MEM_SIZE] << 8) 
 		| mem[((*proc)->pc + 2) % MEM_SIZE];

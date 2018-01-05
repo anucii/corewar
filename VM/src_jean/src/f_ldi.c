@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:16 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:31:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:12:41 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static unsigned int ldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 		unsigned int (*p_idx)[3])
 {
-	unsigned int	ret;
-	unsigned short	deref[2];
-	ssize_t			i;
+	int		ret;
+	short	deref[2];
+	ssize_t	i;
 
 	i = -1;
 	while (++i < 2)

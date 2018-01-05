@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/05 15:50:51 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/05 16:08:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static _Bool	ctrl_speed(t_info *info)
 	static int	speed = 50000;
 	char		ch;
 
-	timeout(5);
+	timeout(1);
 	usleep(speed);
 	ch = getch();
 	if (ch == 'w' && speed > 0)
@@ -118,9 +118,9 @@ void	run(unsigned char *mem, t_proc **p)
 			if (!ctrl_speed(info))
 				return ;
 		}
-		timer(REINIT);
 		c = 0;
 		atropos(p, info->nb_player);
+		timer(REINIT);
 		while (++i < (ssize_t)info->nb_player)
 			c |= p[i] ? 1 : 0;
 		deadline(DECR);

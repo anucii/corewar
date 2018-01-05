@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 14:39:20 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 15:54:23 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ void	kill_proc(t_proc **ptr_proc)
 	if (!(ptr_proc && *ptr_proc))
 		return ;
 	record = (*ptr_proc)->children;
-	if ((*ptr_proc)->life.status)
+	if ((global_timer(CHECK) - (*ptr_proc)->life.last) <= deadline(CHECK))
 		return ;
+//	if ((*ptr_proc)->life.status)
+//		return ;
 	info = get_info(NULL);
 	if (info->opt[3] && !info->opt[0])
-		ft_printf("[DEATH (cy:%04u)]: Process %04u (player %d) killed.\n",\
-				global_timer(CHECK), (*ptr_proc)->pid, (*ptr_proc)->champ.id);
+		ft_printf("[DEATH (cy:%04u)]: Process %04u (player %d) hadn't lived \
+for %u cycles (CTD: %u)\n", global_timer(CHECK), (*ptr_proc)->pid, \
+(*ptr_proc)->champ.id, global_timer(CHECK) - (*ptr_proc)->life.last, \
+deadline(CHECK));
 	free(*ptr_proc);
 	*ptr_proc = record;
 }

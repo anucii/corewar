@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 19:08:29 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:13:40 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 void	f_sti(t_proc **proc, unsigned char *mem)
 {
-	unsigned short		s;
-	unsigned short		t;
-	unsigned int		i;
-	unsigned int		target;
-	int					*param;
-	unsigned int		idx[3];
-	t_info				*info;
+	short			s;
+	short			t;
+	int				i;
+	int				target;
+	int				*param;
+	unsigned int	idx[3];
+	t_info			*info;
 
 
 	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/03 19:35:23 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:08:17 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	f_st(t_proc **proc, unsigned char *mem)
 {
-	int				*i;
-	unsigned short	s;
-	t_info			*info;
+	int		*i;
+	short	s;
+	t_info	*info;
 
 	i = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
 	if (i[1] == T_REG)

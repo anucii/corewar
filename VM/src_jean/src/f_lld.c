@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:42:56 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:31:33 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 17:16:25 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static unsigned int	get_val(int p_type, unsigned char *mem, unsigned int pc,\
 		unsigned int i)
 {
-	unsigned int	val;
-	unsigned int	deref;
+	int	val;
+	int	deref;
 
 	if (p_type == T_DIR)
 		val = chars_to_int(mem, i, 1);
@@ -35,7 +35,7 @@ void				f_lld(t_proc **proc, unsigned char *mem)
 	int				*param;
 	unsigned int	p_idx[3];
 	unsigned int	size;
-	unsigned int	val;
+	int				val;
 
 	if (!(proc && *proc && mem))
 		error_vm("f_lld : undue null parameter(s) received");
