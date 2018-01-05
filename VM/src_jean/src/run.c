@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/05 12:06:13 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:48:58 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,20 @@ p->champ.id);
 
 void	exec_wrapper(unsigned char *mem, t_proc *p)
 {
-	t_proc	*tmp;
+	//t_proc	*tmp;
 
-//	if (!p)
-//		return ;
+
+	if (p->children)
+		exec_wrapper(mem, p->children);
+	execute_order(mem, p);
+	/*
 	tmp = p;
 	while (tmp)
 	{
-		//if (tmp != p) //dbg
-		//	ft_printf("EXEC on child(pid : %04u)\n", tmp->pid);
 		execute_order(mem, tmp);
 		tmp = tmp->children;
 	}
+	*/
 }
 
 /*
