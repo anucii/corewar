@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:00:06 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/05 12:07:33 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/05 16:48:43 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,32 +97,7 @@ static	void	draw_menu(t_info *info)
 
 void		put_menu(t_info *info)
 {
-//	FMOD_SYSTEM *s;
-//	FMOD_SOUND *bgm[4];
-/*	FMOD_RESULT res[4] = {0};
-	int			i = 0;;
-
-	i = 0;
-	FMOD_System_Create(&s);
-	FMOD_System_Init(s, 5, FMOD_INIT_NORMAL, NULL);
-	res[0] = FMOD_System_CreateSound(info->s, "./include/AR.mp3", FMOD_LOOP_NORMAL, 0, &info->bgm[0]);
-	res[1] = FMOD_System_CreateSound(info->s, "./include/Tetris.mp3", FMOD_LOOP_NORMAL, 0, &info->bgm[1]);
-	res[2] = FMOD_System_CreateSound(s, "...", FMOD_LOOP_NORMAL, 0, &bgm[2]);
-	res[3] = FMOD_System_CreateSound(info->s, "./include/ready.ogg", FMOD_CREATESAMPLE, 0, &info->bgm[3]);
-	while (i < 4)
-	{
-		if (res[i] != FMOD_OK)
-		{
-			destroy_win(info);
-			ft_printf("echec %d\n", i);
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}*/
 	new_win(info, MENU);
 	draw_menu(info);
 	destroy_win(info);
-//	FMOD_Sound_Release(bgm);
-//	FMOD_System_Close(system);
-//	FMOD_System_Release(system);
 }
