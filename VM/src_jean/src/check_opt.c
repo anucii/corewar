@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 12:27:24 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/03 12:51:38 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 12:32:27 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	check_curse(t_info *info)
 {
+	if (info->opt[3])
+		error_vm(""RED"Error : Options -v and -c are incompatible"RESET"");
 	if (info->opt[0])
 		error_vm(""RED"Error : Option -c already given"RESET"");
 	info->opt[0] = 1;
@@ -21,6 +23,8 @@ void	check_curse(t_info *info)
 
 void	check_verbos(t_info *info, char **arg, int *index)
 {
+	if (info->opt[0])
+		error_vm(""RED"Error : Option -v and -c are incompatible"RESET"");
 	if (info->opt[3])
 		error_vm(""RED"Error : Option -v already given"RESET"");
 	if (!arg[(*index) + 1])
