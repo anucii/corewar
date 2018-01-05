@@ -6,11 +6,34 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 11:06:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/30 14:30:27 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/05 12:09:59 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+static t_info	*ini_music(t_info *info)
+{
+	FMOD_RESULT		res[5];
+	int				i;
+
+	i = 0;
+	res[0] = FMOD_System_Create(&info->s);
+	res[1] = FMOD_System_Init(info->s, 5, FMOD_INIT_NORMAL, NULL);
+	res[2] = FMOD_System_CreateSound(info->s, "./include/AR.mp3",
+							FMOD_LOOP_NORMAL, 0, &info->bgm[0]);
+	res[3] = FMOD_System_CreateSound(info->s, "./include/Tetris.mp3",
+							FMOD_LOOP_NORMAL, 0, &info->bgm[1]);
+	res[4] = FMOD_System_CreateSound(info->s, "./include/ready.ogg",
+							FMOD_CREATESAMPLE, 0, &info->bgm[3]);
+	while (i < 5)
+	{
+		if (res[i] != FMOD_OK)
+			exit(EXIT_FAILURE);
+		i++;
+	}
+	return (info);
+}
 
 t_info		*ini_info(int (*tab)[2])
 {
@@ -32,5 +55,5 @@ t_info		*ini_info(int (*tab)[2])
 	info->end = 0;
 	(*tab)[0] = 0;
 	(*tab)[1] = -1;
-	return (info);
+	return (ini_music(info));
 }

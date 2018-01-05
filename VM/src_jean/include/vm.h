@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 20:07:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/05 11:31:17 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct		s_info
 	WINDOW			*win;
 	int				start;
 	int				end;
+	FMOD_SYSTEM		*s;
+	FMOD_SOUND		*bgm[4];
 }					t_info;
 
 /*

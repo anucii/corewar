@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:00:06 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/03 18:32:37 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/05 12:07:33 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ static	void	choice_of_music(FMOD_CHANNELGROUP *canal, FMOD_SYSTEM *system,
 	}
 }
 
-static void		manage_music(FMOD_SYSTEM *s, FMOD_SOUND *bgm[4], t_info *info)
+static void		manage_music(t_info *info)
 {
 	FMOD_CHANNELGROUP *c;
 	char p;
 
-	FMOD_System_GetMasterChannelGroup(s, &c);
+	FMOD_System_GetMasterChannelGroup(info->s, &c);
 	while (1)
 	{
 		p = wgetch(info->win);
@@ -64,19 +64,19 @@ static void		manage_music(FMOD_SYSTEM *s, FMOD_SOUND *bgm[4], t_info *info)
 			FMOD_ChannelGroup_Stop(c);
 		else if (p == ' ')
 		{
-			FMOD_System_PlaySound(s, bgm[3], 0, false, NULL);
+			FMOD_System_PlaySound(info->s, info->bgm[3], 0, false, NULL);
 			break ;
 		}
 		else if (p == '1')
-			choice_of_music(c, s, bgm, 0);
+			choice_of_music(c, info->s, info->bgm, 0);
 		else if (p == '2')
-			choice_of_music(c, s, bgm, 1);
+			choice_of_music(c, info->s, info->bgm, 1);
 		else if (p == '3')
-			choice_of_music(c, s, bgm, 2);
+			choice_of_music(c, info->s, info->bgm, 2);
 	}
 }
 
-static	void	draw_menu(t_info *info, FMOD_SYSTEM *s, FMOD_SOUND *bgm[4])
+static	void	draw_menu(t_info *info)
 {
 	wattron(info->win, COLOR_PAIR(3));
 	print_corewar(info);
@@ -91,35 +91,36 @@ static	void	draw_menu(t_info *info, FMOD_SYSTEM *s, FMOD_SOUND *bgm[4])
 	mvwprintw(info->win, 72, 200, "2 = choosen by jpallard");
 	mvwprintw(info->win, 74, 200, "3 = choosen by jgonthie");
 	wrefresh(info->win);
-	manage_music(s, bgm, info);
+	manage_music(info);
 	wattroff(info->win, COLOR_PAIR(3));
 }
 
 void		put_menu(t_info *info)
 {
-	FMOD_SYSTEM *s;
-	FMOD_SOUND *bgm[4];
-	FMOD_RESULT res[4];
+//	FMOD_SYSTEM *s;
+//	FMOD_SOUND *bgm[4];
+/*	FMOD_RESULT res[4] = {0};
 	int			i = 0;;
 
 	i = 0;
 	FMOD_System_Create(&s);
 	FMOD_System_Init(s, 5, FMOD_INIT_NORMAL, NULL);
-	res[0] = FMOD_System_CreateSound(s, "./include/AR.mp3", FMOD_LOOP_NORMAL, 0, &bgm[0]);
-	res[1] = FMOD_System_CreateSound(s, "./include/Tetris.mp3", FMOD_LOOP_NORMAL, 0, &bgm[1]);
-//	res[2] = FMOD_System_CreateSound(s, "...", FMOD_LOOP_NORMAL, 0, &bgm[2]);
-	res[3] = FMOD_System_CreateSound(s, "./include/ready.ogg", FMOD_CREATESAMPLE, 0, &bgm[3]);
+	res[0] = FMOD_System_CreateSound(info->s, "./include/AR.mp3", FMOD_LOOP_NORMAL, 0, &info->bgm[0]);
+	res[1] = FMOD_System_CreateSound(info->s, "./include/Tetris.mp3", FMOD_LOOP_NORMAL, 0, &info->bgm[1]);
+	res[2] = FMOD_System_CreateSound(s, "...", FMOD_LOOP_NORMAL, 0, &bgm[2]);
+	res[3] = FMOD_System_CreateSound(info->s, "./include/ready.ogg", FMOD_CREATESAMPLE, 0, &info->bgm[3]);
 	while (i < 4)
 	{
 		if (res[i] != FMOD_OK)
 		{
 			destroy_win(info);
+			ft_printf("echec %d\n", i);
 			exit(EXIT_FAILURE);
 		}
 		i++;
-	}
+	}*/
 	new_win(info, MENU);
-	draw_menu(info, s, bgm);
+	draw_menu(info);
 	destroy_win(info);
 //	FMOD_Sound_Release(bgm);
 //	FMOD_System_Close(system);
