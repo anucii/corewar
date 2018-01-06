@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/06 14:42:39 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 17:41:00 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,23 +107,27 @@ void	run(unsigned char *mem, t_proc **p)
 	info = get_info(NULL);
 	while (c && deadline(CHECK) > 0)
 	{
-		while (timer(CHECK) < deadline(CHECK))
+		while ((timer(CHECK) < deadline(CHECK)) && (!(c = dump_mem(mem))))
 		{
 			i = (ssize_t)info->nb_player;
 			while (--i >= 0)
 				if (p[i])
 					exec_wrapper(mem, p[i]);
 			timer(INCR);
-		if (info->opt[0])
-			if (!ctrl_speed(info))
-				return ;
+			if (info->opt[0])
+				if (!ctrl_speed(info))
+					return ;
 		}
-		c = 0;
-		atropos(p, info->nb_player);
-		timer(REINIT);
-		while (++i < (ssize_t)info->nb_player)
-			c |= p[i] ? 1 : 0;
-		deadline(DECR);
-		foreach_proc(p, info->nb_player, &reinit_life_status);
+		if (!c)
+		{
+			atropos(p, info->nb_player);
+			timer(REINIT);
+			while (++i < (ssize_t)info->nb_player)
+				c |= p[i] ? 1 : 0;
+			deadline(DECR);
+			foreach_proc(p, info->nb_player, &reinit_life_status);
+		}
+		else
+			c = !c;
 	}
 }

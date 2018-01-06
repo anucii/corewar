@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 14:41:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 16:10:29 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int					*checkocp(unsigned char *mem);
 unsigned int		param_size(unsigned int p_first, int *params,\
 		_Bool dir_as_addr, unsigned int (*p_idx)[3]);
 void				intr_msg(t_proc **p);
-void				dump_mem(unsigned char *mem);
+_Bool				dump_mem(unsigned char *mem);
 void				lives_reg(t_req request, int num, t_info *info,\
 		t_proc *proc);
 t_info				*get_info(t_info **p_info);
