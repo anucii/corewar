@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/06 17:41:00 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 19:03:36 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,23 @@ void	exec_wrapper(unsigned char *mem, t_proc *p)
 	*/
 }
 
+static _Bool	new_round(t_proc **p, t_info *info, ssize_t i, _Bool *c)
+{
+	atropos(p, info->nb_player);
+	timer(REINIT);
+	while (++i < (ssize_t)info->nb_player)
+		*c |= p[i] ? 1 : 0;
+	deadline(DECR);
+	foreach_proc(p, info->nb_player, &reinit_life_status);
+	return (*c);
+}
+
 /*
 **	The run function manages the cycles, it stops only when there is no
 **	more processus alive.
 */
 
-void	run(unsigned char *mem, t_proc **p)
+void			run(unsigned char *mem, t_proc **p)
 {
 	_Bool	c;
 	ssize_t	i;
@@ -118,16 +129,6 @@ void	run(unsigned char *mem, t_proc **p)
 				if (!ctrl_speed(info))
 					return ;
 		}
-		if (!c)
-		{
-			atropos(p, info->nb_player);
-			timer(REINIT);
-			while (++i < (ssize_t)info->nb_player)
-				c |= p[i] ? 1 : 0;
-			deadline(DECR);
-			foreach_proc(p, info->nb_player, &reinit_life_status);
-		}
-		else
-			c = !c;
+		c = c ? !c : new_round(p, info, i, &c);
 	}
 }

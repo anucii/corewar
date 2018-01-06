@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/05 17:06:51 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 18:35:26 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	dbg_print_child(t_proc *child)
 			: "FALSE");
 	ft_printf("> Registers:\n");
 	while (++i < REG_NUMBER)
-		ft_printf("[%d: %#04x(%u)]%c", i + 1, child->reg[i], child->reg[i],\
+		ft_printf("[%d: 0x%08x(%d)]%c", i + 1, child->reg[i], child->reg[i],\
 				(i + 1) % 8 ? ' ' : '\n');
 	ft_printf("> Life status:\n");
 	ft_printf(">> {%s, last_live: %u (life granted to player %d)}\n",\
