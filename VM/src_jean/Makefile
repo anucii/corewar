@@ -68,7 +68,8 @@ SRC_FILE = 	main.c \
 			new_pid.c \
 			info_player.c \
 			color_pc.c \
-			live_board.c \
+			print_board.c \
+			count_proc.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/

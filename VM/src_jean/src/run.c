@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/06 19:03:36 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 20:04:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	exec_wrapper(unsigned char *mem, t_proc *p)
 
 static _Bool	new_round(t_proc **p, t_info *info, ssize_t i, _Bool *c)
 {
+	print_board(p, info);//necessary?
 	atropos(p, info->nb_player);
 	timer(REINIT);
 	while (++i < (ssize_t)info->nb_player)
@@ -124,6 +125,7 @@ void			run(unsigned char *mem, t_proc **p)
 			while (--i >= 0)
 				if (p[i])
 					exec_wrapper(mem, p[i]);
+			print_board(p, info);
 			timer(INCR);
 			if (info->opt[0])
 				if (!ctrl_speed(info))

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 16:10:29 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 19:59:47 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,16 +199,9 @@ _Bool				parse_params(int *param, unsigned int (*p_idx)[3],\
 		unsigned char op_code, unsigned char *mem);
 void				carry(t_proc ***p, unsigned int val);
 
-/*
-**	TESTING auxiliary functions : remember to erase before final push
-*/
-
-void			print_mem(unsigned char *mem, ssize_t max); //to remove after test-phase
-void			print_proc(t_proc *proc); //to remove after test-phase
-void			write_on_mem(unsigned char *mem, unsigned short begin,\
-		unsigned char *txt, unsigned short len);
-/*
- */
+void			print_proc(t_proc **proc);
+int				count_proc(t_proc **tab, t_info *info);
+void			print_board(t_proc **tab, t_info *info);
 
 void			error_vm(char *s);
 t_info			*check_arg(t_proc ***prec, unsigned char **arena, char **argv, int argc);
