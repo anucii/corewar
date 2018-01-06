@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/05 11:31:17 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/06 14:41:52 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@
 typedef struct		s_life
 {
 	_Bool			status;
-	unsigned int	last;
-	unsigned int	player;
+	int				last;
+	int				player;
 }					t_life;
 
 typedef struct		s_champ
@@ -62,7 +62,7 @@ typedef	struct		s_proc
 	unsigned int	pid;
 	unsigned int	pc;
 	unsigned int	old_pc;
-	unsigned int	cc;
+	int				cc;
 	t_champ			champ;
 	struct s_proc	*children;
 }					t_proc;
@@ -121,9 +121,9 @@ typedef enum		e_req
 void				foreach_proc(t_proc **tab, unsigned int max,\
 		void (*func)(t_proc **));
 
-unsigned int		timer(t_req request);
-unsigned int		global_timer(t_req request);
-unsigned int		deadline(t_req request);
+int					timer(t_req request);
+int					global_timer(t_req request);
+int					deadline(t_req request);
 unsigned int		nbr_live(t_req request);
 
 unsigned int		new_pid(void);

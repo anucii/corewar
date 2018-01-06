@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/05 17:16:43 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 14:29:58 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,22 @@
 static unsigned int lldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 		unsigned int (*p_idx)[3])
 {
-	int	ret;
+	int		ret;
 	short	deref[2];
-	ssize_t			i;
+	ssize_t	i;
 
 	i = -1;
 	while (++i < 2)
 	{
 		if (param[i] == T_REG)
 			deref[i] = proc->reg[mem[(*p_idx)[i]] - 1];
-		//else if (param[i] == T_IND)
-		//	deref[i] = chars_to_short(mem, (proc->pc + chars_to_short(mem,\
-		//					(*p_idx)[i])));
 		else if (param[i] == T_IND)
-		{
-			unsigned int dbg;
-
 			deref[i] = chars_to_short(mem, ((*p_idx)[i] \
-					+ (dbg = chars_to_short(mem, (*p_idx)[i], 1))) % IDX_MOD, 1);
-			ft_printf("Intermediate index read on mem[%u] = %u\n", (*p_idx)[i], dbg);
-		}
+					+ chars_to_short(mem, (*p_idx)[i], 1)) % IDX_MOD, 1);
 		else
-			deref[i] = chars_to_short(mem, (*p_idx)[i], 1);//\
-					  // + (param[i] == T_DIR ? 0 : proc->pc);
-		ft_printf("deref[%zu(param @ mem[%u])] = %hu\n", i, (*p_idx)[i], deref[i]);//dbg
-		ft_printf("proc->pc = %u\n", proc->pc);
+			deref[i] = chars_to_short(mem, (*p_idx)[i], 1);
 	}
 	deref[0] = (proc->pc + deref[0] + deref[1]) % MEM_SIZE;
-	//deref[0] = (proc->pc + deref[0] + deref[1]) % MEM_SIZE;
-	ft_printf("deref sum = %hu\n", deref[0]);//dbg
 	return (ret = chars_to_int(mem, deref[0], 1));
 }
 

@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/05 16:08:43 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 14:42:39 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	execute_order(unsigned char *mem, t_proc *p)
 	{
 		if (mem[p->pc] == g_op_tab[i].op_code)
 		{
-			if (++(p->cc) == (unsigned int)g_op_tab[i].cycles)
+			if (++(p->cc) == g_op_tab[i].cycles)
 			{
 				if (info->opt[3] && !info->opt[0])
 					ft_printf("[EXEC (cy:%04u)]: %s (proc:%04u, pc:%04u,  \
@@ -105,7 +105,7 @@ void	run(unsigned char *mem, t_proc **p)
 		return ;
 	c = 1;
 	info = get_info(NULL);
-	while (c)
+	while (c && deadline(CHECK) > 0)
 	{
 		while (timer(CHECK) < deadline(CHECK))
 		{

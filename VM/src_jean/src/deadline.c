@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:15:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/05 17:58:19 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/06 14:36:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ unsigned int	nbr_live(t_req request)
 **	run.c)
 */
 
-unsigned int	deadline(t_req request)
+int				deadline(t_req request)
 {
-	static unsigned int	ret = CYCLE_TO_DIE;
+	static int			ret = CYCLE_TO_DIE;
 	static unsigned int checks = 0;
 	t_info				*info;
 
@@ -48,8 +48,7 @@ unsigned int	deadline(t_req request)
 					global_timer(CHECK), nbr_live(CHECK), checks);
 		if ((nbr_live(CHECK) >= NBR_LIVE) || (checks == MAX_CHECKS))
 		{
-			if (ret > CYCLE_DELTA)
-				ret -= CYCLE_DELTA;
+			ret -= CYCLE_DELTA;
 			checks = 0;
 			nbr_live(REINIT);
 			init_ll(get_info(NULL));
