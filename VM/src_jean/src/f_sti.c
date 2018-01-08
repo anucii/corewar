@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 15:54:01 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/08 12:24:24 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 		s = ((short)mem[idx[1]] << 8) |
 			(mem[(idx[1] + 1)]);
 		if (param[1] == T_IND)
-			s = (short)mem[(*proc)->pc + s + 2] << 8 |
-				(mem[(*proc)->pc + s + 3]) % IDX_MOD;
+			s = (short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
+				(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
 	}
 	if (param[2] == T_REG)
 		t = (unsigned short)(*proc)->reg[mem[idx[2]] - 1];

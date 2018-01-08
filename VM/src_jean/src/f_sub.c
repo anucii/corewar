@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:37:24 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 17:12:14 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/08 12:12:30 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	f_sub(t_proc **proc, unsigned char *mem)
 	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &idx);
 	//if (!parse_params(param, &idx, 4, mem)
 	//	execute_error
-	(*proc)->reg[mem[idx[2] - 1]] = (*proc)->reg[mem[idx[0]] - 1] -
+	(*proc)->reg[mem[idx[2]] - 1] = (*proc)->reg[mem[idx[0]] - 1] -
 		(*proc)->reg[mem[idx[1]] - 1];
-	carry(&proc, (*proc)->reg[mem[idx[2] - 1]]);
+	carry(&proc, (*proc)->reg[mem[idx[2]] - 1]);
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
 	return ;
 }
