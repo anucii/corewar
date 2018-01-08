@@ -6,33 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 18:35:26 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/08 15:23:11 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-static void	dbg_print_child(t_proc *child)
-{
-	t_info	*info;
-	int		i;
-
-	info = get_info(NULL);
-	if (info->opt[0] || !info->opt[3])
-		return ;
-	i = -1;
-	ft_printf("[NEWBORN (cy:%u)]: pid = %04u, pc = %04u, carry:%s\n",\
-			global_timer(CHECK), child->pid, child->pc, child->carry ? "TRUE" \
-			: "FALSE");
-	ft_printf("> Registers:\n");
-	while (++i < REG_NUMBER)
-		ft_printf("[%d: 0x%08x(%d)]%c", i + 1, child->reg[i], child->reg[i],\
-				(i + 1) % 8 ? ' ' : '\n');
-	ft_printf("> Life status:\n");
-	ft_printf(">> {%s, last_live: %u (life granted to player %d)}\n",\
-			child->life.status ? "Alive" : "Dead", child->life.last,\
-			child->life.player);
-}
 
 /*
 **create a new processus at the adress given with % IDX_MOD
@@ -54,7 +32,7 @@ void	f_fork(t_proc **proc, unsigned char *mem)
 	tmp->children->pc = (((*proc)->pc + (s  % IDX_MOD)) % MEM_SIZE);
 	tmp->children->pid = get_pid(INCR);
 	tmp->children->children = NULL;
-	dbg_print_child(tmp->children);//dbg
+	print_child(tmp->children);
 	(*proc)->pc = ((*proc)->pc + 3) % MEM_SIZE;
 	return ;
 }

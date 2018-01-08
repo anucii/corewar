@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 19:59:47 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/08 15:21:17 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ _Bool				parse_params(int *param, unsigned int (*p_idx)[3],\
 		unsigned char op_code, unsigned char *mem);
 void				carry(t_proc ***p, unsigned int val);
 
+void			print_child(t_proc *child);
 void			print_proc(t_proc **proc);
 int				count_proc(t_proc **tab, t_info *info);
 void			print_board(t_proc **tab, t_info *info);

@@ -70,6 +70,7 @@ SRC_FILE = 	main.c \
 			color_pc.c \
 			print_board.c \
 			count_proc.c \
+			print_child.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
