@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/08 15:23:11 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/09 17:46:35 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	f_fork(t_proc **proc, unsigned char *mem)
 	//unsigned short s;
 	short	s;
 	t_proc	*tmp;
-	s = ((short)mem[(*proc)->pc + 1 % MEM_SIZE] << 8) |
-		mem[((*proc)->pc + 2) % MEM_SIZE];
+
+	(void)mem;
+	s = ((short)(*proc)->o_mem[1] << 8) |
+		(*proc)->o_mem[2];
 	tmp = (*proc);
 	while(tmp->children != NULL)
 		tmp = tmp->children;

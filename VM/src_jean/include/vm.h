@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/08 15:21:17 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/09 17:35:21 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef	struct		s_proc
 	unsigned int	pc;
 	unsigned int	old_pc;
 	int				cc;
+	unsigned char	*o_mem;
+	int				c_opc;
 	t_champ			champ;
 	struct s_proc	*children;
 }					t_proc;
@@ -132,6 +134,7 @@ void				atropos(t_proc **proc_tab, unsigned int max);
 void				kill_proc(t_proc **ptr_proc);
 
 unsigned int		new_player(void);
+void				*memcyc(void *dst, const void *src, size_t n, t_proc *p);
 void				checkheader(int fd, t_proc **p, unsigned int player);
 //void				init_proc(t_proc **p, int fd, unsigned int player);
 void				littleendian(unsigned int *i);
@@ -192,7 +195,7 @@ unsigned int		chars_to_int(unsigned char *mem, unsigned int index,\
 unsigned short		chars_to_short(unsigned char *mem, unsigned int index,\
 		_Bool lg);
 unsigned int		convert(unsigned char *mem, unsigned int idx,\
-		unsigned short pc, int j);
+		t_proc *p, int j);
 void				int_on_mem(unsigned char *mem, unsigned int i,\
 		unsigned short s);
 _Bool				parse_params(int *param, unsigned int (*p_idx)[3],\

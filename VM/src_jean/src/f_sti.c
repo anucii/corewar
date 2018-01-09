@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/08 12:24:24 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/09 18:04:33 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	t_info			*info;
 
 
-	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
-	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &idx);
+	param = checkocp(&(*proc)->o_mem[1]);
+	i = param_size(2, param, 1, &idx);
 	info = get_info(NULL);
 	if (param[1] == T_REG)
-		s = (short)(*proc)->reg[mem[idx[1]] - 1];
+		s = (short)(*proc)->reg[(*proc)->o_mem[idx[1]] - 1];
 	else
 	{
-		s = ((short)mem[idx[1]] << 8) |
-			(mem[(idx[1] + 1)]);
+		s = ((short)(*proc)->o_mem[idx[1]] << 8) |
+			((*proc)->o_mem[(idx[1] + 1)]);
 		if (param[1] == T_IND)
 			s = (short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
 				(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
 	}
 	if (param[2] == T_REG)
-		t = (unsigned short)(*proc)->reg[mem[idx[2]] - 1];
+		t = (unsigned short)(*proc)->reg[(*proc)->o_mem[idx[2]] - 1];
 	else
-		t = (short)mem[idx[2]] << 8 |
-			mem[(idx[2] + 1)];
+		t = (short)(*proc)->o_mem[idx[2]] << 8 |
+			(*proc)->o_mem[(idx[2] + 1)];
 	if ((target = (*proc)->pc + ((s + t) % IDX_MOD)) < 0)
 		target = MEM_SIZE + target;
 // 	ft_printf("target = %d\n", target);
 	int_on_mem(mem,
-			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
+			(*proc)->reg[(*proc)->o_mem[2] - 1],
 			target);
 	/*
 	if (info->opt[3] && !info->opt[0])

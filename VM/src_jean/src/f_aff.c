@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:44:25 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/05 17:17:10 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/09 18:13:23 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ void	f_aff(t_proc **proc, unsigned char *mem)
 	else*/
 	t_info	*info;
 
+	(void)mem;
 	info = get_info(NULL);
 	if (info && !info->opt[0])
 		ft_printf("%c\n",
-				(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE ] - 1] % 256);
+				(*proc)->reg[(*proc)->o_mem[2] - 1] % 256);
 	(*proc)->pc = ((*proc)->pc + 3) % MEM_SIZE;
 	return ;
 }

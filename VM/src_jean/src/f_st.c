@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/05 17:08:17 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/09 17:58:25 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ void	f_st(t_proc **proc, unsigned char *mem)
 	short	s;
 	t_info	*info;
 
-	i = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
+	i = checkocp(&(*proc)->o_mem[1]);
 	if (i[1] == T_REG)
 	{
-		(*proc)->reg[mem[((*proc)->pc + 3) % MEM_SIZE] - 1] =
-			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1];
+		(*proc)->reg[(*proc)->o_mem[3] - 1] =
+			(*proc)->reg[(*proc)->o_mem[2] - 1];
 		(*proc)->pc = ((*proc)->pc + 4) % MEM_SIZE;
 	}
 	else
 	{
 		info = get_info(NULL);
-		s = (short)mem[((*proc)->pc + 3) % MEM_SIZE] << 8
-			| mem[((*proc)->pc + 4) % MEM_SIZE];
+		s = (short)(*proc)->o_mem[3] << 8
+			| (*proc)->o_mem[4];
 		int_on_mem(mem,
-					(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
+					(*proc)->reg[(*proc)->o_mem[2] - 1],
 					(*proc)->pc + (s % IDX_MOD));
 		info->start = (*proc)->pc + (s % IDX_MOD);
 		info->end = info->start + 4;
