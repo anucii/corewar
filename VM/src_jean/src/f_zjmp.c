@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:40:44 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/09 18:12:35 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/18 12:49:59 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,20 @@
 
 void	f_zjmp(t_proc **proc, unsigned char *mem)
 {
-	short i;
+	short	i;
+	t_info	*info;
 
-	(void)mem;
-	i = ((short)(*proc)->o_mem[1] << 8)
-		| (*proc)->o_mem[2];
+	info = get_info(NULL);
+	i = ((short)mem[((*proc)->pc + 1) % MEM_SIZE] << 8)
+		| mem[((*proc)->pc + 2) % MEM_SIZE];
 	if ((*proc)->carry == 1)
 		(*proc)->pc = (((*proc)->pc + (i % IDX_MOD)) % MEM_SIZE);
 	else
+	{
 		(*proc)->pc = (((*proc)->pc + 3) % MEM_SIZE);
+		if (info->opt[3] && !info->opt[0])
+			ft_printf(" [FAILED]");
+	}
 	return ;
 }
 

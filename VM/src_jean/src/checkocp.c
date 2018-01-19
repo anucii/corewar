@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:09:44 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/20 15:09:59 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/18 15:53:03 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static unsigned char		bitwise(unsigned char *o1, int i, unsigned char mem)
 	return (*o1);
 }
 
-int		*checkocp(unsigned char *mem)
+int		*checkocp(unsigned char *mem,  unsigned int op_code)
 {
 	int		*param;
 	unsigned char	o[3];
@@ -42,7 +42,10 @@ int		*checkocp(unsigned char *mem)
 	param = ft_memalloc(sizeof(int) * 3);
 	o[0] = *mem >> 6;
 	o[1] = bitwise(&o[1], 0, *mem);
-	o[2] = bitwise(&o[2] , 1, *mem);
+	if (op_code != 2 && op_code != 3 && op_code != 13)
+		o[2] = bitwise(&o[2] , 1, *mem);
+	else
+		o[2] = 0;
 	while (i < 3)
 	{
 		if (o[i] == 2)

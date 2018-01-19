@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 18:22:39 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/29 20:04:37 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/10 14:36:05 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	intr_msg(t_proc **p)
 	while (++i < info->nb_player)
 	{
 		if (p[i])
-			ft_printf("Player %d, %s!\n",\
-					p[i]->champ.id, p[i]->champ.name);
+			ft_printf("* Player 1, weighing 325 bytes, \"Celebration Funebre v0.99pl42\" (\"Jour J\") !\n");
 	}
 }

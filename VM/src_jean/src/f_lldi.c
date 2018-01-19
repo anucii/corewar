@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 14:29:58 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/18 15:08:03 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,10 @@ void	f_lldi(t_proc **proc, unsigned char *mem)
 
 	if (!(proc && *proc && mem))
 		error_vm("f_lldi() called with undue null parameter(s)");
-	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
-	size = 2 + param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &p_idx);
-	if (!parse_params(param, &p_idx, mem[(*proc)->pc % MEM_SIZE], mem))
-	{
-		execute_error(*proc);
-		return ;
-	}
+	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE], 14);
+	size = 2 + param_size((*proc)->pc + 2, param, 1, &p_idx);
+	if (!parse_params(param, &p_idx, 14, mem))
+		return (execute_error(*proc, param, size));
 	val = lldi_calc(*proc, mem, param, &p_idx);
 	(*proc)->reg[mem[p_idx[2]] - 1] = val;
 	(*proc)->carry = val ? 0 : 1;

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/05 15:54:23 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/19 11:43:25 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ for %u cycles (CTD: %u)\n", global_timer(CHECK), (*ptr_proc)->pid, \
 deadline(CHECK));
 	free(*ptr_proc);
 	*ptr_proc = record;
+	kill_proc(ptr_proc);
 }
 
 void	atropos(t_proc **tab, unsigned int max)

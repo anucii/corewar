@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:16 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 14:28:55 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/18 15:07:31 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,11 @@ void	f_ldi(t_proc **proc, unsigned char *mem)
 	unsigned int	size;
 
 	if (!(proc && *proc && mem))
-		error_vm("f_ldi() called with undue null parameter(s)");
-	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE]);
-	size = 2 + param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &p_idx);
-	if (!parse_params(param, &p_idx, mem[(*proc)->pc % MEM_SIZE], mem))
-	{
-		execute_error(*proc);
-		return ;
-	}
+		error_vm("f_ldi() called with undue null parameter(s)"); // THIS IS FUCKING USELESS LIKE THIS COMMENT FROM JPALLARD ;D
+	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE], 10);
+	size = 2 + param_size(((*proc)->pc + 2) % MEM_SIZE , param, 1, &p_idx);
+	if (!parse_params(param, &p_idx, 10, mem))
+		return (execute_error(*proc, param, size));
 	(*proc)->reg[mem[p_idx[2]] - 1] = ldi_calc(*proc, mem, param, &p_idx);
 	(*proc)->pc = ((*proc)->pc + size) % MEM_SIZE;
 	free(param);

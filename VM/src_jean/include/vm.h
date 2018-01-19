@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/09 17:35:21 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/19 17:33:57 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef	struct		s_proc
 	unsigned int	pc;
 	unsigned int	old_pc;
 	int				cc;
-	unsigned char	*o_mem;
 	int				c_opc;
 	t_champ			champ;
 	struct s_proc	*children;
@@ -134,7 +133,6 @@ void				atropos(t_proc **proc_tab, unsigned int max);
 void				kill_proc(t_proc **ptr_proc);
 
 unsigned int		new_player(void);
-void				*memcyc(void *dst, const void *src, size_t n, t_proc *p);
 void				checkheader(int fd, t_proc **p, unsigned int player);
 //void				init_proc(t_proc **p, int fd, unsigned int player);
 void				littleendian(unsigned int *i);
@@ -143,9 +141,9 @@ void				run(unsigned char *mem, t_proc **p);
 void				exec_wrapper(unsigned char *mem, t_proc *p);
 void				execute_order(unsigned char *mem, t_proc *p);
 void				error_vm(char *s);
-void				execute_error(t_proc *proc);
+void				execute_error(t_proc *proc, int *param, unsigned int j);
 void				reinit_life_status(t_proc **proc);
-int					*checkocp(unsigned char *mem);
+int					*checkocp(unsigned char *mem, unsigned int op_code);
 unsigned int		param_size(unsigned int p_first, int *params,\
 		_Bool dir_as_addr, unsigned int (*p_idx)[3]);
 void				intr_msg(t_proc **p);

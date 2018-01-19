@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 15:50:56 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 17:46:48 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/10 15:13:26 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ _Bool	dump_mem(unsigned char *mem)
 						== info->opt[2]))))
 		return (0);
 	i = -1;
-	pad = 32;
+	pad = 64;
 	while (++i < MEM_SIZE)
 	{
 		if (!(i % pad))
-			ft_printf(i ? "%#06x: " : "%#05x: ", i);
-		ft_printf("%02hhx%c", mem[i], (i + 1) % pad ? ' ' : '\n');
+			ft_printf(i ? "%#06x : " : "%#05x : ", i);
+		ft_printf("%02hhx%s", mem[i], (i + 1) % pad ? " " : " \n");
 	}
 	if (MEM_SIZE & 1)
 		ft_printf("\n");

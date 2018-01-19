@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/09 16:58:54 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/18 12:59:52 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,23 @@ void	execute_order(unsigned char *mem, t_proc *p)
 
 	i = 0;
 	info = get_info(NULL);
-	while (mem[p->pc] && (i < 17))
+	while (i < 16)
 	{
 		if (mem[p->pc] == g_op_tab[i].op_code || p->c_opc != 0)
 		{
 			if (p->cc == 0)
-			{
 				p->c_opc = i;
-				p->o_mem = memcyc(p->o_mem, mem, 12, p);
-			}
 			if (++(p->cc) == g_op_tab[p->c_opc].cycles)
 			{
 				if (info->opt[3] && !info->opt[0])
 					ft_printf("[EXEC (cy:%04u)]: %s (proc:%04u, pc:%04u,  \
-player:%d)\n", global_timer(CHECK), g_op_tab[p->c_opc].description, p->pid, p->pc,\
+player:%d)", global_timer(CHECK), g_op_tab[p->c_opc].description, p->pid, p->pc,\
 p->champ.id);
 				p->cc = 0;
 				g_op_tab[p->c_opc].func(&p, mem);
-				free(p->o_mem);
-				p->o_mem = NULL;
 				p->c_opc = 0;
+				if (info->opt[3] && !info->opt[0])
+					ft_printf(" new_pc:%04u \n", p->pc);
 			}
 			color_pc(p, info, mem);
 			return ;

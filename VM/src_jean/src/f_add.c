@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:37:24 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/09 18:11:46 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/18 15:06:15 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ void	f_add(t_proc **proc, unsigned char *mem)
 	unsigned int	idx[3];
 	unsigned int	i;
 
-	(void)mem;
-	param = checkocp(&(*proc)->o_mem[1]);
-	i = param_size(2, param, 1, &idx);
-	//if (!parse_params(param, &idx, 4, mem)
-	//	execute_error
-	(*proc)->reg[(*proc)->o_mem[idx[2]] - 1] = (*proc)->reg[(*proc)->o_mem[idx[0]] - 1] +
-		(*proc)->reg[(*proc)->o_mem[idx[1]] - 1];
-	carry(&proc, (*proc)->reg[(*proc)->o_mem[idx[2]] - 1]);
+	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE], 4);
+	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &idx);
+	if (!parse_params(param, &idx, 4, mem))
+		return (execute_error(*proc, param, i + 2));
+	(*proc)->reg[mem[idx[2]] - 1] = (*proc)->reg[mem[idx[0]] - 1] +
+		(*proc)->reg[mem[idx[1]] - 1];
+	carry(&proc, (*proc)->reg[mem[idx[2]] - 1]);
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
-	return ;
+	free(param);
 }
 
 /*

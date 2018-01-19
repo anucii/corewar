@@ -6,15 +6,19 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 18:04:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/20 19:01:18 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/12 14:03:50 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	execute_error(t_proc *proc)
+void	execute_error(t_proc *proc, int *param, unsigned int j)
 {
-	if (!proc)
-		return ;
-	(proc->pc)++;
+	t_info *info;
+
+	info = get_info(NULL);
+	if (info->opt[3] && !info->opt[0])
+		ft_printf(" [EPIC FAIL]");
+	proc->pc = (proc->pc + j) % MEM_SIZE;
+	free(param);
 }

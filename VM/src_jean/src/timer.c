@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:48:48 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/06 14:40:39 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/18 16:26:11 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int	timer(t_req request)
 {
-	static int	clock = 0;
+	static int	clock = 1;
 
 	if (request == INCR)
 	{
@@ -35,7 +35,7 @@ int	timer(t_req request)
 
 int	global_timer(t_req request)
 {
-	static int	gl_clock = 0;
+	static int	gl_clock = 1;
 
 	if (request == INCR)
 		gl_clock++;

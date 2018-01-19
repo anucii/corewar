@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/09 17:58:25 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/18 15:08:45 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 
 void	f_st(t_proc **proc, unsigned char *mem)
 {
-	int		*i;
-	short	s;
-	t_info	*info;
+	int				*param;
+	short			s;
+	int				size;
+	unsigned int	idx[3];
+	t_info			*info;
 
-	i = checkocp(&(*proc)->o_mem[1]);
-	if (i[1] == T_REG)
+	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE], 3);
+	size = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &idx) + 2;
+	if (!parse_params(param, &idx, 3, mem))
+		return (execute_error(*proc, param, size));
+	if (param[1] == T_REG)
 	{
-		(*proc)->reg[(*proc)->o_mem[3] - 1] =
-			(*proc)->reg[(*proc)->o_mem[2] - 1];
+		(*proc)->reg[mem[idx[2]] - 1] =
+			(*proc)->reg[mem[idx[1]] - 1];
 		(*proc)->pc = ((*proc)->pc + 4) % MEM_SIZE;
 	}
 	else
 	{
 		info = get_info(NULL);
-		s = (short)(*proc)->o_mem[3] << 8
-			| (*proc)->o_mem[4];
-		int_on_mem(mem,
-					(*proc)->reg[(*proc)->o_mem[2] - 1],
+		s = (short)mem[((*proc)->pc + 3) % MEM_SIZE] << 8
+			| mem[((*proc)->pc + 4) % MEM_SIZE];
+		int_on_mem(mem, (*proc)->reg[mem[idx[0]] - 1],
 					(*proc)->pc + (s % IDX_MOD));
 		info->start = (*proc)->pc + (s % IDX_MOD);
 		info->end = info->start + 4;
@@ -39,6 +43,7 @@ void	f_st(t_proc **proc, unsigned char *mem)
 			refresh_arena(info, mem, (*proc)->color);
 		(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
 	}
+	free(param);
 }
 
 /*for quick test
