@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 11:06:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/05 16:12:17 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/22 04:06:34 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static t_info	*ini_music(t_info *info)
 	i = 0;
 	res[0] = FMOD_System_Create(&info->s);
 	res[1] = FMOD_System_Init(info->s, 5, FMOD_INIT_NORMAL, NULL);
-	res[2] = FMOD_System_CreateSound(info->s, "./include/AR.mp3",
+	res[2] = FMOD_System_CreateSound(info->s, "./include/8_bit_trauma.mp3",
 							FMOD_LOOP_NORMAL, 0, &info->bgm[0]);
 	res[3] = FMOD_System_CreateSound(info->s, "./include/Tetris.mp3",
 							FMOD_LOOP_NORMAL, 0, &info->bgm[1]);
-	res[4] = FMOD_System_CreateSound(info->s, "./include/8_bit_trauma.mp3",
+	res[4] = FMOD_System_CreateSound(info->s, "./include/AR.mp3",
 							FMOD_LOOP_NORMAL, 0, &info->bgm[2]);
 	res[5] = FMOD_System_CreateSound(info->s, "./include/ready.ogg",
 							FMOD_CREATESAMPLE, 0, &info->bgm[3]);

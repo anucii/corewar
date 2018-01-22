@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/16 14:53:02 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/22 05:18:57 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	f_lfork(t_proc **proc, unsigned char *mem)
 	tmp->children->pid = get_pid(INCR);
 	tmp->children->children = NULL;
 	tmp->children->c_opc = 0;
+	common_lst(ADD, tmp->children);
 	print_child(tmp->children);
 	(*proc)->pc = ((*proc)->pc + 3) % MEM_SIZE;
 }

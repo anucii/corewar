@@ -71,6 +71,7 @@ SRC_FILE = 	main.c \
 			print_board.c \
 			count_proc.c \
 			print_child.c \
+			common_list.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/

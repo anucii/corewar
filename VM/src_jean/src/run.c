@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/18 12:59:52 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/22 05:49:25 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,30 @@ p->champ.id);
 
 /*
 **	exec_wrapper() enables the handling of the execution of children
-**	processes when needed.
+**	processes when needed; its new version uses a general list (common to 
+**	all players) of the processes adresses.
 */
 
-void	exec_wrapper(unsigned char *mem, t_proc *p)
+void	exec_wrapper(unsigned char *mem, t_list *lst)
 {
+	t_proc	**aproc;
+
+	if (!lst)
+		return ;
+	else if (lst->content)
+	{
+		aproc = (t_proc **)lst->content;
+		execute_order(mem, *aproc);
+	}
+	exec_wrapper(mem, lst->next);
+
 	//t_proc	*tmp;
 
-
+/*
 	if (p->children)
 		exec_wrapper(mem, p->children);
 	execute_order(mem, p);
+	*/
 	/*
 	tmp = p;
 	while (tmp)
@@ -98,7 +111,7 @@ void	exec_wrapper(unsigned char *mem, t_proc *p)
 
 static _Bool	new_round(t_proc **p, t_info *info, ssize_t i, _Bool *c)
 {
-	print_board(p, info);//necessary?
+	print_board(p, info);//necessary? -> the function printboard checks itself whether it should print or return
 	atropos(p, info->nb_player);
 	timer(REINIT);
 	while (++i < (ssize_t)info->nb_player)
@@ -116,7 +129,7 @@ static _Bool	new_round(t_proc **p, t_info *info, ssize_t i, _Bool *c)
 void			run(unsigned char *mem, t_proc **p)
 {
 	_Bool	c;
-	ssize_t	i;
+	//ssize_t	i;
 	t_info	*info;
 
 	if (!(mem && p))
@@ -127,16 +140,19 @@ void			run(unsigned char *mem, t_proc **p)
 	{
 		while ((timer(CHECK) < deadline(CHECK)) && (!(c = dump_mem(mem))))
 		{
-			i = (ssize_t)info->nb_player;
+	/*		i = (ssize_t)info->nb_player;
 			while (--i >= 0)
 				if (p[i])
 					exec_wrapper(mem, p[i]);
+					*/
+			exec_wrapper(mem, common_lst(CHECK, NULL));
 			print_board(p, info);
 			timer(INCR);
 			if (info->opt[0])
 				if (!ctrl_speed(info))
 					return ;
 		}
-		c = c ? !c : new_round(p, info, i, &c);
+		//c = c ? !c : new_round(p, info, i, &c);
+		c = c ? !c : new_round(p, info, 0, &c);
 	}
 }

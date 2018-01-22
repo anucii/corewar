@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 18:50:21 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/10 15:36:18 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/22 06:20:15 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@ proc->champ.id, info->id_player[i], info->name[i]);
 		i = -1;
 		while (++i < info->nb_player)
 			if (last_id == info->id_player[i])
+			{
 				ft_printf("[WIN(cy:%04u)]: le joueur %d(%s) a gagne\n",\
 						global_timer(CHECK), info->id_player[i],\
 						info->name[i]);
+				return ;
+			}
+		ft_printf("Stalemate : no player has ever been declared alive.\n");
 		//to add : stalemate message
 	}
 }

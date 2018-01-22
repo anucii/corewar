@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/19 11:43:25 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/22 06:26:07 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	kill_proc(t_proc **ptr_proc)
 for %u cycles (CTD: %u)\n", global_timer(CHECK), (*ptr_proc)->pid, \
 (*ptr_proc)->champ.id, global_timer(CHECK) - (*ptr_proc)->life.last, \
 deadline(CHECK));
+	//if ((*ptr_proc)->champ.name)
+	//	free((*ptr_proc)->champ.name); => sigabort error : freed object not allocated
+	common_lst(DEL, *ptr_proc);
 	free(*ptr_proc);
 	*ptr_proc = record;
 	kill_proc(ptr_proc);

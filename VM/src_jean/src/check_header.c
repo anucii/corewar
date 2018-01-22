@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/15 16:06:33 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/22 05:17:13 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void		init_proc(t_proc ***p, t_info *info, int fd)
 	(**p)->children = NULL;
 	(**p)->champ.name = get_name(fd);
 	color++;
+	common_lst(ADD, **p);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/19 17:33:57 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/22 05:34:29 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ typedef struct		s_info
 
 typedef enum		e_req
 {
-					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT
+					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT,
+					ADD, DEL
 }					t_req;
 
 /*
@@ -138,7 +139,9 @@ void				checkheader(int fd, t_proc **p, unsigned int player);
 void				littleendian(unsigned int *i);
 unsigned char		*load_champ(int *tab, t_proc **p, t_info *info);
 void				run(unsigned char *mem, t_proc **p);
-void				exec_wrapper(unsigned char *mem, t_proc *p);
+t_list				*common_lst(t_req req, t_proc *proc);
+//void				exec_wrapper(unsigned char *mem, t_proc *p);
+void				exec_wrapper(unsigned char *mem, t_list *lst);
 void				execute_order(unsigned char *mem, t_proc *p);
 void				error_vm(char *s);
 void				execute_error(t_proc *proc, int *param, unsigned int j);
