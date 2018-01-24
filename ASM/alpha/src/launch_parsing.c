@@ -56,7 +56,7 @@ _Bool			launch_parsing(char *filepath, t_order ***tab, t_header *hdr, \
 {
 	char		*tmp;
 
-	if (!filepath || ((fle->fd = open(filepath, O_RDONLY | O_SYMLINK)) < 0))
+	if (!filepath || ((fle->fd = open(filepath, O_RDONLY/* | O_SYMLINK*/)) < 0))
 		error("[ERR] : opening failed on filepath");
 	while ((fle->ret = get_next_line(fle->fd, &fle->line)) == 1)
 	{
