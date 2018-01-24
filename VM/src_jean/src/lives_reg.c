@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 18:50:21 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/22 06:20:15 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/24 17:36:12 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	lives_reg(t_req request, int num, t_info *info, t_proc *proc)
 			if (num == info->id_player[i])
 			{
 				last_id = num;
-				ft_printf("[LIVE(cy:%04u)] : le processus %04u (player %d) dit\
+				ft_printf("\n[LIVE(cy:%04u)] : le processus %04u (player %d) dit\
  que le joueur %d(%s) est en vie\n", global_timer(CHECK), proc->pid,\
 proc->champ.id, info->id_player[i], info->name[i]);
 				return ;
@@ -44,6 +44,5 @@ proc->champ.id, info->id_player[i], info->name[i]);
 				return ;
 			}
 		ft_printf("Stalemate : no player has ever been declared alive.\n");
-		//to add : stalemate message
 	}
 }

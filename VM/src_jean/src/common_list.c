@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 04:24:24 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/22 06:22:50 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/24 17:26:44 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,19 @@ static void		clean_link(void *content, size_t size)
 static t_list	*seek_link(t_list **alst, void *pattern)
 {
 	t_list	*buf;
+	t_list	*parent;
 	
 	if (!(alst && *alst))
 		return (NULL);
 	buf = *alst;
+	parent = NULL;
 	while (buf && (buf->content != pattern))
+	{
+		parent = buf;
 		buf = buf->next;
-	return (buf);
+	}
+	return (parent);
+	//return (buf);
 }
 
 /*
@@ -44,9 +50,9 @@ static void		ft_lstpop(t_list **target)
 
 	if (target && *target && (*target)->next)
 	{
-		record = (*target)->next;
-		ft_lstdelone(target, &clean_link);
-		*target = record;
+		record = (*target)->next->next;
+		ft_lstdelone(&((*target)->next), &clean_link);
+		(*target)->next = record;
 	}
 }
 

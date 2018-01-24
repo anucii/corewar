@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 15:21:39 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/08 15:26:28 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/24 16:53:03 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_child(t_proc *child)
 	if (info->opt[0] || !info->opt[3])
 		return ;
 	i = -1;
-	ft_printf("[NEWBORN (cy:%u)]: player %s(no %d), pid = %04u, pc = %04u, \
+	ft_printf("\n[NEWBORN (cy:%u)]: player %s(no %d), pid = %04u, pc = %04u, \
 carry:%s\n", global_timer(CHECK), child->champ.name, child->champ.id,\
 child->pid, child->pc, child->carry ? "TRUE" : "FALSE");
 	ft_printf("> Registers:\n");

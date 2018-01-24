@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/22 05:49:25 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/24 17:43:10 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,6 @@ void			run(unsigned char *mem, t_proc **p)
 					return ;
 		}
 		//c = c ? !c : new_round(p, info, i, &c);
-		c = c ? !c : new_round(p, info, 0, &c);
+		c = c ? !c : new_round(p, info, -1, &c);
 	}
 }
