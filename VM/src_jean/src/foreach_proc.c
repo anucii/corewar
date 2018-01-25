@@ -6,38 +6,36 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:40:47 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/28 18:47:13 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/25 16:56:37 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 **	Applies the function passed by address to each element of the processes
-**	array whose index is strictly inferior to max
+**	list; 
+**	the 'next' variable is here to secure the case where the pointee is deleted
+**	by the called function (e.g kill())
 */
 
 #include "vm.h"
 
 static void	apply(t_proc **ptr_proc, void (*func)(t_proc **))
 {
+	t_proc	*next;
+
 	if (!(ptr_proc && *ptr_proc && func))
 		return ;
+	next = (*ptr_proc)->next;
 	func(ptr_proc);
-	if ((*ptr_proc) && (*ptr_proc)->children)
-		apply(&((*ptr_proc)->children), func);
+	if (next)
+		apply(&next, func);
 	else
 		return ;
 }
 
-void		foreach_proc(t_proc **tab, unsigned int max, void (*func)(t_proc **))
+void		foreach_proc(t_proc **p, void (*func)(t_proc **))
 {
-	unsigned int	i;
-
-	if (!(tab && func))
+	if (!(p && func))
 		return ;
-	i = 0;
-	while (i < max)
-	{
-		apply(&tab[i], func);
-		i++;
-	}
+	apply(p, func);
 }

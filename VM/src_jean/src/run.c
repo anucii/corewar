@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/18 12:59:52 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/25 19:06:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,37 +74,30 @@ p->champ.id);
 }
 
 /*
-**	exec_wrapper() enables the handling of the execution of children
+**	exec_wrapper() enables the handling of the execution of next
 **	processes when needed.
 */
 
 void	exec_wrapper(unsigned char *mem, t_proc *p)
 {
-	//t_proc	*tmp;
+	t_proc	*next;
 
-
-	if (p->children)
-		exec_wrapper(mem, p->children);
+	if (!p)
+		return ;
+	next = p->next;
 	execute_order(mem, p);
-	/*
-	tmp = p;
-	while (tmp)
-	{
-		execute_order(mem, tmp);
-		tmp = tmp->children;
-	}
-	*/
+	if (next)
+		exec_wrapper(mem, next);
 }
 
-static _Bool	new_round(t_proc **p, t_info *info, ssize_t i, _Bool *c)
+static _Bool	new_round(t_proc **p, t_info *info, _Bool *c)
 {
 	print_board(p, info);//necessary?
-	atropos(p, info->nb_player);
+	atropos(p);
 	timer(REINIT);
-	while (++i < (ssize_t)info->nb_player)
-		*c |= p[i] ? 1 : 0;
+	*c |= (*p != NULL);
 	deadline(DECR);
-	foreach_proc(p, info->nb_player, &reinit_life_status);
+	foreach_proc(p, &reinit_life_status);
 	return (*c);
 }
 
@@ -116,7 +109,6 @@ static _Bool	new_round(t_proc **p, t_info *info, ssize_t i, _Bool *c)
 void			run(unsigned char *mem, t_proc **p)
 {
 	_Bool	c;
-	ssize_t	i;
 	t_info	*info;
 
 	if (!(mem && p))
@@ -127,16 +119,13 @@ void			run(unsigned char *mem, t_proc **p)
 	{
 		while ((timer(CHECK) < deadline(CHECK)) && (!(c = dump_mem(mem))))
 		{
-			i = (ssize_t)info->nb_player;
-			while (--i >= 0)
-				if (p[i])
-					exec_wrapper(mem, p[i]);
+			exec_wrapper(mem, *p);
 			print_board(p, info);
 			timer(INCR);
 			if (info->opt[0])
 				if (!ctrl_speed(info))
 					return ;
 		}
-		c = c ? !c : new_round(p, info, i, &c);
+		c = c ? !c : new_round(p, info, &c);
 	}
 }

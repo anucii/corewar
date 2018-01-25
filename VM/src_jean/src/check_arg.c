@@ -6,26 +6,28 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/04 16:12:24 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:15:04 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void		prepare_pars(t_proc ****p, int *tab, t_info *info, int index)
+static void		prepare_pars(t_proc **p, int *tab, t_info *info, int index)
 {
 	if (tab[index] == -1)
 	{
 		ft_printf("Error : Open failed on file [%s]", info->name);
 		error_vm("");
 	}
+	/*
 	else if (index > 0)
 	{
 		(**p) = (t_proc**)realloc((**p), sizeof(t_proc) * index + 1);
 		if ((**p) == NULL)
 			error_vm("Ft. Realloc() failed");
 	}
-	parse_header(tab[index], &(**p)[index], info);
+	*/
+	parse_header(tab[index], p, info);
 }
 
 static void		check_file(int **tab, int *index)
@@ -70,7 +72,7 @@ static _Bool	check_opt(t_info *info, char **arg, int *index, int id)
 **						sert aussi d'index pour le tableau (int *tab) de FD
 */
 
-t_info			*check_arg(t_proc ***p, unsigned char **arena,\
+t_info			*check_arg(t_proc **p, unsigned char **arena,\
 		char **argv, int argc)
 {
 	t_info		*info;
@@ -89,14 +91,14 @@ t_info			*check_arg(t_proc ***p, unsigned char **arena,\
 			check_file(&tab, index);
 			tab[index[1]] = open(argv[index[0]], O_RDONLY);
 			strcpystatic(&info->name[index[1]], argv[index[0]]);
-			prepare_pars(&p, tab, info, index[1]);
+			prepare_pars(p, tab, info, index[1]);
 		}
 	}
 	if (index[1] == -1)
 		print_usage("");
 	info_player(info, index[1] + 1);
 	//info->nb_player = index[1] + 1;
-	*arena = load_champ(tab, *p, info);
+	*arena = load_champ(tab, p, info);
 	ft_memdel((void**)&tab);
 	return (info);
 }

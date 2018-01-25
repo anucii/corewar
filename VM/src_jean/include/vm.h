@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/19 17:33:57 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/25 18:33:34 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef	struct		s_proc
 	int				cc;
 	int				c_opc;
 	t_champ			champ;
-	struct s_proc	*children;
+	struct s_proc	*next;
 }					t_proc;
 
 /*
@@ -110,7 +110,7 @@ typedef struct		s_info
 
 typedef enum		e_req
 {
-					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT
+					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT, HDR_INIT
 }					t_req;
 
 /*
@@ -119,8 +119,7 @@ typedef enum		e_req
 **	when to put an end to each of the processes life
 */
 
-void				foreach_proc(t_proc **tab, unsigned int max,\
-		void (*func)(t_proc **));
+void				foreach_proc(t_proc **p, void (*func)(t_proc **));
 
 int					timer(t_req request);
 int					global_timer(t_req request);
@@ -129,7 +128,7 @@ unsigned int		nbr_live(t_req request);
 
 unsigned int		new_pid(void);
 _Bool				chronos(t_proc *proc, t_req request, unsigned int player);
-void				atropos(t_proc **proc_tab, unsigned int max);
+void				atropos(t_proc **proc_hdr);
 void				kill_proc(t_proc **ptr_proc);
 
 unsigned int		new_player(void);
@@ -152,6 +151,12 @@ void				lives_reg(t_req request, int num, t_info *info,\
 		t_proc *proc);
 t_info				*get_info(t_info **p_info);
 unsigned int		get_pid(t_req req);
+
+void				proc_add(t_proc **proc_hdr, t_proc *link);
+void				proc_append(t_proc **proc_hdr, t_proc *link);
+void				proc_pop(t_proc **proc_hdr, t_proc *link);
+t_proc				*proc_dup(t_proc **proc_hdr, t_proc *link);
+t_proc				**proc_hdr(t_req req);
 
 typedef				void (*t_f_op)(t_proc **, unsigned char *);
 
@@ -202,11 +207,11 @@ void				carry(t_proc ***p, unsigned int val);
 
 void			print_child(t_proc *child);
 void			print_proc(t_proc **proc);
-int				count_proc(t_proc **tab, t_info *info);
+int				count_proc(t_proc **tab);
 void			print_board(t_proc **tab, t_info *info);
 
 void			error_vm(char *s);
-t_info			*check_arg(t_proc ***prec, unsigned char **arena, char **argv, int argc);
+t_info			*check_arg(t_proc **hdr, unsigned char **arena, char **argv, int argc);
 void			parse_header(int fd, t_proc **p, t_info *info);
 void			info_player(t_info *info, int nb_player);
 void			init_ll(t_info *info);

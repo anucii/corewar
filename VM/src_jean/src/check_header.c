@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/15 16:06:33 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:54:17 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,24 @@ static char	*get_name(int fd)
 	return (ft_strdup(name));
 }
 
-static void		init_proc(t_proc ***p, t_info *info, int fd)
+static void		init_proc(t_proc **p, t_info *info, int fd)
 {
 	static int	color = 1;
 	static int	index = -1;
+	t_proc		*new;
 
-	(**p) = ft_memalloc(sizeof(t_proc));
-	(**p)->color = color;
-	(**p)->carry = 0;
-	(**p)->pc = 0;
-	(**p)->cc = 0;
-	(**p)->c_opc = 0;
-	(**p)->pid = get_pid(INCR);
-	(**p)->champ.id = info->id_player[++index];
-	(**p)->reg[0] = (**p)->champ.id;
-	(**p)->children = NULL;
-	(**p)->champ.name = get_name(fd);
+	new = ft_memalloc(sizeof(t_proc));
+	new->color = color;
+	new->carry = 0;
+	new->pc = 0;
+	new->cc = 0;
+	new->c_opc = 0;
+	new->pid = get_pid(INCR);
+	new->champ.id = info->id_player[++index];
+	new->reg[0] = new->champ.id;
+	new->next = NULL;
+	new->champ.name = get_name(fd);
+	proc_add(p, new);
 	color++;
 }
 
@@ -69,7 +71,7 @@ void	parse_header(int fd, t_proc **p, t_info *info)
 		ft_printf("Error : %s has an invalid header", info->name);
 		error_vm("");
 	}
-	init_proc(&p, info, fd);
+	init_proc(p, info, fd);
 	lseek(fd, PROG_NAME_LENGTH + 8, SEEK_SET);
 	read(fd, i, 4);
 	littleendian(&i[0]);
