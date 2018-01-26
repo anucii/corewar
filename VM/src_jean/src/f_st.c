@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/18 15:08:45 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/26 20:28:11 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ void	f_st(t_proc **proc, unsigned char *mem)
 		return (execute_error(*proc, param, size));
 	if (param[1] == T_REG)
 	{
-		(*proc)->reg[mem[idx[2]] - 1] =
-			(*proc)->reg[mem[idx[1]] - 1];
+		(*proc)->reg[mem[idx[1]] - 1] =
+			(*proc)->reg[mem[idx[0]] - 1];
+		info = get_info(NULL);
+		if (info->opt[3] && !info->opt[0])
+			ft_printf("\n\t\t\tstore %d(from r[%d]) @r[%d]",\
+					(*proc)->reg[mem[idx[0]] - 1], mem[idx[1] - 1],\
+					(*proc)->reg[mem[idx[1] - 1]]);
 		(*proc)->pc = ((*proc)->pc + 4) % MEM_SIZE;
 	}
 	else

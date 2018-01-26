@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/26 16:14:45 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/26 19:28:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void		init_proc(t_proc **p, t_info *info, int fd)
 	new->champ.name = get_name(fd);
 	proc_add(p, new);
 	color++;
-	ft_printf("[DBG] turn %d : new_champ = %s (id %d), reg1 = %d(pid %d)\n", index, new->champ.name,\
-			new->champ.id, new->reg[0], new->pid);//DBG
+//	ft_printf("[DBG] turn %d : new_champ = %s (id %d), reg1 = %d(pid %d)\n", index, new->champ.name,\
+//			new->champ.id, new->reg[0], new->pid);//DBG
 }
 
 /*

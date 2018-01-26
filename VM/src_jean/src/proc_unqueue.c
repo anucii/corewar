@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:07:27 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/26 18:57:29 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/26 19:15:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ t_proc		*proc_unqueue(void)
 		get_depth(buf, &depth);
 		first = 0;
 	}
-	ft_printf("[DBG] depth: %d\n", depth);
+//	ft_printf("[DBG] depth: %d\n", depth);
 	return (unqueue(buf, &depth, REINIT));
 }

@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 13:57:33 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/26 18:47:17 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/26 20:27:30 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ unsigned char	*load_champ(int *tab, t_proc **p, t_info *info)
 	}
 	while ((buf = proc_unqueue()) && (i < info->nb_player))
 	{
-		ft_printf("[DBG:load_champ()]proc %d @ pc:%d (player %d, %s)\n",\
-				buf->pid, buf->pc, buf->champ.id, buf->champ.name);
+	//	ft_printf("[DBG:load_champ()]proc %d @ pc:%d (player %d, %s)\n",\
+	//			buf->pid, buf->pc, buf->champ.id, buf->champ.name);
 		lseek(tab[i], PROG_NAME_LENGTH + 8, SEEK_SET);
 		read(tab[i], size, 4);
 		littleendian(&size[0]);
