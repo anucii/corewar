@@ -6,11 +6,17 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 11:44:04 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/04 16:45:39 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/26 19:08:53 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+static	void	error_label(char *label)
+{
+	ft_printf("[ERR] : Label ["RED"%s"RESET"] ", label);
+	error("does not exist");
+}
 
 static	void	write_max(char *param, unsigned char c, int fd)
 {
@@ -72,7 +78,8 @@ void			labelcall(t_order **champ, int fd, char *label, t_order *inst)
 	short			res;
 	unsigned short	max;
 
-	pos = deref_label(champ, label);
+	if ((pos = deref_label(champ, label)) == USHRT_MAX)
+		error_label(label);
 	res = pos - inst->pos;
 	max = 0xFFFF;
 	if (dir_as_addr(inst->op_code) == 1)

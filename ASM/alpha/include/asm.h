@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/26 15:48:51 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/26 19:10:09 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "op.h"
 # include "./libft/include/libft.h"
 # include <fcntl.h>
+# include <limits.h>
 
 # define SIZE_STRUCT	20
 # define HASH			'#'

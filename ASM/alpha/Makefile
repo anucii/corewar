@@ -38,7 +38,6 @@ SRC_FILE =	asm.c \
 			has_ocp.c \
 			new_name.c \
 			realloc_order.c \
-			
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
