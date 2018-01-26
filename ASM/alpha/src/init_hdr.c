@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 16:40:00 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/05 14:40:14 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/26 13:09:00 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_hdr(t_header *hdr, char *s)
 	if (!(hdr && s))
 		error("[ERR] : bad params to init header");
 	hdr->magic = COREWAR_EXEC_MAGIC;
-	if ((fd = open(s, O_RDONLY/* | O_SYMLINK*/)) < 0)
+	if ((fd = open(s, O_RDONLY | O_SYMLINK)) < 0)
 		error("[ERR] : opening failed on filepath");
 	if (ft_strlen(s) > 252)
 		error("[ERR] : FIle name to long (252 octet max)");

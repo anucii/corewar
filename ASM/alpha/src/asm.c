@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:22:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/05 14:37:21 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/26 14:36:52 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ int		main(int argc, char **argv)
 		error("Usage : ./parser <line content space-separated>");
 	init_hdr(&hdr, argv[argc - 1]);
 	file.nb_line = 0;
+	file.empty = 0;
 	if (!launch_parsing(argv[argc - 1], &tab, &hdr, &file))
-	{
-		ft_printf("[ERR] : parsing failure line %d", file.nb_line);
-		error("\n");
-	}
-	write_order_pos(tab, hdr.nb_struct);
+		error_parsing(file.nb_line + file.empty);
+	write_order_pos(tab, &file, hdr.nb_struct);
 	calc_prog_size(tab, &hdr);
 	writeinst(tab, &hdr);
+	ft_printf("Writing output program to %s\n", hdr.filename);
+	ft_strdel(&file.line);
 	ft_strdel(&hdr.filename);
 	free_order(tab, hdr.nb_struct);
-	ft_printf("Writing output program to %s\n", argv[argc - 1]);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 16:53:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/04 16:53:46 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/26 15:48:39 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ _Bool	empty_line(t_file *file, char *s)
 	if ((skip_blanks(&s) == -1) || ((*s == COMMENT_CHAR)\
 				|| !(s)))
 	{
+		file->empty += 1;
 		ft_strdel(&file->line);
 		return (1);
 	}

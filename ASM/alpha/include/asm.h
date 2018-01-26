@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2017/12/04 17:37:55 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/26 15:48:51 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_order
 	char		op_code;
 	short		pos;
 	short		size;
+	char		*failure;
 }				t_order;
 
 typedef struct	s_file
@@ -73,6 +74,7 @@ typedef struct	s_file
 	int			nb_line;
 	int			fd;
 	int			ret;
+	int			empty;
 }				t_file;
 
 void			init_hdr(t_header *hdr, char *s);
@@ -94,6 +96,10 @@ _Bool			label_param(char *s);
 _Bool			digit_param(char *s);
 int				multi_split(char ***tokens, char *s);
 void			error(char *s);
+void			error_parsing(int n);
+void			error_param(char *s, char *failure);
+void			error_header(char *s);
+void			error_file(char *s);
 void			labelcall(t_order **champ, int fd, char *label, t_order *inst);
 int				deref_label(t_order **champ, char *label);
 void			bigendian(unsigned int *i, unsigned short *s);
@@ -104,7 +110,7 @@ void			free_order(t_order **tab, int size);
 void			free_doublechar(char **tab, int size);
 _Bool			dir_as_addr(char op_code);
 _Bool			has_ocp(char op_code);
-void			write_order_pos(t_order **tab, int last);
+void			write_order_pos(t_order **tab, t_file *file, int last);
 _Bool			dir_as_addr(char op_code);
 void			write_order_size(t_order *slot);
 char			*new_name(t_header *file);

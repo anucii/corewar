@@ -6,13 +6,13 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:29:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/26 14:46:26 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/26 14:53:02 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static _Bool	print_error(char *instr, int nb)
+static _Bool	p_e(char *instr, int nb)
 {
 	ft_printf(RED"[%s] instr need [%d] params on line :\n", instr, nb);
 	return (0);
@@ -56,8 +56,7 @@ _Bool			pars_param(char **param, int max, t_order *slot, ssize_t op_idx)
 			slot->nb_param = g_op_tab[index].nb_param;
 			slot->param = ft_memalloc(sizeof(char**) * slot->nb_param);
 			if ((max - op_idx) != (g_op_tab[index].nb_param + 1))
-				return (print_error(g_op_tab[index].name,
-						g_op_tab[index].nb_param));
+				return (p_e(g_op_tab[index].name, g_op_tab[index].nb_param));
 			if (!ini_ty_param(&g_op_tab[index], slot, param, op_idx))
 			{
 				index = -1;

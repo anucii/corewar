@@ -1,4 +1,4 @@
 .name ""
 .comment ""
 
-live  %:test
+zjmp %:test

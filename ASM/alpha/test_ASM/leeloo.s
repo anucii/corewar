@@ -3,7 +3,7 @@
 	
 begin:	ld %0,r6
 jump:	zjmp %:deb
-	
+
 pare:	st r16,:begin -52
 	st r16,:begin -44
 	st r16,:begin -52
