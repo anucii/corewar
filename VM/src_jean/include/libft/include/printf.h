@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 14:43:40 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/05 14:43:41 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/26 17:00:01 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-# define BUFF_SIZE_P 256
+# define BUFF_SIZE_P 4096
 
 # define RESET "\033[0m"
 # define BLACK "\033[1;90m"
