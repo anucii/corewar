@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/25 18:33:34 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/26 18:38:31 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void				proc_add(t_proc **proc_hdr, t_proc *link);
 void				proc_append(t_proc **proc_hdr, t_proc *link);
 void				proc_pop(t_proc **proc_hdr, t_proc *link);
 t_proc				*proc_dup(t_proc **proc_hdr, t_proc *link);
+t_proc				*proc_unqueue(void);
 t_proc				**proc_hdr(t_req req);
 
 typedef				void (*t_f_op)(t_proc **, unsigned char *);

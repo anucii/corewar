@@ -75,6 +75,7 @@ SRC_FILE = 	main.c \
 			proc_add.c \
 			proc_pop.c \
 			proc_dup.c \
+			proc_unqueue.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
