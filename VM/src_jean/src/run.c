@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/29 14:40:58 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/29 16:08:35 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,14 @@ void	exec_wrapper(unsigned char *mem, t_proc *p)
 
 static _Bool	new_round(t_proc **p, t_info *info, _Bool *c)
 {
-	print_board(p, info);//necessary?
+	_Bool	check;
+
+	check = 0;
+	print_board(p, info);
 	atropos(p);
 	timer(REINIT);
-	*c |= (*p != NULL);
+	check |= (*p != NULL);
+	*c = check;
 	deadline(DECR);
 	foreach_proc(p, &reinit_life_status);
 	return (*c);
@@ -115,7 +119,7 @@ void			run(unsigned char *mem, t_proc **p)
 		return ;
 	c = 1;
 	info = get_info(NULL);
-	while (c /*&& deadline(CHECK) > 0*/)
+	while (c)
 	{
 		while ((timer(CHECK) < deadline(CHECK)) && (!(c = dump_mem(mem))))
 		{
@@ -126,6 +130,9 @@ void			run(unsigned char *mem, t_proc **p)
 				if (!ctrl_speed(info))
 					return ;
 		}
-		c = c ? !c : new_round(p, info, &c);
+		if (c && (deadline(CHECK) < 0))
+			new_round(p, info, &c);
+		else
+			c = c ? !c : new_round(p, info, &c);
 	}
 }
