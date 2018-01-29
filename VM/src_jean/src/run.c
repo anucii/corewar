@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/29 17:10:24 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/29 20:42:14 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,26 +80,19 @@ p->champ.id);
 
 void	exec_wrapper(unsigned char *mem, t_proc *p)
 {
-	t_proc	*next;
-
 	if (!p)
 		return ;
-	next = p->next;
 	execute_order(mem, p);
-	if (next)
-		exec_wrapper(mem, next);
+	if (p->next)
+		exec_wrapper(mem, p->next);
 }
 
 static _Bool	new_round(t_proc **p, t_info *info, _Bool *c)
 {
-	_Bool	check;
-
-	check = 0;
 	print_board(p, info);
 	atropos(p);
 	timer(REINIT);
-	check |= (*p != NULL);
-	*c = check;
+	*c = (*p != NULL);
 	deadline(DECR);
 	foreach_proc(p, &reinit_life_status);
 	return (*c);
@@ -119,20 +112,17 @@ void			run(unsigned char *mem, t_proc **p)
 		return ;
 	c = 1;
 	info = get_info(NULL);
-	while (c)
+	while (1)
 	{
-		while ((timer(CHECK) < deadline(CHECK)) && (!(c = dump_mem(mem))))
-		{
-			exec_wrapper(mem, *p);
-			print_board(p, info);
-			timer(INCR);
-			if (info->opt[0])
-				if (!ctrl_speed(info))
-					return ;
-		}
-		if (c && (deadline(CHECK) < 0))
+		exec_wrapper(mem, *p);
+		print_board(p, info);
+		if (!c || dump_mem(mem))
+			return ;
+		if (timer(CHECK) >= deadline(CHECK))
 			new_round(p, info, &c);
-		else
-			c = c ? !c : new_round(p, info, &c);
+		timer(INCR);
+		if (info->opt[0])
+			if (!ctrl_speed(info))
+				return ;
 	}
 }

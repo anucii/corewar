@@ -6,13 +6,11 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/25 16:37:43 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/29 18:12:28 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-unsigned int	g_n_players = 0;
 
 int				main(int argc, char **argv)
 {
