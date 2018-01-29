@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/01/29 16:19:20 by jgonthie          #+#    #+#              #
+#    Updated: 2018/01/29 16:24:58 by jgonthie         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = asm
 NAME_2 = corewar
 NAME_3 = crack
@@ -5,12 +17,13 @@ NAME_3 = crack
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 
+LIB_PATH = $(INC_PATH)libft/
 INC_PATH = ./include/
 INC = $(addprefix -I , $(INC_PATH))
 
-SRC_ASM = $(addprefix $(SRC_PATH), $(SRC_FILE_ASM))
-SRC_COREWAR = $(addprefix $(SRC_PATH), $(SRC_FILE_COREWAR))
-SRC_CRACK = $(addprefix $(SRC_PATH), $(SRC_FILE_CRACK))
+SRC_ASM = $(addprefix $(SRC_PATH_ASM), $(SRC_FILE_ASM))
+SRC_COREWAR = $(addprefix $(SRC_PATH_COREWAR), $(SRC_FILE_COREWAR))
+SRC_CRACK = $(addprefix $(SRC_PATH_CRACK), $(SRC_FILE_CRACK))
 
 SRC_PATH_ASM = ./src_asm/
 SRC_PATH_COREWAR = ./src_corewar/
@@ -147,35 +160,40 @@ all: $(NAME) $(NAME_2) $(NAME_3)
 $(NAME) : $(OBJ_ASM)
 	@make -C $(LIB_PATH)
 	@$(CC) $(OBJ_ASM) -L $(LIB_PATH) -lft -o $(NAME)
-
-$(NAME_2) : $(OBJ_COREWAR)
-	@make -C $(LIB_PATH)
-	@$(CC) $(OBJ_COREWAR) -L $(LIB_PATH) -lft -o $(NAME_2)
-
-$(NAME_3) : $(OBJ_CRACK)
-	@make -C $(LIB_PATH)
-	@$(CC) $(OBJ_CRACK) -L $(LIB_PATH) -lft -o $(NAME_3)
+	@echo "\033[32masm success.\033[0m"
 
 $(OBJ_PATH_ASM)%.o: $(SRC_PATH_ASM)%.c
 	@mkdir -p $(OBJ_PATH_ASM)
 	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
+$(NAME_2) : $(OBJ_COREWAR)
+	@$(CC) $(OBJ_COREWAR) -L $(LIB_PATH) -lft -lcurses -L $(INC_PATH) -lfmod -o $(NAME_2)
+	@echo "\033[32mcorewar success.\033[0m"
+
 $(OBJ_PATH_COREWAR)%.o: $(SRC_PATH_COREWAR)%.c
 	@mkdir -p $(OBJ_PATH_COREWAR)
 	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
+
+$(NAME_3) : $(OBJ_CRACK)
+	@$(CC) $(OBJ_CRACK) -L $(LIB_PATH) -lft -o $(NAME_3)
+	@echo "\033[32mcrack success.\033[0m"
 
 $(OBJ_PATH_CRACK)%.o: $(SRC_PATH_CRACK)%.c
 	@mkdir -p $(OBJ_PATH_CRACK)
 	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 clean :
-	@rm -Rf $(OBJ_PATH_ASM)
-	@rm -Rf $(OBJ_PATH_COREWAR)
-	@rm -Rf $(OBJ_PATH_CRACK)
+	@make clean -C $(LIB_PATH)
+	@rm -rf $(OBJ_PATH_ASM)
+	@rm -rf $(OBJ_PATH_COREWAR)
+	@rm -rf $(OBJ_PATH_CRACK)
+	@echo "\033[31mclean success.\033[0m"
 
 fclean : clean
-	@rm -Rf $(NAME)
-	@rm -Rf $(NAME_2)
-	@rm -Rf $(NAME_3)
+	@make fclean -C $(LIB_PATH)
+	@rm -rf $(NAME)
+	@rm -rf $(NAME_2)
+	@rm -rf $(NAME_3)
+	@echo "\033[31mfclean success.\033[0m"
 
 re: fclean all

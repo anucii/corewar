@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/04 15:07:04 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/29 16:28:13 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@
 # include <math.h>
 # include <stdio.h>
 
-# define COREWAR_EXEC_MAGIC	0xea83f3
-# define PROG_NAME_LENGTH	(128)
-# define COMMENT_LENGTH		(2048)
-# define MEM_SIZE			(4*1024)
-# define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
-# define REG_NUMBER			16
+typedef struct	s_op
+{
+	char		*name;
+	int			nb_param;
+	int			tp_param[3];
+	char		op_code;
+	int			cycles;
+	char		*description;
+	_Bool		has_ocp;
+	_Bool		bool_2;
+}				t_op;
 
 extern t_op			g_op_tab[17];
 
