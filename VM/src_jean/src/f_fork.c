@@ -6,7 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:59 by jdaufin           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/01/22 05:18:26 by jdaufin          ###   ########.fr       */
+=======
+/*   Updated: 2018/01/29 17:11:11 by jdaufin          ###   ########.fr       */
+>>>>>>> db57eea64e3e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +28,7 @@ void	f_fork(t_proc **proc, unsigned char *mem)
 
 	s = ((short)mem[((*proc)->pc + 1) % MEM_SIZE] << 8) |
 		mem[((*proc)->pc + 2) % MEM_SIZE];
+<<<<<<< HEAD
 	tmp = (*proc);
 	while(tmp->children != NULL)
 		tmp = tmp->children;
@@ -35,6 +40,13 @@ void	f_fork(t_proc **proc, unsigned char *mem)
 	tmp->children->c_opc = 0;
 	common_lst(ADD, tmp->children);
 	print_child(tmp->children);
+=======
+	tmp = proc_dup(proc_hdr(CHECK), *proc);
+	tmp->pc = (((*proc)->pc + (s  % IDX_MOD)) % MEM_SIZE);
+	tmp->pid = get_pid(INCR);
+	tmp->c_opc = -1;
+	print_child(tmp);
+>>>>>>> db57eea64e3e
 	(*proc)->pc = ((*proc)->pc + 3) % MEM_SIZE;
 	return ;
 }

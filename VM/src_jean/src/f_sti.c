@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/18 15:09:19 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/29 16:57:13 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	int_on_mem(mem,
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
 			target);
-	/*
 	if (info->opt[3] && !info->opt[0])
-		ft_printf("store %d (%#05x) @ %04u\n", convert(mem, target, 0, 1),\
+		ft_printf("\n\t\t\tstore %d (%#4x) @ %04u", convert(mem, target, 0, 1),\
 				convert(mem, target, 0, 1), target);
-				*/
 	info->start = (*proc)->pc + ((s + t) % IDX_MOD);
 	info->end = info->start + 4;
 	if (info->opt[0])

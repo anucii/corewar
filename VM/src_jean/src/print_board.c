@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 19:28:36 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/08 15:18:05 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/25 18:35:21 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ static _Bool	test_cycle(int period)
 	return (0);
 }
 
-static void		print_hdr(t_proc **tab, t_info *info)
+static void		print_hdr(t_proc **tab)
 {
 	ft_printf("\n/* Periodic report */\n---------------------\n");
 	ft_printf("Current round:\nCynum(rel.): %d\tCynum(abs.): %d\tLives: %u\t\
 Processes: %d\n\n", timer(CHECK), global_timer(CHECK), nbr_live(CHECK),\
-count_proc(tab, info));
+count_proc(tab));
 }
 
 void			print_board(t_proc **p, t_info *info)
 {
 	if (info->opt[0] || !info->opt[3] || !test_cycle(info->opt[4]))
 		return ;
-	print_hdr(p, info);
-	foreach_proc(p, info->nb_player, &print_proc);
+	print_hdr(p);
+	foreach_proc(p, &print_proc);
 }

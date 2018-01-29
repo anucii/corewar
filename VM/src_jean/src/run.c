@@ -6,7 +6,11 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/01/24 17:43:10 by jdaufin          ###   ########.fr       */
+=======
+/*   Updated: 2018/01/29 20:42:14 by jdaufin          ###   ########.fr       */
+>>>>>>> db57eea64e3e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +52,7 @@ void	execute_order(unsigned char *mem, t_proc *p)
 	info = get_info(NULL);
 	while (i < 16)
 	{
-		if (mem[p->pc] == g_op_tab[i].op_code || p->c_opc != 0)
+		if (mem[p->pc] == g_op_tab[i].op_code || p->c_opc != -1)
 		{
 			if (p->cc == 0)
 				p->c_opc = i;
@@ -60,7 +64,7 @@ player:%d)", global_timer(CHECK), g_op_tab[p->c_opc].description, p->pid, p->pc,
 p->champ.id);
 				p->cc = 0;
 				g_op_tab[p->c_opc].func(&p, mem);
-				p->c_opc = 0;
+				p->c_opc = -1;
 				if (info->opt[3] && !info->opt[0])
 					ft_printf(" new_pc:%04u \n", p->pc);
 			}
@@ -74,13 +78,19 @@ p->champ.id);
 }
 
 /*
+<<<<<<< HEAD
 **	exec_wrapper() enables the handling of the execution of children
 **	processes when needed; its new version uses a general list (common to 
 **	all players) of the processes adresses.
+=======
+**	exec_wrapper() enables the handling of the execution of next
+**	processes when needed.
+>>>>>>> db57eea64e3e
 */
 
 void	exec_wrapper(unsigned char *mem, t_list *lst)
 {
+<<<<<<< HEAD
 	t_proc	**aproc;
 
 	if (!lst)
@@ -107,17 +117,28 @@ void	exec_wrapper(unsigned char *mem, t_list *lst)
 		tmp = tmp->children;
 	}
 	*/
+=======
+	if (!p)
+		return ;
+	execute_order(mem, p);
+	if (p->next)
+		exec_wrapper(mem, p->next);
+>>>>>>> db57eea64e3e
 }
 
-static _Bool	new_round(t_proc **p, t_info *info, ssize_t i, _Bool *c)
+static _Bool	new_round(t_proc **p, t_info *info, _Bool *c)
 {
+<<<<<<< HEAD
 	print_board(p, info);//necessary? -> the function printboard checks itself whether it should print or return
 	atropos(p, info->nb_player);
+=======
+	print_board(p, info);
+	atropos(p);
+>>>>>>> db57eea64e3e
 	timer(REINIT);
-	while (++i < (ssize_t)info->nb_player)
-		*c |= p[i] ? 1 : 0;
+	*c = (*p != NULL);
 	deadline(DECR);
-	foreach_proc(p, info->nb_player, &reinit_life_status);
+	foreach_proc(p, &reinit_life_status);
 	return (*c);
 }
 
@@ -129,15 +150,19 @@ static _Bool	new_round(t_proc **p, t_info *info, ssize_t i, _Bool *c)
 void			run(unsigned char *mem, t_proc **p)
 {
 	_Bool	c;
+<<<<<<< HEAD
 	//ssize_t	i;
+=======
+>>>>>>> db57eea64e3e
 	t_info	*info;
 
 	if (!(mem && p))
 		return ;
 	c = 1;
 	info = get_info(NULL);
-	while (c && deadline(CHECK) > 0)
+	while (1)
 	{
+<<<<<<< HEAD
 		while ((timer(CHECK) < deadline(CHECK)) && (!(c = dump_mem(mem))))
 		{
 	/*		i = (ssize_t)info->nb_player;
@@ -154,5 +179,17 @@ void			run(unsigned char *mem, t_proc **p)
 		}
 		//c = c ? !c : new_round(p, info, i, &c);
 		c = c ? !c : new_round(p, info, -1, &c);
+=======
+		exec_wrapper(mem, *p);
+		print_board(p, info);
+		if (!c || dump_mem(mem))
+			return ;
+		if (timer(CHECK) >= deadline(CHECK))
+			new_round(p, info, &c);
+		timer(INCR);
+		if (info->opt[0])
+			if (!ctrl_speed(info))
+				return ;
+>>>>>>> db57eea64e3e
 	}
 }

@@ -8,6 +8,7 @@ fail_val:	ld %48,r16	#value to display if replacement failed
 			sti r7,%:replaced,%1
 			sti r2,%0,%96
 			sti r7,%0,%90
+			st	r1,250
 			st	r2,42
 			st	r3,43
 replaced:	aff r16

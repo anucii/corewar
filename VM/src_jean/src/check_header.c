@@ -6,7 +6,11 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/01/26 16:08:52 by jgonthie         ###   ########.fr       */
+=======
+/*   Updated: 2018/01/29 17:10:36 by jdaufin          ###   ########.fr       */
+>>>>>>> db57eea64e3e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +37,31 @@ static char	*get_name(int fd)
 	return (ft_strdup(name));
 }
 
-static void		init_proc(t_proc ***p, t_info *info, int fd)
+static void		init_proc(t_proc **p, t_info *info, int fd)
 {
 	static int	color = 1;
 	static int	index = -1;
+	t_proc		*new;
 
-	(**p) = ft_memalloc(sizeof(t_proc));
-	(**p)->color = color;
-	(**p)->carry = 0;
-	(**p)->pc = 0;
-	(**p)->cc = 0;
-	(**p)->c_opc = 0;
-	(**p)->pid = get_pid(INCR);
-	(**p)->champ.id = info->id_player[++index];
-	(**p)->reg[0] = (**p)->champ.id;
-	(**p)->children = NULL;
-	(**p)->champ.name = get_name(fd);
+	new = ft_memalloc(sizeof(t_proc));
+	new->color = color;
+	new->carry = 0;
+	new->pc = 0;
+	new->cc = 0;
+	new->c_opc = -1;
+	new->pid = get_pid(INCR);
+	new->champ.id = info->id_player[++index];
+	new->reg[0] = new->champ.id;
+	new->next = NULL;
+	new->champ.name = get_name(fd);
+	proc_add(p, new);
 	color++;
+<<<<<<< HEAD
 	common_lst(ADD, **p);
+=======
+//	ft_printf("[DBG] turn %d : new_champ = %s (id %d), reg1 = %d(pid %d)\n", index, new->champ.name,\
+//			new->champ.id, new->reg[0], new->pid);//DBG
+>>>>>>> db57eea64e3e
 }
 
 /*
@@ -70,7 +81,7 @@ void	parse_header(int fd, t_proc **p, t_info *info)
 		ft_printf("Error : %s has an invalid header", info->name);
 		error_vm("");
 	}
-	init_proc(&p, info, fd);
+	init_proc(p, info, fd);
 	lseek(fd, PROG_NAME_LENGTH + 8, SEEK_SET);
 	read(fd, i, 4);
 	littleendian(&i[0]);

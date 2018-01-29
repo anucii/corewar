@@ -6,7 +6,11 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/01/24 16:47:07 by jdaufin          ###   ########.fr       */
+=======
+/*   Updated: 2018/01/29 16:09:17 by jdaufin          ###   ########.fr       */
+>>>>>>> db57eea64e3e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +26,35 @@
 
 void	kill_proc(t_proc **ptr_proc)
 {
-	t_proc	*record;
 	t_info	*info;
 
 	if (!(ptr_proc && *ptr_proc))
 		return ;
-	record = (*ptr_proc)->children;
 	if ((global_timer(CHECK) - (*ptr_proc)->life.last) <= deadline(CHECK))
 		return ;
-//	if ((*ptr_proc)->life.status)
-//		return ;
 	info = get_info(NULL);
 	if (info->opt[3] && !info->opt[0])
 		ft_printf("[DEATH (cy:%04u)]: Process %04u (player %d) hadn't lived \
-for %u cycles (CTD: %u)\n", global_timer(CHECK), (*ptr_proc)->pid, \
+for %u cycles (CTD: %d)\n", global_timer(CHECK), (*ptr_proc)->pid, \
 (*ptr_proc)->champ.id, global_timer(CHECK) - (*ptr_proc)->life.last, \
 deadline(CHECK));
+<<<<<<< HEAD
 	//if ((*ptr_proc)->champ.name)
 	//	free((*ptr_proc)->champ.name); => sigabort error : freed object not allocated
 	common_lst(DEL, *ptr_proc);
 	free(*ptr_proc);
 	*ptr_proc = record;
 	kill_proc(ptr_proc);
+=======
+	proc_pop(proc_hdr(CHECK), *ptr_proc);
+>>>>>>> db57eea64e3e
 }
 
-void	atropos(t_proc **tab, unsigned int max)
+void	atropos(t_proc **p)
 {
-	if (!tab)
+	if (!p)
 		return ;
-	foreach_proc(tab, max, &kill_proc);
+	foreach_proc(p, &kill_proc);
 }
 
 /*

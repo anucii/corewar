@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:09:44 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/18 15:53:03 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:29:50 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int		*checkocp(unsigned char *mem,  unsigned int op_code)
 	i = 0;
 	param = ft_memalloc(sizeof(int) * 3);
 	o[0] = *mem >> 6;
-	o[1] = bitwise(&o[1], 0, *mem);
-	if (op_code != 2 && op_code != 3 && op_code != 13)
+	o[1] = op_code != 16 ?  bitwise(&o[1], 0, *mem) : 0;
+	if (op_code != 2 && op_code != 3 && op_code != 13 && op_code != 16)
 		o[2] = bitwise(&o[2] , 1, *mem);
 	else
 		o[2] = 0;

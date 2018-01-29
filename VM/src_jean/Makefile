@@ -72,6 +72,11 @@ SRC_FILE = 	main.c \
 			count_proc.c \
 			print_child.c \
 			common_list.c \
+			proc_hdr.c \
+			proc_add.c \
+			proc_pop.c \
+			proc_dup.c \
+			proc_unqueue.c \
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 OBJ_PATH = ./obj/
