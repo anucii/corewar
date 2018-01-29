@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/26 19:28:43 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:10:36 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		init_proc(t_proc **p, t_info *info, int fd)
 	new->carry = 0;
 	new->pc = 0;
 	new->cc = 0;
-	new->c_opc = 0;
+	new->c_opc = -1;
 	new->pid = get_pid(INCR);
 	new->champ.id = info->id_player[++index];
 	new->reg[0] = new->champ.id;

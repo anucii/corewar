@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/29 16:08:35 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:10:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	execute_order(unsigned char *mem, t_proc *p)
 	info = get_info(NULL);
 	while (i < 16)
 	{
-		if (mem[p->pc] == g_op_tab[i].op_code || p->c_opc != 0)
+		if (mem[p->pc] == g_op_tab[i].op_code || p->c_opc != -1)
 		{
 			if (p->cc == 0)
 				p->c_opc = i;
@@ -60,7 +60,7 @@ player:%d)", global_timer(CHECK), g_op_tab[p->c_opc].description, p->pid, p->pc,
 p->champ.id);
 				p->cc = 0;
 				g_op_tab[p->c_opc].func(&p, mem);
-				p->c_opc = 0;
+				p->c_opc = -1;
 				if (info->opt[3] && !info->opt[0])
 					ft_printf(" new_pc:%04u \n", p->pc);
 			}
