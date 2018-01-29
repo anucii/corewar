@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/25 19:06:09 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/29 14:40:58 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void			run(unsigned char *mem, t_proc **p)
 		return ;
 	c = 1;
 	info = get_info(NULL);
-	while (c && deadline(CHECK) > 0)
+	while (c /*&& deadline(CHECK) > 0*/)
 	{
 		while ((timer(CHECK) < deadline(CHECK)) && (!(c = dump_mem(mem))))
 		{
