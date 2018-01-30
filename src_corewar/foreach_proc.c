@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:40:47 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/25 16:56:37 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/30 16:06:14 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,27 @@
 static void	apply(t_proc **ptr_proc, void (*func)(t_proc **))
 {
 	t_proc	*next;
+	t_proc	*tmp;
 
 	if (!(ptr_proc && *ptr_proc && func))
 		return ;
 	next = (*ptr_proc)->next;
-	func(ptr_proc);
-	if (next)
+	tmp = (*ptr_proc);
+	while (tmp != NULL)
+	{
+		func(&tmp);
+		if (tmp != next)
+		{
+			tmp = next;
+			if (next)
+			next = next->next;
+		}
+		else
+			next = tmp->next;
+	}/*
 		apply(&next, func);
 	else
-		return ;
+		return ;*/
 }
 
 void		foreach_proc(t_proc **p, void (*func)(t_proc **))

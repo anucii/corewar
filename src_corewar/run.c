@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/29 21:12:08 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:07:17 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,16 @@ p->champ.id);
 
 void	exec_wrapper(unsigned char *mem, t_proc *p)
 {
-	if (!p)
-		return ;
-	execute_order(mem, p);
-	if (p->next)
-		exec_wrapper(mem, p->next);
+	t_proc		*tmp;
+
+	tmp = p;
+	while (tmp)
+	{
+		execute_order(mem, tmp);
+		tmp = tmp->next;
+	}/*
+	while (p->next)
+		exec_wrapper(mem, p->next);*/
 }
 
 static _Bool	new_round(t_proc **p, t_info *info, _Bool *c)
