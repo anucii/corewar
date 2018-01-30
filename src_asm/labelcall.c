@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 11:44:04 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/26 19:08:53 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:22:48 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			labelcall(t_order **champ, int fd, char *label, t_order *inst)
 		error_label(label);
 	res = pos - inst->pos;
 	max = 0xFFFF;
-	if (dir_as_addr(inst->op_code) == 1)
+	if (dir_as_addr(inst->op_code) == 1 || str_t(0, 0) == T_IND || str_t(-1,0))
 	{
 		if (res < 0)
 		{

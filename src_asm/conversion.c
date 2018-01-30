@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 12:27:23 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/04 16:31:45 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:23:59 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ static void				writeparams(t_order **champ, int fd, t_order *inst)
 	{
 		if (inst->ty_param[i] == 1)
 			timetoatoi(0, 1, inst->param[i], fd);
-		else if (inst->ty_param[i] == 2)
+		else if (inst->ty_param[i] == 2 && str_t(1, T_DIR))
 		{
 			if (inst->param[i][j] == LABEL_CHAR)
 				labelcall(champ, fd, inst->param[i], inst);
 			else
 				timetoatoi(inst->op_code, 0, inst->param[i], fd);
 		}
-		else if (inst->ty_param[i] == 4)
+		else if (inst->ty_param[i] == 4 && str_t(1, T_IND))
 		{
 			if (inst->param[i][j] == LABEL_CHAR)
 				labelcall(champ, fd, inst->param[i], inst);

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/26 19:10:09 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:22:19 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			error_param(char *s, char *failure);
 void			error_header(char *s);
 void			error_file(char *s);
 void			labelcall(t_order **champ, int fd, char *label, t_order *inst);
+int				str_t(int cmd, int type);
 int				deref_label(t_order **champ, char *label);
 void			bigendian(unsigned int *i, unsigned short *s);
 void			timetoatoi(unsigned int j, unsigned char c, char *par, int fd);

@@ -6,7 +6,7 @@
 #    By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 16:19:20 by jgonthie          #+#    #+#              #
-#    Updated: 2018/01/29 21:14:28 by jgonthie         ###   ########.fr        #
+#    Updated: 2018/01/30 13:24:48 by jdaufin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME_2 = corewar
 NAME_3 = crack
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra
 
 LIB_PATH = $(INC_PATH)libft/
 INC_PATH = ./include/
@@ -49,6 +49,7 @@ SRC_FILE_ASM =		asm.c \
 					op.c \
 					conversion.c \
 					labelcall.c \
+					str_t.c \
 					deref_label.c \
 					calc_prog_size.c \
 					free.c \
