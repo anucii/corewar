@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/29 21:12:22 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:42:13 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	kill_proc(t_proc **ptr_proc)
 	if ((global_timer(CHECK) - (*ptr_proc)->life.last) <= deadline(CHECK))
 		return ;
 	info = get_info(NULL);
-	if (info->opt[3] && !info->opt[0])
+	if (info->opt[3] && info->opt[4] && !info->opt[0])
 		ft_printf("[DEATH (cy:%04u)]: Process %04u (player %d) hadn't lived \
 for %u cycles (CTD: %d)\n", global_timer(CHECK), (*ptr_proc)->pid, \
 (*ptr_proc)->champ.id, global_timer(CHECK) - (*ptr_proc)->life.last, \

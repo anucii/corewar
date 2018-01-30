@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/29 21:12:08 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:47:27 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ void	execute_order(unsigned char *mem, t_proc *p)
 				p->c_opc = i;
 			if (++(p->cc) == g_op_tab[p->c_opc].cycles)
 			{
-				if (info->opt[3] && !info->opt[0])
+				if (info->opt[3] && info->opt[4] && !info->opt[0])
 					ft_printf("[EXEC (cy:%04u)]: %s (proc:%04u, pc:%04u,  \
 player:%d)", global_timer(CHECK), g_op_tab[p->c_opc].description, p->pid, p->pc,\
 p->champ.id);
 				p->cc = 0;
 				g_op_tab[p->c_opc].func(&p, mem);
 				p->c_opc = -1;
-				if (info->opt[3] && !info->opt[0])
+				if (info->opt[3] && info->opt[4] && !info->opt[0])
 					ft_printf(" new_pc:%04u \n", p->pc);
 			}
 			color_pc(p, info, mem);

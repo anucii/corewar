@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:15:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/29 17:30:15 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:44:20 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ int				deadline(t_req request)
 	{
 		info = get_info(NULL);
 		checks++;
-		if (info->opt[3] && !info->opt[0])
-			ft_printf("[DEADLINE (cy:%u)]: %u lives recorded (check no %u), new CTD = ",\
-					global_timer(CHECK), nbr_live(CHECK), checks);
+		if (info->opt[3] && info->opt[4] && !info->opt[0])
+			ft_printf("[DEADLINE (cy:%u)]: %u lives recorded (check no %u), \
+new CTD = ", global_timer(CHECK), nbr_live(CHECK), checks);
 		if ((nbr_live(CHECK) >= NBR_LIVE) || (checks == MAX_CHECKS))
 		{
 			ret -= CYCLE_DELTA;
-			if (info->opt[3] && !info->opt[0])
+			if (info->opt[3] && info->opt[4] && !info->opt[0])
 				ft_printf("%d\n", ret);
 			checks = 0;
 			init_ll(get_info(NULL));
 		}
-		else if (info->opt[3] && !info->opt[0])
+		else if (info->opt[3] && info->opt[4] && !info->opt[0])
 			ft_printf("old CTD (ie %d)\n", ret);
 		nbr_live(REINIT);
 	}

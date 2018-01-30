@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 15:21:39 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/29 21:13:36 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:51:03 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_child(t_proc *child)
 	int		i;
 
 	info = get_info(NULL);
-	if (info->opt[0] || !info->opt[3])
+	if (info->opt[0] || !info->opt[3] || !info->opt[4])
 		return ;
 	i = -1;
 	ft_printf("\n[NEWBORN (cy:%u)]: player %s(no %d), pid = %04u, pc = %04u, \

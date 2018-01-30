@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 19:28:36 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/25 18:35:21 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:54:54 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			print_proc(t_proc **p)
 	int		i;
 
 	info = get_info(NULL);
-	if (info->opt[0] || !info->opt[3])
+	if (info->opt[0] || !info->opt[3] || !info->opt[4])
 		return ;
 	i = -1;
 	ft_printf("[PROC_STAT (cy:%u)]: player %s(no %d), pid = %04u, pc = %04u,\
@@ -48,7 +48,8 @@ cc = %d, carry:%s\n", global_timer(CHECK), (*p)->champ.name, (*p)->champ.id,\
 
 static _Bool	test_cycle(int period)
 {
-	if ((timer(CHECK) == deadline(CHECK)) || !(global_timer(CHECK) % period))
+	if ((timer(CHECK) == deadline(CHECK)) || (period && !(global_timer(CHECK)\
+					% period)))
 		return (1);
 	return (0);
 }
@@ -63,7 +64,8 @@ count_proc(tab));
 
 void			print_board(t_proc **p, t_info *info)
 {
-	if (info->opt[0] || !info->opt[3] || !test_cycle(info->opt[4]))
+	if (info->opt[0] || !info->opt[3] || !info->opt[4]\
+			|| !test_cycle(info->opt[4]))
 		return ;
 	print_hdr(p);
 	foreach_proc(p, &print_proc);

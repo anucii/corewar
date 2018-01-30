@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/26 20:28:11 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:46:04 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	f_st(t_proc **proc, unsigned char *mem)
 		(*proc)->reg[mem[idx[1]] - 1] =
 			(*proc)->reg[mem[idx[0]] - 1];
 		info = get_info(NULL);
-		if (info->opt[3] && !info->opt[0])
+		if (info->opt[3] && info->opt[4] && !info->opt[0])
 			ft_printf("\n\t\t\tstore %d(from r[%d]) @r[%d]",\
 					(*proc)->reg[mem[idx[0]] - 1], mem[idx[1] - 1],\
 					(*proc)->reg[mem[idx[1] - 1]]);

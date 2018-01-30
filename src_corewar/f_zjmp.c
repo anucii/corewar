@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:40:44 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/18 12:49:59 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:46:48 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	f_zjmp(t_proc **proc, unsigned char *mem)
 	else
 	{
 		(*proc)->pc = (((*proc)->pc + 3) % MEM_SIZE);
-		if (info->opt[3] && !info->opt[0])
+		if (info->opt[3] && info->opt[4] && !info->opt[0])
 			ft_printf(" [FAILED]");
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:35:02 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/29 16:54:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:45:28 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	f_live(t_proc **proc, unsigned char *mem)
 	val = chars_to_int(mem, (*proc)->pc + 1, 1);
 	chronos(*proc, LIVE, val);
 	info = get_info(NULL);
-	if (info->opt[3] && !info->opt[0])
+	if (info->opt[3] && info->opt[4] && !info->opt[0])
 		ft_printf("\n\t\t\tlive %d(%#4x)", val, val);
 	(*proc)->pc = ((*proc)->pc + 5) % MEM_SIZE;
 }
