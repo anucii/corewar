@@ -2,10 +2,10 @@
 [ $1 -a $2 -a $3 ] || echo "Usage: ./diff_report.sh <DUMP_VAL> <contendant1> <contendant2> ..."
 [ -x "./corewar" -a -x "./asm" ] || make
 [ -e "./CHAMPS/golem.cor" ] || ./asm ./CHAMPS/golem.s
-[ -e "./CHAMPS/andromaque.cor" ] || ./asm ./CHAMPS/andromaque.s 
+[ -e "./CHAMPS/allcmds.cor" ] || ./asm ./CHAMPS/allcmds.s 
 [ $1 ] && VAL=$1 || VAL=1586
 [ $2 ] && C1=$2 || C1="CHAMPS/golem.cor"
-[ $3 ] && C2=$3 || C2="CHAMPS/andromaque.cor"
+[ $3 ] && C2=$3 || C2="CHAMPS/allcmds.cor"
 [ $4 ] && C3=$4 || C3=""
 [ $5 ] && C4=$5 || C4=""
 
