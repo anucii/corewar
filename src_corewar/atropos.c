@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:55:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 17:42:13 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/31 13:26:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	kill_proc(t_proc **ptr_proc)
 
 	if (!(ptr_proc && *ptr_proc))
 		return ;
-	if ((global_timer(CHECK) - (*ptr_proc)->life.last) <= deadline(CHECK))
+	if ((global_timer(CHECK) - (*ptr_proc)->life.last) < deadline(CHECK))
 		return ;
 	info = get_info(NULL);
 	if (info->opt[3] && info->opt[4] && !info->opt[0])
