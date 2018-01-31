@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:16 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/18 15:07:31 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/01/31 15:08:00 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static unsigned int ldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 						+ (chars_to_short(mem, (*p_idx[i]), 0) % IDX_MOD)), 0)\
 					% IDX_MOD;
 		else
-			deref[i] = chars_to_short(mem, (*p_idx)[i], 0);
+			deref[i] = chars_to_short(mem, (*p_idx)[i], 1);
 	}
 	deref[0] = (proc->pc + ((deref[0] + deref[1]) % IDX_MOD)) % MEM_SIZE;
 	return (ret = chars_to_int(mem, deref[0], 1));
@@ -40,6 +40,7 @@ void	f_ldi(t_proc **proc, unsigned char *mem)
 	int				*param;
 	unsigned int	p_idx[3];
 	unsigned int	size;
+	t_info			*info;
 
 	if (!(proc && *proc && mem))
 		error_vm("f_ldi() called with undue null parameter(s)"); // THIS IS FUCKING USELESS LIKE THIS COMMENT FROM JPALLARD ;D
@@ -47,6 +48,7 @@ void	f_ldi(t_proc **proc, unsigned char *mem)
 	size = 2 + param_size(((*proc)->pc + 2) % MEM_SIZE , param, 1, &p_idx);
 	if (!parse_params(param, &p_idx, 10, mem))
 		return (execute_error(*proc, param, size));
+	info = get_info(NULL);
 	(*proc)->reg[mem[p_idx[2]] - 1] = ldi_calc(*proc, mem, param, &p_idx);
 	(*proc)->pc = ((*proc)->pc + size) % MEM_SIZE;
 	free(param);
