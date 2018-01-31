@@ -7,7 +7,7 @@
 		ld		%-5,r8
 		ld		%1,r7
 live:	live	%42
-		add		r1,r2,r3
+add:	add		r1,r2,r3
 		add		r9,r8,r9
 		sub		r9,r3,r10
 		and		-15,%15,r11
