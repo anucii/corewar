@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 19:46:39 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/04 15:31:43 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/31 20:17:14 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		check_op(unsigned char c)
 	ft_strdel(&conv_deci);
 	if (op == -1)
 	{
-		ft_printf("Bad instr!\n");
+		ft_printf("Bad instr\n");
 		return (-1);
 	}
 	return (op);
@@ -65,11 +65,12 @@ _Bool			write_instr(int new_fd, int old_fd)
 	ft_bzero(instr, CHAMP_MAX_SIZE + 1);
 	lseek(old_fd, PROG_NAME_LENGTH + 8, SEEK_SET);
 	read(old_fd, size, 4);
+	littleendian(&size[0]);
 	lseek(old_fd, COMMENT_LENGTH + 4, SEEK_CUR);
 	read(old_fd, instr, size[0]);
 	len = lseek(old_fd, 0, SEEK_END);
 	len = len - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
-	if (len > CHAMP_MAX_SIZE + 1)
+	if (size[0] > CHAMP_MAX_SIZE)
 	{
 		ft_printf("Champ to big\n");
 		return (0);
