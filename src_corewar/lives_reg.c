@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 18:50:21 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 17:49:40 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/01/31 15:23:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	lives_reg(t_req request, int num, t_info *info, t_proc *proc)
 			if (num == info->id_player[i])
 			{
 				last_id = num;
-				if (info->opt[3] && !info->opt[4])
+				if (info->opt[0] || (info->opt[3] && !info->opt[4]))
 					return ;
 				ft_printf("\n[LIVE(cy:%04u)] : le processus %04u (player %d) dit\
  que le joueur %d(%s) est en vie\n", global_timer(CHECK), proc->pid,\
