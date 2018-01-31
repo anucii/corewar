@@ -6,27 +6,20 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 09:31:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/05 17:06:47 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/31 13:47:42 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-/*
-static void	draw_live(t_info *info)
-{
-	mvwprintw(info->win, BORDER_ARENA_Y + 2, 165, "Live breakdown for current period :");
-	mvwprintw(info->win, BORDER_ARENA_Y + 4, 155, "[-----------------------------------------------------]");
-	mvwprintw(info->win, BORDER_ARENA_Y + 6, 165, "Live breakdown for last period :");
-	mvwprintw(info->win, BORDER_ARENA_Y + 8, 155, "[-----------------------------------------------------]");
-	wrefresh(info->win);
-}
-*/
+
 static void	draw_info_player(t_info *info, t_proc **proc, int color)
 {
+	t_proc	*tmp;
 	int			y;
 
 	y = 18;
-	while (*proc)
+	tmp = (*proc);
+	while (tmp)
 	{
 		wattron(info->win, A_STANDOUT);
 		wattron(info->win, COLOR_PAIR(color));
@@ -47,7 +40,7 @@ static void	draw_info_player(t_info *info, t_proc **proc, int color)
 		mvwprintw(info->win, y + 8, BORDER_ARENA_X + 5, "Lives in current period : ");
 		wprintw(info->win, ft_itoa(0));
 		color++;
-		proc++;
+		tmp = tmp->next;
 		y += 12;
 	}
 	wrefresh(info->win);
@@ -55,23 +48,25 @@ static void	draw_info_player(t_info *info, t_proc **proc, int color)
 
 static void	draw_player(t_info *info, t_proc **proc, int color)
 {
+	t_proc	*tmp;
 	int		nb_player;
 	int		pos;
 
+	tmp = (*proc);
 	nb_player = -1;
 	pos = 2;
-	while (*proc)
+	while (tmp)
 	{
 		mvwprintw(info->win, BORDER_ARENA_Y + pos, 5, "Player ");
 		wprintw(info->win, ft_itoa(nb_player));
 		wprintw(info->win, " : ");
 		wattron(info->win, COLOR_PAIR(color));
-		wprintw(info->win, (*proc)->champ.name);
+		wprintw(info->win, tmp->champ.name);
 		wattroff(info->win, COLOR_PAIR(color));
 		nb_player--;
 		pos += 2;
 		color++;
-		proc++;
+		tmp = tmp->next;
 	}
 	mvwprintw(info->win, 12, BORDER_ARENA_X + 5, "Processes : ");
 	wprintw(info->win, ft_itoa(nb_player * (-1) - 1));
@@ -106,5 +101,5 @@ void		draw_corewar(t_info *info, t_proc **proc)
 	draw_info(info);
 	draw_player(info, proc, color);
 	draw_info_player(info, proc, color);
-//	draw_live(info);
+	return ; 
 }

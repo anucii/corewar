@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:00:06 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/05 16:48:43 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/31 13:37:02 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 static	void	print_corewar(t_info *info)
 {
-	mvwprintw(info->win, (HEIGHT_WIN / 2) - 12, 75, " ________  ________\
-________  _______   ___       __   ________  ________     ");
-	mvwprintw(info->win, (HEIGHT_WIN / 2) - 11, 75, "|\\   ____\\|\\   __\
-\\|\\   __  \\|\\  ___ \\ |\\  \\     |\\  \\|\\   __  \\|\\   __  \\    ");
-	mvwprintw(info->win, (HEIGHT_WIN / 2) - 10, 75, "\\ \\  \\___|\\ \\  \\|\\\
-\\ \\  \\|\\  \\ \\   __/|\\ \\  \\    \\ \\  \\ \\  \\|\\  \\ \\  \\|\\  \\   ");
-	mvwprintw(info->win, (HEIGHT_WIN / 2) - 9, 75, " \\ \\  \\    \\ \\  \\\\\\ \
-\\ \\   _  _\\ \\  \\_|/_\\ \\  \\  __\\ \\  \\ \\   __  \\ \\   _  _\\  ");
-	mvwprintw(info->win, (HEIGHT_WIN / 2) - 8, 75, "  \\ \\  \\____\\ \\  \
-\\\\\\  \\ \\  \\\\  \\\\ \\  \\_|\\ \\ \\  \\|\\__\\_\\ \
-\\ \\  \\ \\  \\ \\  \\\\  \\| ");
-	mvwprintw(info->win, (HEIGHT_WIN / 2) - 7, 75, "   \\ \\_______\\ \
-\\_______\\ \\__\\\\ _\\\\ \\_______\\ \\____________\\ \\__\\ \\__\\ \\
-\__\\\\ _\\ ");
-	mvwprintw(info->win, (HEIGHT_WIN / 2) - 6, 75, "    \\|______\
-_|\\|_______|\\|__|\\|__|\\|_______|\\|____________|\\|__|\\|__|\\|__|\\|__|");
+	wattron(info->win, COLOR_PAIR(1));
+	mvwprintw(info->win, (HEIGHT_WIN / 2) - 12, 75, "     _/_/_/    _/_/    _\
+/_/_/    _/_/_/_/  _/          _/    _/_/    _/_/_/    ");
+	mvwprintw(info->win, (HEIGHT_WIN / 2) - 11, 75, "  _/        _/    _/  _\
+/    _/  _/        _/          _/  _/    _/  _/    _/   ");
+	mvwprintw(info->win, (HEIGHT_WIN / 2) - 10, 75, " _/        _/    _/  _/\
+_/_/    _/_/_/    _/    _/    _/  _/_/_/_/  _/_/_/      ");
+	mvwprintw(info->win, (HEIGHT_WIN / 2) - 9, 75, "_/        _/    _/  _\
+/    _/  _/          _/  _/  _/    _/    _/  _/    _/     ");
+	mvwprintw(info->win, (HEIGHT_WIN / 2) - 8, 75, " _/_/_/    _/_/    _\
+/    _/  _/_/_/_/      _/  _/      _/    _/  _/    _/      ");
+	wattroff(info->win, COLOR_PAIR(1));
+	wattron(info->win, A_UNDERLINE);
+	mvwprintw(info->win, (HEIGHT_WIN / 2) + 3, 106, "PRESS SPACE TO BEGIN");
+	wattroff(info->win, A_UNDERLINE);
 }
 
 static	void	choice_of_music(FMOD_CHANNELGROUP *canal, FMOD_SYSTEM *system,
@@ -78,26 +77,37 @@ static void		manage_music(t_info *info)
 
 static	void	draw_menu(t_info *info)
 {
-	wattron(info->win, COLOR_PAIR(3));
-	print_corewar(info);
-	wattron(info->win, A_UNDERLINE);
-	mvwprintw(info->win, (HEIGHT_WIN / 2) + 3, 106, "PRESS SPACE TO BEGIN");
-	wattroff(info->win, A_UNDERLINE);
-	mvwprintw(info->win, 70, 10, "By : JDaufin");
+	mvwprintw(info->win, 70, 10, "By :");
+	wattron(info->win, COLOR_PAIR(2));
+	wprintw(info->win, " JDaufin");
+	wattroff(info->win, COLOR_PAIR(2));
 	mvwprintw(info->win, 68, 200, "Choose a bgm song with 1, 2, 3");
+	wattron(info->win, COLOR_PAIR(4));
 	mvwprintw(info->win, 72, 10, "     JPallard");
-	mvwprintw(info->win, 70, 200, "1 = choosen by jdaufin ");
+	wattroff(info->win, COLOR_PAIR(4));
+	mvwprintw(info->win, 70, 200, "1 = choosen by");
+	wattron(info->win, COLOR_PAIR(2));
+	wprintw(info->win, " JDaufin");
+	wattroff(info->win, COLOR_PAIR(2));
+	wattron(info->win, COLOR_PAIR(6));
 	mvwprintw(info->win, 74, 10, "     JGonthie");
-	mvwprintw(info->win, 72, 200, "2 = choosen by jpallard");
-	mvwprintw(info->win, 74, 200, "3 = choosen by jgonthie");
+	wattroff(info->win, COLOR_PAIR(6));
+	mvwprintw(info->win, 72, 200, "2 = choosen by");
+	wattron(info->win, COLOR_PAIR(4));
+	wprintw(info->win, " JPallard");
+	wattroff(info->win, COLOR_PAIR(4));
+	mvwprintw(info->win, 74, 200, "3 = choosen by");
+	wattron(info->win, COLOR_PAIR(6));
+	wprintw(info->win, " JGonthie");
+	wattroff(info->win, COLOR_PAIR(6));
 	wrefresh(info->win);
-	manage_music(info);
-	wattroff(info->win, COLOR_PAIR(3));
 }
 
 void		put_menu(t_info *info)
 {
 	new_win(info, MENU);
+	print_corewar(info);
 	draw_menu(info);
+	manage_music(info);
 	destroy_win(info);
 }
