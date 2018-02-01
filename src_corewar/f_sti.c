@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 17:46:28 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/01 17:24:08 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 void	f_sti(t_proc **proc, unsigned char *mem)
 {
 	short			s;
+	unsigned short	s1 = 0;
 	short			t;
+	unsigned short	t1 = 0;
 	int				i;
 	int				target;
 	int				*param;
@@ -34,21 +36,50 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 		return (execute_error(*proc, param, i + 2));
 	info = get_info(NULL);
 	if (param[1] == T_REG)
-		s = (short)(*proc)->reg[mem[idx[1]] - 1];
+	{
+		if (((*proc)->reg[mem[idx[1]] - 1]) > INT_MAX)
+			s = (short)(*proc)->reg[mem[idx[1]] - 1];
+		else
+		{
+			s1 = (unsigned short)(*proc)->reg[mem[idx[1]] - 1];
+			s = 0;
+		}
+	}
 	else
 	{
 		s = ((short)mem[idx[1]] << 8) |
 			(mem[(idx[1] + 1)]);
 		if (param[1] == T_IND)
-			s = (short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
+		{
+			target = chars_to_int(mem, ((*proc)->pc + s), 1);
+			if (target > 0)
+			{
+				s = (short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
 				(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
+			}
+			else
+			{
+				s1 = (unsigned short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
+				(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
+			}
+				//s = (short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
+				//(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
+		}
 	}
 	if (param[2] == T_REG)
-		t = (unsigned short)(*proc)->reg[mem[idx[2]] - 1];
+	{
+		if (((*proc)->reg[mem[idx[2]] - 1]) > INT_MAX)
+			t = (short)(*proc)->reg[mem[idx[2]] - 1];
+		else
+		{
+			t1 = (unsigned short)(*proc)->reg[mem[idx[2]] - 1];
+			t = 0;
+		}
+	}
 	else
 		t = (short)mem[idx[2]] << 8 |
 			mem[(idx[2] + 1)];
-	if ((target = (*proc)->pc + ((s + t) % IDX_MOD)) < 0)
+	if ((target = (*proc)->pc + ((s + t1 + t + s1) % IDX_MOD)) < 0)
 		target = MEM_SIZE + target;
 // 	ft_printf("target = %d\n", target);
 	int_on_mem(mem,
