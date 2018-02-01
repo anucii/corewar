@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/29 21:14:18 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:28:06 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,9 +195,9 @@ void				f_lldi(t_proc **proc, unsigned char *mem);
 void				f_lfork(t_proc **proc, unsigned char *mem);
 void				f_aff(t_proc **proc, unsigned char *mem);
 
-unsigned int		chars_to_int(unsigned char *mem, unsigned int index,\
+int					chars_to_int(unsigned char *mem, unsigned int index,\
 		_Bool lg);
-unsigned short		chars_to_short(unsigned char *mem, unsigned int index,\
+short				chars_to_short(unsigned char *mem, unsigned int index,\
 		_Bool lg);
 unsigned int		convert(unsigned char *mem, unsigned int idx,\
 		t_proc *p, int j);
