@@ -6,35 +6,57 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 13:47:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/04 16:15:14 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:36:07 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "crack.h"
 
-static _Bool	conv_for_bitwise(int (*size)[3], int info[2])
+static void		f_sti_lldi_ldi_st(int (*size)[3], _Bool (*print)[3])
 {
 	int		index;
 
 	index = -1;
-	if (info[0] == 9 || info[0] == 10 || info[0] == 13 || info[0] == 14)
+	while (++index < 3)
+	{
+		if ((*size)[index] == DIR_CODE)
+		{
+			(*size)[index] = IND_CODE;
+			(*print)[index] = 1;
+		}
+		else
+			(*print)[index] = 0;
+	}
+}
+
+static void		conv_for_bitwise(int (*size)[3], _Bool (*print)[3], int info[2])
+{
+	int		index;
+
+	index = -1;
+	if (info[0] + 1 == 11 || info[0] + 1 == 14 
+			|| info[0] + 1 == 10 || info[0] + 1 == 3)
+	{
+		f_sti_lldi_ldi_st(size, print);
+		return ;
+	}
+	if (info[0] + 1 == 15 || info[0] + 1 == 12)
 	{
 		while (++index < 3)
 		{
 			if ((*size)[index] == DIR_CODE)
 				(*size)[index] = IND_CODE;
+			(*print)[index] = 1;
 		}
-		return (1);
 	}
-	return (0);
 }
 
 _Bool			f_all(unsigned char *instr, int info[2], int *index, int fd)
 {
 	static int	size[3] = {0, 0, 0};
+	_Bool		print[3];
 	char		*opc;
 	int			i;
-	_Bool		print;
 
 	i = -1;
 	opc = ft_strbase(instr[++(*index)], "01");
@@ -42,7 +64,7 @@ _Bool			f_all(unsigned char *instr, int info[2], int *index, int fd)
 		opc = new_join(opc, "0");
 	if (!check_opc(&size, opc, info[0], info[1]))
 		return (0);
-	print = conv_for_bitwise(&size, info);
+	conv_for_bitwise(&size, &print, info);
 	while (++i < info[1])
 	{
 		if (size[i] == REG_CODE)
@@ -50,7 +72,7 @@ _Bool			f_all(unsigned char *instr, int info[2], int *index, int fd)
 		else if (size[i] == DIR_CODE)
 			write_dir(instr, index, fd);
 		else if (size[i] == IND_CODE)
-			write_ind(instr, index, fd, print);
+			write_ind(instr, index, fd, print[i]);
 		if (i + 1 < info[1])
 			write(fd, ",", 1);
 	}

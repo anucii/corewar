@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 19:46:39 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/31 20:17:14 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:37:31 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		check_op(unsigned char c)
 	ft_strdel(&conv_deci);
 	if (op == -1)
 	{
-		ft_printf("Bad instr\n");
+		ft_printf("Error : Bad instr\n");
 		return (-1);
 	}
 	return (op);
@@ -37,7 +37,7 @@ static _Bool	write_instr_in_file(unsigned char *s, int *index, int fd)
 	int				instr;
 	int				i;
 
-	if ((instr = check_op(s[++(*index)])) == -1)
+	if ((instr = check_op(s[(*index)])) == -1)
 		return (0);
 	write(fd, g_op_tab[instr].name, ft_strlen(g_op_tab[instr].name));
 	write(fd, " ", 1);
@@ -46,10 +46,12 @@ static _Bool	write_instr_in_file(unsigned char *s, int *index, int fd)
 	info[1] = g_op_tab[instr].nb_param;
 	if (g_op_tab[instr].op_code == 1)
 		write_dir(s, index, fd);
-	else if (g_op_tab[instr].op_code == 9 || g_op_tab[instr].op_code == 12)
-		write_ind(s, index, fd, 1);
+//	else if (g_op_tab[instr].op_code == 9 || g_op_tab[instr].op_code == 12
+//			|| g_op_tab[instr].op_code == 15)
+//		write_ind(s, index, fd, 1);
 	else
-		f_all(s, info, index, fd);
+		if (!f_all(s, info, index, fd))
+			return (0);
 	write(fd, "\n", 1);
 	return (1);
 }
@@ -63,20 +65,35 @@ _Bool			write_instr(int new_fd, int old_fd)
 
 	index = -1;
 	ft_bzero(instr, CHAMP_MAX_SIZE + 1);
+	lseek(old_fd, 0, SEEK_SET);
+	read(old_fd, size, 4);
+	littleendian(&size[0]);
+	if (*size != COREWAR_EXEC_MAGIC)
+	{
+		ft_printf("Error : Invalid header\n");
+		return (0);
+	}
 	lseek(old_fd, PROG_NAME_LENGTH + 8, SEEK_SET);
 	read(old_fd, size, 4);
 	littleendian(&size[0]);
-	lseek(old_fd, COMMENT_LENGTH + 4, SEEK_CUR);
-	read(old_fd, instr, size[0]);
-	len = lseek(old_fd, 0, SEEK_END);
-	len = len - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
-	if (size[0] > CHAMP_MAX_SIZE)
+	if (*size > CHAMP_MAX_SIZE)
 	{
-		ft_printf("Champ to big\n");
+		ft_printf("Error : Champ to big\n");
 		return (0);
 	}
-	while (index < (int)len - 1)
+	lseek(old_fd, COMMENT_LENGTH + 4, SEEK_CUR);
+	read(old_fd, instr, size[0]);
+	if ((*size + PROG_NAME_LENGTH + COMMENT_LENGTH + 16) !=\
+		   	(len = lseek(old_fd, 0, SEEK_END)))
+	{
+		ft_printf("Error : Diff between file size and header prog_size\n");
+		return (0);
+	}
+	len = len - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
+	while (++index < (int)len)
+	{
 		if (!write_instr_in_file(instr, &index, new_fd))
 			return (0);
+	}
 	return (1);
 }
