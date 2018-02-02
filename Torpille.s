@@ -16,13 +16,14 @@ live1:	live	%4
 	zjmp	%:live1b
 	xor	r4, r4, r4
 	zjmp	%:live1
-live1b:	fork	%:t2
 	ld	%-10, r2
 	xor	r4, r4, r4
 	zjmp	%:live1
 
+live1b:	fork	%:t2
 debut2:
 	st	r1, :ld2
+
 ld2:	live	%0
 	fork	%:t1
 	# process qui dit live pour T2
@@ -36,6 +37,8 @@ live2:	live	%4
 	xor	r4, r4, r4
 	zjmp	%:live2
 
+t2:
+t1: live	%42
 live2b:	fork	%:t1
 	ld	%-10, r2
 	xor	r4, r4, r4

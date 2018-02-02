@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:01:22 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/26 15:17:21 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/02 20:36:30 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 **	NB : label_match must be called with the label definition first "xxxx:"
 **	and the label as a parameter ":xxxx" then.
 */
+
+static	void	error_label(char *label)
+{
+	ft_printf("[ERR] : Label ["RED"%s"RESET"] ", label);
+	error("does not exist");
+}
 
 static _Bool	label_match(char *def, char *param)
 {
@@ -43,13 +49,17 @@ static int		search_label(t_order *prog, char *label)
 {
 	int		index;
 
-	if (!(prog && label))
+	if (!prog || !label)
 		error("[ERR] : search label bad params");
 	index = -1;
-	while (++index < prog->nb_label)
+	while (++index < prog->nb_label && prog->label[index])
 	{
+		ft_printf("%s\n", prog->label[index]);
 		if (label_match(prog->label[index], label))
+		{
+			ft_printf("MATCH : [%s] [%s] ??\n", prog->label[index], label);
 			return (prog->pos);
+		}
 	}
 	return (-1);
 }
@@ -63,12 +73,16 @@ int				deref_label(t_order **prog, char *label)
 	i = 0;
 	if (!(prog && *prog && label))
 		error("[ERR] dereferencing failure : no label or no program");
+	ft_printf("lab : %s\n", label);
 	while (prog && prog[i] && prog[i]->op_code)
 	{
 		if (prog[i]->label \
 				&& ((ret = search_label(prog[i], label)) >= 0))
+		{
 			return (ret);
+		}
 		i++;
 	}
+	error_label(label);
 	return (ret);
 }

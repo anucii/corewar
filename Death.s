@@ -23,7 +23,7 @@ lock:	add	r3, r4, r3
 	xor	r5, r5, r5
 	zjmp	%:lock
 nolock:	
-	xor	r1, r1, r1
+xor	r1, r1, r1
 	add	r1, r1, r1
 live:	live	%1
 
@@ -38,6 +38,7 @@ f7:	fork	%:f8
 f8:	fork	%:f9
 f9:	fork	%:f10
 f10:
+ live %42
 
 l1:	live	%1
 l2:	live	%1

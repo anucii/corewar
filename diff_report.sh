@@ -1,7 +1,7 @@
 #!/bin/sh
 [ $1 -a $2 -a $3 ] || \
-	echo "Script launched with default values\n[Usage: ./diff_report.sh <DUMP_VAL> <contendant1> \
-<contendant2> ...]"
+		echo "Script launched with default values\n[Usage: ./diff_report.sh <DUMP_VAL> <contendant1> \
+		<contendant2> ...]"
 [ -x "./corewar" -a -x "./asm" ] || make
 [ -e "./CHAMPS/golem.cor" ] || ./asm ./CHAMPS/golem.s
 [ -e "./CHAMPS/allcmds.cor" ] || ./asm ./CHAMPS/allcmds.s 
