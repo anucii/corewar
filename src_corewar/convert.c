@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/15 16:10:19 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/02 14:14:26 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 unsigned int	convert(unsigned char *mem, unsigned int idx, t_proc *proc, int j)
 {
 	unsigned int	o;
+	unsigned short	s;
 
 	o = 0;
 	if (j == 1)
@@ -24,11 +25,12 @@ unsigned int	convert(unsigned char *mem, unsigned int idx, t_proc *proc, int j)
 			(mem[idx + 3]);
 	else if (j == 0)
 	{
-		o = (((unsigned short)mem[idx] << 8) | (mem[idx + 1])) % IDX_MOD;
-		o = ((unsigned int)mem[(proc->pc + o) % MEM_SIZE]) << 24 |
-			((unsigned int)mem[(proc->pc + o + 1) % MEM_SIZE]) << 16 |
-			((unsigned int)mem[(proc->pc + o + 2) % MEM_SIZE]) << 8 |
-			(mem[proc->pc + o + 3]) % MEM_SIZE;
+		s = (mem[idx] << 8) | (mem[idx + 1]);
+		s %= MEM_SIZE;
+		o = (mem[(proc->pc + s) % MEM_SIZE]) << 24;
+		o |= (mem[(proc->pc + s + 1) % MEM_SIZE]) << 16;
+		o |= (mem[(proc->pc + s + 2) % MEM_SIZE]) << 8;
+		o |= (mem[(proc->pc + s + 3) % MEM_SIZE]);
 	}
 	return (o);
 }

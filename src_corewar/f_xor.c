@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/18 15:10:19 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/02 11:50:28 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	f_xor(t_proc **proc, unsigned char *mem)
 	while (j < 2)
 	{
 		if (param[j] == T_REG)
-			s[j] = (*proc)->reg[mem[idx[0]] - 1];
+			s[j] = (*proc)->reg[mem[idx[j]] - 1];
 		else if (param[j] == T_DIR)
 			s[j] = convert(mem, idx[j], (*proc), 1);
 		else if (param[j] == T_IND)
@@ -36,7 +36,7 @@ void	f_xor(t_proc **proc, unsigned char *mem)
 		j++;
 	}
 	(*proc)->reg[mem[idx[2]] - 1] = s[0] ^ s[1];
-	carry(&proc, (*proc)->reg[mem[idx[2]] - 1]);
+	carry(proc, (*proc)->reg[mem[idx[2]] - 1]);
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
 	return ;
 }

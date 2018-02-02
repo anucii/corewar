@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/31 17:28:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/02 15:07:53 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ _Bool				dump_mem(unsigned char *mem);
 void				lives_reg(t_req request, int num, t_info *info,\
 		t_proc *proc);
 t_info				*get_info(t_info **p_info);
+t_info				*ini_music(t_info *info);
 unsigned int		get_pid(t_req req);
 
 void				proc_add(t_proc **proc_hdr, t_proc *link);
@@ -205,7 +206,7 @@ void				int_on_mem(unsigned char *mem, unsigned int i,\
 		unsigned short s);
 _Bool				parse_params(int *param, unsigned int (*p_idx)[3],\
 		unsigned char op_code, unsigned char *mem);
-void				carry(t_proc ***p, unsigned int val);
+void				carry(t_proc **p, unsigned int val);
 
 void			print_child(t_proc *child);
 void			print_proc(t_proc **proc);

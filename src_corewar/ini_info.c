@@ -6,13 +6,13 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 11:06:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/29 21:13:24 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:06:47 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static t_info	*ini_music(t_info *info)
+t_info		*ini_music(t_info *info)
 {
 	FMOD_RESULT		res[6];
 	int				i;
@@ -57,5 +57,5 @@ t_info		*ini_info(int (*tab)[2])
 	info->end = 0;
 	(*tab)[0] = 0;
 	(*tab)[1] = -1;
-	return (ini_music(info));
+	return (info);
 }

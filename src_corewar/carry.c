@@ -6,16 +6,16 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 16:32:14 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/28 17:01:03 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/02 11:34:03 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	carry(t_proc ***p, unsigned int val)
+void	carry(t_proc **p, unsigned int val)
 {
 	if (val != 0)
-		(**p)->carry = 0;
+		(*p)->carry = 0;
 	else
-		(**p)->carry = 1;
+		(*p)->carry = 1;
 }

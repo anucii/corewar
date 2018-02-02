@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 12:27:24 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/05 12:32:27 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:09:46 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	check_curse(t_info *info)
 	if (info->opt[0])
 		error_vm(""RED"Error : Option -c already given"RESET"");
 	info->opt[0] = 1;
+	info = ini_music(info);
 }
 
 void	check_verbos(t_info *info, char **arg, int *index)
