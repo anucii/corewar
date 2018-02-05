@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:05 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/18 15:07:18 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/05 09:59:22 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static unsigned int	get_val(int p_type, unsigned char *mem, t_proc *p,\
 		val = chars_to_int(mem, i, 1);
 	else
 	{
-		deref = (p->pc + (unsigned int)(chars_to_short(mem, i, 0) % IDX_MOD))\
+		deref = (p->pc + (chars_to_short(mem, i, 1) % IDX_MOD))\
 				% MEM_SIZE;
 		val = chars_to_int(mem, deref, 1);
 	}
