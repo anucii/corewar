@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/05 13:34:11 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/05 18:06:12 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 			if (target > 0)
 			{
 				s = (short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
-				(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
+				(mem[((*proc)->pc + s + 3) % MEM_SIZE]);
 			}
 			else
 			{
 				s1 = (unsigned short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
 				(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
+				s = 0;
 			}
 				//s = (short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
 				//(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
