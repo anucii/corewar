@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/01 17:24:08 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/05 13:34:11 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	short			s;
 	unsigned short	s1 = 0;
 	short			t;
-	unsigned short	t1 = 0;
+	int				t1 = 0;
 	int				i;
 	int				target;
 	int				*param;
@@ -43,7 +43,9 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 		{
 			s1 = (unsigned short)(*proc)->reg[mem[idx[1]] - 1];
 			s = 0;
-		}
+		}/*
+		s1 = (*proc)->reg[mem[idx[1]] - 1];
+		s = 0;*/
 	}
 	else
 	{
@@ -67,14 +69,16 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 		}
 	}
 	if (param[2] == T_REG)
-	{
-		if (((*proc)->reg[mem[idx[2]] - 1]) > INT_MAX)
+	{/*
+		if (((*proc)->reg[mem[idx[2]] - 1]) > USHRT_MAX)
 			t = (short)(*proc)->reg[mem[idx[2]] - 1];
 		else
 		{
 			t1 = (unsigned short)(*proc)->reg[mem[idx[2]] - 1];
 			t = 0;
-		}
+		}*/
+		t1 = (*proc)->reg[mem[idx[2]] - 1];
+		t = 0;
 	}
 	else
 		t = (short)mem[idx[2]] << 8 |
@@ -86,8 +90,8 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
 			target);
 	if (info->opt[3] && info->opt[4] && !info->opt[0])
-		ft_printf("\n\t\t\tstore %d (%#4x) @ %04u", convert(mem, target, 0, 1),\
-				convert(mem, target, 0, 1), target);
+		ft_printf("\n\t\t\tstore %d (%#4x) @ %04u  s = %hd , t = %hd", convert(mem, target, 0, 1),\
+				convert(mem, target, 0, 1), target, s, t);
 	info->start = (*proc)->pc + ((s + t) % IDX_MOD);
 	info->end = info->start + 4;
 	if (info->opt[0])
