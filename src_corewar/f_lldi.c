@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/18 15:08:03 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/05 15:46:51 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static unsigned int lldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 		unsigned int (*p_idx)[3])
 {
 	int		ret;
-	short	deref[2];
+	int		deref[2];
 	ssize_t	i;
 
 	i = -1;
