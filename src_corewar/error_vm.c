@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:52:38 by jpallard          #+#    #+#             */
-/*   Updated: 2017/12/30 11:53:54 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/06 14:42:31 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ number] ["CYAN"-v"RESET" number] <champ.cor> <...> \
 
 void	error_vm(char *s)
 {
+	t_info	*info;
+
+	info = get_info(NULL);
 	ft_printf(RED"%s\n"RESET, s);
+	if (info->opt[0])
+	{
+		destroy_win(info);
+		endwin();
+	}
 	exit(EXIT_FAILURE);
 }

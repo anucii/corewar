@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/05 18:06:12 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/06 17:00:29 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	if (info->opt[0])
 		refresh_arena(info, mem, (*proc)->color);
 	(*proc)->pc = ((*proc)->pc + 2 + i) % MEM_SIZE;
+	free(param);
 }
 /*
 int		main(void)

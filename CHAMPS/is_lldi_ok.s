@@ -24,9 +24,9 @@ live:	live %:begin
 		sti r9,310,%0
 		lldi r2,%0,r9
 		sti r9,310,%0
-		lldi %4294967196,%0,r9
+		lldi %4294967266,%0,r9
 		sti r9,310,%0
-		lldi 4294967196,%0,r9
+		lldi 4294967266,%0,r9
 		sti r9,310,%0
 		lldi r5,%0,r9
 		sti r9,310,%0

@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/29 18:12:28 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/06 14:52:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int				main(int argc, char **argv)
 		destroy_win(info);
 		endwin();
 	}
+	ft_memdel((void **)&arena);
 	lives_reg(CHECK, 0, info, NULL);
 	return (0);
 }
