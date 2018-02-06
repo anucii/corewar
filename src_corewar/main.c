@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/29 18:12:28 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/06 17:06:30 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int				main(int argc, char **argv)
 	{
 		destroy_win(info);
 		endwin();
+		free_music(info);
 	}
 	lives_reg(CHECK, 0, info, NULL);
+	while(1);
 	return (0);
 }

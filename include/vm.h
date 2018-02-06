@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/02 15:07:53 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/06 17:05:21 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void				lives_reg(t_req request, int num, t_info *info,\
 		t_proc *proc);
 t_info				*get_info(t_info **p_info);
 t_info				*ini_music(t_info *info);
+void				free_music(t_info *info);
 unsigned int		get_pid(t_req req);
 
 void				proc_add(t_proc **proc_hdr, t_proc *link);
