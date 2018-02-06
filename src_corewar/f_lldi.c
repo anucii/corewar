@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:43:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/05 15:46:51 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/06 11:25:26 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static unsigned int lldi_calc(t_proc *proc, unsigned char *mem, int *param,\
 			deref[i] = proc->reg[mem[(*p_idx)[i]] - 1];
 		else if (param[i] == T_IND)
 			deref[i] = chars_to_short(mem, ((*p_idx)[i] \
-					+ chars_to_short(mem, (*p_idx)[i], 1)) % IDX_MOD, 1);
+					+ chars_to_short(mem, (*p_idx)[i], 1)), 1);
 		else
 			deref[i] = chars_to_short(mem, (*p_idx)[i], 1);
 	}
