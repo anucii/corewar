@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/06 17:16:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/06 18:21:28 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int				main(int argc, char **argv)
 	}
 	ft_memdel((void **)&arena);
 	lives_reg(CHECK, 0, info, NULL);
-	while(1);
+	store_names(CLEAR, NULL);
+	free(info);
 	return (0);
 }

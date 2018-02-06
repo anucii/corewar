@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:22:25 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/04 19:13:37 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/06 17:44:19 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		color_pc(t_proc *proc, t_info *info, unsigned char *mem)
 	int					line;
 	int					x;
 
+	if (!info->opt[0])
+		return ;
 	uncolor_pc(proc, info, mem, proc->old_pc);
 	line = proc->pc / 64;
 	x = proc->pc;

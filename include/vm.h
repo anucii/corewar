@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/06 17:05:21 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/06 18:15:16 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct		s_info
 
 typedef enum		e_req
 {
-					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT, HDR_INIT
+					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT, HDR_INIT, CLEAR
 }					t_req;
 
 /*
@@ -217,6 +217,7 @@ void			print_board(t_proc **tab, t_info *info);
 void			error_vm(char *s);
 t_info			*check_arg(t_proc **hdr, unsigned char **arena, char **argv, int argc);
 void			parse_header(int fd, t_proc **p, t_info *info);
+char			*store_names(t_req req, char *name);
 void			info_player(t_info *info, int nb_player);
 void			init_ll(t_info *info);
 void			start_ncurses(t_info *info, t_proc **proc);

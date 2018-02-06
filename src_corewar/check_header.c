@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/29 21:09:34 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/06 18:14:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*get_name(int fd)
 	ft_bzero(name, PROG_NAME_LENGTH + 1);
 	lseek(fd, 4, SEEK_SET);
 	read(fd, name, PROG_NAME_LENGTH);
-	return (ft_strdup(name));
+	return (store_names(INCR, ft_strdup(name)));
 }
 
 static void		init_proc(t_proc **p, t_info *info, int fd)
