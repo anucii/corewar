@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:22:25 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/06 17:44:19 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/07 15:47:14 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	uncolor_pc(t_proc *proc, t_info *info, unsigned char *mem,\
 {
 	int				line;
 	int				x;
+	char			*s;
 
 	line = old_pc / 64;
 	x = old_pc;
@@ -42,13 +43,15 @@ static void	uncolor_pc(t_proc *proc, t_info *info, unsigned char *mem,\
 	x = x * 3;
 	mvwprintw(info->win, line + 2, x + 2, "  ");
 	wattron(info->win, COLOR_PAIR(proc->color));
-	mvwprintw(info->win, line + 2, x + 2, conv_to_print(mem[old_pc]));
+	mvwprintw(info->win, line + 2, x + 2, s = conv_to_print(mem[old_pc]));
+	ft_strdel(&s);
 }
 
 void		color_pc(t_proc *proc, t_info *info, unsigned char *mem)
 {
 	int					line;
 	int					x;
+	char				*s;
 
 	if (!info->opt[0])
 		return ;
@@ -59,9 +62,10 @@ void		color_pc(t_proc *proc, t_info *info, unsigned char *mem)
 		x = x - (64 * line);
 	x = x * 3;
 	wattron(info->win, A_STANDOUT);
-	mvwprintw(info->win, line + 2, x + 2, conv_to_print(mem[proc->pc]));
+	mvwprintw(info->win, line + 2, x + 2, s = conv_to_print(mem[proc->pc]));
 	wattroff(info->win, COLOR_PAIR(proc->color));
 	wattroff(info->win, A_STANDOUT);
 	wrefresh(info->win);
+	ft_strdel(&s);
 	proc->old_pc = proc->pc;
 }

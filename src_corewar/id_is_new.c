@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reinit_life_status.c                               :+:      :+:    :+:   */
+/*   id_is_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/14 18:42:20 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/07 16:17:49 by jdaufin          ###   ########.fr       */
+/*   Created: 2018/02/07 16:37:27 by jdaufin           #+#    #+#             */
+/*   Updated: 2018/02/07 20:11:12 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	reinit_life_status(t_proc **ptr_proc)
+_Bool	id_is_new(t_req req, int val)
 {
-	if (!(ptr_proc && *ptr_proc))
-		return ;
-	(*ptr_proc)->life.status = 0;
-	//(*ptr_proc)->life.last = 0;
-	(*ptr_proc)->life.player = 0;
-	(*ptr_proc)->life.cur= 0;
+	static int	ctrl[MAX_PLAYERS + 1] = {0};
+	static int	i = -1;
+	int			j;
+
+	j = -1;
+	if (req == CHECK)
+	{
+		while (++j < MAX_PLAYERS)
+			if (ctrl[j] == val)
+				return (0);
+		ctrl[++i] = val;
+	}
+	else if (req == REINIT)
+	{
+		i = -1;
+		while (++j < MAX_PLAYERS)
+			ctrl[j] = INT_MAX;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:30:38 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/31 15:24:06 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/07 16:19:27 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ _Bool	chronos(t_proc *proc, t_req request, unsigned int player)
 		proc->life.status = 1;
 		proc->life.last = global_timer(CHECK);
 		proc->life.player = player;
+		(proc->life.cur)++;
 		nbr_live(INCR);
 		if (info)
 			lives_reg(LIVE, player, info, proc);

@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 18:57:12 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:12:53 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/06 19:29:16 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void		draw_arena(t_info *info, unsigned char *arena, int color)
 	static int		line = 0;
 	int				index;
 	int				len;
+	char			*s;
 
 	wattron(info->win, COLOR_PAIR(color));
 	len = info->end - info->start;
 	index = info->start;
 	while (len-- > 0)
 	{
-		mvwprintw(info->win, line + 2, info->start + 2, conv_to_print(arena[index]));
+		mvwprintw(info->win, line + 2, info->start + 2, s = conv_to_print(arena[index]));
 		mvwprintw(info->win, line + 2, info->start + 4, " ");
 		info->start += 3;
 		if (info->start % 64 == 0)
@@ -50,6 +51,7 @@ void		draw_arena(t_info *info, unsigned char *arena, int color)
 		}
 		index++;
 		wrefresh(info->win);
+		ft_strdel(&s);
 	}
 	line--;
 	wattroff(info->win, COLOR_PAIR(color));

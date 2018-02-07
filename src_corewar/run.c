@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/30 18:16:27 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/07 20:39:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	execute_order(unsigned char *mem, t_proc *p)
 
 	t_info	*info;
 
-	i = 0;
+	i = -1;
 	info = get_info(NULL);
-	while (i < 16)
+	while (++i < 16)
 	{
 		if (mem[p->pc] == g_op_tab[i].op_code || p->c_opc != -1)
 		{
@@ -67,21 +67,15 @@ p->champ.id);
 			color_pc(p, info, mem);
 			return ;
 		}
-		i++;
 	}
 	p->pc++;
 	p->pc %= MEM_SIZE;
 }
 
 /*
-<<<<<<< HEAD
 **	exec_wrapper() enables the handling of the execution of children
 **	processes when needed; its new version uses a general list (common to 
 **	all players) of the processes adresses.
-=======
-**	exec_wrapper() enables the handling of the execution of next
-**	processes when needed.
->>>>>>> db57eea64e3e
 */
 
 void	exec_wrapper(unsigned char *mem, t_proc *p)
@@ -93,9 +87,7 @@ void	exec_wrapper(unsigned char *mem, t_proc *p)
 	{
 		execute_order(mem, tmp);
 		tmp = tmp->next;
-	}/*
-	while (p->next)
-		exec_wrapper(mem, p->next);*/
+	}
 }
 
 static _Bool	new_round(t_proc **p, t_info *info, _Bool *c)
@@ -105,6 +97,7 @@ static _Bool	new_round(t_proc **p, t_info *info, _Bool *c)
 	timer(REINIT);
 	*c = (*p != NULL);
 	deadline(DECR);
+	player_lives(REINIT, NULL, NULL, NULL);
 	foreach_proc(p, &reinit_life_status);
 	return (*c);
 }
@@ -127,6 +120,8 @@ void			run(unsigned char *mem, t_proc **p)
 	{
 		exec_wrapper(mem, *p);
 		print_board(p, info);
+		if (info->opt[0])
+			draw_corewar(info, p);
 		if (!c || dump_mem(mem))
 			return ;
 		if (timer(CHECK) >= deadline(CHECK))

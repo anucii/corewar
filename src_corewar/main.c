@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/06 18:21:28 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/06 18:39:23 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int				main(int argc, char **argv)
 	lives_reg(CHECK, 0, info, NULL);
 	store_names(CLEAR, NULL);
 	free(info);
+	//while (1); //leaks hunt
 	return (0);
 }

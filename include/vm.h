@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/06 18:15:16 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/07 20:50:57 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_life
 {
 	_Bool			status;
 	int				last;
+	int				cur;
 	int				player;
 }					t_life;
 
@@ -238,5 +239,9 @@ void			check_verbos(t_info *info, char **arg, int *index);
 void			check_dump(t_info *info, char **arg, int *index);
 void			check_id_player(t_info *info, char **arg, int *index, int id);
 void			color_pc(t_proc *proc, t_info *info, unsigned char *mem);
+_Bool			id_is_new(t_req req, int val);
+int				player_lives(t_req req, int *(*val)[2], t_info *info,\
+		t_proc *proc);
+char			*store_nb(t_req req, char *val);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 16:19:20 by jgonthie          #+#    #+#              #
-#    Updated: 2018/02/06 18:15:50 by jdaufin          ###   ########.fr        #
+#    Updated: 2018/02/07 20:51:25 by jdaufin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,6 +128,8 @@ SRC_FILE_COREWAR =	main.c \
 					proc_unqueue.c \
 					free_music.c \
 					store_names.c \
+					id_is_new.c \
+					store_nb.c \
 
 
 SRC_FILE_CRACK =	main.c \
