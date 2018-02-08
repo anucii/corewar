@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/06 17:00:29 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 18:24:07 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 		{
 			s1 = (unsigned short)(*proc)->reg[mem[idx[1]] - 1];
 			s = 0;
-		}/*
-		s1 = (*proc)->reg[mem[idx[1]] - 1];
-		s = 0;*/
+		}
 	}
 	else
 	{
@@ -65,19 +63,10 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 				(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
 				s = 0;
 			}
-				//s = (short)mem[((*proc)->pc + s + 2) % MEM_SIZE] << 8 |
-				//(mem[((*proc)->pc + s + 3) % MEM_SIZE]) % IDX_MOD;
 		}
 	}
 	if (param[2] == T_REG)
-	{/*
-		if (((*proc)->reg[mem[idx[2]] - 1]) > USHRT_MAX)
-			t = (short)(*proc)->reg[mem[idx[2]] - 1];
-		else
-		{
-			t1 = (unsigned short)(*proc)->reg[mem[idx[2]] - 1];
-			t = 0;
-		}*/
+	{
 		t1 = (*proc)->reg[mem[idx[2]] - 1];
 		t = 0;
 	}
@@ -86,7 +75,6 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 			mem[(idx[2] + 1)];
 	if ((target = (*proc)->pc + ((s + t1 + t + s1) % IDX_MOD)) < 0)
 		target = MEM_SIZE + target;
-// 	ft_printf("target = %d\n", target);
 	int_on_mem(mem,
 			(*proc)->reg[mem[((*proc)->pc + 2) % MEM_SIZE] - 1],
 			target);
@@ -100,30 +88,3 @@ void	f_sti(t_proc **proc, unsigned char *mem)
 	(*proc)->pc = ((*proc)->pc + 2 + i) % MEM_SIZE;
 	free(param);
 }
-/*
-int		main(void)
-{
-	unsigned char pq[] = {0 ,0 , 0, 0, 11, 100, 12, 0, 0, 12, 1, 0, 0, 11, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	t_proc *p;
-	unsigned char mem[4096] = {0} ;
-
-
-	p = ft_memalloc(sizeof(t_proc));
-	p->pc = 4;
-	p->reg[11] = -6;
-	p->reg[0] = 1;
-	p->reg[1] = 7;
-	ft_memcpy(mem, pq, 36);
-	f_sti(&p, mem);
-	int i = 0;
-	while (i < 4096)
-	{
-		ft_printf("%hhu\n", mem[i]);
-		i++;
-	}
-	unsigned short d = 46;
-	unsigned short s = -186;
-	s = d + s;
-	ft_printf("test = %hu\n", s);
-	return (0);
-}*/
