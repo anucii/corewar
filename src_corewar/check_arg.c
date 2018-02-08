@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/02 15:03:46 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/08 17:26:25 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_info			*check_arg(t_proc **p, unsigned char **arena,\
 	if (index[1] == -1)
 		print_usage("");
 	info_player(info, index[1] + 1);
-	*arena = load_champ(tab, p, info);
+	*arena = load_champ(tab, p, get_info(&info));
 	ft_memdel((void**)&tab);
 	return (info);
 }

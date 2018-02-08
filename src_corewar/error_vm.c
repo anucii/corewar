@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:52:38 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/08 12:17:46 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 17:30:04 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	error_vm(char *s)
 
 	info = get_info(NULL);
 	ft_printf(RED"%s\n"RESET, s);
-	if (info->opt[0])
+	if (info && info->opt[0])
 	{
 		destroy_win(info);
 		endwin();
