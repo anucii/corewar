@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/08 14:46:20 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 16:04:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct		s_info
 
 typedef enum		e_req
 {
-	NONE = -1, LIVE, CHECK, INCR, DECR, REINIT, HDR_INIT, CLEAR
+	NONE = -1, LIVE, CHECK, INCR, DECR, REINIT, HDR_INIT, CLEAR, SETV
 }					t_req;
 
 /*
@@ -226,6 +226,7 @@ void				destroy_win(t_info *info);
 void				init_coor(t_info *info);
 void				draw_corewar(t_info *info, t_proc **proc);
 void				draw_arena(t_info *info, unsigned char *arena, int color);
+void				draw_info_player(t_info *info, t_proc **proc, int color);
 void				init_arena(t_info *info, unsigned char *arena);
 void				refresh_arena(t_info *info, unsigned char *arena, \
 		int color);

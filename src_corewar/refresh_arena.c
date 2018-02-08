@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:26:19 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/08 14:19:48 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 16:11:34 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,46 @@ static char	*conv_to_print(unsigned char c)
 	return (s);
 }
 
+static int	store_line(t_req req, int val)
+{
+	static int	ret = 0;
+
+	if (req == SETV)
+		ret = val;
+	if (req == REINIT)
+		ret = 0;
+	return (ret);
+}
+
+static void	refresh_area(t_info *info, unsigned char *arena, int len, int idx)
+{
+	char	*s;
+	int		line;
+
+	line = store_line(CHECK, 0);
+	while (len-- > 0)
+	{
+		mvwprintw(info->win, line + 2, info->start + 2, s = \
+				conv_to_print(arena[idx]));
+		info->start += 3;
+		if (info->start % 64 == 0)
+		{
+			info->start = 0;
+			store_line(SETV, ++line);
+			if (line == 64)
+				store_line(SETV, line = 0);
+		}
+		idx++;
+		wrefresh(info->win);
+		ft_strdel(&s);
+	}
+}
+
 void		refresh_arena(t_info *info, unsigned char *arena, int color)
 {
 	int				index;
 	int				line;
 	int				len;
-	char			*s;
 
 	wattron(info->win, COLOR_PAIR(color));
 	if (info->start <= info->end)
@@ -42,25 +76,11 @@ void		refresh_arena(t_info *info, unsigned char *arena, int color)
 	else
 		len = MEM_SIZE - (info->start - info->end);
 	index = info->start;
-	line = info->start / 64;
+	store_line(SETV, line = info->start / 64);
 	if (info->start > 64)
 		info->start = info->start - (64 * line);
 	info->start = info->start * 3;
-	while (len-- > 0)
-	{
-		mvwprintw(info->win, line + 2, info->start + 2, s = \
-				conv_to_print(arena[index]));
-		info->start += 3;
-		if (info->start % 64 == 0)
-		{
-			info->start = 0;
-			line++;
-			if (line == 64)
-				line = 0;
-		}
-		index++;
-		wrefresh(info->win);
-		ft_strdel(&s);
-	}
+	refresh_area(info, arena, len, index);
 	wattroff(info->win, COLOR_PAIR(color));
+	store_line(REINIT, 0);
 }

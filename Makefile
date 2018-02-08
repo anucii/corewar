@@ -6,7 +6,7 @@
 #    By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 16:19:20 by jgonthie          #+#    #+#              #
-#    Updated: 2018/02/07 20:51:25 by jdaufin          ###   ########.fr        #
+#    Updated: 2018/02/08 15:41:40 by jdaufin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,6 +130,7 @@ SRC_FILE_COREWAR =	main.c \
 					store_names.c \
 					id_is_new.c \
 					store_nb.c \
+					draw_info_player.c \
 
 
 SRC_FILE_CRACK =	main.c \
