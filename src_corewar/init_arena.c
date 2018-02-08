@@ -6,11 +6,17 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 16:22:45 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 19:09:27 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/08 13:55:19 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+static void	update_val(int *count_col, _Bool *print)
+{
+	*count_col += 3;
+	*print = 0;
+}
 
 void		init_arena(t_info *info, unsigned char *arena)
 {
@@ -33,8 +39,7 @@ void		init_arena(t_info *info, unsigned char *arena)
 				wprintw(info->win, " ");
 				wprintw(info->win, "00");
 			}
-			count_col += 3;
-			print = 0;
+			update_val(&count_col, &print);
 			arena++;
 		}
 	}

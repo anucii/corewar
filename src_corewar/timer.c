@@ -6,14 +6,14 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 15:48:48 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/18 16:26:11 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/08 14:08:33 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 /*
-**	Timer function, 
+**	Timer function,
 **	- increments the clock only if called with request INCR,
 **	- reinitializes the clock if called with REINIT
 **	- returns the current clock value otherwise

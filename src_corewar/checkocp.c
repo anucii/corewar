@@ -6,18 +6,18 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:09:44 by jpallard          #+#    #+#             */
-/*   Updated: 2018/01/29 15:29:50 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 14:15:40 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 /*
-**function purpose = recup type of param of the instruction remember
-**to free the array param later, *mem should be pointing on the ocp !
+**	function purpose = recup type of param of the instruction remember
+**	to free the array param later, *mem should be pointing on the ocp !
 */
 
-static unsigned char		bitwise(unsigned char *o1, int i, unsigned char mem)
+static unsigned char	bitwise(unsigned char *o1, int i, unsigned char mem)
 {
 	if (i == 0)
 	{
@@ -32,18 +32,18 @@ static unsigned char		bitwise(unsigned char *o1, int i, unsigned char mem)
 	return (*o1);
 }
 
-int		*checkocp(unsigned char *mem,  unsigned int op_code)
+int						*checkocp(unsigned char *mem, unsigned int op_code)
 {
-	int		*param;
+	int				*param;
 	unsigned char	o[3];
-	int			i;
+	int				i;
 
 	i = 0;
 	param = ft_memalloc(sizeof(int) * 3);
 	o[0] = *mem >> 6;
-	o[1] = op_code != 16 ?  bitwise(&o[1], 0, *mem) : 0;
+	o[1] = op_code != 16 ? bitwise(&o[1], 0, *mem) : 0;
 	if (op_code != 2 && op_code != 3 && op_code != 13 && op_code != 16)
-		o[2] = bitwise(&o[2] , 1, *mem);
+		o[2] = bitwise(&o[2], 1, *mem);
 	else
 		o[2] = 0;
 	while (i < 3)
@@ -60,18 +60,3 @@ int		*checkocp(unsigned char *mem,  unsigned int op_code)
 	}
 	return (param);
 }
-
-/* if you need a quick test
-int main(void)
-{
-	unsigned char test = 0xf8;
-	int		*tab = NULL;
-	int i = 0;
-	tab = checkocp(test);
-	while (i < 3)
-	{
-		ft_printf("%d\n", tab[i]);
-		i++;
-	}
-	return (0);
-}*/

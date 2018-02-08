@@ -6,13 +6,13 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:00:13 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/06 18:14:24 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 14:17:02 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		littleendian(unsigned int *i)
+void			littleendian(unsigned int *i)
 {
 	if (i != 0)
 	{
@@ -23,7 +23,7 @@ void		littleendian(unsigned int *i)
 	}
 }
 
-static char	*get_name(int fd)
+static char		*get_name(int fd)
 {
 	char	name[PROG_NAME_LENGTH + 1];
 
@@ -52,16 +52,14 @@ static void		init_proc(t_proc **p, t_info *info, int fd)
 	new->champ.name = get_name(fd);
 	proc_add(p, new);
 	color++;
-//	ft_printf("[DBG] turn %d : new_champ = %s (id %d), reg1 = %d(pid %d)\n", index, new->champ.name,\
-//			new->champ.id, new->reg[0], new->pid);//DBG
 }
 
 /*
- **check if each champ have the correct header attached to them and if the size 
- **is correct
- */
+**	check if each champ have the correct header attached to them and if the size
+**	is correct
+*/
 
-void	parse_header(int fd, t_proc **p, t_info *info)
+void			parse_header(int fd, t_proc **p, t_info *info)
 {
 	unsigned int	i[1];
 	unsigned int	j;

@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 11:06:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/02 15:06:47 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/08 13:56:32 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ t_info		*ini_music(t_info *info)
 
 t_info		*ini_info(int (*tab)[2])
 {
-	t_info		*info;
-	int 		index;
+	t_info	*info;
+	int		index;
 
 	index = -1;
 	info = ft_memalloc(sizeof(t_info));

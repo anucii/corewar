@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/02 11:50:05 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:30:53 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,3 @@ void	f_or(t_proc **proc, unsigned char *mem)
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
 	free(param);
 }
-
-/*
-int		main(void)
-{
-	unsigned char mem[] = {6, 228, 0, 2, 255, 120, 120, 120, 1};
-	t_proc *p = ft_memalloc(sizeof(t_proc));
-	p->pc = 0;
-	p->reg[0] = 2;
-	p->reg[1] = 5000000;
-	f_or(&p, mem);
-	ft_printf("pc = %hu\nreg = %u\n", p->pc, p->reg[0]);
-	return (0);
-}*/

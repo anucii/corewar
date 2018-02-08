@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:10:33 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/29 18:45:50 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/08 13:59:43 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		new_win(t_info *info, int put)
 		error_vm("Ft.newwin in curses.h failed");
 	wattron(info->win, A_STANDOUT);
 	box(info->win, ' ', ' ');
-	wborder(info->win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+	wborder(info->win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 	if (put == MENU)
 	{
 		wrefresh(info->win);

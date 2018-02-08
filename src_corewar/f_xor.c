@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/06 17:24:58 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 13:53:01 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	f_xor(t_proc **proc, unsigned char *mem)
 
 	j = -1;
 	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE], 8);
-	i = param_size(((*proc)->pc + 2) % MEM_SIZE , param, 0, &idx);
+	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 0, &idx);
 	if (!parse_params(param, &idx, 8, mem))
 		return (execute_error(*proc, param, i + 2));
 	while (++j < 2)
@@ -40,16 +40,3 @@ void	f_xor(t_proc **proc, unsigned char *mem)
 	free(param);
 	return ;
 }
-
-/*test
-int		main(void)
-{
-	unsigned char mem[] = {6, 228, 0, 2, 255, 120, 120, 120, 1};
-	t_proc *p = ft_memalloc(sizeof(t_proc));
-	p->pc = 0;
-	p->reg[0] = 2;
-	p->reg[1] = 5000000;
-	f_xor(&p, mem);
-	ft_printf("pc = %hu\nreg = %u\n", p->pc, p->reg[0]);
-	return (0);
-}*/

@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 18:57:12 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/06 19:29:16 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 14:16:32 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void		draw_arena(t_info *info, unsigned char *arena, int color)
 	index = info->start;
 	while (len-- > 0)
 	{
-		mvwprintw(info->win, line + 2, info->start + 2, s = conv_to_print(arena[index]));
+		mvwprintw(info->win, line + 2, info->start + 2, s = \
+				conv_to_print(arena[index]));
 		mvwprintw(info->win, line + 2, info->start + 4, " ");
 		info->start += 3;
 		if (info->start % 64 == 0)

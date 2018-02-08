@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:12 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/07 20:50:57 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 14:46:20 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 /*
 **	Structure specific fields
-**	- life : a structure with a boolean (status) that handles the life 
+**	- life : a structure with a boolean (status) that handles the life
 **	status of each process which is initialized to 0, and is set to 1
 **	by the 'live' instruction, and an unsigned int that keeps the cycle
 **	number of the last live call.
@@ -79,7 +79,7 @@ typedef	struct		s_proc
 /*
 **	Struct for parsing and opt
 **	name:			- name of champ
-**	opt:			- opt used 
+**	opt:			- opt used
 **	----------------> opt[0]: -c
 **	----------------> opt[1]: -dump - opt[2]: N for dump opt
 **	----------------> opt[3]: -v 	- opt[4]: N for v opt
@@ -111,7 +111,7 @@ typedef struct		s_info
 
 typedef enum		e_req
 {
-					NONE = -1, LIVE, CHECK,	INCR, DECR, REINIT, HDR_INIT, CLEAR
+	NONE = -1, LIVE, CHECK, INCR, DECR, REINIT, HDR_INIT, CLEAR
 }					t_req;
 
 /*
@@ -134,13 +134,11 @@ void				kill_proc(t_proc **ptr_proc);
 
 unsigned int		new_player(void);
 void				checkheader(int fd, t_proc **p, unsigned int player);
-//void				init_proc(t_proc **p, int fd, unsigned int player);
 void				littleendian(unsigned int *i);
 unsigned char		*load_champ(int *tab, t_proc **p, t_info *info);
 void				run(unsigned char *mem, t_proc **p);
 void				exec_wrapper(unsigned char *mem, t_proc *p);
-//void				exec_wrapper(unsigned char *mem, t_list *lst);
-void				execute_order(unsigned char *mem, t_proc *p);
+void				execute_order(unsigned char *mem, t_proc *p, t_info *info);
 void				error_vm(char *s);
 void				execute_error(t_proc *proc, int *param, unsigned int j);
 void				reinit_life_status(t_proc **proc);
@@ -163,7 +161,7 @@ t_proc				*proc_dup(t_proc **proc_hdr, t_proc *link);
 t_proc				*proc_unqueue(void);
 t_proc				**proc_hdr(t_req req);
 
-typedef				void (*t_f_op)(t_proc **, unsigned char *);
+typedef void		(*t_f_op)(t_proc **, unsigned char *);
 
 typedef struct		s_op
 {
@@ -210,38 +208,41 @@ _Bool				parse_params(int *param, unsigned int (*p_idx)[3],\
 		unsigned char op_code, unsigned char *mem);
 void				carry(t_proc **p, unsigned int val);
 
-void			print_child(t_proc *child);
-void			print_proc(t_proc **proc);
-int				count_proc(t_proc **tab);
-void			print_board(t_proc **tab, t_info *info);
+void				print_child(t_proc *child);
+void				print_proc(t_proc **proc);
+int					count_proc(t_proc **tab);
+void				print_board(t_proc **tab, t_info *info);
 
-void			error_vm(char *s);
-t_info			*check_arg(t_proc **hdr, unsigned char **arena, char **argv, int argc);
-void			parse_header(int fd, t_proc **p, t_info *info);
-char			*store_names(t_req req, char *name);
-void			info_player(t_info *info, int nb_player);
-void			init_ll(t_info *info);
-void			start_ncurses(t_info *info, t_proc **proc);
-void			new_win(t_info *info, int put);
-void			destroy_win(t_info *info);
-void			init_coor(t_info *info);
-void			draw_corewar(t_info *info, t_proc **proc);
-void			draw_arena(t_info *info, unsigned char *arena, int color);
-void			init_arena(t_info *info, unsigned char *arena);
-void			refresh_arena(t_info *info, unsigned char *arena, int color);
-void			put_menu(t_info *info);
-void			strcpystatic(char (*dest)[255], char *copy);
-t_info			*ini_info(int (*tab)[2]);
-void			print_usage(char *s);
-void			check_int(char *nb);
-void			check_curse(t_info *info);
-void			check_verbos(t_info *info, char **arg, int *index);
-void			check_dump(t_info *info, char **arg, int *index);
-void			check_id_player(t_info *info, char **arg, int *index, int id);
-void			color_pc(t_proc *proc, t_info *info, unsigned char *mem);
-_Bool			id_is_new(t_req req, int val);
-int				player_lives(t_req req, int *(*val)[2], t_info *info,\
+void				error_vm(char *s);
+t_info				*check_arg(t_proc **hdr, unsigned char **arena, \
+		char **argv, int argc);
+void				parse_header(int fd, t_proc **p, t_info *info);
+char				*store_names(t_req req, char *name);
+void				info_player(t_info *info, int nb_player);
+void				init_ll(t_info *info);
+void				start_ncurses(t_info *info, t_proc **proc);
+void				new_win(t_info *info, int put);
+void				destroy_win(t_info *info);
+void				init_coor(t_info *info);
+void				draw_corewar(t_info *info, t_proc **proc);
+void				draw_arena(t_info *info, unsigned char *arena, int color);
+void				init_arena(t_info *info, unsigned char *arena);
+void				refresh_arena(t_info *info, unsigned char *arena, \
+		int color);
+void				put_menu(t_info *info);
+void				strcpystatic(char (*dest)[255], char *copy);
+t_info				*ini_info(int (*tab)[2]);
+void				print_usage(char *s);
+void				check_int(char *nb);
+void				check_curse(t_info *info);
+void				check_verbos(t_info *info, char **arg, int *index);
+void				check_dump(t_info *info, char **arg, int *index);
+void				check_id_player(t_info *info, char **arg, int *index, \
+		int id);
+void				color_pc(t_proc *proc, t_info *info, unsigned char *mem);
+_Bool				id_is_new(t_req req, int val);
+int					player_lives(t_req req, int *(*val)[2], t_info *info,\
 		t_proc *proc);
-char			*store_nb(t_req req, char *val);
+char				*store_nb(t_req req, char *val);
 
 #endif

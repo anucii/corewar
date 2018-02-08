@@ -6,13 +6,13 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:00:06 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/01/31 13:37:02 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/08 14:22:04 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static	void	print_corewar(t_info *info)
+static void		print_corewar(t_info *info)
 {
 	wattron(info->win, COLOR_PAIR(1));
 	mvwprintw(info->win, (HEIGHT_WIN / 2) - 12, 75, "     _/_/_/    _/_/    _\
@@ -31,13 +31,13 @@ _/_/    _/_/_/    _/    _/    _/  _/_/_/_/  _/_/_/      ");
 	wattroff(info->win, A_UNDERLINE);
 }
 
-static	void	choice_of_music(FMOD_CHANNELGROUP *canal, FMOD_SYSTEM *system,
+static void		choice_of_music(FMOD_CHANNELGROUP *canal, FMOD_SYSTEM *system,
 		FMOD_SOUND *bgm[4], int i)
 {
 	FMOD_BOOL state;
 
 	FMOD_ChannelGroup_GetPaused(canal, &state);
-	if (state == false )
+	if (state == false)
 	{
 		FMOD_ChannelGroup_Stop(canal);
 		FMOD_Sound_SetLoopCount(bgm[i], -1);
@@ -52,8 +52,8 @@ static	void	choice_of_music(FMOD_CHANNELGROUP *canal, FMOD_SYSTEM *system,
 
 static void		manage_music(t_info *info)
 {
-	FMOD_CHANNELGROUP *c;
-	char p;
+	FMOD_CHANNELGROUP	*c;
+	char				p;
 
 	FMOD_System_GetMasterChannelGroup(info->s, &c);
 	while (1)
@@ -103,7 +103,7 @@ static	void	draw_menu(t_info *info)
 	wrefresh(info->win);
 }
 
-void		put_menu(t_info *info)
+void			put_menu(t_info *info)
 {
 	new_win(info, MENU);
 	print_corewar(info);

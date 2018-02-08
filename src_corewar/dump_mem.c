@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 15:50:56 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 17:54:09 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 12:17:27 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ _Bool	dump_mem(unsigned char *mem)
 	t_info	*info;
 
 	info = get_info(NULL);
-	if (!mem || info->opt[0] ||!(info->opt[1] && (ret = (global_timer(CHECK)\
+	if (!mem || info->opt[0] || !(info->opt[1] && (ret = (global_timer(CHECK)\
 						== info->opt[2]))))
 		return (0);
 	i = -1;

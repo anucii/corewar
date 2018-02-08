@@ -6,15 +6,11 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:52:38 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/06 14:42:31 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 12:17:46 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-/*
- **YOU REALLY NEED A COMMENT FOR THIS ONE !?
- */
 
 void	print_usage(char *s)
 {

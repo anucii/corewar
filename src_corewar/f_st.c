@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 17:46:04 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 14:17:44 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,3 @@ void	f_st(t_proc **proc, unsigned char *mem)
 	}
 	free(param);
 }
-
-/*for quick test
-int main(void)
-{
-	unsigned char mem[12] = {3, 96, 12, 0, 6, 1, 1, 1, 2, 2, 2 ,2};
-	t_proc *p;
-
-	p = ft_memalloc(sizeof(t_proc));
-	p->pc = 0;
-	p->reg[12] = 5413584;
-	p->reg[1] = 1;
-	f_st(&p, mem);
-	int i = 0;
-	while (i < 12)
-	{
-		ft_printf("%hhu\n", mem[i]);
-		i++;
-	}
-	return (0);
-}*/

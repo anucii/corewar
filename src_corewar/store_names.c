@@ -6,19 +6,20 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 17:59:07 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/06 18:26:53 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 14:19:25 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 /*
-**	Function designed to store the output of the calls to strdup on the 
+**	Function designed to store the output of the calls to strdup on the
 **	champions binary file name field. It thus allows us to cleanly free
 **	the allocated strings at the end of the game (which cannot be made from the
 **	processes, as siblings share a unique pointer to characters => double free
 **	error)
 */
+
 char	*store_names(t_req req, char *name)
 {
 	static char		*store[MAX_PLAYERS + 1] = {0};

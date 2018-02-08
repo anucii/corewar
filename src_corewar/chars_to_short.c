@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 15:20:26 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/31 17:29:16 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 12:10:44 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ short	chars_to_short(unsigned char *mem, unsigned int i, _Bool lg)
 		error_vm("chars_to_short() called with a null memory pointer");
 	mod = lg ? MEM_SIZE : IDX_MOD;
 	val = ((short)mem[i % mod] << 8) \
-		  | ((short)mem[(i + 1) % mod]);
+		| ((short)mem[(i + 1) % mod]);
 	return (val);
 }

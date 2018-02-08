@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 20:06:18 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/24 20:20:13 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 14:02:33 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /*
 **	proc_append() appends a processus to the tail of the list whereas
-**	proc_add() prepends it at its head, which implies, concerning the last 
-**	case, that the added link is a new one, with a NULL 'next' field (those 
+**	proc_add() prepends it at its head, which implies, concerning the last
+**	case, that the added link is a new one, with a NULL 'next' field (those
 **	pointers beeing lost otherwise)
 */
 

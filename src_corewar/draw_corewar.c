@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 09:31:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/07 20:59:39 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 12:41:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	draw_info_player(t_info *info, t_proc **proc, int color)
 {
 	t_proc	*tmp;
 	int		y;
-	int		*val[2];	
+	int		*val[2];
 
 	y = 18;
 	tmp = (*proc);
@@ -41,9 +41,12 @@ static void	draw_info_player(t_info *info, t_proc **proc, int color)
 			wattroff(info->win, COLOR_PAIR(color));
 			wattroff(info->win, A_STANDOUT);
 			mvwprintw(info->win, y + 7, BORDER_ARENA_X + 5, "Last live : ");
-			wprintw(info->win, store_nb(INCR, ft_itoa(player_lives(CHECK, &val, info, tmp))));
-			mvwprintw(info->win, y + 8, BORDER_ARENA_X + 5, "Lives in current period : ");
-			wprintw(info->win, store_nb(INCR, ft_itoa(player_lives(NONE, &val, info, tmp))));
+			wprintw(info->win, store_nb(INCR, ft_itoa(player_lives(CHECK,\
+								&val, info, tmp))));
+			mvwprintw(info->win, y + 8, BORDER_ARENA_X + 5, "Lives in current \
+					period : ");
+			wprintw(info->win, store_nb(INCR, ft_itoa(player_lives(NONE, \
+								&val, info, tmp))));
 			color++;
 			y += 12;
 		}
@@ -54,31 +57,28 @@ static void	draw_info_player(t_info *info, t_proc **proc, int color)
 	wrefresh(info->win);
 }
 
-static void	draw_player(t_info *info, t_proc **proc, int color)
+static void	draw_player(t_info *info, t_proc **proc, int color, _Bool init)
 {
 	t_proc			*tmp;
 	int				pos;
-	static _Bool	init = 1;
 
 	tmp = (*proc);
 	pos = 2;
-	if (init)
-		while (tmp)
+	while (tmp)
+	{
+		if (init && id_is_new(CHECK, tmp->champ.id))
 		{
-			if (id_is_new(CHECK, tmp->champ.id))
-			{
-				mvwprintw(info->win, BORDER_ARENA_Y + pos, 5, "Player ");
-				wprintw(info->win, store_nb(INCR, ft_itoa(tmp->champ.id)));
-				wprintw(info->win, " : ");
-				wattron(info->win, COLOR_PAIR(color));
-				wprintw(info->win, tmp->champ.name);
-				wattroff(info->win, COLOR_PAIR(color));
-				pos += 2;
-				color++;
-			}
-			tmp = tmp->next;
-			init = 0;
+			mvwprintw(info->win, BORDER_ARENA_Y + pos, 5, "Player ");
+			wprintw(info->win, store_nb(INCR, ft_itoa(tmp->champ.id)));
+			wprintw(info->win, " : ");
+			wattron(info->win, COLOR_PAIR(color));
+			wprintw(info->win, tmp->champ.name);
+			wattroff(info->win, COLOR_PAIR(color));
+			pos += 2;
+			color++;
 		}
+		tmp = tmp->next;
+	}
 	mvwprintw(info->win, 12, BORDER_ARENA_X + 5, "Processes : ");
 	wprintw(info->win, store_nb(INCR, ft_itoa(count_proc(proc))));
 	wrefresh(info->win);
@@ -109,12 +109,14 @@ static void	draw_info(t_info *info)
 
 void		draw_corewar(t_info *info, t_proc **proc)
 {
-	int		color;
+	int				color;
+	static _Bool	init = 1;
 
 	color = 1;
 	id_is_new(REINIT, INT_MAX);
 	draw_info(info);
-	draw_player(info, proc, color);
+	draw_player(info, proc, color, init);
+	init = 0;
 	draw_info_player(info, proc, color);
-	return ; 
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:38:59 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/02 15:50:37 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:23:12 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	f_and(t_proc **proc, unsigned char *mem)
 	unsigned int	i;
 	unsigned int	idx[3];
 	int				j;
-	 unsigned int	s[2];
+	unsigned int	s[2];
 
 	j = 0;
 	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE], 6);
@@ -40,16 +40,3 @@ void	f_and(t_proc **proc, unsigned char *mem)
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
 	free(param);
 }
-
-/*test
-int		main(void)
-{
-	unsigned char mem[] = {6, 228, 0, 2, 255, 120, 120, 120, 1};
-	t_proc *p = ft_memalloc(sizeof(t_proc));
-	p->pc = 0;
-	p->reg[0] = 2;
-	p->reg[1] = 5000000;
-	f_and(&p, mem);
-	ft_printf("pc = %hu\nreg = %u\n", p->pc, p->reg[0]);
-	return (0);
-}*/

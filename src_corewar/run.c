@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/07 20:39:43 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 14:37:44 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,12 @@ static _Bool	ctrl_speed(t_info *info)
 **	and then calls the operation execution function associated with the opcode
 */
 
-void	execute_order(unsigned char *mem, t_proc *p)
+void			execute_order(unsigned char *mem, t_proc *p, t_info *info)
 {
 	int		i;
 
-	t_info	*info;
-
 	i = -1;
-	info = get_info(NULL);
 	while (++i < 16)
-	{
 		if (mem[p->pc] == g_op_tab[i].op_code || p->c_opc != -1)
 		{
 			if (p->cc == 0)
@@ -56,8 +52,8 @@ void	execute_order(unsigned char *mem, t_proc *p)
 			{
 				if (info->opt[3] && info->opt[4] && !info->opt[0])
 					ft_printf("[EXEC (cy:%04u)]: %s (proc:%04u, pc:%04u,  \
-player:%d)", global_timer(CHECK), g_op_tab[p->c_opc].description, p->pid, p->pc,\
-p->champ.id);
+player:%d)", global_timer(CHECK), g_op_tab[p->c_opc].description, p->pid, \
+p->pc, p->champ.id);
 				p->cc = 0;
 				g_op_tab[p->c_opc].func(&p, mem);
 				p->c_opc = -1;
@@ -67,25 +63,24 @@ p->champ.id);
 			color_pc(p, info, mem);
 			return ;
 		}
-	}
 	p->pc++;
 	p->pc %= MEM_SIZE;
 }
 
 /*
 **	exec_wrapper() enables the handling of the execution of children
-**	processes when needed; its new version uses a general list (common to 
+**	processes when needed; its new version uses a general list (common to
 **	all players) of the processes adresses.
 */
 
-void	exec_wrapper(unsigned char *mem, t_proc *p)
+void			exec_wrapper(unsigned char *mem, t_proc *p)
 {
 	t_proc		*tmp;
 
 	tmp = p;
 	while (tmp)
 	{
-		execute_order(mem, tmp);
+		execute_order(mem, tmp, get_info(NULL));
 		tmp = tmp->next;
 	}
 }

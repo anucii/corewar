@@ -6,15 +6,15 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:40:44 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 17:46:48 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/08 13:51:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 /*
-**2 unsigned char transferred over 1 short to have the real number in case you 
-**wondering on the next formula, otherwise function who jump to adress 
+**2 unsigned char transferred over 1 short to have the real number in case you
+**wondering on the next formula, otherwise function who jump to adress
 **passed % IDX_MOD
 */
 
@@ -36,17 +36,3 @@ void	f_zjmp(t_proc **proc, unsigned char *mem)
 	}
 	return ;
 }
-
-/* for quick test
-int main(void)
-{
-	unsigned char i[4] = {'9' , 255 , 255, '0'};
-	t_proc	*p;
-
-	p = ft_memalloc(sizeof(t_proc));
-	p->carry = 1;
-	p->pc = 0;
-	f_zjmp(&p, i);
-	ft_printf("%u\n", p->pc);
-	return(0);
-}*/

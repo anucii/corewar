@@ -6,13 +6,15 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:37:24 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/05 16:37:16 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/08 13:49:35 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-//WARNING operation modify carry
+/*
+**	WARNING operation modifies carry
+*/
 
 void	f_sub(t_proc **proc, unsigned char *mem)
 {
@@ -32,19 +34,3 @@ void	f_sub(t_proc **proc, unsigned char *mem)
 	free(param);
 	return ;
 }
-
-/* for test purpose
-int		main(void)
-{
-	unsigned char mem[] = {4, 84, 1, 2, 3};
-	t_proc		*p;
-
-	p = ft_memalloc(sizeof(t_proc));
-	p->reg[0] = 15;
-	p->reg[1] = 16;
-	p->reg[2] = 1;
-	p->pc = 0;
-	f_sub(&p, mem);
-	ft_printf("pc = %hu\n, reg[2] = %u\n", p->pc, p->reg[2]);
-	return(0);
-}*/

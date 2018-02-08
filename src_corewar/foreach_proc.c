@@ -6,13 +6,13 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:40:47 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 16:06:14 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/08 13:52:15 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 **	Applies the function passed by address to each element of the processes
-**	list; 
+**	list;
 **	the 'next' variable is here to secure the case where the pointee is deleted
 **	by the called function (e.g kill())
 */
@@ -35,14 +35,11 @@ static void	apply(t_proc **ptr_proc, void (*func)(t_proc **))
 		{
 			tmp = next;
 			if (next)
-			next = next->next;
+				next = next->next;
 		}
 		else
 			next = tmp->next;
-	}/*
-		apply(&next, func);
-	else
-		return ;*/
+	}
 }
 
 void		foreach_proc(t_proc **p, void (*func)(t_proc **))

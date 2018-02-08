@@ -6,13 +6,15 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:37:24 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/05 16:35:32 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:19:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-//WARNING operation modify carry
+/*
+**	WARNING operation modifies carry
+*/
 
 void	f_add(t_proc **proc, unsigned char *mem)
 {
@@ -30,19 +32,3 @@ void	f_add(t_proc **proc, unsigned char *mem)
 	(*proc)->pc = ((*proc)->pc + i + 2) % MEM_SIZE;
 	free(param);
 }
-
-/*
-int		main(void)
-{
-	unsigned char mem[] = {4, 84, 1, 2, 3};
-	t_proc		*p;
-
-	p = ft_memalloc(sizeof(t_proc));
-	p->reg[0] = 393216;
-	p->reg[1] = 917504;
-	p->reg[2] = 1;
-	p->pc = 0;
-	f_add(&p, mem);
-	ft_printf("pc = %hu\n, reg[2] = %d\n", p->pc, p->reg[2]);
-	return(0);
-}*/
