@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 09:31:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/08 15:50:18 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/12 20:43:25 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void		draw_corewar(t_info *info, t_proc **proc)
 	draw_info(info);
 	draw_player(info, proc, color, init);
 	init = 0;
-	draw_info_player(info, proc, color);
+	draw_info_player(info, proc);
 	return ;
 }

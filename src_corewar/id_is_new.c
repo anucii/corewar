@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 16:37:27 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/07 20:11:12 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/12 17:14:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 _Bool	id_is_new(t_req req, int val)
 {
-	static int	ctrl[MAX_PLAYERS + 1] = {0};
+	static int	ctrl[MAX_PLAYERS + 1] = {INT_MAX};
 	static int	i = -1;
 	int			j;
 

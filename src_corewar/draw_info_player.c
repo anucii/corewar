@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 15:42:31 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/08 15:53:26 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/12 20:42:47 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ period : ");
 								val, info, tmp))));
 }
 
-static void	w_tracer(t_info *info, int y, int color, t_proc *tmp)
+static void	w_tracer(t_info *info, int y, t_proc *tmp)
 {
 	wattron(info->win, A_STANDOUT);
 	wattron(info->win, COLOR_PAIR(tmp->color));
@@ -37,11 +37,11 @@ static void	w_tracer(t_info *info, int y, int color, t_proc *tmp)
 	mvwprintw(info->win, y + 3, BORDER_ARENA_X + 17, "   ");
 	mvwprintw(info->win, y + 3, BORDER_ARENA_X + 21, " ");
 	mvwprintw(info->win, y + 4, BORDER_ARENA_X + 18, "  ");
-	wattroff(info->win, COLOR_PAIR(color));
+	wattroff(info->win, COLOR_PAIR(tmp->color));
 	wattroff(info->win, A_STANDOUT);
 }
 
-void		draw_info_player(t_info *info, t_proc **proc, int color)
+void		draw_info_player(t_info *info, t_proc **proc)
 {
 	t_proc	*tmp;
 	int		y;
@@ -55,9 +55,8 @@ void		draw_info_player(t_info *info, t_proc **proc, int color)
 		if (id_is_new(CHECK, tmp->champ.id))
 		{
 			val[1] = &(tmp->champ.id);
-			w_tracer(info, y, color, tmp);
+			w_tracer(info, y, tmp);
 			p_tracer(info, y, &val, tmp);
-			color++;
 			y += 12;
 		}
 		tmp = tmp->next;
