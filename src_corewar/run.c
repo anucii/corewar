@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/12 22:57:38 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/13 16:52:26 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,11 @@ void			run(unsigned char *mem, t_proc **p)
 		print_board(p, info);
 		if (info->opt[0])
 			draw_corewar(info, p);
-		if (!c || dump_mem(mem))
-			return ;
 		if (timer(CHECK) >= deadline(CHECK))
 			new_round(p, info, &c);
 		timer(INCR);
+		if (!c || dump_mem(mem))
+			return ;
 		if (info->opt[0])
 			if (!ctrl_speed(info))
 				return ;
