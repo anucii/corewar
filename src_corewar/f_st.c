@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/08 17:51:09 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/13 13:49:35 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		f_st(t_proc **proc, unsigned char *mem)
 	unsigned int	idx[3];
 
 	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE], 3);
-	size = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &idx) + 2;
+	size = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 0, &idx) + 2;
 	if (!parse_params(param, &idx, 3, mem))
 		return (execute_error(*proc, param, size));
 	if (param[1] == T_REG)

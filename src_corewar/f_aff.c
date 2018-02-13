@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:44:25 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/08 12:19:52 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/13 13:58:08 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	f_aff(t_proc **proc, unsigned char *mem)
 
 	info = get_info(NULL);
 	param = checkocp(&mem[((*proc)->pc + 1) % MEM_SIZE], 16);
-	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 1, &idx);
+	i = param_size(((*proc)->pc + 2) % MEM_SIZE, param, 0, &idx);
 	if (!parse_params(param, &idx, 16, mem))
 		return (execute_error(*proc, param, i + 2));
 	else
