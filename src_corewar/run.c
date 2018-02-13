@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/08 14:37:44 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/12 22:57:38 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void			execute_order(unsigned char *mem, t_proc *p, t_info *info)
 	while (++i < 16)
 		if (mem[p->pc] == g_op_tab[i].op_code || p->c_opc != -1)
 		{
-			if (p->cc == 0)
-				p->c_opc = i;
+			p->c_opc = (p->cc == 0) ? i : p->c_opc;
 			if (++(p->cc) == g_op_tab[p->c_opc].cycles)
 			{
 				if (info->opt[3] && info->opt[4] && !info->opt[0])
@@ -63,8 +62,7 @@ p->pc, p->champ.id);
 			color_pc(p, info, mem);
 			return ;
 		}
-	p->pc++;
-	p->pc %= MEM_SIZE;
+	p->pc = (p->pc + 1) % MEM_SIZE;
 }
 
 /*

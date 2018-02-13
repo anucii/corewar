@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 19:28:36 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 17:54:54 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/12 22:18:47 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void			print_proc(t_proc **p)
 		return ;
 	i = -1;
 	ft_printf("[PROC_STAT (cy:%u)]: player %s(no %d), pid = %04u, pc = %04u,\
-cc = %d, carry:%s\n", global_timer(CHECK), (*p)->champ.name, (*p)->champ.id,\
-(*p)->pid, (*p)->pc, (*p)->cc, (*p)->carry ? "TRUE" : "FALSE");
+cc = %d, op_code: %d, carry:%s\n", global_timer(CHECK), (*p)->champ.name, \
+(*p)->champ.id, (*p)->pid, (*p)->pc, (*p)->cc, (*p)->c_opc, (*p)->carry ? \
+"TRUE" : "FALSE");
 	ft_printf("> Registers:\n");
 	while (++i < REG_NUMBER)
 		ft_printf("[%d: 0x%08x(%d)]%c", i + 1, (*p)->reg[i], (*p)->reg[i],\
