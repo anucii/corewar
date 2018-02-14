@@ -2,3 +2,4 @@
 .comment	"champion for endianness testing purposes"
 
 autoref:	st r2,3
+			zjmp %:autoref

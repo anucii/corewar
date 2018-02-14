@@ -6,13 +6,13 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/14 15:23:53 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/14 15:36:02 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static _Bool	ctrl_speed(t_info *info)
+static _Bool	ctrl_speed(void)
 {
 	static int	speed = 50000;
 	char		ch;
@@ -25,11 +25,7 @@ static _Bool	ctrl_speed(t_info *info)
 	if (ch == 'e' && speed < 70000)
 		speed += 10000;
 	if (ch == 'Q')
-	{
-		destroy_win(info);
-		endwin();
 		return (0);
-	}
 	return (1);
 }
 
@@ -120,8 +116,7 @@ void			run(unsigned char *mem, t_proc **p)
 		timer(INCR);
 		if (!c || dump_mem(mem))
 			return ;
-		if (info->opt[0])
-			if (!ctrl_speed(info))
+		if (info->opt[0] && !ctrl_speed())
 				return ;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:54:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/14 15:24:11 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/14 15:36:07 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int				main(int argc, char **argv)
 	if (!info->opt[0])
 		intr_msg(p);
 	run(arena, p);
+	if (info->opt[0])
+	{
+		destroy_win(info);
+		endwin();
+		free_music(info);
+	}
 	ft_memdel((void **)&arena);
 	lives_reg(CHECK, 0, info, NULL);
 	store_names(CLEAR, NULL);
