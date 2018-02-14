@@ -1,5 +1,5 @@
 .name		"test_st"
 .comment	"champion for endianness testing purposes"
 
-autoref:	st r2,3
-			zjmp %:autoref
+ld	%57672193, r2
+st	r2, 16
