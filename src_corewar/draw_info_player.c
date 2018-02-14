@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 15:42:31 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/12 20:42:47 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/14 14:20:44 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ static void	w_tracer(t_info *info, int y, t_proc *tmp)
 	wattroff(info->win, A_STANDOUT);
 }
 
+static int	set_y(t_info *info, int id)
+{
+	int	y;
+	int	i;
+
+	y = 18;
+	i = 0;
+	while ((i < 4) && info->id_player[i] != id)
+		++i;
+	return (y + 12 * i);
+}
+
 void		draw_info_player(t_info *info, t_proc **proc)
 {
 	t_proc	*tmp;
@@ -54,10 +66,10 @@ void		draw_info_player(t_info *info, t_proc **proc)
 	{
 		if (id_is_new(CHECK, tmp->champ.id))
 		{
+			y = set_y(info, tmp->champ.id);
 			val[1] = &(tmp->champ.id);
 			w_tracer(info, y, tmp);
 			p_tracer(info, y, &val, tmp);
-			y += 12;
 		}
 		tmp = tmp->next;
 	}
