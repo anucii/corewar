@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:36:53 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/13 13:49:35 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/14 15:03:20 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	addr_on_ind(t_proc *proc, unsigned char *mem, t_info *info, \
 	s = (short)mem[(proc->pc + 3) % MEM_SIZE] << 8
 		| mem[(proc->pc + 4) % MEM_SIZE];
 	int_on_mem(mem, proc->reg[mem[(*idx)[0]] - 1], proc->pc + (s % IDX_MOD));
-	info->start = proc->pc + (s % IDX_MOD);
-	info->end = info->start + 4;
-	if (info && info->opt[0])
+	info->start = (proc->pc + (s % IDX_MOD)) % MEM_SIZE;
+	info->end = (info->start + 4) % MEM_SIZE;
+	if (info->opt[0])
 		refresh_arena(info, mem, proc->color);
 	proc->pc = (proc->pc + 5) % MEM_SIZE;
 }

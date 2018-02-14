@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 15:41:35 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/13 14:13:11 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:31:41 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	info_sti(t_proc **proc, unsigned char *mem, int tar)
 	if (info->opt[3] && info->opt[4] && !info->opt[0])
 		ft_printf("\n\t\t\tstore %d (%#4x) @ %04u",\
 				convert(mem, tar, 0, 1), convert(mem, tar, 0, 1), tar);
-	info->start = (*proc)->pc + (tar) % IDX_MOD;
-	info->end = info->start + 4;
+	info->start = ((*proc)->pc + (tar) % IDX_MOD) % MEM_SIZE;
+	info->end = (info->start + 4) % MEM_SIZE;
 	if (info->opt[0])
 		refresh_arena(info, mem, (*proc)->color);
 }
