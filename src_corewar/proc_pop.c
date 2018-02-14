@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 20:20:31 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/06 18:16:01 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/14 14:25:39 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	proc_pop(t_proc **proc_hdr, t_proc *link)
 {
 	t_proc	*buf[2];
+	t_info	*info;
 
 	if (!(proc_hdr && link))
 		return ;
@@ -33,4 +34,6 @@ void	proc_pop(t_proc **proc_hdr, t_proc *link)
 		free(link);
 		link = NULL;
 	}
+	info = get_info(NULL);
+	FMOD_System_PlaySound(info->s, info->bgm[4], 0, false, NULL);
 }

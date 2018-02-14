@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 11:06:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/08 13:56:32 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/14 14:17:45 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_info		*ini_music(t_info *info)
 {
-	FMOD_RESULT		res[6];
+	FMOD_RESULT		res[7];
 	int				i;
 
 	i = 0;
@@ -28,7 +28,9 @@ t_info		*ini_music(t_info *info)
 							FMOD_LOOP_NORMAL, 0, &info->bgm[2]);
 	res[5] = FMOD_System_CreateSound(info->s, "./include/ready.ogg",
 							FMOD_CREATESAMPLE, 0, &info->bgm[3]);
-	while (i < 6)
+	res[6] = FMOD_System_CreateSound(info->s, "./include/fatality.mp3",
+							FMOD_CREATESAMPLE, 0, &info->bgm[4]);
+	while (i < 7)
 	{
 		if (res[i] != FMOD_OK)
 			exit(EXIT_FAILURE);
