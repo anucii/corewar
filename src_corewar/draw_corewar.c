@@ -6,13 +6,13 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 09:31:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/12 20:43:25 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/14 18:01:09 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void	draw_player(t_info *info, t_proc **proc, int color, _Bool init)
+static void	draw_player(t_info *info, t_proc **proc, _Bool init)
 {
 	t_proc			*tmp;
 	int				pos;
@@ -26,11 +26,10 @@ static void	draw_player(t_info *info, t_proc **proc, int color, _Bool init)
 			mvwprintw(info->win, BORDER_ARENA_Y + pos, 5, "Player ");
 			wprintw(info->win, store_nb(INCR, ft_itoa(tmp->champ.id)));
 			wprintw(info->win, " : ");
-			wattron(info->win, COLOR_PAIR(color));
+			wattron(info->win, COLOR_PAIR(tmp->color));
 			wprintw(info->win, tmp->champ.name);
-			wattroff(info->win, COLOR_PAIR(color));
+			wattroff(info->win, COLOR_PAIR(tmp->color));
 			pos += 2;
-			color++;
 		}
 		tmp = tmp->next;
 	}
@@ -64,13 +63,11 @@ static void	draw_info(t_info *info)
 
 void		draw_corewar(t_info *info, t_proc **proc)
 {
-	int				color;
 	static _Bool	init = 1;
 
-	color = 1;
 	id_is_new(REINIT, INT_MAX);
 	draw_info(info);
-	draw_player(info, proc, color, init);
+	draw_player(info, proc, init);
 	init = 0;
 	draw_info_player(info, proc);
 	return ;
