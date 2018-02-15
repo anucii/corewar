@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 12:13:34 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/14 16:49:53 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/15 14:42:06 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ void			run(unsigned char *mem, t_proc **p)
 		if (!c || dump_mem(mem))
 			return ;
 		if (info->opt[0] && !ctrl_speed())
-				return ;
+			return ;
 	}
 }
