@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 16:58:18 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/06 17:06:32 by jpallard         ###   ########.fr       */
+/*   Updated: 2018/02/16 14:51:47 by jpallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_music(t_info *info)
 	int		i;
 
 	i = 0;
-	while (info->bgm[i])
+	while (i < 5)
 	{
 		FMOD_Sound_Release(info->bgm[i]);
 		i++;
