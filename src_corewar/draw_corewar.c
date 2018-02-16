@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 09:31:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/14 18:01:09 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/16 16:09:14 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static void	draw_info(t_info *info)
 	mvwprintw(info->win, 3, BORDER_ARENA_X + 5, "Press 'w' to speed up");
 	mvwprintw(info->win, 4, BORDER_ARENA_X + 5, "Press 'e' to speed down");
 	mvwprintw(info->win, 6, BORDER_ARENA_X + 5, "CYCLE_TO_DIE : ");
-	wprintw(info->win, store_nb(INCR, ft_itoa(deadline(CHECK))));
+	mvwprintw(info->win, 6, BORDER_ARENA_X + 5 + ft_strlen("CYCLE_TO_DIE : "),\
+			"    ");
+	mvwprintw(info->win, 6, BORDER_ARENA_X + 5 + ft_strlen("CYCLE_TO_DIE : "),\
+			store_nb(INCR, ft_itoa(deadline(CHECK))));
 	mvwprintw(info->win, 7, BORDER_ARENA_X + 5, "CYCLE_DELTA : ");
 	wprintw(info->win, store_nb(INCR, ft_itoa(CYCLE_DELTA)));
 	mvwprintw(info->win, 8, BORDER_ARENA_X + 5, "NBR_LIVE : ");
