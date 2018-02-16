@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 09:31:30 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/16 16:09:14 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/16 16:15:35 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ static void	draw_info(t_info *info)
 	wprintw(info->win, store_nb(INCR, ft_itoa(nbr_live(CHECK))));
 	mvwprintw(info->win, 9, BORDER_ARENA_X + 5, "MAX_CHECKS : ");
 	wprintw(info->win, store_nb(INCR, ft_itoa(MAX_CHECKS)));
-	mvwprintw(info->win, 10, BORDER_ARENA_X + 5, "Cycles/second limit : ");
-	wprintw(info->win, store_nb(INCR, ft_itoa(CYCLE_DELTA)));
-	mvwprintw(info->win, 11, BORDER_ARENA_X + 5, "Cycle : ");
+	mvwprintw(info->win, 10, BORDER_ARENA_X + 5, "Cycle : ");
 	wprintw(info->win, store_nb(INCR, ft_itoa(global_timer(CHECK))));
 	wrefresh(info->win);
 	store_nb(REINIT, NULL);
