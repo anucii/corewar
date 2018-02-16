@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 16:22:25 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/07 15:47:14 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/16 15:30:19 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	uncolor_pc(t_proc *proc, t_info *info, unsigned char *mem,\
 
 	line = old_pc / 64;
 	x = old_pc;
-	if (x > 64)
+	if (x >= 64)
 		x = x - (64 * line);
 	x = x * 3;
 	mvwprintw(info->win, line + 2, x + 2, "  ");
@@ -58,7 +58,7 @@ void		color_pc(t_proc *proc, t_info *info, unsigned char *mem)
 	uncolor_pc(proc, info, mem, proc->old_pc);
 	line = proc->pc / 64;
 	x = proc->pc;
-	if (x > 64)
+	if (x >= 64)
 		x = x - (64 * line);
 	x = x * 3;
 	wattron(info->win, A_STANDOUT);

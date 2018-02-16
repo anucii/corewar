@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:01:22 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/02 20:36:30 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/16 14:46:24 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,8 @@ static int		search_label(t_order *prog, char *label)
 		error("[ERR] : search label bad params");
 	index = -1;
 	while (++index < prog->nb_label && prog->label[index])
-	{
-		ft_printf("%s\n", prog->label[index]);
 		if (label_match(prog->label[index], label))
-		{
-			ft_printf("MATCH : [%s] [%s] ??\n", prog->label[index], label);
 			return (prog->pos);
-		}
-	}
 	return (-1);
 }
 
@@ -73,7 +67,6 @@ int				deref_label(t_order **prog, char *label)
 	i = 0;
 	if (!(prog && *prog && label))
 		error("[ERR] dereferencing failure : no label or no program");
-	ft_printf("lab : %s\n", label);
 	while (prog && prog[i] && prog[i]->op_code)
 	{
 		if (prog[i]->label \

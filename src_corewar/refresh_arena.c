@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:26:19 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/14 17:20:28 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/16 15:33:22 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		refresh_arena(t_info *info, unsigned char *arena, int color)
 		len = MEM_SIZE - (info->start - info->end);
 	index = info->start;
 	store_line(SETV, line = info->start / 64);
-	if (info->start > 64)
+	if (info->start >= 64)
 		info->start = info->start - (64 * line);
 	info->start = info->start * 3;
 	refresh_area(info, arena, len, index);
