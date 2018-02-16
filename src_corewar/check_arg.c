@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/08 17:26:25 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/16 15:00:17 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		check_file(int **tab, int *index)
 		*tab = ft_memalloc(sizeof(int));
 	else if (index[1] >= MAX_PLAYERS)
 		print_usage("Too many players");
-	else if ((*tab = (int*)realloc(*tab, sizeof(int) * index[1] + 1))
+	else if ((*tab = (int*)realloc(*tab, sizeof(int) * (index[1] + 1)))
 			== NULL)
 		error_vm("Error : Ft. realloc failed");
 }
