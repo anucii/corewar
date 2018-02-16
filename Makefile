@@ -6,7 +6,7 @@
 #    By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 16:19:20 by jgonthie          #+#    #+#              #
-#    Updated: 2018/02/08 15:41:40 by jdaufin          ###   ########.fr        #
+#    Updated: 2018/02/16 14:33:13 by jdaufin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME_2 = corewar
 NAME_3 = crack
 
 CC = gcc
-FLAGS = -g -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 LIB_PATH = $(INC_PATH)libft/
 INC_PATH = ./include/
@@ -169,7 +169,7 @@ all: $(NAME) $(NAME_2) $(NAME_3)
 
 $(NAME) : $(OBJ_ASM)
 	@make -C $(LIB_PATH)
-	@$(CC) $(OBJ_ASM) -L $(LIB_PATH) -lft -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ_ASM) -L $(LIB_PATH) -lft -o $(NAME)
 	@echo "\033[32masm success.\033[0m"
 
 $(OBJ_PATH_ASM)%.o: $(SRC_PATH_ASM)%.c
@@ -177,7 +177,7 @@ $(OBJ_PATH_ASM)%.o: $(SRC_PATH_ASM)%.c
 	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 $(NAME_2) : $(OBJ_COREWAR)
-	@$(CC) $(OBJ_COREWAR) -L $(LIB_PATH) -lft -lcurses -L $(INC_PATH) -lfmod -o $(NAME_2)
+	@$(CC) $(FLAGS) $(OBJ_COREWAR) -L $(LIB_PATH) -lft -lcurses -L $(INC_PATH) -lfmod -o $(NAME_2)
 	@echo "\033[32mcorewar success.\033[0m"
 
 $(OBJ_PATH_COREWAR)%.o: $(SRC_PATH_COREWAR)%.c
@@ -185,7 +185,7 @@ $(OBJ_PATH_COREWAR)%.o: $(SRC_PATH_COREWAR)%.c
 	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 $(NAME_3) : $(OBJ_CRACK)
-	@$(CC) $(OBJ_CRACK) -L $(LIB_PATH) -lft -o $(NAME_3)
+	@$(CC) $(FLAGS) $(OBJ_CRACK) -L $(LIB_PATH) -lft -o $(NAME_3)
 	@echo "\033[32mcrack success.\033[0m"
 
 $(OBJ_PATH_CRACK)%.o: $(SRC_PATH_CRACK)%.c
