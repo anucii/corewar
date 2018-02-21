@@ -17,7 +17,8 @@ void		write_ind(unsigned char *instr, int *index, int fd, _Bool print)
 	char	*hexa;
 	char	*deci;
 
-	hexa = to_hexa(instr[++(*index)], instr[++(*index)]);
+	hexa = to_hexa(instr[(*index) + 1], instr[(*index) + 2]);
+	(*index) += 2;
 	deci = ft_to_deci(hexa, "0123456789abcdef");
 	if (print)
 		write(fd, "%", 1);

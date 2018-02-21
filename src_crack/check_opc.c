@@ -12,11 +12,13 @@
 
 #include "crack.h"
 
-static _Bool	op_match(int (*size)[3], int instr, int nb_params)
+static _Bool	op_match(int (*size)[3], int instr, int nb_params, int op_code)
 {
 	int		index;
 
 	index = -1;
+	if (op_code == 9 || op_code == 12 || op_code == 15)
+		return (1);
 	while (++index < nb_params)
 	{
 		if (g_op_tab[instr].tp_param[index] & T_REG)
@@ -53,7 +55,7 @@ _Bool			check_opc(int (*size)[3], char *opc, int instr, int nb_params)
 		index_2 += 2;
 	}
 	ft_strdel(&opc);
-	if (!op_match(size, instr, nb_params))
+	if (!op_match(size, instr, nb_params, g_op_tab[instr].op_code))
 	{
 		ft_printf("Error : Bad params for %s\n", g_op_tab[instr].name);
 		return (0);

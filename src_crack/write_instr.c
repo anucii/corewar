@@ -35,20 +35,15 @@ static _Bool	write_instr_in_file(unsigned char *s, int *index, int fd)
 {
 	int				info[2];
 	int				instr;
-	int				i;
 
 	if ((instr = check_op(s[(*index)])) == -1)
 		return (0);
 	write(fd, g_op_tab[instr].name, ft_strlen(g_op_tab[instr].name));
 	write(fd, " ", 1);
-	i = g_op_tab[instr].op_code - 1;
 	info[0] = g_op_tab[instr].op_code - 1;
 	info[1] = g_op_tab[instr].nb_param;
 	if (g_op_tab[instr].op_code == 1)
 		write_dir(s, index, fd);
-//	else if (g_op_tab[instr].op_code == 9 || g_op_tab[instr].op_code == 12
-//			|| g_op_tab[instr].op_code == 15)
-//		write_ind(s, index, fd, 1);
 	else
 		if (!f_all(s, info, index, fd))
 			return (0);

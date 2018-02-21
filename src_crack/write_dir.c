@@ -19,8 +19,9 @@ void		write_dir(unsigned char *instr, int *index, int fd)
 	char	*o1;
 	char	*o2;
 
-	o1 = to_hexa(instr[++(*index)], instr[++(*index)]);
-	o2 = to_hexa(instr[++(*index)], instr[++(*index)]);
+	o1 = to_hexa(instr[(*index) + 1], instr[(*index) + 2]);
+	o2 = to_hexa(instr[(*index) + 3], instr[(*index) + 4]);
+	(*index) += 4;
 	hexa = ft_strjoin(o1, o2);
 	write(fd, "%", 1);
 	deci = ft_to_deci(hexa, "0123456789abcdef");
