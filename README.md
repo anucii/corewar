@@ -1,4 +1,4 @@
-# corewar (School project in algorithms)
+# corewar
 
 Simplified virtual machine nesting processes tournaments.
 
