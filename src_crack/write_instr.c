@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 19:46:39 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/02 18:37:31 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/27 14:30:06 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,33 @@ static _Bool	write_instr_in_file(unsigned char *s, int *index, int fd)
 	if (g_op_tab[instr].op_code == 1)
 		write_dir(s, index, fd);
 	else
+	{
 		if (!f_all(s, info, index, fd))
 			return (0);
+	}
 	write(fd, "\n", 1);
 	return (1);
 }
 
-_Bool			write_instr(int new_fd, int old_fd)
+static _Bool	check_len_prog(int old_fd, unsigned int size[1],
+		unsigned char instr[CHAMP_MAX_SIZE + 1], unsigned int *len)
 {
-	unsigned char	instr[CHAMP_MAX_SIZE + 1];
-	unsigned int	size[1];
-	unsigned int	len;
-	int				index;
+	lseek(old_fd, COMMENT_LENGTH + 4, SEEK_CUR);
+	read(old_fd, instr, size[0]);
+	if ((*size + PROG_NAME_LENGTH + COMMENT_LENGTH + 16) !=\
+		(*len = lseek(old_fd, 0, SEEK_END)))
+	{
+		ft_printf("Error : Diff between file size and header prog_size\n");
+		return (0);
+	}
+	return (1);
+}
 
-	index = -1;
-	ft_bzero(instr, CHAMP_MAX_SIZE + 1);
+static _Bool	check_prog(int old_fd, unsigned char instr[CHAMP_MAX_SIZE + 1],
+		unsigned int *len)
+{
+	unsigned int	size[1];
+
 	lseek(old_fd, 0, SEEK_SET);
 	read(old_fd, size, 4);
 	littleendian(&size[0]);
@@ -76,19 +88,26 @@ _Bool			write_instr(int new_fd, int old_fd)
 		ft_printf("Error : Champ to big\n");
 		return (0);
 	}
-	lseek(old_fd, COMMENT_LENGTH + 4, SEEK_CUR);
-	read(old_fd, instr, size[0]);
-	if ((*size + PROG_NAME_LENGTH + COMMENT_LENGTH + 16) !=\
-		   	(len = lseek(old_fd, 0, SEEK_END)))
-	{
-		ft_printf("Error : Diff between file size and header prog_size\n");
+	if (!check_len_prog(old_fd, size, instr, len))
 		return (0);
-	}
+	return (1);
+}
+
+_Bool			write_instr(int new_fd, int old_fd)
+{
+	unsigned char	instr[CHAMP_MAX_SIZE + 1];
+	unsigned int	size[1];
+	unsigned int	len;
+	int				index;
+
+	size[0] = 0;
+	index = -1;
+	ft_bzero(instr, CHAMP_MAX_SIZE + 1);
+	if (!check_prog(old_fd, instr, &len))
+		return (0);
 	len = len - (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
 	while (++index < (int)len)
-	{
 		if (!write_instr_in_file(instr, &index, new_fd))
 			return (0);
-	}
 	return (1);
 }

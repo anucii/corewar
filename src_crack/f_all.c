@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 13:47:08 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/02 18:36:07 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/27 14:16:19 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		conv_for_bitwise(int (*size)[3], _Bool (*print)[3], \
 		(*index_instr) -= 1;
 		return ;
 	}
-	if (info[0] + 1 == 11 || info[0] + 1 == 14 
+	if (info[0] + 1 == 11 || info[0] + 1 == 14
 			|| info[0] + 1 == 10 || info[0] + 1 == 3)
 	{
 		f_sti_lldi_ldi_st(size, print);
@@ -53,7 +53,7 @@ _Bool			f_all(unsigned char *instr, int info[2], int *index, int fd)
 	_Bool		print[3];
 	char		*opc;
 	int			i;
-	
+
 	i = -1;
 	opc = ft_strbase(instr[++(*index)], "01");
 	while (ft_strlen(opc) != 8)
