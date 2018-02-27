@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:23:11 by jgonthie          #+#    #+#             */
-/*   Updated: 2017/12/01 16:26:20 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/27 15:20:16 by jdaufin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 void		realloc_order(t_order ***order, int *size)
 {
+	int	start;
+	int	end;
+
+	start = *size * SIZE_STRUCT;
+	end = start + SIZE_STRUCT;
 	*size += 1;
 	if ((*order = realloc(*order, sizeof(t_order *) *
 					(*size * SIZE_STRUCT))) == NULL)
 		error("[ERR] : Ft. Realloc Failed\n");
+	while (start < end)
+	{
+		(*order)[start] = NULL;
+		++start;
+	}
 }
