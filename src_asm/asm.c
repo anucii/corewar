@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:22:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/02 16:25:17 by jgonthie         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:42:17 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ int		main(int argc, char **argv)
 	t_header	hdr;
 	t_file		file;
 
+	while (1)
+	{
 	tab = ft_memalloc(sizeof(t_order**) * (SIZE_STRUCT));
 	if (argc < 2)
 		error("Usage : ./parser <line content space-separated>");
 	init_hdr(&hdr, argv[argc - 1]);
 	file.nb_line = 0;
 	file.empty = 0;
+	file.size = 1;
 	if (!launch_parsing(argv[argc - 1], &tab, &hdr, &file))
 		error_parsing(file.nb_line + file.empty);
 	write_order_pos(tab, &file, hdr.nb_struct);
@@ -33,5 +36,6 @@ int		main(int argc, char **argv)
 	ft_strdel(&file.line);
 	ft_strdel(&hdr.filename);
 	free_order(tab, hdr.nb_struct);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 19:15:51 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/01/30 13:22:19 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/27 17:37:15 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct	s_file
 	int			fd;
 	int			ret;
 	int			empty;
+	int			size;
 }				t_file;
 
 void			init_hdr(t_header *hdr, char *s);

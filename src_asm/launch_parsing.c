@@ -6,7 +6,7 @@
 /*   By: jdaufin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:54:28 by jdaufin           #+#    #+#             */
-/*   Updated: 2018/02/27 16:54:51 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/27 17:43:19 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ static _Bool	parse_header(t_file *file, t_header *hdr, char *s)
 
 static _Bool	instr_line(t_order ***tab, t_file *file, char *s)
 {
-	static int	size = 1;
-
-	if (file->nb_line == (SIZE_STRUCT * size - 1))
-		realloc_order(tab, &size);
+	if (file->nb_line == (SIZE_STRUCT * (file->size - 1)))
+		realloc_order(tab, &file->size);
 	if (!(*tab)[file->nb_line])
 	{
 		(*tab)[file->nb_line] = ft_memalloc(sizeof(t_order));
