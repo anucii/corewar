@@ -6,7 +6,7 @@
 /*   By: jpallard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 13:52:38 by jpallard          #+#    #+#             */
-/*   Updated: 2018/02/08 17:30:04 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/27 18:01:05 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	error_vm(char *s)
 	{
 		destroy_win(info);
 		endwin();
+		free_music(info);
 	}
 	exit(EXIT_FAILURE);
 }

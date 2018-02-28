@@ -6,7 +6,7 @@
 #    By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 16:19:20 by jgonthie          #+#    #+#              #
-#    Updated: 2018/02/16 14:49:49 by jdaufin          ###   ########.fr        #
+#    Updated: 2018/02/28 10:38:43 by jgonthie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME_2 = corewar
 NAME_3 = crack
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+FLAGS = -Wall -Werror -Wextra
 
 LIB_PATH = $(INC_PATH)libft/
 INC_PATH = ./include/
@@ -58,7 +58,6 @@ SRC_FILE_ASM =		asm.c \
 					has_ocp.c \
 					new_name.c \
 					realloc_order.c \
-
 
 SRC_FILE_COREWAR =	main.c \
 					error_vm.c \
@@ -131,7 +130,6 @@ SRC_FILE_COREWAR =	main.c \
 					id_is_new.c \
 					store_nb.c \
 					draw_info_player.c \
-
 
 SRC_FILE_CRACK =	main.c \
 					parse_file.c \

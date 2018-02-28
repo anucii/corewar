@@ -6,7 +6,7 @@
 /*   By: jgonthie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 14:57:52 by jgonthie          #+#    #+#             */
-/*   Updated: 2018/02/16 15:00:17 by jdaufin          ###   ########.fr       */
+/*   Updated: 2018/02/28 10:35:02 by jgonthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,6 @@ static _Bool	check_opt(t_info *info, char **arg, int *index, int id)
 	}
 	return (0);
 }
-
-/*
-**	Deux index :	- index[0] incremente pour chaque ARG
-**					- index[1] incremente que l'ARG n'est pas une option et
-**						sert aussi d'index pour le tableau (int *tab) de FD
-*/
 
 t_info			*check_arg(t_proc **p, unsigned char **arena,\
 		char **argv, int argc)
